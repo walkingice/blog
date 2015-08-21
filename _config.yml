@@ -12,7 +12,7 @@ timezone: Asia/Taipei
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-# url: http://yoursite.com
+url: http://blog.julianchu.net
 root: /
 permalink: :year-:month-:day-:slug.html
 permalink_defaults:
@@ -69,7 +69,7 @@ theme: hexo-theme-next
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: github
+  type: git
   repository: https://github.com/walkingice/blog.git
   branch: gh-pages
 
