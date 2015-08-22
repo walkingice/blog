@@ -73,7 +73,7 @@ deploy:
   repository: https://github.com/walkingice/blog.git
   branch: gh-pages
 
-feed:
+feaed:
    type: atom
    path: atom.xml
    limit: 20
@@ -81,4 +81,4 @@ feed:
 creative_commons: by-nc-sa
 google_analytics: UA-2502077-5
 social:
-        GitHub: https://github.com/walkingicee
+        GitHub: https://github.com/walkingice
