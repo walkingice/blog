@@ -16,7 +16,8 @@ keywords: "Hexo,next"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
+avatar: /assets/default_avatar.jpg
 
 # Icon fonts
 # Place your font into next/source/fonts, specify directory-name and font-name here
@@ -33,7 +34,7 @@ highlight_theme: normal
 
 
 # MathJax Support
-mathjax:
+mathjax: true
 
 
 # Schemes
