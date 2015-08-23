@@ -14,7 +14,7 @@ timezone: Asia/Taipei
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.julianchu.net
 root: /
-permalink: :year-:month-:day-:slug.html
+permalink: :year/:month/:day-:slug.html
 permalink_defaults:
 
 # Directory
