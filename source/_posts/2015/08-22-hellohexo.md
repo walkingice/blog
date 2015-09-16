@@ -19,6 +19,8 @@ comments: true
 1. 文章用 markdown 來寫，即使不透過 browser 也能看得懂
 1. git based，天生就備份好了
 
+<!-- more -->
+
 # How
 
 要開新文章也滿簡單的

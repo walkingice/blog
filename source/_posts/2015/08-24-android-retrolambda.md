@@ -20,6 +20,8 @@ categories: geek
 
 但從一個使用者來看，花時間投資在一個工具上，只能寫 Android 不能寫 Java 是有點浪費。
 
+<!-- more -->
+
 Android Studio 一定不可能大改，所以鄉民還是找出了方法[在 Android Studio 寫一般的 Java project](https://href.li/?http://stackoverflow.com/a/26196451)。我對這個 IDE 還不是很了解，不知道會不會有什麼副作用，所以我選擇再裝一個 IDEA Intellij Community 版本，反正才 100+ MB，便宜啦。
 
 ```bash
