@@ -4,6 +4,7 @@ date: 2015-10-28 01:27:51
 tags:
     - linux
     - geek
+categories: geek
 ---
 
 最近發生了奇怪的事情，就是我的 root file system (/) 會整個被吃光，同時還注意到 rsyslogd 會跑到 CPU 100%。接著就發現是 <code>/var/log</code> 底下的 syslog 或是 message 幾個檔案變成好幾 Gigabyte 的大小，裡面滿是 gdm3 的錯誤訊息
