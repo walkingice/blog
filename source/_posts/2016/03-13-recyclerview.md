@@ -304,3 +304,21 @@ dataAdapter.add(new MyData(MyData.TYPE_A, "Hello"));
 dataAdapter.add(new MyData(MyData.TYPE_B, "World"));
 dataAdapter.add("I will use fallback");
 ```
+
+## 後記
+
+額外筆記一下實作的心得
+
+* 經常會想要實作一種介面，就是上方有一大塊各種資訊、圖片的 ViewGroup，下面再接一個 RecyclerView 來充當 ListView 畫出長度不固定，各種風格的 Rows。因為長度一定會超過螢幕高度，最直覺的作法往往就是用 ScrollView 包一個 LinearLayout，裡面再依序塞入各個 View，最後面塞進去的是 RecyclerView。這樣會出問題，尤其在 Scroll 的部份。
+
+    可以把 RecyclerView 當成是一個廣義的 ListView，ListView 可以垂直拖動。把這樣的元件放進 ScrollView 裡面，就成了「垂直拖動的 View 裡面還有一個垂直拖動的 View」，雖然技術上可以做到，但是怎麼想就覺得有點怪，也不是好的使用介面。
+
+    但是 RecyclerView 又不像 ListView 那樣可以設定 Header，怎麼辦呢？
+
+    其中一個作法就是用 CoordinatorLayout 來包，把許多資訊的 ViewGroup 當成上方的 Toolbar 來用。因為 CoordinatorLayout 的特性，拖動的時候會有一些滿炫的特效，但也有可能不符合設計需求。
+
+    另外一個作法就是通通塞進 Adapter 裡面，把上方 ViewGroup 的資訊固定放進 Adapter 的第一個位置，然後 render 的時候針對這筆資料套用專屬的 Presenter。感覺還是不完美，但至少是符合了 RecyclerView 的設計哲學。
+
+
+* 另外 RecyclerView 在 XML 檔的位置似乎有影響，如果擺在一個一開始根本不會顯示的位置，連產生 Selector/Presenter 的程式都不會跑到，或許是效能考量所作的設計，今天一直卡在這個地方，稿不清楚哪裡的 code 有寫錯。嘗試之後得到這個結論，但是實際的原因還沒有認真看 source code 也不敢確定，只是寫在這邊先給自己提醒一下。
+
