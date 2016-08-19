@@ -187,18 +187,9 @@ msgstr[1] "已選擇類型 %s 的 <b>%i</b> 個物件"
 
 # Patch
 
-嗯，只有繁體中文是這樣，其實上個簡單的 patch 就行了
+嗯，只有繁體中文是這樣，<del>其實上個簡單的 patch 就行了</del> **更新：這樣的 patch 是不對的**
 
 ```diff
-From 4423bf9b3867c50f10d57d6600166111dcdc435c Mon Sep 17 00:00:00 2001
-From: Julian_Chu <walkingice@0xlab.org>
-Date: Sat, 30 Jul 2016 11:13:49 +0900
-Subject: [PATCH] assign parameter ordering
-
----
- src/selection-describer.cpp | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
 diff --git a/src/selection-describer.cpp b/src/selection-describer.cpp
 index 1cb96fe..ab719a0 100644
 --- a/src/selection-describer.cpp
@@ -219,6 +210,55 @@ index 1cb96fe..ab719a0 100644
 
 ```
 
-不過對 ngettext 不熟，不確定這樣是不是正確的解法，也還不是很清楚 debian 的 contribution 方法。所以還是要先看一些文件才能送 patch  orz
+<del>不過對 ngettext 不熟，不確定這樣是不是正確的解法，也還不是很清楚 debian 的 contribution 方法。所以還是要先看一些文件才能送 patch  orz</del>
 
+後來看了一下 ngettext 的 man page，才比較了解它的用法。
+
+```c
+#include <libintl.h>
+
+char * ngettext (const char * msgid, const char * msgid_plural,
+                    unsigned long int n);
+
+The  ngettext attempt to translate a text string into the user's native language....
+```
+
+簡單來說，這個 function 就是用來取得「翻譯成使用者的語言，拿來做 formatting 的字串」，就是類似「Hi, I am %s -> 嗨, 我是 %s」。但是有三個參數，而非一個 msgid 就可以了，為什麼呢？
+
+因為很多語言有複數型態的問題，根據 man page 的說法，有些語言除了單數、雙數、複數，甚至有四種以上的形式，雖然中文沒有，但是我們熟悉的英文就有複數型。所以最後一個變數 <code>n</code> 就是用來指定要使用第 **n** 種型態，**n=1** 就是單數型，以此類推。
+
+<code>msgid_plural</code> 就是遇到複數型態的時候，要找的對象的 msgid。通常單數型與複數型的翻譯會寫在一起，這樣好像功能重複了？所以 msgid_plural 的用處更像是 fallback。
+
+> In  the  "C"  locale,  or  if  none of the used catalogs contain a translation for msgid, the ngettext functions return msgid if n == 1, or msgid_plural if n != 1.
+
+如果沒有找到合適的翻譯，那麼就拿 <code>msgid</code> 的字串當成單數型來用，<code>msgid_plural</code> 的字串當成複數型來用，要用哪一個由 <code>n</code> 來決定。
+
+看到這邊就知道上面的 patch 錯了，因為它把整個 id(key) 變成了另外一個值，這會使得其他所有的 po 檔都失效，永遠找不到對應的翻譯。由於有 fallback 的關係而不會爆炸，但這樣的行為就不對了。
+
+於是比較合理的作法，就是改 po 檔，從翻譯裡面指定 formatting 的時候參數的位置要擺到哪，這樣就不會出錯了。
+
+```diff
+diff --git a/po/zh_TW.po b/po/zh_TW.po
+index db57029..fd694bd 100644
+--- a/po/zh_TW.po
++++ b/po/zh_TW.po
+@@ -12091,8 +12091,8 @@ msgstr "使用 <b>Shift+D</b> 找尋訊框"
+ #, c-format
+ msgid "<b>%i</b> objects selected of type %s"
+ msgid_plural "<b>%i</b> objects selected of types %s"
+-msgstr[0] "已選擇類型 %s 的 <b>%i</b> 個物件"
+-msgstr[1] "已選擇類型 %s 的 <b>%i</b> 個物件"
++msgstr[0] "已選擇類型 %2$s 的 <b>%1$i</b> 個物件"
++msgstr[1] "已選擇類型 %2$s 的 <b>%1$i</b> 個物件"
+ 
+ #: ../src/selection-describer.cpp:225
+ #, c-format
+-- 
+2.8.1
+
+```
+
+額外一提的是，inkscape 跑起來的時候讀的 po 檔是 */usr/share/locale/zh_TW/LC_MESSAGES/inkscape.mo*，我一開始不知道，想說怎麼改 po 檔的內容，make 完之後都沒變呢？後來才注意到即使是我自己編的 inkscape 還是跑去讀系統的 mo 檔。而且我找不到方法用 make 編出 mo 檔(除了整個 deb 重編以外 =.=)。不過我很偷懶地直接把 zh_TW.gmo 給硬塞進系統的位置，也算是另一個 workaround 吧 :P
+
+啊，還是不知道 debian 送 patch 的流程 orz
 
