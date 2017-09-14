@@ -3,6 +3,7 @@ s: strictmode
 date: 2017-09-03 23:20:17
 tags:
     - Android
+    - tools
 categories: geek
 ---
 
