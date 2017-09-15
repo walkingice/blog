@@ -86,7 +86,7 @@ dependencies {
  }
 ```
 
-設定後執行 `./gradlew ktlint` 就行了。
+設定後執行 `./gradlew ktlint` 就行了。如果有些檔案不想被檢查，好比 Test 結尾的檔案，可以修改成 `args "src/**/*.kt !src/**/*Test.kt"`
 
 ktlint 說自己沒有 configuration，而是可以[延展](https://github.com/shyiko/ktlint#creating-a-ruleset)，藉以加入更多功能("no configuration" doesn't mean "no extensibility")。但我現在還沒研究好該怎麼做，等未來有需求再回來更新這裡。
 
