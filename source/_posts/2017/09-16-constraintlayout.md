@@ -9,55 +9,31 @@ categories: geek
 
 ConstraintLayout 是 Support Library 裡面新增的一個 ViewGroup，從功能上來看非常強大，效能上不輸、甚至[贏過](https://android-developers.googleblog.com/2017/08/understanding-performance-benefits-of.html)傳統的 Layout。因為放在 Support Library 裡面，幾乎市面上所有的手機都相容，就放心使用吧。
 
-以往在建構複雜的畫面時，經常是 LinearLayout 與 RelativeLayout 等等相互組合，拼湊出相當深且複雜的樹狀 xml。略懂 View render 過程的都知道，效能就在深邃的遞迴之中持續消耗。改用 ConstraintLayout 取代傳統 Layout 的複雜組合，把 xml 檔變得更加扁平，效率很容易就能提升。
+以往在建構複雜的畫面時，經常是 LinearLayout 與 RelativeLayout 等等相互組合，拼湊出相當深且複雜的樹狀 xml。略懂 View render 過程的都知道，效能就在層層的 measurement/layout 之中持續消耗。改用 ConstraintLayout 取代傳統 Layout 的複雜組合，把 xml 檔變得更加扁平，效率很容易就能提升。
 
 粗看 ConstraintLayout 會覺得跟 RelativeLayout 有點像，其實它還能做到很多 RelativeLayout 做不到的事情。以下就稍微簡介 ConstraintLayout 的安裝與使用。
 
 <!-- more -->
 
-# 加入 ConstraintLayout
+# 專案裡面加入 ConstraintLayout
 
-從 [Recent Changes](http://tools.android.com/recent)裡面搜尋可以看到最新的 ConstraintLayout release version。又或著用指令 **sdkmanager** 查詢
+由於 support libarary 已經被[整併進 AndroidX](https://developer.android.com/jetpack/androidx/migrate)，所以 package name 跟安裝方法跟以前都不一樣，我覺得這是改進，比以前好理解了。目前 AndroidX 的是初版本是 1.0.0，你的所有 AndroidX library 都是用這個版號。也可以個別為 ConstraintLayout 換上[比較新的版本](https://mvnrepository.com/artifact/com.android.support.constraint/constraint-layout)
 
-```bash
-$ ~/.android-sdk/tools/bin/sdkmanager --list |grep ConstraintLayout
-.....
-extras;m2repository;com;android;support;constraint;constraint-layout;1.0.0-beta5         | 1            | ConstraintLayout for Android 1.0.0-beta5
-extras;m2repository;com;android;support;constraint;constraint-layout;1.0.1               | 1            | ConstraintLayout for Android 1.0.1
-extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2               | 1            | ConstraintLayout for Android 1.0.2
-```
-
-接著在 gradle 裡面照平常的步驟加進去 app/build.gradle 就行了
+在 gradle 裡面照平常的步驟加進去 app/build.gradle 就行了
 
 ```
-dependencies {
-+    compile "com.android.support.constraint:constraint-layout:1.0.2"
+ext {
++    constraintLayoutLibVersion = '1.1.3'
 }
-```
-
-截至目前都還好。但若你有使用 Travis CI，極有可能就拿到這個 error
-
-```
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-
-A problem occurred configuring project ':app'.
-> You have not accepted the license agreements of the following SDK components:
-  [ConstraintLayout for Android 1.0.2, Solver for ConstraintLayout 1.0.2].
-  Before building your project, you need to accept the license agreements and complete the installation of the missing components using the Android Studio SDK Manager.
-```
-
-這是 license 的[問題](https://issuetracker.google.com/issues/37102998)，我使用的[解法](https://stackoverflow.com/questions/38096225)是修改 **.travis.yml** 遇到 ConstraintLayout 的 License 就送出 yes。引號內的文字來源，看上面的 sdkmanager 指令就知道了。
-
-```yml
-install:
-  - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
+....
+dependencies {
++    implementation "androidx.constraintlayout:constraintlayout:${constraintLayoutLibVersion}"
+}
 ```
 
 # ConstraintLayout 的使用介紹
 
-以我的印象所及，ConstraintLayout 可以取代 RelativeLayout。還可以做到一些 RelativeLayout 做不到的事情，舉例來說
+以我的理解，ConstraintLayout 可以取代 RelativeLayout(不知是否可以完全取代)。還可以做到一些 RelativeLayout 做不到的事情，舉例來說
 
 1. 利用 Guideline 來定位
 1. 透過 bias 對 view 的位置做一些偏移
@@ -68,7 +44,7 @@ Android Studio 還提供了非常強大的 [Layout Editor](https://developer.and
 
 ### 跟 RelativeLayout 相同的地方
 
-在 RelativeLayout 裡面都是一個 View A 當作基準點，另外一個 View B 去對齊 View A，或是 Parent 的上下左右。這些在 ConstraintLayout 裡面都有相當直觀的參數對應
+在 RelativeLayout 裡面都是一個 View A 當作基準點，讓另外一個 View B 根據 View A 的位置來排版，或是對齊 Parent 的上下左右。這些在 ConstraintLayout 裡面都有相當直觀的參數對應
 
 * app:layout_constraintLeft_toLeftOf
 * app:layout_constraintLeft_toRightOf
@@ -77,7 +53,7 @@ Android Studio 還提供了非常強大的 [Layout Editor](https://developer.and
 
 #### 置中
 
-要放到 parent 的中央，做法就有點不一樣。以水平置中為例，則是左邊對齊 parent 的左邊，右邊對齊 parent 的右邊，結果就是剛好會放在中間；垂直方向亦然。
+要放到 parent 的中央，做法就有點不一樣。以水平置中為例，左邊對齊 parent 的左邊，右邊對齊 parent 的右邊，結果就是剛好會放在中間；垂直方向亦然。
 
 ```xml
  <Button
@@ -95,13 +71,13 @@ Android Studio 還提供了非常強大的 [Layout Editor](https://developer.and
 
 ### 使用 Guideline
 
-Guideline 是非常簡單的 View，它總是把自己設為 `View.GONE` 變成看不見，因此只是用來定位的物件，可以有 vertical 與 horizontal 兩種
+Guideline 是非常簡單的 View，它總是把自己設為 `View.GONE` 變成看不見，因此只是用來輔助定位的物件，可以有 vertical 與 horizontal 兩種
 
 ```xml
 <android.support.constraint.Guideline
     android:id="@+id/guideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintGuide_begin="100dp" />
 <Button
@@ -124,6 +100,8 @@ Guideline 是非常簡單的 View，它總是把自己設為 `View.GONE` 變成�
 <div style="max-width: 400px;" class="img-row">{% asset_img 02-guideline.png Using Guideline %}</div>
 
 上面的範例中，我新增了一個 Guideline，位置在 parent 的左側的 100dp(RTL 的時候會剛好相反)。接著讓原本置中的 button，把左側對齊新增的 guideline。另外還新增了一個按鈕，左側一樣是對齊 guideline，右側則是對齊 btn_01 的左方。在兩邊拉扯之下，這個 button 就會擺在 guideline 與 btn 的中間。這件事情用 RelativeLayout 就很難做到。
+
+Guideline 也可以用百分比的方式來擺放，如果使用 `app:layout_constraintGuide_percent="0.3"` 就是從上方或是左方算起 30% 的地方放置 guideline。(不確定會不會有 RTL 的 issue)
 
 ## 透過 bias 用百分比做位置的調整
 
@@ -149,8 +127,8 @@ ConstraintLayout 裡面不該使用 **match_parent**，取而代之該使用 **m
 ```xml
 <android.support.constraint.Guideline
     android:id="@+id/guideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintGuide_begin="100dp" />
 
@@ -167,7 +145,7 @@ ConstraintLayout 裡面不該使用 **match_parent**，取而代之該使用 **m
 
 ### 用 ratio 調整大小
 
-決定了一個方向的大小，還可以透過 ratio 來動態計算另一個方向的大小。
+根據螢幕大小縮放一個固定長寬比的 View 是常見需求。決定了一個方向的尺寸，還可以透過 ratio 來動態計算另一個方向的大小。
 
 ```xml
 <Button
@@ -190,8 +168,8 @@ ConstraintLayout 裡面不該使用 **match_parent**，取而代之該使用 **m
 ```xml
 <android.support.constraint.Guideline
     android:id="@+id/guideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:orientation="vertical"
     app:layout_constraintGuide_begin="100dp" />
 
@@ -313,3 +291,161 @@ ConstraintLayout 裡面不該使用 **match_parent**，取而代之該使用 **m
 
 最後就是回到 LinearLayout 的邏輯。把寬度設定成 0dp 之後使用 `layout_constraintHorizontal_weight` 就能像以前在用 LinearLayout 一樣，以 weight 指定這個 view 需要佔據剩下空間的多少權重；垂直方向的用法也一樣。上圖就是把第一個 Button 的寬度設定為 0dp，並且指定 weight 為 1
 
+# Examples
+
+以下記錄一些常常遇到的排版需求，複製貼上的速度會比較快
+
+## 在中央放一個 TextView
+
+通常用來顯示某一個區塊的 Title
+
+1. 因為是 title，希望會置中
+1. title 可能長或可能短，但是設計師通常會說「如果字串太長，就佔 60% 寬為極限」
+
+我的方法是左右增加兩個 guideline，位置由百分比決定。然後把 TextView 的左右 align guideline，寬度為 `wrap_content` 並且指定 `app:layout_constrainedWidth`。我還刻意加了一個 drawable 進去，反正這也是常被要求的東西。
+
+<div style="max-width: 100%;" class="img-row">{% asset_img 14-example.png Example %}</div>
+
+```xml
+<androidx.constraintlayout.widget.Guideline
+    android:id="@+id/title_guideline_left"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.2" />
+
+<androidx.constraintlayout.widget.Guideline
+    android:id="@+id/title_guideline_right"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.8" />
+
+<TextView
+    android:id="@+id/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableStart="@android:drawable/arrow_down_float"
+    android:drawablePadding="6dp"
+    android:gravity="bottom"
+    android:includeFontPadding="false"
+    android:singleLine="true"
+    android:text="@string/common_back_to"
+    app:layout_constrainedWidth="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="@id/title_guideline_left"
+    app:layout_constraintRight_toRightOf="@id/title_guideline_right"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="@tools:sample/lorem/random" />
+```
+
+## 聯絡人列表
+
+1. 左方擺一張照片 (avatar)
+1. 中間上方顯示聯絡人的姓名 (title)
+1. 中間上方顯示更多細節資訊 (description)
+1. 右側有一個按鈕
+
+還有些更麻煩的細節
+
+1. 字串最長不要蓋到右方的按鈕
+1. 中間的字串希望可以垂直置中
+1. avatar, title, description 都可能會消失 (gone)
+
+我的作法是在 avatar 的右邊加上一條垂直的 guideline，至少在 avatar 消失的時候，title 跟 description 還知道要跟誰對齊
+
+<div style="max-width: 100%;" class="img-row">{% asset_img 15-example.png Example %}</div>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    tools:background="#AAAAAA"
+    tools:ignore="RtlHardcoded">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline_avatar_end"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@tools:sample/avatars" />
+
+    <!-- avatar might be hidden. In that case Title still need a view to
+    align. So add a vertical guideline for both title and description -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_avatar_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toRightOf="@id/avatar"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintLeft_toRightOf="@id/guideline_avatar_end"
+        app:layout_constraintRight_toLeftOf="@id/close_button_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:background="#22FF0000"
+        tools:text="Header Title" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textSize="11sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guideline_avatar_end"
+        app:layout_constraintRight_toLeftOf="@id/close_button_img"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:background="#22FF0000"
+        tools:text="@tools:sample/lorem/random"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/close_button_img"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/access_close"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="#110000FF" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+<hr>
+
+* 20190314 更新：修改關於 androidx 的部分，並加上一些範例
+
+若有寫錯的地方，還請到 [twitter](https://twitter.com/walkingice) 提醒我一下，謝謝
