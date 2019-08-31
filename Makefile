@@ -1,4 +1,4 @@
-hexo=./node_modules/.bin/hexo
+hexo=npx hexo
 
 all: help
 
