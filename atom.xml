@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://julianchu.net/"/>
-  <updated>2020-09-02T13:29:41.558Z</updated>
+  <updated>2020-10-30T07:44:33.409Z</updated>
   <id>https://julianchu.net/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Gralde build error</title>
+    <link href="https://julianchu.net/2020/10/30-gradle.html"/>
+    <id>https://julianchu.net/2020/10/30-gradle.html</id>
+    <published>2020-10-30T08:34:37.000Z</published>
+    <updated>2020-10-30T07:44:33.409Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 Android 的 app moudle 裡面，嘗試把一些獨立的類別搬到新增加的一個 library module 的時候，遇到了類似這樣的錯誤</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; The consumer was configured to find an API of a component, as well as attribute &apos;com.android.build.api.attributes.BuildTypeAttr&apos; with value &apos;debug&apos;, attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;. However we cannot choose between the following variants of project :common-libs:</span><br></pre></td></tr></table></figure><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Library    +-------------+</span><br><span class="line">module     | common-libs |</span><br><span class="line">           +-------------+</span><br><span class="line">               ^</span><br><span class="line">               |</span><br><span class="line">               |</span><br><span class="line"> Base      +-------+</span><br><span class="line"> module    |  App  |</span><br><span class="line">           +-------+</span><br></pre></td></tr></table></figure><p>上圖，一開始只有 app depends on common-libs 這個 library module</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">           +-------------+</span><br><span class="line">           | common-libs |</span><br><span class="line">           +-------------+</span><br><span class="line">Library        ^</span><br><span class="line">module         |           +--------+</span><br><span class="line">               |           |my-utils|</span><br><span class="line">               |           +--------+</span><br><span class="line">               |              ^</span><br><span class="line">               |              |</span><br><span class="line"> Base      +-------+----------+</span><br><span class="line"> module    |  App  |</span><br><span class="line">           +-------+</span><br></pre></td></tr></table></figure><p>後來把 app 裡面的類別拉出來，放到 my-utils 裡面，這樣也沒問題</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">           +-------------+</span><br><span class="line">           | common-libs |&lt;-----+</span><br><span class="line">           +-------------+      |</span><br><span class="line">Library        ^                |</span><br><span class="line">module         |           +--------+</span><br><span class="line">               |           |my-utils|</span><br><span class="line">               |           +--------+</span><br><span class="line">               |              ^</span><br><span class="line">               |              |</span><br><span class="line"> Base      +-------+----------+</span><br><span class="line"> module    |  App  |</span><br><span class="line">           +-------+</span><br></pre></td></tr></table></figure><p>但是 my-utils 開始用到 common-libs 裡面的東西，增加 <code>implementation project(&#39;:common-libs&#39;)</code> 的時候就開始出現類似下方的錯誤訊息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">== BUILD FAILED ==</span><br><span class="line"></span><br><span class="line">FAILURE: Build failed with an exception.</span><br><span class="line"></span><br><span class="line">* What went wrong:</span><br><span class="line">Could not determine the dependencies of task &apos;:my-utils:compileDebugKotlin&apos;.</span><br><span class="line">&gt; Could not resolve all task dependencies for configuration &apos;:my-utils:debugCompileClasspath&apos;.</span><br><span class="line">   &gt; Could not resolve project :common-libs.</span><br><span class="line">     Required by:</span><br><span class="line">         project :my-utils</span><br><span class="line">      &gt; The consumer was configured to find an API of a component, as well as attribute &apos;com.android.build.api.attributes.BuildTypeAttr&apos; with value &apos;debug&apos;, attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;. However we cannot choose between the following variants of project :common-libs:</span><br><span class="line">          - betaDebugAndroidTestCompile</span><br><span class="line">          - betaDebugAndroidTestRuntime</span><br><span class="line">          - betaReleaseUnitTestRuntime</span><br><span class="line">          .....(skip).....</span><br><span class="line">          - developDebugAndroidTestCompile</span><br><span class="line">          .....(skip).....</span><br><span class="line">          - productionReleaseRuntime</span><br><span class="line">          .....(skip).....</span><br><span class="line">        All of them match the consumer attributes:</span><br><span class="line">          - Variant &apos;betaDebugAndroidTestCompile&apos; capability My_App:common-libs:unspecified declares a component, as well as attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;:</span><br><span class="line">              - Unmatched attributes:</span><br><span class="line">                  - Doesn&apos;t say anything about com.android.build.api.attributes.BuildTypeAttr (required &apos;debug&apos;)</span><br><span class="line">                  - Doesn&apos;t say anything about its usage (required an API)</span><br><span class="line">                  - Provides attribute &apos;org.jetbrains.kotlin.localToProject&apos; with value &apos;local to :common-libs&apos; but the consumer didn&apos;t ask for it</span><br><span class="line">          - Variant &apos;betaDebugAndroidTestRuntime&apos; capability My_App:common-libs:unspecified declares a component, as well as attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;:</span><br><span class="line">              - Unmatched attributes:</span><br><span class="line">                  - Doesn&apos;t say anything about com.android.build.api.attributes.BuildTypeAttr (required &apos;debug&apos;)</span><br><span class="line">                  - Doesn&apos;t say anything about its usage (required an API)</span><br><span class="line">                  - Provides attribute &apos;org.jetbrains.kotlin.localToProject&apos; with value &apos;local to :common-libs&apos; but the consumer didn&apos;t ask for it</span><br><span class="line">          - Variant &apos;betaDebugApiElements&apos; capability My_App:common-libs:unspecified declares an API of a component, as well as attribute &apos;com.android.build.api.attributes.BuildTypeAttr&apos; with value &apos;debug&apos;, attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;:</span><br><span class="line">              - Unmatched attributes:</span><br><span class="line">                  - Provides attribute &apos;com.android.build.api.attributes.VariantAttr&apos; with value &apos;betaDebug&apos; but the consumer didn&apos;t ask for it</span><br><span class="line">                  - Provides attribute &apos;default&apos; with value &apos;beta&apos; but the consumer didn&apos;t ask for it</span><br><span class="line">          - Variant &apos;betaDebugRuntime&apos; capability My_App:common-libs:unspecified declares a component, as well as attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;:</span><br><span class="line">              - Unmatched attributes:</span><br><span class="line">                  - Doesn&apos;t say anything about com.android.build.api.attributes.BuildTypeAttr (required &apos;debug&apos;)</span><br><span class="line">                  - Doesn&apos;t say anything about its usage (required an API)</span><br><span class="line">                  - Provides attribute &apos;org.jetbrains.kotlin.localToProject&apos; with value &apos;local to :common-libs&apos; but the consumer didn&apos;t ask for it</span><br><span class="line">          - Variant &apos;betaDebugRuntimeElements&apos; capability My_App:common-libs:unspecified declares a runtime of a component, as well as attribute &apos;com.android.build.api.attributes.BuildTypeAttr&apos; with value &apos;debug&apos;, attribute &apos;org.jetbrains.kotlin.platform.type&apos; with value &apos;androidJvm&apos;:</span><br><span class="line">              - Unmatched attributes:</span><br><span class="line">                  - Provides attribute &apos;com.android.build.api.attributes.VariantAttr&apos; with value &apos;betaDebug&apos; but the consumer didn&apos;t ask for it</span><br><span class="line">                  - Provides attribute &apos;default&apos; with value &apos;beta&apos; but the consumer didn&apos;t ask for it</span><br><span class="line"></span><br><span class="line">.....(skip).....</span><br></pre></td></tr></table></figure><p>訊息不是很容易懂，大致上原因為 <code>App</code> base module 裡面定義了一些 <code>productFlavors</code>，但是處理 <code>my-utils</code> module 時找不到對應的 flavor 就爆炸了。因為我有加上 <code>develop</code>, <code>beta</code>, <code>production</code> 等等的 flavor，所以在 <code>my-utils</code> 的 build.gradle 補上這一段就可以了</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> android &#123;</span><br><span class="line">     flavorDimensions <span class="string">"default"</span></span><br><span class="line">+</span><br><span class="line">+    productFlavors &#123;</span><br><span class="line">+        register(<span class="string">"develop"</span>)</span><br><span class="line">+        register(<span class="string">"beta"</span>)</span><br><span class="line">+        register(<span class="string">"production"</span>)</span><br><span class="line">+    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在 Android 的 app moudle 裡面，嘗試把一些獨立的類別搬到新增加的一個 library module 的時候，遇到了類似這樣的錯誤&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;gt; The consumer was configured to find an API of a component, as well as attribute &amp;apos;com.android.build.api.attributes.BuildTypeAttr&amp;apos; with value &amp;apos;debug&amp;apos;, attribute &amp;apos;org.jetbrains.kotlin.platform.type&amp;apos; with value &amp;apos;androidJvm&amp;apos;. However we cannot choose between the following variants of project :common-libs:&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="geek" scheme="https://julianchu.net/categories/geek/"/>
+    
+    
+      <category term="android" scheme="https://julianchu.net/tags/android/"/>
+    
+      <category term="kotlin" scheme="https://julianchu.net/tags/kotlin/"/>
+    
+      <category term="gradle" scheme="https://julianchu.net/tags/gradle/"/>
+    
+  </entry>
   
   <entry>
     <title>Android Studio 觀察 Sqlite Database</title>
@@ -161,9 +188,9 @@
       <category term="ramble" scheme="https://julianchu.net/categories/ramble/"/>
     
     
-      <category term="political" scheme="https://julianchu.net/tags/political/"/>
-    
       <category term="taiwan" scheme="https://julianchu.net/tags/taiwan/"/>
+    
+      <category term="political" scheme="https://julianchu.net/tags/political/"/>
     
   </entry>
   
@@ -506,11 +533,11 @@
     
       <category term="tools" scheme="https://julianchu.net/tags/tools/"/>
     
-      <category term="kotlin" scheme="https://julianchu.net/tags/kotlin/"/>
+      <category term="git" scheme="https://julianchu.net/tags/git/"/>
     
       <category term="Android" scheme="https://julianchu.net/tags/Android/"/>
     
-      <category term="git" scheme="https://julianchu.net/tags/git/"/>
+      <category term="kotlin" scheme="https://julianchu.net/tags/kotlin/"/>
     
   </entry>
   
@@ -532,30 +559,6 @@
     
       <category term="geek" scheme="https://julianchu.net/categories/geek/"/>
     
-    
-      <category term="Android" scheme="https://julianchu.net/tags/Android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>開發 Android App 階段啟用 StrictMode</title>
-    <link href="https://julianchu.net/2017/09/04-strictmode.html"/>
-    <id>https://julianchu.net/2017/09/04-strictmode.html</id>
-    <published>2017-09-03T15:20:17.000Z</published>
-    <updated>2020-08-15T13:10:31.349Z</updated>
-    
-    <content type="html"><![CDATA[<p>開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 <strong>Don’t keep Activity</strong> 打開以外，還有一個就是啟動 <a href="https://developer.android.com/reference/android/os/StrictMode.html" target="_blank" rel="noopener">StrictMode</a></p><a id="more"></a><p>啟用 StrictMode 的方式，在網路上隨意 Google 一下就能看到很多教學。通常都直接 <code>detectAll()</code> 把所有的情況都抓出來，那麼要如何測試會不會動的？最簡單的就是測試 Resource mismatch。</p><p>新增一個 strings array 到 xml 檔，array 的內容放數字，然後把該 array 當成 integer-arry 來存取，就能觸發 penalty</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add this to array.xml</span></span><br><span class="line"><span class="comment">//  &lt;string-array name="my_str_array"&gt;</span></span><br><span class="line"><span class="comment">//    &lt;item&gt;9257&lt;/item&gt;</span></span><br><span class="line"><span class="comment">//  &lt;/string-array&gt;</span></span><br><span class="line"><span class="keyword">final</span> TypedArray ta = getResources().obtainTypedArray(R.array.my_str_array);</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> foobar = ta.getInt(<span class="number">0</span>, -<span class="number">1</span>);</span><br></pre></td></tr></table></figure><p>我試著在 <code>Application.onCreate()</code> 裡面直接啟用，測試的結果卻發現 StrictMode 不會動，詳細的原因不明，但是透過 <code>StrictMode.getThreadPolicy()</code> 取得 instance 再看它的 mask 值，發現我在 Application 裡面順利設定的值，在 Activity 裡面重新檢查的時候已經不見，變回預設值了。</p><p>沒有追進 framework 裡面詳細檢查原因(註)，現在先暫時在每個 Activity 啟動的時候再設定一次，就能看到 penalty 了</p><div class="img-row"><img src="/2017/09/04-strictmode/penalty.png" title="Penalty for detectResourceMismatches"></div><p>註：其實這個原因需要釐清，如果真的是被改成預設值而不知道條件為何，很可能開發階段以為 StrictMode 有啟動，實際上並沒有作用</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 &lt;strong&gt;Don’t keep Activity&lt;/strong&gt; 打開以外，還有一個就是啟動 &lt;a href=&quot;https://developer.android.com/reference/android/os/StrictMode.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;StrictMode&lt;/a&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="geek" scheme="https://julianchu.net/categories/geek/"/>
-    
-    
-      <category term="tools" scheme="https://julianchu.net/tags/tools/"/>
     
       <category term="Android" scheme="https://julianchu.net/tags/Android/"/>
     

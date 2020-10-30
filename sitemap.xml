@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://julianchu.net/2020/10/30-gradle.html</loc>
+    
+    <lastmod>2020-10-30T07:44:33.409Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://julianchu.net/2020/09/02-sqlscout.html</loc>
     
     <lastmod>2020-09-02T13:29:41.558Z</lastmod>
@@ -30,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/lamejokes/old.html</loc>
+    <loc>https://julianchu.net/tags/index.html</loc>
     
     <lastmod>2020-08-15T13:10:31.454Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/tags/index.html</loc>
+    <loc>https://julianchu.net/lamejokes/old.html</loc>
     
     <lastmod>2020-08-15T13:10:31.454Z</lastmod>
     
@@ -51,14 +58,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/lamejokes/2015.html</loc>
+    <loc>https://julianchu.net/lamejokes/2017.html</loc>
     
     <lastmod>2020-08-15T13:10:31.453Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/lamejokes/2017.html</loc>
+    <loc>https://julianchu.net/lamejokes/2015.html</loc>
     
     <lastmod>2020-08-15T13:10:31.453Z</lastmod>
     
@@ -72,14 +79,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2019/05/29-license.html</loc>
+    <loc>https://julianchu.net/2019/03/11-populism.html</loc>
     
     <lastmod>2020-08-15T13:10:31.430Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2019/03/11-populism.html</loc>
+    <loc>https://julianchu.net/2019/05/29-license.html</loc>
     
     <lastmod>2020-08-15T13:10:31.430Z</lastmod>
     
@@ -121,14 +128,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2018/05/05-kotlin.html</loc>
+    <loc>https://julianchu.net/2018/03/13-cd.html</loc>
     
     <lastmod>2020-08-15T13:10:31.361Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2018/03/13-cd.html</loc>
+    <loc>https://julianchu.net/2018/05/05-kotlin.html</loc>
     
     <lastmod>2020-08-15T13:10:31.361Z</lastmod>
     
@@ -163,7 +170,7 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/09/04-strictmode.html</loc>
+    <loc>https://julianchu.net/2017/09/04-drawable.html</loc>
     
     <lastmod>2020-08-15T13:10:31.349Z</lastmod>
     
@@ -177,7 +184,7 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/09/04-drawable.html</loc>
+    <loc>https://julianchu.net/2017/09/04-strictmode.html</loc>
     
     <lastmod>2020-08-15T13:10:31.349Z</lastmod>
     
@@ -205,7 +212,7 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/06/19-political.html</loc>
+    <loc>https://julianchu.net/2016/12/03-git.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
@@ -219,14 +226,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/07/08-book.html</loc>
+    <loc>https://julianchu.net/2017/06/19-political.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2016/12/03-git.html</loc>
+    <loc>https://julianchu.net/2017/07/08-book.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
@@ -247,14 +254,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2016/09/26-tokyo-transport.html</loc>
+    <loc>https://julianchu.net/2016/09/06-retrofit.html</loc>
     
     <lastmod>2020-08-15T13:10:31.334Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2016/09/06-retrofit.html</loc>
+    <loc>https://julianchu.net/2016/09/26-tokyo-transport.html</loc>
     
     <lastmod>2020-08-15T13:10:31.334Z</lastmod>
     
@@ -275,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2016/05/20-taiwan.html</loc>
+    <loc>https://julianchu.net/2016/04/19-docker.html</loc>
     
     <lastmod>2020-08-15T13:10:31.328Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2016/04/19-docker.html</loc>
+    <loc>https://julianchu.net/2016/05/20-taiwan.html</loc>
     
     <lastmod>2020-08-15T13:10:31.328Z</lastmod>
     
