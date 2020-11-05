@@ -355,6 +355,18 @@ pre .javascript .function {
   margin-left: 10px;
   font-size: 2.5rem !important;
 }
+.extra-comments {
+  width: 80%;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.extra-comments a {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-weight: bold;
+  color: #808080;
+}
 #blog-title {
   letter-spacing: 2px;
   text-shadow: 4px 3px 0px #ccc, 9px 8px 0px rgba(0,0,0,0.15);
