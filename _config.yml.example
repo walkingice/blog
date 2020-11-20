@@ -67,6 +67,14 @@ pagination_dir: page
 # https://github.com/iissnan/hexo-theme-next
 theme: hexo-theme-kaku
 
+# https://www.npmjs.com/package/hexo-filter-plantuml
+plantuml:
+  render: "Local"
+  link: "localLink"
+  GraphvizDotFile: "/usr/local/bin/dot"
+  PlantJar: "/usr/local/Cellar/plantuml/1.2020.13/libexec/plantuml.jar"
+  outputFormat: "svg"
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
