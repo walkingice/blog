@@ -1,0 +1,249 @@
+/**
+ * BSD 0-clause license
+ * Copyright (C) 2020 by Julian Chu
+
+ * Permission to use, copy, modify, and/or distribute this software for any purpose
+ * with or without fee is hereby granted.
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+ * REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+ * INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+ * OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+ * THIS SOFTWARE.
+ */
+
+window.addEventListener("load", () => {
+    function insertCss() {
+        var styles = `
+        #search-container {
+            position: fixed;
+            background: #EEE;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+        }
+        #search-input {
+            width: 30px;
+            position: relative;
+            display: flex;
+            padding: 5px;
+            margin: 5px;
+            margin-left: auto;
+            transition: width 0.1s ease-in-out
+        }
+        .candidate-list {
+            margin-top: 10px;
+        }
+        .candidate-item {
+            background: #FFF;
+            min-height: 10px;
+            font-size: 0.8rem;
+            margin: 2px;
+            padding: 3px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .candidate-item.focus {
+            background: #AFA;
+        }
+        .hide {
+            display: none;
+        }
+        `
+        var styleSheet = document.createElement("style")
+        styleSheet.innerHTML = styles
+        document.head.appendChild(styleSheet)
+    }
+
+    function createDom() {
+        let container = document.getElementById("search-container")
+        if (container != null) {
+            return container
+        }
+        container = document.body.appendChild(document.createElement("div"))
+        container.id = "search-container"
+        let input = document.createElement("input")
+        input.id = "search-input"
+        container.appendChild(input)
+        let listDom = document.createElement("div")
+        listDom.id = "candidate-list"
+        container.appendChild(listDom)
+
+        for (let i = 0; i < 20; i++) {
+            let item = document.createElement("div")
+            let anchor = document.createElement("a")
+            item.className = "candidate-item"
+            item.appendChild(anchor)
+            item.hide = function () {
+                item.classList.add('hide')
+            }
+            item.show = function () {
+                item.classList.remove('hide')
+            }
+
+            item.setLink = (text, url) => {
+                anchor.innerText = text
+                anchor.href = url
+            }
+
+            item.hide()
+
+            listDom.appendChild(item)
+        }
+    }
+
+    insertCss()
+    createDom()
+    let containerDom = document.getElementById('search-container')
+    let inputDom = document.getElementById('search-input')
+    let listDom = document.getElementById('candidate-list')
+    document.onkeydown = (e) => {
+        const focusing = document.activeElement == inputDom
+        if (e.keyCode == 191 && !focusing) { // cmd + /
+            inputDom.focus()
+        } else if (focusing && e.keyCode == 38) { // arrow up
+            listDom.mayMoveUp()
+        } else if (focusing && e.keyCode == 40) { // arrow down
+            listDom.mayMoveDown()
+        } else if (focusing && e.keyCode == 13) { // Enteer
+            listDom.mayApplyCursor()
+        } else {
+            return true
+        }
+        return false
+    }
+
+    inputDom.addEventListener('focus', (e) => {
+        e.target.style.width = '200px'
+        e.target.select()
+        listDom.classList.remove('hide')
+        listDom.refreshCursor()
+    })
+    inputDom.addEventListener('blur', (e) => {
+        // add delay, so clicking on Anchor tag starts working
+        setTimeout(() => {
+            e.target.style.width = '30px'
+            e.target.value = ""
+            listDom.classList.add('hide')
+        }, 100)
+    })
+
+    inputDom.addEventListener('input', (e) => {
+        if (e.target.value.length > 2) {
+            inputDom.showList(e.target.value)
+        } else {
+            inputDom.clearList()
+        }
+    })
+    const UNDEF = -2;
+    listDom.cursor = UNDEF
+
+    inputDom.showList = (text) => {
+        listDom.candidates = repo.filterCandidates(text)
+        listDom.refreshCursor()
+    }
+
+    inputDom.clearList = () => {
+        listDom.cursor = UNDEF
+        listDom.clearCandidates()
+    }
+
+    listDom.candidates = []
+
+    listDom.clearCandidates = () => {
+        listDom.candidates = []
+        listDom.refreshCursor()
+    }
+
+    listDom.mayMoveUp = () => {
+        listDom.cursor = listDom.cursor == UNDEF ? 0 : listDom.cursor - 1
+        listDom.refreshCursor()
+    }
+
+    listDom.mayMoveDown = () => {
+        listDom.cursor = listDom.cursor == UNDEF ? 0 : listDom.cursor + 1
+        listDom.refreshCursor()
+    }
+
+    listDom.refreshCursor = () => {
+        if (listDom.cursor < 0 && listDom.cursor != UNDEF) {
+            listDom.cursor = listDom.candidates.length - 1
+        } else if (listDom.cursor >= listDom.candidates.length) {
+            listDom.cursor = 0
+        }
+
+        listDom.childNodes.forEach((node, idx) => {
+            node.classList.remove('focus')
+            if (idx == listDom.cursor) {
+                node.classList.add('focus')
+            }
+            let data = idx < listDom.candidates.length ? listDom.candidates[idx] : null
+            if (data) {
+                node.setLink(data.name, data.url)
+                node.show()
+            } else {
+                node.hide()
+            }
+        })
+    }
+
+    listDom.mayApplyCursor = () => {
+        let candidate = listDom.candidates[listDom.cursor]
+        if (!candidate) {
+            return
+        }
+        location.href = candidate.url
+    }
+
+    listDom.refreshCursor()
+
+    // window.rawData = [
+    //    {}
+    //    name: "android.app.Activity",
+    //    key: "android.app.actiivty",
+    //    url: "/path/to/Documents/developer.android.com/reference/android/app/Activity.html"
+    //    },
+    //    {
+    //    name: "android.app.ActivityManager",
+    //    key: "android.app.actiivtymanager",
+    //    url: "/path/to/Documents/developer.android.com/reference/android/app/ActivityManager.html"
+    //    },
+    //    ...
+    //  ]
+    //
+    //  a simple Perl script to generate data
+    //
+    // #!/usr/bin/env perl -l
+    //
+    // my $pwd = `pwd`;
+    // chomp $pwd;
+    // my @files = `find . -regex ".*.html" | sort -t '/' `;
+    // print "window.rawData = [";
+    // foreach my $line(@files) {
+    //     chomp $line;
+    //     substr $line, 0, 1, ""; # remove leading '.'
+    //     my $full = $pwd.$line;
+    //     @match = $full=~ /.*reference\/(.*)\.html/;
+    //     @match[0] =~ tr/\//\./;
+    //     print "{";
+    //     print "name: \"", @match[0], "\",";
+    //     print "key: \"", lc @match[0], "\",";
+    //     print "url: \"$full\"";
+    //     print "},";
+    // }
+    // print "];";
+    //
+    // $ perl parser.pl > data.js
+    let repo = {
+        rawData: window.rawData
+    }
+
+    repo.filterCandidates = (text) => {
+        let regex = RegExp(text.toLocaleLowerCase())
+        let array = repo.rawData.filter((item) => {
+            return regex.test(item.name.toLocaleLowerCase())
+        })
+        return array.slice(0, listDom.childNodes.length);
+    }
+})
