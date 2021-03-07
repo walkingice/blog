@@ -171,7 +171,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add this to array.xml</span></span><br><span class="line"><span class="comment">//  &lt;string-array name="my_str_array"&gt;</span></span><br><span class="line"><span class="comment">//    &lt;item&gt;9257&lt;/item&gt;</span></span><br><span class="line"><span class="comment">//  &lt;/string-array&gt;</span></span><br><span class="line"><span class="keyword">final</span> TypedArray ta = getResources().obtainTypedArray(R.array.my_str_array);</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> foobar = ta.getInt(<span class="number">0</span>, -<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 <p>我試著在 <code>Application.onCreate()</code> 裡面直接啟用，測試的結果卻發現 StrictMode 不會動，詳細的原因不明，但是透過 <code>StrictMode.getThreadPolicy()</code> 取得 instance 再看它的 mask 值，發現我在 Application 裡面順利設定的值，在 Activity 裡面重新檢查的時候已經不見，變回預設值了。</p>
 <p>沒有追進 framework 裡面詳細檢查原因(註)，現在先暫時在每個 Activity 啟動的時候再設定一次，就能看到 penalty 了</p>
-<div class="img-row"><img src="/2017/09/03-strictmode/penalty.png" title="Penalty for detectResourceMismatches"></div>
+<div class="img-row"><img src="/2017/09/04-strictmode/penalty.png" title="Penalty for detectResourceMismatches"></div>
 
 <p>註：其實這個原因需要釐清，如果真的是被改成預設值而不知道條件為何，很可能開發階段以為 StrictMode 有啟動，實際上並沒有作用</p>
 

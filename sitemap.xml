@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://julianchu.net/2021/03/06-constitution.html</loc>
+    
+    <lastmod>2021-03-07T16:46:08.037Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://julianchu.net/2021/03/04-mayflash.html</loc>
     
     <lastmod>2021-03-03T16:36:46.775Z</lastmod>
@@ -23,16 +30,16 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2020/11/01-game.html</loc>
+    <loc>https://julianchu.net/2020/10/30-gradle.html</loc>
     
-    <lastmod>2020-11-20T08:13:19.481Z</lastmod>
+    <lastmod>2020-12-16T17:38:04.277Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2020/10/30-gradle.html</loc>
+    <loc>https://julianchu.net/2020/11/01-game.html</loc>
     
-    <lastmod>2020-10-30T07:44:33.409Z</lastmod>
+    <lastmod>2020-12-16T17:38:04.277Z</lastmod>
     
   </url>
   
@@ -65,13 +72,6 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/lamejokes/old.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.454Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://julianchu.net/tags/index.html</loc>
     
     <lastmod>2020-08-15T13:10:31.454Z</lastmod>
@@ -79,7 +79,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/lamejokes/2017.html</loc>
+    <loc>https://julianchu.net/lamejokes/old.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.454Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://julianchu.net/lamejokes/2015.html</loc>
     
     <lastmod>2020-08-15T13:10:31.453Z</lastmod>
     
@@ -93,7 +100,7 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/lamejokes/2015.html</loc>
+    <loc>https://julianchu.net/lamejokes/2017.html</loc>
     
     <lastmod>2020-08-15T13:10:31.453Z</lastmod>
     
@@ -156,6 +163,13 @@
   </url>
   
   <url>
+    <loc>https://julianchu.net/2018/08/16-test.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.361Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://julianchu.net/2018/03/13-cd.html</loc>
     
     <lastmod>2020-08-15T13:10:31.361Z</lastmod>
@@ -164,13 +178,6 @@
   
   <url>
     <loc>https://julianchu.net/2018/05/05-kotlin.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.361Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://julianchu.net/2018/08/16-test.html</loc>
     
     <lastmod>2020-08-15T13:10:31.361Z</lastmod>
     
@@ -198,14 +205,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/09/04-strictmode.html</loc>
+    <loc>https://julianchu.net/2017/09/04-drawable.html</loc>
     
     <lastmod>2020-08-15T13:10:31.349Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/09/04-drawable.html</loc>
+    <loc>https://julianchu.net/2017/09/04-strictmode.html</loc>
     
     <lastmod>2020-08-15T13:10:31.349Z</lastmod>
     
@@ -226,13 +233,6 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/08/21-storage.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.348Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://julianchu.net/2017/09/02-viewpager.html</loc>
     
     <lastmod>2020-08-15T13:10:31.348Z</lastmod>
@@ -240,14 +240,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2016/12/03-git.html</loc>
+    <loc>https://julianchu.net/2017/08/21-storage.html</loc>
     
-    <lastmod>2020-08-15T13:10:31.347Z</lastmod>
+    <lastmod>2020-08-15T13:10:31.348Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/04/24-mockito.html</loc>
+    <loc>https://julianchu.net/2017/07/08-book.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
@@ -261,7 +261,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2017/07/08-book.html</loc>
+    <loc>https://julianchu.net/2017/04/24-mockito.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.347Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://julianchu.net/2016/12/03-git.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
@@ -373,13 +380,6 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2015/10/31-github.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.216Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://julianchu.net/2015/10/28-lightdm.html</loc>
     
     <lastmod>2020-08-15T13:10:31.216Z</lastmod>
@@ -387,7 +387,7 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2015/11/18-git.html</loc>
+    <loc>https://julianchu.net/2015/10/31-github.html</loc>
     
     <lastmod>2020-08-15T13:10:31.216Z</lastmod>
     
@@ -395,6 +395,13 @@
   
   <url>
     <loc>https://julianchu.net/2015/12/03-hsinchu.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.216Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://julianchu.net/2015/11/18-git.html</loc>
     
     <lastmod>2020-08-15T13:10:31.216Z</lastmod>
     
@@ -415,14 +422,14 @@
   </url>
   
   <url>
-    <loc>https://julianchu.net/2015/09/24-simpleadapter-viewbinder.html</loc>
+    <loc>https://julianchu.net/2015/09/18-streamsupport.html</loc>
     
     <lastmod>2020-08-15T13:10:31.210Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://julianchu.net/2015/09/18-streamsupport.html</loc>
+    <loc>https://julianchu.net/2015/09/24-simpleadapter-viewbinder.html</loc>
     
     <lastmod>2020-08-15T13:10:31.210Z</lastmod>
     

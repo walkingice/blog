@@ -163,6 +163,69 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article">
     <h1 class="article-title">
+        <a href="/2016/04/19-docker.html" itemprop="url" target="_blank">
+            <span class>Docker volume 簡單用法</span>
+        </a>
+    </h1>
+
+    <p>最近在設定開發環境的時候有個使用 docker volume 的機會，在這邊筆記一下指令，以便自己下次查詢使用。</p>
+<p>比起在系統裡面裝一個 postgresql，我比較喜歡透過 <a href="https://hub.docker.com/_/postgres/" target="_blank" rel="noopener">docker</a> 來使用。藉此降低對 host packages 的相依性，雖然會有一些效能上的 overhead 我覺得還是值得。</p>
+<p>既然要用 docker，馬上就要考慮 persistent data 的問題：<strong>如何把資料獨立在 image 之外來保存？</strong>，第一個聽到的解答就是 volume，因為開發需要，我的需求又有點不一樣</p>
+<ul>
+<li>希望能用官方的 pg image</li>
+<li>db 資料是獨立的，這樣可以獨立升級 pg 版本</li>
+<li>db 的資料希望能有 snapshot，這樣方便寫 unit test 或是開發，不管怎麼惡搞資料都能簡單回復</li>
+</ul>
+<p>這邊紀錄下我最近的作法，未來遇到更好的作法再更新於此。</p>
+
+    
+    <a href="/2016/04/19-docker.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-03-08">2016-04-19</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/docker/">
+                    <span class="tag">docker</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
         <a href="/2016/03/13-recyclerview.html" itemprop="url" target="_blank">
             <span class>使用 RecyclerView</span>
         </a>
@@ -190,7 +253,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-03-13</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-03-13</span>
             </a>
         </span>
 
@@ -260,7 +323,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-02-23</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-02-23</span>
             </a>
         </span>
 
@@ -321,7 +384,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-01-28</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-01-28</span>
             </a>
         </span>
 
@@ -380,7 +443,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-01-26</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-01-26</span>
             </a>
         </span>
 
@@ -439,7 +502,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-01-26</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-01-26</span>
             </a>
         </span>
 
@@ -499,7 +562,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-01-26</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-01-26</span>
             </a>
         </span>
 
@@ -561,7 +624,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2016-01-26</span>
+                <span itemprop="datePublished" content="2021-03-08">2016-01-26</span>
             </a>
         </span>
 
@@ -600,9 +663,9 @@
     </h1>
 
     <p>11/28 的時候與 <a href="https://github.com/yhsiang" target="_blank" rel="noopener">Ly</a> 以及設計師佳寧一同參與了名為 <a href="http://2015hackhsinchucity.punnode.com/" target="_blank" rel="noopener">2015新竹官網黑客松</a> 的網頁設計比賽。雖然比賽沒有拿到名次，覺得還是該稍微紀錄一下，以後回顧的時候才不會都忘光光。</p>
-<div class="img-row"><img src="/2015/12/02-hsinchu/thumb.png" title="成果擷圖"></div>
+<div class="img-row"><img src="/2015/12/03-hsinchu/thumb.png" title="成果擷圖"></div>
 
-<p>這是成果網頁的部份截圖，我還另外抓了 <a target="_blank" href="/2015/12/02-hsinchu/index.png">首頁的圖</a>，有興趣的可以看看。</p>
+<p>這是成果網頁的部份截圖，我還另外抓了 <a target="_blank" href="/2015/12/03-hsinchu/index.png">首頁的圖</a>，有興趣的可以看看。</p>
 <p>打開多數市府的網頁，多是目不暇給的各式連結，或是市府想要宣導的訊息。就我自己多次打開各單位的網站，通常都已有特定目的，好比要申訴、回報問題，或是有文件申請的疑惑想尋求解答。因此我們嘗試從另外一個極端出發，設計一個盡力完成民眾需求的網站，想看看用起來的感覺會怎樣。</p>
 
     
@@ -621,7 +684,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2015-12-02</span>
+                <span itemprop="datePublished" content="2021-03-08">2015-12-02</span>
             </a>
         </span>
 
@@ -681,7 +744,7 @@
         <span class="group">
             <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2015-11-18</span>
+                <span itemprop="datePublished" content="2021-03-08">2015-11-18</span>
             </a>
         </span>
 
@@ -704,67 +767,6 @@
             
                 <a href="/tags/tools/">
                     <span class="tag">tools</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
-    <h1 class="article-title">
-        <a href="/2015/10/31-github.html" itemprop="url" target="_blank">
-            <span class>Github 與 Halloween</span>
-        </a>
-    </h1>
-
-    <p>今天萬聖節，打開 github 看到這個 style 有嚇一跳</p>
-<div class="img-row"><img src="/2015/10/31-github/contributions.png" title="Github contributions"></div>
-
-    
-    <a href="/2015/10/31-github.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://julianchu.net/page/5/index.html">
-                <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-03-04">2015-10-31</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/fun/">
-                    <i class="fa fa-th"></i>
-                    <span class>fun</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/github/">
-                    <span class="tag">github</span>
                 </a>
             
         </span>
