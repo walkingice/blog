@@ -25,10 +25,14 @@ foreach my $line(@files) {
     my $full = $pwd.$line;
     @match = $full=~ /.*\/reference\/(.*)\.html/;
     @match[0] =~ tr/\//\./;
-    print "{";
-    print "name: \"", @match[0], "\",";
-    print "key: \"", lc @match[0], "\",";
-    print "url: \"$full\"";
-    print "},";
+    my $class = @match[0] =~ s/^.*\.//r;
+    if ($class) {
+        print "{";
+        print "name: \"", @match[0], "\",";
+        print "class: \"", $class, "\",";
+        print "key: \"", lc @match[0], "\",";
+        print "url: \"$full\"";
+        print "},";
+    }
 }
 print "];";
