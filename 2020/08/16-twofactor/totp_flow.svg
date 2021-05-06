@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="794px" preserveAspectRatio="none" style="width:312px;height:794px;" version="1.1" viewBox="0 0 312 794" width="312px" zoomAndPan="magnify"><defs><filter height="300%" id="f1aajv6fs4eom9" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="46" x="124" y="17.4023">TOTP</text><g id="CurrentTimeMillis"><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="50.6211" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="286" x="7" y="28.1992"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="7" x2="293" y1="54.6875" y2="54.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="122" x="89" y="46.7344">CurrentTimeMillis</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="266" x="12" y="71.2891">2020-05-22 01:57:34 = 1590080254249L</text></g><g id="CurrentTimeSeconds"><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="50.6211" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="280" x="10" y="139.1992"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="10" x2="290" y1="165.6875" y2="165.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="144" x="78" y="157.7344">CurrentTimeSeconds</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="260" x="15" y="182.2891">1590080254L = 1590080254249L / 1000</text></g><g id="Steps"><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="64.7539" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="267" x="16.5" y="250.1992"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="16.5" x2="283.5" y1="276.6875" y2="276.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="37" x="131.5" y="268.7344">Steps</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="122" x="21.5" y="293.2891">30 seconds = 1 step</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="247" x="21.5" y="307.4219">steps = 53003675 = 1590080254L / 30</text></g><g id="StepsHexString"><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="78.8867" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="194" x="53" y="375.1992"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="53" x2="247" y1="401.6875" y2="401.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="105" x="97.5" y="393.7344">StepsHexString</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="174" x="58" y="418.2891">add leading 0, until size = 16</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="152" x="58" y="432.4219">53002675 = 0x328C1B3</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="135" x="58" y="446.5547">"000000000328C1B3"</text></g><g id="StepsBytArray"><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="50.6211" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="183" x="58.5" y="514.1992"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="58.5" x2="241.5" y1="540.6875" y2="540.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="94" x="103" y="532.7344">StepsBytArray</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="163" x="63.5" y="557.2891">[00 00 00 00 03 28 C1 B3]</text></g><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="50" x="125" y="625.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="38" x="131" y="650.4902">HOTP</text><g id="HOTP_Result"><rect fill="#FEFECE" filter="url(#f1aajv6fs4eom9)" height="50.6211" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="107" x="96.5" y="725.1992"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="96.5" x2="203.5" y1="751.6875" y2="751.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="87" x="106.5" y="743.7344">HOTP_Result</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="48" x="101.5" y="768.2891">450722</text></g><!--MD5=[84b377553803b13a5145149b0eeb7553]
+link CurrentTimeMillis to CurrentTimeSeconds--><path d="M150,79.4292 C150,95.5992 150,116.8092 150,133.8992 " fill="none" id="CurrentTimeMillis-&gt;CurrentTimeSeconds" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="150,139.0592,154,130.0592,150,134.0592,146,130.0592,150,139.0592" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ffb2c9b575762b22a96cea7fd3151f3b]
+link CurrentTimeSeconds to Steps--><path d="M150,190.2992 C150,206.0892 150,226.8892 150,244.6592 " fill="none" id="CurrentTimeSeconds-&gt;Steps" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="150,250.0692,154,241.0692,150,245.0692,146,241.0692,150,250.0692" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[39f3f0b2c1c915d1010863ffa00705ef]
+link Steps to StepsHexString--><path d="M150,315.4992 C150,331.7092 150,351.6892 150,369.3892 " fill="none" id="Steps-&gt;StepsHexString" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="150,374.7992,154,365.7992,150,369.7992,146,365.7992,150,374.7992" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[4b6ee4cd57c41b2c3889adff46ec6028]
+link StepsHexString to StepsBytArray--><path d="M150,454.2792 C150,471.8792 150,492.3992 150,508.7992 " fill="none" id="StepsHexString-&gt;StepsBytArray" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="150,514.1892,154,505.1892,150,509.1892,146,505.1892,150,514.1892" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[281d17195720a5e89c6c8e28ab3a9b8d]
+link StepsBytArray to HOTP--><path d="M150,565.2292 C150,581.6592 150,603.2192 150,619.6492 " fill="none" id="StepsBytArray-&gt;HOTP" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="150,625.0192,154,616.0192,150,620.0192,146,616.0192,150,625.0192" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[a2d8df15e6f9c7726d5933fc933d6424]
+link HOTP to HOTP_Result--><path d="M150,665.6692 C150,680.8392 150,702.1892 150,719.5692 " fill="none" id="HOTP-&gt;HOTP_Result" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="150,724.8192,154,715.8192,150,719.8192,146,715.8192,150,724.8192" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[25587177f811e3961843a3f9671052cb]
+@startuml
+
+title TOTP
+
+hide empty description
+
+CurrentTimeMillis -down-> CurrentTimeSeconds
+CurrentTimeMillis:  2020-05-22 01:57:34 = 1590080254249L
+
+CurrentTimeSeconds -down-> Steps
+CurrentTimeSeconds: 1590080254L = 1590080254249L / 1000
+
+Steps: 30 seconds = 1 step
+Steps: steps = 53003675 = 1590080254L / 30
+
+Steps -down-> StepsHexString
+StepsHexString: add leading 0, until size = 16
+StepsHexString: 53002675 = 0x328C1B3
+StepsHexString: "000000000328C1B3"
+
+StepsHexString -down-> StepsBytArray
+StepsBytArray: [00 00 00 00 03 28 C1 B3]
+
+StepsBytArray -down-> HOTP
+HOTP -down-> HOTP_Result
+HOTP_Result: 450722
+
+@enduml
+
+PlantUML version 1.2020.13(Sat Jun 13 21:26:38 JST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: JP
+--></g></svg>

@@ -1,0 +1,248 @@
+@startuml
+
+skinparam state {
+	EndColor Red
+	BorderColor Gray
+	FontName Impact
+}
+
+state "Stage01: 目覚め" as Stage01
+
+state "Stage02: 希望への序曲" as Stage02
+Stage02: * 何も恐れず街へ出る
+Stage02: * 近くにあるという小さな村へ行く
+Stage02: * 森へ逃げて体勢をたて直す
+
+state "Stage03: 森林の怪物" as Stage03
+Stage03: * 森を出てレジスタンスの村を救う
+Stage03: * この先の山を越えて城へ向かう
+
+state "Stage04: 魔導兵器" as Stage04
+Stage04: * このままカノンを追いつめる
+Stage04: * この場はひいて村へ急ぐ
+
+state "Stage05: 無力な反乱" as Stage05
+Stage05: * 森へ入って城へ近づく
+Stage05: * 正面から城へつづく街へ入る
+Stage05: * 街での戦いをさけ荒野に出る
+
+state "Stage06: 王国の罠" as Stage06
+Stage06: * 森へ入って城へ近づく
+Stage06: * 正面から城へつづく街へ入る
+Stage06: * 街での戦いをさけ荒野に出る
+
+state "Stage07: 囚われの国" as Stage07
+Stage07: * 森へ入って城へ近づく
+Stage07: * 正面から城へつづく街へ入る
+Stage07: * 街での戦いをさけ荒野に出る
+
+state "Stage08: 悲しみの大地" as Stage08
+Stage08: * このやり方は間違っている
+Stage08: * 偽りの権力を使うのはゆるせない
+Stage08: * 国の平和を壊しては意味がない
+Stage08: * なぜ力で権力を奪った
+Stage08: * このやり方も仕方のないことだ
+
+state "Stage09: マッチョとゆかいな仲間たち" as Stage09
+Stage09: * このやり方は間違っている
+Stage09: * 偽りの権力を使うのはゆるせない
+Stage09: * 国の平和を壊しては意味がない
+Stage09: * なぜ力で権力を奪った
+Stage09: * このやり方も仕方のないことだ
+
+state "Stage10: 裏切りの街" as Stage10
+Stage10: * このやり方は間違っている
+Stage10: * 偽りの権力を使うのはゆるせない
+Stage10: * 国の平和を壊しては意味がない
+Stage10: * なぜ力で権力を奪った
+Stage10: * このやり方も仕方のないことだ
+
+state "Stage11: とまどいの使徒" as Stage11
+Stage11: * このやり方は間違っている
+Stage11: * 偽りの権力を使うのはゆるせない
+Stage11: * 国の平和を壊しては意味がない
+Stage11: * なぜ力で権力を奪った
+Stage11: * このやり方も仕方のないことだ
+
+state "Stage12: 正面突破" as Stage12
+Stage12: * このやり方は間違っている
+Stage12: * 偽りの権力を使うのはゆるせない
+Stage12: * 国の平和を壊しては意味がない
+Stage12: * なぜ力で権力を奪った
+Stage12: * このやり方も仕方のないことだ
+
+
+state "Stage13: 未知なる幕あけ" as Stage13
+Stage13: * 悪に染まったものは全て倒す
+Stage13: * 邪悪な意思の偽王家を先にうつ
+Stage13: * 確かに悪は倒さねばならない
+Stage13: * 人間同士の問題に口に出すな
+Stage13: * それで解決するわけではない
+
+state "Stage14: 進撃の一閃" as Stage14
+Stage14: * 背後にかくれる地の力を先に倒す
+Stage14: * 自分達がまず城へのり込む
+Stage14: * 今事実がわかれば民は混乱する
+
+state "Stage15: 魔導要塞" as Stage15
+Stage15: * バルガと王を共に敵とみなす
+Stage15: * 王を倒すことに協力する
+Stage15: * 自分達も王に問う
+Stage15: * とりあえずバルガを止める
+
+state "Stage16: 闇の迷宮回廊" as Stage16
+Stage16: * 人をとりまく不穏な空気を消す
+Stage16: * カノンの復讐の進行を止める
+Stage16: * カノンなき今地の者が気にかかる
+
+state "Stage17: 復讐" as Stage17
+Stage17: * 地の者の話など聞けない
+Stage17: * 城と民衆のもとへもどる
+Stage17: * 話を聞くため先へ進む
+
+state "Stage18: 反逆の翼" as Stage18
+Stage18: * 邪悪な魔の力を断つ
+Stage18: * 人間界に平和をとりもどす
+
+state "Stage19: 新たなる鼓動" as Stage19
+Stage19: * 邪悪な魔の力は使わせない
+Stage19: * バルガの手から国を守る
+Stage19: * バルガを正気に戻す
+
+state "Stage20: 決断" as Stage20
+Stage20: * 確かに悪は倒さねばならない
+Stage20: * 人間同士の問題に口を出すな
+Stage20: * それで解決するわけではない
+
+state "Stage21: 城下の攻防" as Stage21
+Stage21: * 混乱する国を守るほうが先だ
+Stage21: * 暴走する人造兵を止める
+Stage21: * 話を聞く
+
+state "Stage22: 鋼の砦" as Stage22
+Stage22: * チャンスをうかがう
+Stage22: * 言いなりになるしかない
+Stage22: * 本人もああ言ってることだし
+
+state "Stage23: 真実" as Stage23
+Stage23: * 国と民の平和のために戦う
+Stage23: * 真実を知り悪を倒す
+
+state "Stage24: 運命" as Stage24
+state "Stage25: 狂喜の舞踏会" as Stage25
+state "Stage26: 破滅へのシナリオ" as Stage26
+state "Stage27: 機械じかけの謀略" as Stage27
+state "Stage28: 光の騎士" as Stage28
+state "Stage29: 理想郷" as Stage29
+state "Stage30: 旅立ち" as Stage30
+
+
+[*] --> Stage01
+Stage01 --> Stage02
+
+Stage02 --> Stage04 : 何も..
+Stage02 --> Stage05 : 近くに..
+Stage02 --> Stage03 : 森へ..
+
+Stage03 --> Stage06 : 森を..
+Stage03 --> Stage08 : この..
+
+note right of Stage03
+    途中にある看板から、闘技場へ行く事が可能。
+    レベル上げにどうぞ。
+    闘技場のモンスターはザコキャラクターが多いが、
+    その分数も多く出る事が有り、レベルも高いので注意が必要。
+end note
+
+Stage04 --> Stage12 : このまま..
+Stage04 --> Stage07 : この場..
+
+Stage05 --> Stage11 : 森へ..
+Stage05 --> Stage10 : 正面から..
+Stage05 --> Stage09 : 街で..
+
+Stage06 --> Stage11 : 森へ..
+Stage06 --> Stage10 : 正面から..
+Stage06 --> Stage09 : 街で..
+
+Stage07 --> Stage11 : 森へ..
+Stage07 --> Stage10 : 正面から..
+Stage07 --> Stage09 : 街で..
+
+
+state Joint02 <<join>>
+
+Joint02 --> Stage13 : このやり方は間違..
+Joint02 --> Stage14 : 偽りの権力..
+Joint02 --> Stage15 : 国の平和..
+Joint02 --> Stage16 : なぜ力で..
+Joint02 --> Stage17 : このやり方も仕方..
+
+Stage08 --> Joint02
+Stage09 --> Joint02
+Stage10 --> Joint02
+Stage11 --> Joint02
+Stage12 --> Joint02
+
+Stage13 --> Stage18 : 悪に..
+Stage13 --> Stage19 : 邪悪な..
+Stage13 --> Stage24 : 確かに..
+Stage13 --> Stage25 : 人間同士..
+Stage13 --> Stage26 : それで..
+
+Stage14 --> Stage18 : 背後に..
+Stage14 --> Stage19 : 自分達が..
+Stage14 --> Stage20 : 今事実が..
+
+Stage15 --> Stage19 : バルガ..
+Stage15 --> Stage20 : 王を..
+Stage15 --> Stage21 : 自分..
+Stage15 --> Stage22 : とり..
+
+Stage16 --> Stage21 : 人を..
+Stage16 --> Stage22 : カノンの復讐..
+Stage16 --> Stage23 : カノンな..
+
+Stage17 --> Stage21 : 地の者..
+Stage17 --> Stage22 : 城と..
+Stage17 --> Stage23 : 話を..
+
+Stage18 --> Stage24 : 邪悪な..
+Stage18 --> Stage25 : 人間界..
+
+Stage19 --> Stage24 : 邪悪な..
+Stage19 --> Stage25 : バルガの手..
+Stage19 --> Stage26 : バルガを正気..
+
+Stage20 --> Stage24 : 確かに..
+Stage20 --> Stage25 : 人間..
+Stage20 --> Stage26 : それで..
+
+Stage21 --> Stage26 : 混乱..
+Stage21 --> Stage27 : 暴走..
+Stage21 --> Stage28 : 話を..
+
+Stage22 --> Stage26 : チャンス..
+Stage22 --> Stage27 : 言いなり..
+Stage22 --> Stage28 : 本人..
+
+Stage23 --> Stage27 : 国と民..
+Stage23 --> Stage28 : 真実..
+
+Stage24 --> Ending1
+
+Stage25 --> Ending2
+
+Stage26 --> Stage29
+
+Stage27 --> Stage30
+
+Stage28 --> Ending5
+Ending5: Light / Dark
+
+Stage29 --> Ending3
+Ending3: Light / Dark
+
+Stage30 --> Ending4
+
+@enduml
