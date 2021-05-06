@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 使用 RecyclerView | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 使用 RecyclerView | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 使用 RecyclerView | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" 使用 RecyclerView | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" 使用 RecyclerView | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" 使用 RecyclerView | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2016/03/13-recyclerview.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/03/13-recyclerview.html" itemprop="url" target="_blank">
+            <span class>使用 RecyclerView</span>
+        </a>
+    </h1>
+
+    <p><a href="http://android-developers.blogspot.tw/2015/10/android-support-library-231.html" target="_blank" rel="noopener">RecyclerView</a> 是個在 Google I/O 2014 出現的 ViewGroup，放在 <a href="http://developer.android.com/intl/zh-tw/tools/support-library/features.html#v7" target="_blank" rel="noopener">v7 support libraries</a>，Android 2.1(API Level 7) 以上的版本都可以用，以現在普及率來看，幾乎是每一支手機都能用。</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/03/13-recyclerview/3layout.png"></div>
+
+<p>RecyclerView 預設就提供了三種 <a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank" rel="noopener">LayoutManager</a>，如上圖，由左而右依序是 ListLayoutManager, GridLayoutManager 與 StaggeredGridLayoutManager。都放在 v7 support libraries 裡面。</p>
+<p>看起來 List 與 Grid 已經重複了，為何 Android 還要多提供這個 Widget？</p>
+<a id="more"></a>
+<p>我自己的猜測是：後來發現 ListView 彈性不夠。ListView 與 GridView 從 API level 1 就已經出現，聽說 Android 開發之初並未針對 Smart Phone？無論如何在 API Level 1 的年代完全無法想像手機會變成現在的光景。當初實作 ListView 應該是努力想著如何讓人們少寫一點 code，多一點已經寫好的東西在 Framework 裡面。怎知後來大家在用 ListView 的時候，反而有完全不同的需求，好比讓每個 row 可能有完全不同的呈現。既然如此，就提供一個更有彈性的 ViewGroup。當然這是我個人的想法。</p>
+<p>既然之前寫了一篇 <a href="/2015/09/26-implement-listview.html">ListView 的實作方法</a>，現在就順便寫一下 RecyclerView 的簡單教學。</p>
+<p>RecyclerView 的用法跟 ListView 不太一樣，後者是一個 AdapterView，用法是把<strong>資料</strong>跟 <strong>Layout</strong> 給 <a href="http://developer.android.com/guide/topics/ui/binding.html" target="_blank" rel="noopener">bind</a> 起來，render 的時候 ListView 翻箱倒櫃找出資料，接著用指定的 Layout 把該筆資料「畫」出來，此時由 ListView 幫你處理 View 重用的細節。(重新 Create View instance 是很花資源的事情)，所以才會衍生出，想要兩個 row 的外觀長得不一樣就會不好處理的問題。</p>
+<p>要使用 RecyclerView，先在 gradle 裡面加入 v7 support libraries。(23.2.0 是我正在使用的版本，依自己的喜好改變吧)</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile <span class="string">'com.android.support:appcompat-v7:23.2.0'</span></span><br><span class="line">    compile <span class="string">'com.android.support:recyclerview-v7:23.2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/2016/03/13-recyclerview/hierarchy.png">
+<p>從繼承關係明顯得知，RecyclerView 僅是一個 ViewGroup，而非是 AdapterView。RecyclerView 也有自己的 <a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter.html" target="_blank" rel="noopener">RecyclerView.Adapter</a>，但它的 Adapter 用法不同於 ListView 的 Adapter。以下翻譯自官方文件的術語</p>
+<ul>
+<li>Adapter - 負責把 Dataset 裡面的資料，轉成 view 給 RecyclerView 顯示</li>
+<li>Position - 在 Adapter 裡面的 data item 的位置</li>
+<li>Index - 已掛上 RecyclerView 裡面的 child-view 的位置，用在 <code>getChildAt(int)</code></li>
+<li>Binding - 把資料變成可視的 view 的過程</li>
+<li>Recycle(view) - 之前曾經被拿來顯示過的 view，現在放在 cache 裡面留待下次使用</li>
+<li>Dirty(view) - 需要重新自資料更新外觀的 view</li>
+<li>Scrap(view) - 在 Layout 過程被拿下來但是尚未完全 detached。(從原始碼來看，<code>mAttachScrap</code> 放在 class Recycler 底下。</li>
+</ul>
+<h1 id="Basic-Implementation"><a href="#Basic-Implementation" class="headerlink" title="Basic Implementation"></a>Basic Implementation</h1><p>照上面的截圖以最陽春的 List 形式來實作一個簡單的範例。LayoutManager 負責把每個 child-view 安排在畫面中，而 Adapter 負責生出 child-view。要做的事情如下</p>
+<ul>
+<li>類似 <a href="http://developer.android.com/intl/zh-tw/training/improving-layouts/smooth-scrolling.html" target="_blank" rel="noopener">ViewHolder pattern</a> 做一個 ViewHolder 來放 View</li>
+<li>自己做一個 Adapter 來使用該 ViewHolder</li>
+<li>把 Adapter 跟 RecyclerView 連結起來，並且使用不同的 Layout</li>
+</ul>
+<h2 id="ViewHolder"><a href="#ViewHolder" class="headerlink" title="ViewHolder"></a>ViewHolder</h2><p>Adapter 需要一個 ViewHolder，原本就有一個把所有基本東西都做完的抽象類別 <a href="http://developer.android.com/intl/zh-tw/reference/android/support/v7/widget/RecyclerView.ViewHolder.html" target="_blank" rel="noopener">RecyclerView.ViewHolder</a>，我們只要實作它的 constructor 就好</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DummyViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DummyViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(itemView);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存起來的 view 會放在 <code>itemView</code> 裡面</p>
+<h2 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h2><p>RecyclerView.Adapter 負責提供 child-view 給 RecyclerView 使用，同時也負責把資料跟 child-view 綁在一起。實際上並不是直接對上 View，而是對上 ViewHolder。從設計上來看就是強迫使用 ViewHolder pattern 來增加效率。此抽象類別需要實作這三個 method</p>
+<ul>
+<li><code>getItemCount()</code> - Adapter 自己才知道如何儲存資料，所以它自己也才知道該怎麼數有多少資料</li>
+<li><code>onCreateViewHolder(ViewGroup, int)</code> - 現有的 ViewHolder 不夠用，要求 Adapter 產生一個新的</li>
+<li><code>onBindViewHolder(ViewHolder, int)</code> - 重用之前產生的 ViewHolder，把特定位置的資料連結上去準備顯示</li>
+</ul>
+<p>原則上就是負責 1) 向上呈報數目 2) 若不夠用就產生新的 3) 需要重用就幫忙上色。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">RecyclerView</span>.<span class="title">ViewHolder</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    ArrayList&lt;Integer&gt; iList; <span class="comment">// 放在 ArrayList 裡面</span></span><br><span class="line"></span><br><span class="line">    MyAdapter() &#123;</span><br><span class="line">        iList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> RecyclerView.<span class="function">ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</span><br><span class="line">        Button view = <span class="keyword">new</span> Button(parent.getContext());</span><br><span class="line">        <span class="comment">// ViewHolder 可以放更多複雜的 View，不過我們這邊直接用自己的 Dummy</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DummyViewHolder(view);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(RecyclerView.ViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        Integer size = iList.get(position);</span><br><span class="line">        Button btn = (Button) holder.itemView;</span><br><span class="line">        btn.setText(<span class="string">"size: "</span> + size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iList.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="LayoutManager"><a href="#LayoutManager" class="headerlink" title="LayoutManager"></a>LayoutManager</h2><p>這邊直接使用 LinearLayoutManager 來畫出類似 ListView 的功能。可以另外指定 GridLayouManager 或是 StaggeredGridLayoutManager 來畫出不同的外觀，非常簡單。從這邊來看，RecyclerView 也統一了 List 跟 Grid 兩種 Layout。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">RecyclerView list = (RecyclerView) findViewById(R.id.main_list);</span><br><span class="line">MyAdapter adapter = <span class="keyword">new</span> MyAdapter();</span><br><span class="line">list.setAdapter(adapter);</span><br><span class="line">list.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>));</span><br><span class="line"><span class="comment">//list.setLayoutManager(new GridLayoutManager(this, 2));</span></span><br><span class="line"><span class="comment">//list.setLayoutManager(new StaggeredGridLayoutManager(4,</span></span><br><span class="line"><span class="comment">//                          StaggeredGridLayoutManager.VERTICAL));</span></span><br></pre></td></tr></table></figure>
+<p>完整的原始檔在：<a href="/2016/03/13-recyclerview/BasicActivity.java" title="BasicActivity.java">BasicActivity.java</a></p>
+<h1 id="Advance-Implementation"><a href="#Advance-Implementation" class="headerlink" title="Advance Implementation"></a>Advance Implementation</h1><p>前面提到的是最簡單 RecyclerView 實作。如果我們想要實作得複雜一點，讓 child-view 有各個不同的外觀，該如何？以前 ListView 的作法可能會是產生一個比較大的 View，根據狀態顯示不同的部份。<a href="http://developer.android.com/intl/zh-tw/tools/support-library/features.html#v17-leanback" target="_blank" rel="noopener">v17 Support Libraries</a> 提供了額外的 class 可供我們使用，如果你要支援的 device 在 Android 4.2 以上，那麼可以直接拿來用。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile <span class="string">'com.android.support:leanback-v17:+'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/03/13-recyclerview/selector.png"></div>
+
+<p>ItemBridgeAdapte 把先前 Adapter 的兩樣工作 1) 儲存資料 2) 產生 ViewHolder 給分配到 <strong>ObjectAdapter</strong> 與 <strong>PresenterSelector</strong> 兩個地方。</p>
+<p>ObjectAdapter 負責儲存資料，已經實作了 Array 與 SparseArray(稀疏矩陣) 兩種，通常已經夠用。</p>
+<p>Presenter 負責產生與連結 ViewHolder，中間多了一層 PresenterSelector，負責根據資料的型別選妃，挑出對應的 Presenter。</p>
+<p>以下的簡單實作範例會是</p>
+<ol>
+<li>先做一個簡單的 Data structure</li>
+<li>實作幾個 Presenter</li>
+<li>實作一個 PresenterSelector</li>
+<li>用 ItemBridgeAdapter 取代原來的 MyAdapter，並使用用 ArrayObjectAdapter</li>
+</ol>
+<h2 id="Data-Structure"><a href="#Data-Structure" class="headerlink" title="Data Structure"></a>Data Structure</h2><p>用來存放要被 render 的資料，把它寫得蠢一點吧！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyData</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> TYPE_A = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> TYPE_B = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> mType;</span><br><span class="line">    <span class="keyword">public</span> String mContent;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyData</span><span class="params">(<span class="keyword">int</span> type, String content)</span> </span>&#123;</span><br><span class="line">        mType = type;</span><br><span class="line">        mContent = content;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>寫成這樣，是為了要針對不同 type 的 MyData 來選用不同的 selector。ObjectAdapter 並非只能吃一種資料結構(看它的 <a href="http://developer.android.com/intl/zh-tw/reference/android/support/v17/leanback/widget/ArrayObjectAdapter.html#add(java.lang.Object" target="_blank" rel="noopener">add(Object)</a> 根本就直接吃 Object)，其實你可放進各種資料結構，然後直接用 <a href="http://developer.android.com/intl/zh-tw/reference/android/support/v17/leanback/widget/ClassPresenterSelector.html" target="_blank" rel="noopener">ClassPresenterSelector</a> 來針對型別選用 Selector。</p>
+<h2 id="Presenter"><a href="#Presenter" class="headerlink" title="Presenter"></a>Presenter</h2><p>先寫兩個 Presenter，先讓它們做的事情大同小異，差別在讀進的 xml resource 檔</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeAPresenter</span> <span class="keyword">extends</span> <span class="title">Presenter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 從 xml 檔產生外觀</span></span><br><span class="line">        LayoutInflater inflater = LayoutInflater.from(parent.getContext());</span><br><span class="line">        View v = inflater.inflate(R.layout.type_1, parent, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 把 View 放進去 ViewHolder，就像之前做的一樣</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyViewHolder(v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(ViewHolder viewHolder, Object item)</span> </span>&#123;</span><br><span class="line">        MyData data = (MyData) item;</span><br><span class="line">        MyViewHolder myHolder = (MyViewHolder) viewHolder;</span><br><span class="line">        myHolder.iText.setText(data.mContent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUnbindViewHolder</span><span class="params">(ViewHolder viewHolder)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果要做任何資源釋放的事情，go here</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MyViewHolder</span> <span class="keyword">extends</span> <span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> TextView iText;</span><br><span class="line">        MyViewHolder(View view) &#123;</span><br><span class="line">            <span class="keyword">super</span>(view);</span><br><span class="line">            iText = (TextView view);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeBPresenter</span> <span class="keyword">extends</span> <span class="title">TypeAPresenter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 從 xml 檔產生外觀</span></span><br><span class="line">        LayoutInflater inflater = LayoutInflater.from(parent.getContext());</span><br><span class="line">        View v = inflater.inflate(R.layout.type_2, parent, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyViewHolder(v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很閒的話，可以多寫一個 Fallback 的 Presenter，遇到無法理解的資料就拿出來用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FallbackPresenter</span> <span class="keyword">extends</span> <span class="title">Presenter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        TextView v = <span class="keyword">new</span> TextView(parent.getContext());</span><br><span class="line">        v.setBackgroundColor(Color.RED); <span class="comment">// be aware of me, please!</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ViewHolder(v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(ViewHolder viewHolder, Object item)</span> </span>&#123;</span><br><span class="line">        TextView textView = (TextView) viewHolder.view;</span><br><span class="line">        textView.setText(<span class="string">"Invalid data: "</span> + item.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUnbindViewHolder</span><span class="params">(ViewHolder viewHolder)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// I am simple!</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="PresenterSelector"><a href="#PresenterSelector" class="headerlink" title="PresenterSelector"></a>PresenterSelector</h2><p>準備好了三個 Presenters，接著就是 Selector，拿資料的內容來決定該用哪個 Presenter。因為邏輯<br>很簡單，所以直接用 Array 來存放各個 presenters</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyPresenterSelector</span> <span class="keyword">extends</span> <span class="title">PresenterSelector</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* No complex logic here, so use Array should be fastest. */</span></span><br><span class="line">    <span class="keyword">private</span> Presenter[] mPresenters;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> INVALID = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> TYPE_A = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> TYPE_B = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TwitterPresenterSelector</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        mPresenters = <span class="keyword">new</span> Presenter[<span class="number">3</span>];</span><br><span class="line">        mPresenters[INVALID] = <span class="keyword">new</span> FallbackPresenter();</span><br><span class="line">        mPresenters[TYPE_A] = <span class="keyword">new</span> TypeAPresenter();</span><br><span class="line">        mPresenters[TYPE_B] = <span class="keyword">new</span> TypeBPresenter();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Presenter <span class="title">getPresenter</span><span class="params">(Object item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!(item <span class="keyword">instanceof</span> MyData)) &#123;</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">            <span class="keyword">return</span> mPresenters[INVALID];</span><br><span class="line">        &#125;</span><br><span class="line">        MyData data = (MyData) item;</span><br><span class="line">        <span class="keyword">if</span> (data.mType == MyData.TYPE_A) &#123;</span><br><span class="line">            <span class="keyword">return</span> mPresenters[TYPE_A];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mPresenters[TYPE_B];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Presenter[] getPresenters() &#123;</span><br><span class="line">        <span class="keyword">return</span> mPresenters;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Integration"><a href="#Integration" class="headerlink" title="Integration"></a>Integration</h2><p>把資料都放進 dataAdapter 裡面，讓它使用 MyPresenterSelector 來選擇該怎麼呈現資料。對於 RecyclerView 來說，它從來都不知道底層發生了什麼事。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ArrayObjectAdapter dataAdapter = <span class="keyword">new</span> ArrayObjectAdapter(<span class="keyword">new</span> MyPresenterSelector());</span><br><span class="line"></span><br><span class="line">RecyclerView list = (RecyclerView)findViewById(R.id.list);</span><br><span class="line">list.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>));</span><br><span class="line">list.setAdapter(<span class="keyword">new</span> ItemBridgeAdapter(dataAdapter));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加入資料</span></span><br><span class="line">dataAdapter.add(<span class="keyword">new</span> MyData(MyData.TYPE_A, <span class="string">"Hello"</span>));</span><br><span class="line">dataAdapter.add(<span class="keyword">new</span> MyData(MyData.TYPE_B, <span class="string">"World"</span>));</span><br><span class="line">dataAdapter.add(<span class="string">"I will use fallback"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>額外筆記一下實作的心得</p>
+<ul>
+<li><p>經常會想要實作一種介面，就是上方有一大塊各種資訊、圖片的 ViewGroup，下面再接一個 RecyclerView 來充當 ListView 畫出長度不固定，各種風格的 Rows。因為長度一定會超過螢幕高度，最直覺的作法往往就是用 ScrollView 包一個 LinearLayout，裡面再依序塞入各個 View，最後面塞進去的是 RecyclerView。這樣會出問題，尤其在 Scroll 的部份。</p>
+<p>  可以把 RecyclerView 當成是一個廣義的 ListView，ListView 可以垂直拖動。把這樣的元件放進 ScrollView 裡面，就成了「垂直拖動的 View 裡面還有一個垂直拖動的 View」，雖然技術上可以做到，但是怎麼想就覺得有點怪，也不是好的使用介面。</p>
+<p>  但是 RecyclerView 又不像 ListView 那樣可以設定 Header，怎麼辦呢？</p>
+<p>  其中一個作法就是用 CoordinatorLayout 來包，把許多資訊的 ViewGroup 當成上方的 Toolbar 來用。因為 CoordinatorLayout 的特性，拖動的時候會有一些滿炫的特效，但也有可能不符合設計需求。</p>
+<p>  另外一個作法就是通通塞進 Adapter 裡面，把上方 ViewGroup 的資訊固定放進 Adapter 的第一個位置，然後 render 的時候針對這筆資料套用專屬的 Presenter。感覺還是不完美，但至少是符合了 RecyclerView 的設計哲學。</p>
+</li>
+</ul>
+<ul>
+<li>另外 RecyclerView 在 XML 檔的位置似乎有影響，如果擺在一個一開始根本不會顯示的位置，連產生 Selector/Presenter 的程式都不會跑到，或許是效能考量所作的設計，今天一直卡在這個地方，稿不清楚哪裡的 code 有寫錯。嘗試之後得到這個結論，但是實際的原因還沒有認真看 source code 也不敢確定，只是寫在這邊先給自己提醒一下。</li>
+</ul>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2016/03/13-recyclerview.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2016-03-13">2016-03-13</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2016/04/19-docker.html" title="Docker volume 簡單用法"><b>Docker volume 簡單用法</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2016/02/23-webpack.html" title="Gulp and Webpack-dev-server options">Next &rarr; <b>Gulp and Webpack-dev-server options</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

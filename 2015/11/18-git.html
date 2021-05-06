@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Git commands | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Git commands | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Git commands | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Git commands | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Git commands | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Git commands | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2015/11/18-git.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/11/18-git.html" itemprop="url" target="_blank">
+            <span class>Git commands</span>
+        </a>
+    </h1>
+
+    <p>今天看到朋友講了一個 git 指令，想說順便分享一下我自己常用的指令，算是野人獻曝。</p>
+<a id="more"></a>
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>首先是 <code>~/.gitconfig</code>，放一些 global 的 git 環境變數，可以在裡面設定自己常用的名稱，以及 alias</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[color]</span><br><span class="line">	ui = auto</span><br><span class="line">[user]</span><br><span class="line">	name = YOUR_COMMIT_AUTHOR_NAME</span><br><span class="line">	email = someone@foo.bar</span><br><span class="line">[alias]</span><br><span class="line">	lg = log --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit --date=relative</span><br><span class="line">	ld = log --decorate --graph</span><br><span class="line">	lf = log --pretty=fuller --decorate --graph</span><br><span class="line">	s  = status</span><br><span class="line">	amd = commit -a --amend</span><br><span class="line">	cm = commit --amend</span><br><span class="line">	co = commit</span><br><span class="line">	ca = commit -a</span><br><span class="line">	ck = checkout</span><br><span class="line">	ri = rebase -i</span><br><span class="line">	ri5 = rebase -i HEAD~5</span><br><span class="line">	ri10 = rebase -i HEAD~10</span><br><span class="line">	ra = rebase --abort</span><br><span class="line">	rc = rebase --continue</span><br><span class="line">	cp = cherry-pick</span><br><span class="line">	rb = rebase</span><br><span class="line">[diff]</span><br><span class="line">	algorithm = patience</span><br><span class="line">[core]</span><br><span class="line">	editor = vim</span><br><span class="line">	autocrlf = input</span><br><span class="line">	quotepath = false</span><br><span class="line">[push]</span><br><span class="line">	default = simple</span><br><span class="line">[url &quot;git@github.com:&quot;]</span><br><span class="line">	insteadOf = https://github.com/</span><br><span class="line">[tig &quot;bind&quot;]</span><br><span class="line">	# use &apos;Z&apos; to see commit via vimdiff</span><br><span class="line">	generic=Z !sh -c &apos;git difftool %(commit)^ %(commit)&apos;</span><br></pre></td></tr></table></figure>
+<p>從這些 command 就可以輕易看出我最常做的事，不外乎就是對 commit 修修剪剪，<code>git rebase -i</code> 真是宅宅的好朋友。</p>
+<ul>
+<li>在專案裡面新增 <code>.gitignore</code> 可以叫 git 忽略、不去管理部份檔案，通常用在編譯出來的檔案</li>
+<li>如果是一些自己手動的東西需要忽略，不適合放進 .gitignore 給專案的其他人知道，可以寫進 <code>.git/info/exclude</code></li>
+</ul>
+<h2 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h2><p>只有某幾個修改要給別人的時候，可以用 diff 或是 format-patch 來產生 patch，然後用 apply / am 來打上 patch</p>
+<p>format-patch 與 am 是成對的，可以透過 e-mail 來更方便傳遞，但我沒試過。喜歡用 format-patch/am 是因為這樣的 patch 看起來資訊含量比較多。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git diff HEAD^..HEAD &gt; patch_for_apply.patch</span><br><span class="line">$ git format-patch HEAD~5..HEAD</span><br><span class="line"></span><br><span class="line">$ git apply patch_for_apply.patch</span><br><span class="line">$ git am 01-Foobar.patch</span><br></pre></td></tr></table></figure>
+<h2 id="手動新增-object"><a href="#手動新增-object" class="headerlink" title="手動新增 object"></a>手動新增 object</h2><p>以前還要用 repo sync 奮鬥的時候，常常因為網路或是其他問題，搞到自己的 repository 裡面少了幾個 git object，那時候 <a href="https://kanru.info/" target="_blank" rel="noopener">kanru</a> 教過這招可以把檔案塞進去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假設缺少的檔案叫 foobar</span></span><br><span class="line">$ cat foobar | base64 -d | git unpack-objects</span><br></pre></td></tr></table></figure>
+<h2 id="其他指令"><a href="#其他指令" class="headerlink" title="其他指令"></a>其他指令</h2><p>一些偶爾會用到，但是很容易忘記的指令。其實原本是持續更新在我自己的 local wiki 筆記裡面，直接複製貼上到這邊。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找出之前弄丟的 commit，經常在 rebase 後發現很需要這個，有一天會拯救你的小命！</span></span><br><span class="line">$ git reflog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 顯示一個範圍內的 commit 與內容</span></span><br><span class="line">$ git <span class="built_in">log</span> -p &lt;MD5&gt;..HEAD --reverse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 顯示 author time and commit time</span></span><br><span class="line">$ git <span class="built_in">log</span> --pretty=fuller</span><br><span class="line"></span><br><span class="line"><span class="comment"># 某一個 remote branch 跟某一個 commit 有哪些差異</span></span><br><span class="line">$ git diff orig/some_branch..&lt;MD5&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出兩個 commit 之間有哪些檔案被更動了</span></span><br><span class="line"></span><br><span class="line">$ git diff origin/master..HEAD --name-only    <span class="comment"># 只顯示名字</span></span><br><span class="line">$ git diff origin/master..HEAD --name-status  <span class="comment"># 顯示名字，新增修改或刪除</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># branch 的分支圖，其實有點難看懂</span></span><br><span class="line">$ git -p show-branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 像 ls 那樣看某一個 commit 當下的檔案 tree</span></span><br><span class="line">$ git ls-tree &lt;MD5&gt;</span><br><span class="line">$ git ls-tree &lt;MD5&gt; path/to/somewhere</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出某一個 commit 當下，某個檔案的內容</span></span><br><span class="line">$ git show &lt;MD5&gt;:path/to/file</span><br><span class="line"></span><br><span class="line"><span class="comment"># signed-off and mark where the patch come from</span></span><br><span class="line">$ git cherry-pick -s -x &lt;MD5&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 砍掉 repository 上面的 branch</span></span><br><span class="line">$ git push &lt;Repo&gt; :heads/branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 產生 remote 的新 branch</span></span><br><span class="line">$ git push &lt;Repo&gt; Newbranch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包某一個 commit 當下的內容，其他部門警急呼叫的時候常用到，所以要記得經常打 tag</span></span><br><span class="line">$ git archive -o output.zip &lt;MD5&gt;</span><br><span class="line">$ git archive -o output.zip &lt;MD5&gt; the/sub/dir</span><br></pre></td></tr></table></figure>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2015/11/18-git.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2015-11-18">2015-11-18</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2015/12/03-hsinchu.html" title="新竹市官網比賽後記"><b>新竹市官網比賽後記</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2015/10/31-github.html" title="Github 與 Halloween">Next &rarr; <b>Github 與 Halloween</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Some Git tips | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Some Git tips | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Some Git tips | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Some Git tips | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Some Git tips | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Some Git tips | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2016/12/03-git.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/12/03-git.html" itemprop="url" target="_blank">
+            <span class>Some Git tips</span>
+        </a>
+    </h1>
+
+    <p>Git is so popular around the developer world, as well as Github. Nowadays almost every developer could use git a bit. It was hard to imagine this situation in several years ago.</p>
+<p>To master your development tool would help you focus on development itself. And provide more information when hacking code.</p>
+<p>Git has so many commands, and each commands have many parameters. It is common that people says “Oh! I don’t know we can use Git like that!”. This article is for sharing some commands I use often. Hope it helps, and I hope you can share your tips as well.</p>
+<a id="more"></a>
+<h2 id="Git-config"><a href="#Git-config" class="headerlink" title="Git config"></a>Git config</h2><p>This is most basic. Make your own <code>~/.gitconfig</code>. I did, and put lots of alias into it. Part of my <code>~/.gitconfig</code> is</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[color]</span><br><span class="line">	ui = auto</span><br><span class="line">[user]</span><br><span class="line">	name = YOUR_COMMIT_NAME</span><br><span class="line">	email = YOUR@commit.email</span><br><span class="line">[alias]</span><br><span class="line">	lg = log --graph --pretty=format:&apos;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&apos; --abbrev-commit --date=relative</span><br><span class="line">	ld = log --decorate --graph</span><br><span class="line">	ln = log --decorate --graph --name-status</span><br><span class="line">	lf = log --pretty=fuller --decorate --graph</span><br><span class="line">	s  = status</span><br><span class="line">	amd = commit -a --amend</span><br><span class="line">	cm = commit --amend</span><br><span class="line">	co = commit</span><br><span class="line">	ca = commit -a</span><br><span class="line">	ck = checkout</span><br><span class="line">	ri = rebase -i</span><br><span class="line">	ri5 = rebase -i HEAD~5</span><br><span class="line">	ri10 = rebase -i HEAD~10</span><br><span class="line">	ra = rebase --abort</span><br><span class="line">	rc = rebase --continue</span><br><span class="line">	cp = cherry-pick</span><br><span class="line">	rb = rebase</span><br><span class="line">	fp = fetch -p --tags</span><br><span class="line">	g = grep</span><br><span class="line">	sm = submodule</span><br><span class="line">[diff]</span><br><span class="line">	algorithm = patience</span><br><span class="line">[core]</span><br><span class="line">	editor = vim</span><br><span class="line">	autocrlf = input</span><br><span class="line">	quotepath = false</span><br><span class="line">	paginate = true</span><br><span class="line">	pager = less</span><br><span class="line">[push]</span><br><span class="line">	default = simple</span><br><span class="line">[url &quot;git@github.com:&quot;]</span><br><span class="line">	insteadOf = https://github.com/</span><br></pre></td></tr></table></figure>
+<h2 id="tig"><a href="#tig" class="headerlink" title="tig"></a>tig</h2><p><a href="http://jonas.nitro.dk/tig/manual.html" target="_blank" rel="noopener">tig</a> is a very useful command line interactive tool. Even in Mac you can install it via <code>brew</code></p>
+<h2 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h2><p>In Git, you can specify a range by this format <code>&lt;HASH1&gt;..&lt;HASH2&gt;</code>, for example</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> -p HEAD~10..HEAD~3 <span class="comment"># see commits content between HEAD~10 to HEAD~10</span></span><br><span class="line">$ git <span class="built_in">log</span> -p bfd4dd408cf..af9c8c9b6 <span class="comment"># similiar, buy specify specific hash</span></span><br></pre></td></tr></table></figure>
+<h2 id="Sharing"><a href="#Sharing" class="headerlink" title="Sharing"></a>Sharing</h2><p>Sometimes you will co-work with people who cannot access full repository. We can send some changes to him by patches. Because Git is patch-based tool, manipulating patches is natural for Git.</p>
+<h3 id="format-patch"><a href="#format-patch" class="headerlink" title="format-patch"></a>format-patch</h3><p>To format patches, we should specify a range to command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To create a patch file for latest commit</span></span><br><span class="line">$ git format-patch HEAD^..HEAD</span><br><span class="line">0001-update-view.patch</span><br><span class="line"></span><br><span class="line"><span class="comment"># To create patch files for recent 5 commits</span></span><br><span class="line">$ git format-patch HEAD~5..HEAD</span><br><span class="line">0001-bison-add-empty-mycoach-fragment.patch</span><br><span class="line">0002-bison-Render-basic-MyCoachFragment.patch</span><br><span class="line">0003-bison-use-xml-to-define-tab-layout-in-MyCoach-and-fi.patch</span><br><span class="line">0004-working-on-tab-steps.patch</span><br><span class="line">0005-update-view.patch</span><br></pre></td></tr></table></figure>
+<h3 id="am"><a href="#am" class="headerlink" title="am"></a>am</h3><p>In the other side, people can apply that patch via <code>am</code> commant</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git am 0001-update-view.patch</span><br><span class="line">Applying: update view</span><br></pre></td></tr></table></figure>
+<p>The benefit of <code>format-patch</code> and <code>am</code> is that it remains commit message.</p>
+<h3 id="archive"><a href="#archive" class="headerlink" title="archive"></a>archive</h3><p>If you gonna to share a snapshot to people who cannot access full repository. For example, you co-work with another company, and they want source code in a specific version.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git archive -o /tmp/ouptut.zip HEAD   <span class="comment"># latest one</span></span><br><span class="line">$ git archive -o /tmp/ouptut.zip &lt;HASH&gt; <span class="comment"># another version</span></span><br></pre></td></tr></table></figure>
+<p>of course you can use tag, if you manage tags in proper way.</p>
+<h2 id="Browsing"><a href="#Browsing" class="headerlink" title="Browsing"></a>Browsing</h2><h3 id="log"><a href="#log" class="headerlink" title="log"></a>log</h3><p>Everyone uses <code>git log</code>. It can provide many information in pretty format.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># In reverse order, display changed content from specific commit</span><br><span class="line">$ git log -p &lt;MD5&gt;..HEAD --reverse</span><br><span class="line"></span><br><span class="line"># To see merge graph and what file was changed</span><br><span class="line">$ git log --decorate --graph --name-status</span><br></pre></td></tr></table></figure>
+<h3 id="show"><a href="#show" class="headerlink" title="show"></a>show</h3><p>Not only to see the content of one commit, we can also see <strong>full content of one file in specific commit</strong>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git show &lt;HASH&gt;:./path/to/file</span><br></pre></td></tr></table></figure>
+<p>Sometime when I want review a Pull-Request. But you know, usually if you cannot see the whole file, you cannot get overview of the change, then it is hard to understand “Is this change safe?”.</p>
+<p>I will use this command to see <strong>diff in whole file</strong>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git show &lt;HASH&gt; -U10000</span><br><span class="line">or</span><br><span class="line">$ git show HEAD~5 -U10000</span><br><span class="line">or</span><br><span class="line">$ git show origin/SOMEONE/branch -U10000</span><br></pre></td></tr></table></figure>
+<p><strong>10000</strong> is just a large-enough number. of course you can adjust it. Sometime I use <strong>vim</strong> to review patch</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git show &lt;HASH&gt; -U10000 | vim -R -</span><br></pre></td></tr></table></figure>
+<h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><p>The basic usage of diff is to see different conent between two commits.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff HEAD~10..HEAD</span><br></pre></td></tr></table></figure>
+<p>To see <strong>What changed in a specific file, between two commits?</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff &lt;HASH&gt;..&lt;HASH&gt; Thefile</span><br></pre></td></tr></table></figure>
+<p>If we want to see <strong>What files were changed, between remote master and my current work tree?</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff origin/master..HEAD --name-status</span><br></pre></td></tr></table></figure>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><h3 id="gc"><a href="#gc" class="headerlink" title="gc"></a>gc</h3><p>If you found there are too many small object files under <code>.git/objects/</code>, this command could pack them into one large file.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git gc</span><br></pre></td></tr></table></figure>
+<p>ps. Git is more like a object filesystem. The way Git works is to manage many <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">objects</a>.</p>
+<h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><p>If you want to clean up EVERYTHING doesn’t be tracked by git, such as generated files.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clean -xdf</span><br></pre></td></tr></table></figure>
+<p>Be careful, I usually use command and mis-cleaned my config files.(orz)</p>
+<h3 id="reflog"><a href="#reflog" class="headerlink" title="reflog"></a>reflog</h3><p><strong>This command will save your ass in some day</strong>.</p>
+<p>Sometimes you use <code>reset</code> to change your HEAD, or <strong>to delete a branch</strong>. We know the content still exist in the git repository, we cannot get it back because we don’t know its hash.</p>
+<p>That is why git reflog matters. It records every action you did in your git repository, so you can get everything back.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git reflog</span><br></pre></td></tr></table></figure>
+<h3 id="clean-with-gc"><a href="#clean-with-gc" class="headerlink" title="clean with gc"></a>clean with gc</h3><p><strong>This is a bit dangerous</strong>.</p>
+<p>If you found your git repository is huge, full of objects you really don’t need. The command will prune not-tracked-objects. For example, if you had ever fetch objects from another remote server, but you don’t need them anymore. Even if you delete every branches in your repo, those objects still exists in your git repo. (a bit like <strong>dangling object</strong>)</p>
+<p>This command will clean them. And it definitely effects <strong>reflog</strong>, so pleae be careful for this command.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git -c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0 \</span><br><span class="line">    -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc</span><br></pre></td></tr></table></figure>
+<h2 id="Rebase"><a href="#Rebase" class="headerlink" title="Rebase"></a>Rebase</h2><p>Well. I don’t wanna talk about <code>rebase</code>. <code>rebase</code> is too <strong>IMPORTANT</strong> so it should be a standalone topic. In my personal opinion, a people don’t udnerstand Git until who know how to use <code>git rebase -i</code>.</p>
+<p><code>rebase</code> is not only doing rebase, but can also edit previous commits.(remove, edit, squash). To use <code>rebase</code> in proper way will make you commits looks perfect.</p>
+<p>This is one of most useful git-rebase command. Please read git help to understand how to use git rebase, if you don’t know about it.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase -i &lt;HASH&gt;</span><br></pre></td></tr></table></figure>
+<p>At least, in here I want introduce a common situation in development process.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   foobar</span><br><span class="line">o---o---o---o---o  master</span><br><span class="line">    |            \</span><br><span class="line">    |             o&apos;--o&apos;--o&apos;  topic</span><br><span class="line">     \</span><br><span class="line">      o---o---o---o---o  next</span><br></pre></td></tr></table></figure>
+<ol>
+<li>You start work from commit <code>foobar</code>, and you create 5 commits in branch <code>next</code>. You are in branch <code>next</code> now.</li>
+<li>Some people works on <code>master</code> branch and have progress. <code>master</code> branch got some commits.</li>
+<li>Your colleage create new branch <code>topic</code>, and he gave 3 commits into it.</li>
+</ol>
+<p>If you wanna get his effort to your branch. It means <strong>I wanna develop base on my colleague’s work</strong>. Then we can use rebase like this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase -i --onto topic --fork-point foobar</span><br></pre></td></tr></table></figure>
+<p>Then the result looks like</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   foobar</span><br><span class="line">o---o---o---o---o  master</span><br><span class="line">                 \</span><br><span class="line">                  o&apos;--o&apos;--o&apos;  topic</span><br><span class="line">                           \</span><br><span class="line">                            o---o---o---o---o  next</span><br></pre></td></tr></table></figure>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2016/12/03-git.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2016-12-03">2016-12-03</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/git/">
+                    <span class="tag">git</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2017/04/24-mockito.html" title="Using Mockito"><b>Using Mockito</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2016/10/10-rxjavadoc.html" title="RxJava Javadoc">Next &rarr; <b>RxJava Javadoc</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Android Studio 使用 RetroLambda | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Android Studio 使用 RetroLambda | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Android Studio 使用 RetroLambda | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Android Studio 使用 RetroLambda | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Android Studio 使用 RetroLambda | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Android Studio 使用 RetroLambda | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2015/08/24-android-retrolambda.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/08/24-android-retrolambda.html" itemprop="url" target="_blank">
+            <span class>Android Studio 使用 RetroLambda</span>
+        </a>
+    </h1>
+
+    <p>一直以來都習慣用 vim + ant 來開發 Android Application/System。<del>因為這樣不夠潮</del>前一陣子給朋友推坑後，下定決心要學習用 IDE，既然要寫 Android，當然就選了 Android Studio。</p>
+<h1 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h1><img src="/2015/08/24-android-retrolambda/android_studio-splash.png" title="[Android Studio]">
+<p><a href="https://href.li/?http://developer.android.com/tools/studio/index.html" target="_blank" rel="noopener">Android Studio</a> 由 <a href="https://href.li/?https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener">IntelliJ community</a> 版本修改而來，看起來主要是針對 Android 開發做了調整，好比可以點開 resource 的 layout xml 就有 preview 畫面可以看，或是，你可以很輕易地打開一個 Android Project，卻找不到選項打開一個「普通的 Java Project」</p>
+<p>沒錯，我找不到開普通 Java 專案的選項，想想也算合理。Android Studio 目的要提供一個「寫 Android app 的工具」，而不是「一個 IDE，可以寫各種語言包括 Android」。從公司的角度來看我能理解這樣降低維護成本的決定。</p>
+<p>但從一個使用者來看，花時間投資在一個工具上，只能寫 Android 不能寫 Java 是有點浪費。</p>
+<a id="more"></a>
+<p>Android Studio 一定不可能大改，所以鄉民還是找出了方法<a href="https://href.li/?http://stackoverflow.com/a/26196451" target="_blank" rel="noopener">在 Android Studio 寫一般的 Java project</a>。我對這個 IDE 還不是很了解，不知道會不會有什麼副作用，所以我選擇再裝一個 IDEA Intellij Community 版本，反正才 100+ MB，便宜啦。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ln -sf ~/.AndroidStudio1.3 ~/.IdeaIC14</span><br></pre></td></tr></table></figure>
+<p>我透過 symbolic link 讓兩邊共享同一份設定檔，也許會有潛在的問題，不過目前的使用方法，idea 用來開 normal java project，接著再打開 android studio 用 open existed project 的方法，應該是不會遇上什麼問題。</p>
+<h2 id="安裝-IdeaVim"><a href="#安裝-IdeaVim" class="headerlink" title="安裝 IdeaVim"></a>安裝 IdeaVim</h2><p>安裝 Android Studio 就像一般應用程式一樣，沒啥好說的。如果你也慣用 VIM，可以試著裝這個 plugin 滿足一下手指肌肉。</p>
+<ul>
+<li>依序點 File / Settings / Plugins</li>
+<li>Browse repositories / 輸入 IdeaVim</li>
+</ul>
+<p>就像 <strong>~/.vimrc</strong>，IdeaVim 也可以寫一個 <strong>~/.ideavimrc</strong> 來放設定檔</p>
+<img src="/2015/08/24-android-retrolambda/install-ideavim.png" title="[IdeaVim]">
+<h2 id="備份"><a href="#備份" class="headerlink" title="備份"></a>備份</h2><p>千辛萬苦把 IDE 調教好之後，記得要時時備份自己的設定檔</p>
+<ul>
+<li>File / Export Settings</li>
+</ul>
+<h1 id="Retrolambda"><a href="#Retrolambda" class="headerlink" title="Retrolambda"></a>Retrolambda</h1><p>Javascript 寫了一段時間之後，開始對 Functional Programming 感興趣。<a href="http://sayuan.github.io/" target="_blank" rel="noopener">小安老師</a>說 Java8 加入了很多新特性跟 FP 有關，值得一試。</p>
+<p>目前我在 Java 的主要用途集中在 Android 開發，Android 頂多也在 <a href="http://tools.android.com/recent/androidstudio032released" target="_blank" rel="noopener">4.4 之後才支援 Java 7</a>，就連我的日常用機也不過是 Android 4.0，對 Java 8 語法可說看得到吃不到，幸好有 Retrolambda。</p>
+<p><a href="https://github.com/orfjackal/retrolambda" target="_blank" rel="noopener">Retrolambda</a> 的網站說它會把 java8 編出的 bytecode，轉成舊的 Java runtime 能執行的格式。讓鄉民也能在舊機器上面用潮到出水的新語法，包括</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" target="_blank" rel="noopener">Lambda expression</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html" target="_blank" rel="noopener">Method references</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html" target="_blank" rel="noopener">Try-with-resources statements</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html" target="_blank" rel="noopener">Default Methods</a></li>
+</ul>
+<h2 id="Install-JDK6-on-Debian"><a href="#Install-JDK6-on-Debian" class="headerlink" title="Install JDK6 on Debian"></a>Install JDK6 on Debian</h2><p>因為我希望能夠編譯出 JDK6 的 bytecode，所以要先安裝 JDK6。不過 Debian testing 裡面找不到 sun 版本的 jdk6，應該是因為授權的關係，無法直接釋出可以使用的 binary 檔。</p>
+<p>要安裝 JDK6 可以參考 Deiban 的教學頁面<a href="https://wiki.debian.org/Java/Sun" target="_blank" rel="noopener">Oracle/Sun Java</a>，透過 <strong>java-package</strong> 這個工具，把 jdk6 binary 打包成 deb 檔讓我們統一使用 apt 來管理。</p>
+<p>先從 Oracle 網站把 jdk6 抓下來，好比放在 <strong>/tmp/jdk-6u45-linux-x64.bin</strong>。如果你跟我一樣把 /tmp 掛成 tmpfs，記得要 resize 成足夠大的容量來製作 deb 檔</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo aptitude install java-package</span><br><span class="line">$ make-jpkg /tmp/jdk-<span class="number">6</span>u45-linux-x64.bin</span><br><span class="line">$ sudo dpkg -i oracle-java6-jdk_6u45_amd64.deb</span><br></pre></td></tr></table></figure>
+<p>安裝完 deb 檔之後，接著設定一些環境變數給 Android Studio 的 gradle 使用，我在 <strong>~/.bashrc</strong> 裡面加入了這幾行，預設使用 java8。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA6_HOME=/usr/lib/jvm/jdk-6-oracle-x64</span><br><span class="line"><span class="built_in">export</span> JAVA7_HOME=/usr/lib/jvm/java-7-openjdk-amd64</span><br><span class="line"><span class="built_in">export</span> JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</span><br></pre></td></tr></table></figure>
+<h2 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h2><p>在 Android 上面要用 <a href="https://github.com/evant/gradle-retrolambda" target="_blank" rel="noopener">gradle-retrolambda</a>，網站上面已經把設定檔寫得很詳細了，這邊列出我的<a href="https://github.com/walkingice/momome/commit/fa1e5746b7e276d2e7c933fa3dc8d0257651d6e0" target="_blank" rel="noopener">修改</a></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    .....</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath <span class="symbol">'me</span>.tatarka:gradle-retrolambda:<span class="number">3.2</span><span class="number">.0</span>'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">apply plugin: <span class="symbol">'me</span>.tatarka.retrolambda'</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        sourceCompatibility <span class="type">JavaVersion</span>.<span class="type">VERSION_1_8</span></span><br><span class="line">        targetCompatibility <span class="type">JavaVersion</span>.<span class="type">VERSION_1_8</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">retrolambda &#123;</span><br><span class="line">    jdk <span class="type">System</span>.getenv(<span class="string">"JAVA8_HOME"</span>)</span><br><span class="line">    oldJdk <span class="type">System</span>.getenv(<span class="string">"JAVA6_HOME"</span>)</span><br><span class="line">    javaVersion <span class="type">JavaVersion</span>.<span class="type">VERSION_1_6</span></span><br><span class="line">    defaultMethods <span class="literal">true</span></span><br><span class="line">    incremental <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>範例中可以看見我使用了 <strong>JAVA8_HOME</strong> 與 <strong>JAVA6_HOME</strong> 這個環境變數，也就是前一步的設定，意思就是我要用 java8 的 compiler，想要編譯出 java6 的 bytecode。</p>
+<h2 id="動手玩"><a href="#動手玩" class="headerlink" title="動手玩"></a>動手玩</h2><p>既然在 build.gradle 裡面打開了 defaultMethods，就以這個最簡單的功能來測試一下 retrolambda 會不會動</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">sayHi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        android.util.Log.d(<span class="string">"Foo"</span>, <span class="string">"Hi"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著隨便拿個 MainActivity 來用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle saved)</span> </span>&#123;</span><br><span class="line">        sayHi();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./gradlew --daemon installDebug</span><br></pre></td></tr></table></figure>
+<p>安裝並執行程式，應該就能在 logcat 看到 “Hi”。成功就代表 command line 的設定已經完成了。Happy hacking!….啊，還有 IDE 要搞定</p>
+<h2 id="Config-Android-Studio-Project"><a href="#Config-Android-Studio-Project" class="headerlink" title="Config Android-Studio Project"></a>Config Android-Studio Project</h2><p>到這邊理論上已經裝好了 jdk6 / jdk8 / retrolambda。接著要在 Android Studio 裡面也能順利工作。首先把 jdk 1.8 的 sdk 版本加進去 Android Studio 裡面</p>
+<ol>
+<li>選 File</li>
+<li>Project Structure</li>
+<li>Platform Settings - SDKs</li>
+<li>按下 + 號 新增一個 JDK</li>
+<li>找到 jdk1.8 的安裝位置，我的是在 /usr/lib/jvm/java-8-openjdk-amd64</li>
+</ol>
+<p>到這邊設定好之後，Android Studio 就認得 jdk1.8 了，我的結果大概如下</p>
+<img src="/2015/08/24-android-retrolambda/jdk1_8.png" title="[Android Studio set JDK]">
+<p>接著設定 project，就在同一個 popup window 的 Project 那一頁</p>
+<ol>
+<li>指定 Project SDK 用我們剛剛產生的 1.8</li>
+<li>Project language level 用 8 - Lambdas</li>
+</ol>
+<img src="/2015/08/24-android-retrolambda/project_config.png" title="[Android Studio set Project]">
+<p>到這邊應該就設定完成，可以編一下程式來玩玩看。同時摸索 IntelliJ 以及 gradle 這兩個我不是很熟的東西，以上的步驟很可能會有少做 (我忘記要紀錄) 或是多做 (阿宅最討厭的多餘動作) 的地方，還望鄉親多指教。(鞋櫃可能很懶得弄留言板，鄉親不管是直接寫信、在 social network 或是直接發篇 blog 文來吐嘈都很歡迎啦～)</p>
+<p>Happy Hacking!</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2015/08/24-android-retrolambda.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2015-08-24">2015-08-24</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2015/09/18-streamsupport.html" title="streamsupport"><b>streamsupport</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2015/08/22-hellohexo.html" title="Hello Hexo">Next &rarr; <b>Hello Hexo</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

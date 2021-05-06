@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Inkscape crashed in Debian testing | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Inkscape crashed in Debian testing | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Inkscape crashed in Debian testing | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Inkscape crashed in Debian testing | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Inkscape crashed in Debian testing | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Inkscape crashed in Debian testing | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2016/07/30-debian-inkscape.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/07/30-debian-inkscape.html" itemprop="url" target="_blank">
+            <span class>Inkscape crashed in Debian testing</span>
+        </a>
+    </h1>
+
+    <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>這個問題持續發生好長一段時間了：只要同時選擇了兩個以上的物件，Inkscape 就會 crash。問題簡單來說就是中文翻譯的問題，所以用其他語言的人不會遇到。</p>
+<p><strong>For debian inkscape 0.91, It only happens in Traditional-Chinese conext</strong>.</p>
+<p>You could reproduce this problem by launching inkscape in Traditional-Chinese context. (It won’t happen in Simplified-Chinese context. explain later).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANGUAGE=zh_TW.utf8 /usr/bin/inkscape</span><br></pre></td></tr></table></figure>
+<p>Then create any two objects, select all of them. boom!</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/07/30-debian-inkscape/inkscape_crash_in_zh.png"></div>
+
+<p>If you only need workaroud for now.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANGUAGE=en_US /usr/bin/inkscape</span><br></pre></td></tr></table></figure>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/07/30-debian-inkscape/inkscape_works_in_eng.png"></div>
+
+<p>因為困擾我超久的，今天就用 gdb 稍微追一下問題</p>
+<a id="more"></a>
+<h1 id="Environment"><a href="#Environment" class="headerlink" title="Environment"></a>Environment</h1><ul>
+<li>Distribution: Debian testing, upgraded to latest</li>
+<li>Window manager: Awesome window manager</li>
+<li>Language: zh-TW.utf8</li>
+<li>Inkscape: 0.91-9</li>
+</ul>
+<p>其實這個問題存在超過半年以上，詳細時間我已經記不清楚了。某一次更新之後發生這個問題，激發我想要修的動力，跑去 <a href="https://launchpad.net/inkscape" target="_blank" rel="noopener">launchpad</a> 上面把 <a href="https://code.launchpad.net/~inkscape.dev/inkscape/trunk" target="_blank" rel="noopener">source code</a> 抓下來，編譯完之後跑起來發現沒問題就一直用著。但是每一次 c library 升級，我就要整個重編一遍。強制把 inkscape 固定在沒問題的 0.48 版本又使得其他 lib 不能升級。想要編個 static linked 的 binary 又失敗(原因不明，懶得找)。甚至還想過要用 docker 把整個 inkscape 包起來。</p>
+<p>經過一連串的掙扎，持續在可用，爛掉之間的輪迴好一段時間之後，昨天比較早，八點多離開公司的時候，覺得人生充滿希望，吃完晚餐就決定要來看一下原因到底出在哪。不然我這麼愛用 inkscape，卻又讓它一直爛掉實在不像話。</p>
+<p>其實也只是編譯，開 gdb 就好了……</p>
+<h1 id="Compiling-inkscape"><a href="#Compiling-inkscape" class="headerlink" title="Compiling inkscape"></a>Compiling inkscape</h1><p>一開始直接用 gdb 去追 stacktrace 會看到一堆問號，inkscape 也沒有 dev package 可以用，只好自己手動重編一份。感謝 Kanru 以前的教學，要編 debian 的 package 實在很簡單</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir foobar</span><br><span class="line">$ <span class="built_in">cd</span> foobar</span><br><span class="line">$ apt-get <span class="built_in">source</span> inkscape</span><br><span class="line"></span><br><span class="line">$ dpkg-source -x inkscape_0.91-9.dsc    <span class="comment"># apply patch</span></span><br><span class="line">$ ls debian    <span class="comment"># 應該會有 debian 這個目錄，檢查一下</span></span><br><span class="line">$ sudo apt-get build-dep foo-package    <span class="comment"># 安裝 dependency libraries，編譯 inkscape 的時候才會順利</span></span><br><span class="line"></span><br><span class="line">$ dpkg-buildpackage    <span class="comment"># 編譯！ for normal purpose</span></span><br><span class="line"><span class="comment"># get a cup of coffee</span></span><br></pre></td></tr></table></figure>
+<p>上面是一般的 debian package 編譯方法，理論上會生出跟官方一樣的 deb 檔 (當然一些 info 是不一樣的)。但現在要 debug inkscape，所以編譯的時候要塞一些選項</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ CFLAGS=<span class="string">"-g3 -fPIC -O0"</span> CXXFLAGS=<span class="string">"<span class="variable">$CFLAGS</span>"</span> dpkg-buildpackage</span><br></pre></td></tr></table></figure>
+<p>用 <code>-g3 -O0</code> 讓 compiler 保留多一點 debug info，因為我的是 x86-64，一開始編譯沒加上 <code>-fPIC</code> 結果 link 的時候失敗，結果整個重編一次才行。夏天天氣熱，電腦又一直發燒，這是最痛苦的地方。總之通過漫長的編譯過程就可以開始真正找問題了。</p>
+<h1 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h1><p>用 gdb 跑起 inkscape 之後，觸發 bug 再看一下 backstrace</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ gdb ./inkscape</span><br><span class="line">GNU gdb (Debian 7.11.1-2) 7.11.1</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;</span><br><span class="line">and &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;x86_64-linux-gnu&quot;.</span><br><span class="line">Type &quot;show configuration&quot; for configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For help, type &quot;help&quot;.</span><br><span class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</span><br><span class="line">Reading symbols from ./inkscape...done.</span><br><span class="line">(gdb)</span><br><span class="line">(gdb)</span><br><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/walkingice/code/inkscape/inkscape-0.91/src/inkscape</span><br><span class="line">[Thread debugging using libthread_db enabled]</span><br><span class="line">Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.</span><br><span class="line">[New Thread 0x7fffe6a94700 (LWP 6493)]</span><br><span class="line">[New Thread 0x7fffe6293700 (LWP 6495)]</span><br><span class="line">[New Thread 0x7fffe5a92700 (LWP 6496)]</span><br><span class="line">[New Thread 0x7fffe2ff2700 (LWP 6497)]</span><br><span class="line">[New Thread 0x7fffe27f1700 (LWP 6498)]</span><br><span class="line"></span><br><span class="line">Thread 1 &quot;inkscape&quot; received signal SIGSEGV, Segmentation fault.</span><br><span class="line">0x00007fffeee51410 in vfprintf () from /lib/x86_64-linux-gnu/libc.so.6</span><br><span class="line">(gdb) bt</span><br><span class="line">#0  0x00007fffeee51410 in vfprintf () from /lib/x86_64-linux-gnu/libc.so.6</span><br><span class="line">#1  0x00007fffeef00045 in __vasprintf_chk () from /lib/x86_64-linux-gnu/libc.so.6</span><br><span class="line">#2  0x00007ffff0003ce9 in g_vasprintf () from /lib/x86_64-linux-gnu/libglib-2.0.so.0</span><br><span class="line">#3  0x00007fffeffde67d in g_strdup_vprintf () from /lib/x86_64-linux-gnu/libglib-2.0.so.0</span><br><span class="line">#4  0x00007fffeffde739 in g_strdup_printf () from /lib/x86_64-linux-gnu/libglib-2.0.so.0</span><br><span class="line">#5  0x0000555555a463fd in Inkscape::SelectionDescriber::_updateMessageFromSelection (this=0x55555d63eec0, selection=0x5555577cee00)</span><br><span class="line">    at selection-describer.cpp:217</span><br><span class="line">#6  0x0000555555a46fde in sigc::bound_mem_functor1&lt;void, Inkscape::SelectionDescriber, Inkscape::Selection*&gt;::operator() (this=0x555559712c38,</span><br><span class="line">    _A_a1=@0x7fffffffc548: 0x5555577cee00) at /usr/include/sigc++-2.0/sigc++/functors/mem_fun.h:2064</span><br></pre></td></tr></table></figure>
+<h1 id="Problem-addressed"><a href="#Problem-addressed" class="headerlink" title="Problem addressed"></a>Problem addressed</h1><p>stack 很深，理論上 libc 那邊比較不會有問題，第五行可以第一次看到 inkscape 的相關訊息。在 inkscape 的 selection-describer.cpp 第 217 行爛掉，code 如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gchar *objects_str = g_strdup_printf(ngettext(</span><br><span class="line">    <span class="string">"&lt;b&gt;%i&lt;/b&gt; objects selected of type %s"</span>,</span><br><span class="line">    <span class="string">"&lt;b&gt;%i&lt;/b&gt; objects selected of types %s"</span>, n_terms),</span><br><span class="line">     objcount, terms);</span><br></pre></td></tr></table></figure>
+<p>看起來不是 ngettext 那邊出了問題，就是 g_strdup_printf 有問題。稍微改一下 code 再重新 make 一次，看 ngettext 的回傳值是什麼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(gdb) set listsize 15</span><br><span class="line">(gdb) list</span><br><span class="line">210                 int objcount = g_slist_length((GSList *)items);</span><br><span class="line">211                 char *terms = collect_terms ((GSList *)items);</span><br><span class="line">212                 int n_terms = count_terms((GSList *)items);</span><br><span class="line">213</span><br><span class="line">214                 char* foo = ngettext(&quot;&lt;b&gt;%i&lt;/b&gt; objects selected of type %s&quot;,</span><br><span class="line">215                         &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of types %s&quot;, n_terms);</span><br><span class="line">216                 gchar *objects_str = g_strdup_printf(foo,</span><br><span class="line">217                      objcount, terms);</span><br><span class="line">218</span><br><span class="line">219                 g_free(terms);</span><br><span class="line">220</span><br><span class="line">221                 // indicate all, some, or none filtered</span><br><span class="line">222                 gchar *filt_str = NULL;</span><br><span class="line">223                 int n_filt = count_filtered((GSList *)items);  //all filtered</span><br><span class="line">224                 if (n_filt) &#123;</span><br><span class="line">(gdb) p foo</span><br><span class="line">$1 = 0x7ffff7f60ad1 &quot;已選擇類型 %s 的 &lt;b&gt;%i&lt;/b&gt; 個物件&quot;</span><br><span class="line">(gdb) ptype objcount</span><br><span class="line">type = int</span><br><span class="line">(gdb) ptype terms</span><br><span class="line">type = char *</span><br></pre></td></tr></table></figure>
+<p>原來如此，ngettext 拿到的 string 是 %s 在前 %i 在後，可是 format 的時候是先給 int 再給 char*，當然就爆炸了。那麼其他語言會有這個問題嗎？</p>
+<h1 id="PO-file"><a href="#PO-file" class="headerlink" title="PO file"></a>PO file</h1><p>fr.po<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msgid &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of type %s&quot;</span><br><span class="line">msgid_plural &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of types %s&quot;</span><br><span class="line">msgstr[0] &quot;&lt;b&gt;%i&lt;/b&gt; objets de type %s sélectionnés&quot;</span><br><span class="line">msgstr[1] &quot;&lt;b&gt;%i&lt;/b&gt; objets de types %s sélectionnés&quot;</span><br></pre></td></tr></table></figure></p>
+<p>zh_CN.po<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msgid &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of type %s&quot;</span><br><span class="line">msgid_plural &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of types %s&quot;</span><br><span class="line">msgstr[0] &quot;&lt;b&gt;%i&lt;/b&gt;个对象选择&quot;</span><br><span class="line">msgstr[1] &quot;&lt;b&gt;%i&lt;/b&gt;个对象选择&quot;</span><br></pre></td></tr></table></figure></p>
+<p>zh_TW.po<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">msgid &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of type %s&quot;</span><br><span class="line">msgid_plural &quot;&lt;b&gt;%i&lt;/b&gt; objects selected of types %s&quot;</span><br><span class="line">msgstr[0] &quot;已選擇類型 %s 的 &lt;b&gt;%i&lt;/b&gt; 個物件&quot;</span><br><span class="line">msgstr[1] &quot;已選擇類型 %s 的 &lt;b&gt;%i&lt;/b&gt; 個物件&quot;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Patch"><a href="#Patch" class="headerlink" title="Patch"></a>Patch</h1><p>嗯，只有繁體中文是這樣，<del>其實上個簡單的 patch 就行了</del> <strong>更新：這樣的 patch 是不對的</strong></p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/src/selection-describer.cpp b/src/selection-describer.cpp</span><br><span class="line">index 1cb96fe..ab719a0 100644</span><br><span class="line"><span class="comment">--- a/src/selection-describer.cpp</span></span><br><span class="line"><span class="comment">+++ b/src/selection-describer.cpp</span></span><br><span class="line">@@ -212,8 +212,8 @@ void SelectionDescriber::_updateMessageFromSelection(Inkscape::Selection *select</span><br><span class="line">             int n_terms = count_terms((GSList *)items);</span><br><span class="line">             </span><br><span class="line">             gchar *objects_str = g_strdup_printf(ngettext(</span><br><span class="line"><span class="deletion">-                "&lt;b&gt;%i&lt;/b&gt; objects selected of type %s",</span></span><br><span class="line"><span class="deletion">-                "&lt;b&gt;%i&lt;/b&gt; objects selected of types %s", n_terms),</span></span><br><span class="line"><span class="addition">+                "&lt;b&gt;%1$i&lt;/b&gt; objects selected of type %2$s",</span></span><br><span class="line"><span class="addition">+                "&lt;b&gt;%1$i&lt;/b&gt; objects selected of types %2$s", n_terms),</span></span><br><span class="line">                  objcount, terms);</span><br><span class="line"> </span><br><span class="line">             g_free(terms);</span><br><span class="line"><span class="deletion">-- </span></span><br><span class="line">2.8.1</span><br></pre></td></tr></table></figure>
+<p><del>不過對 ngettext 不熟，不確定這樣是不是正確的解法，也還不是很清楚 debian 的 contribution 方法。所以還是要先看一些文件才能送 patch  orz</del></p>
+<p>後來看了一下 ngettext 的 man page，才比較了解它的用法。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;libintl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">ngettext</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * msgid, <span class="keyword">const</span> <span class="keyword">char</span> * msgid_plural,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line">The  ngettext attempt to translate a text <span class="built_in">string</span> into the user<span class="number">'</span>s native language....</span><br></pre></td></tr></table></figure>
+<p>簡單來說，這個 function 就是用來取得「翻譯成使用者的語言，拿來做 formatting 的字串」，就是類似「Hi, I am %s -&gt; 嗨, 我是 %s」。但是有三個參數，而非一個 msgid 就可以了，為什麼呢？</p>
+<p>因為很多語言有複數型態的問題，根據 man page 的說法，有些語言除了單數、雙數、複數，甚至有四種以上的形式，雖然中文沒有，但是我們熟悉的英文就有複數型。所以最後一個變數 <code>n</code> 就是用來指定要使用第 <strong>n</strong> 種型態，<strong>n=1</strong> 就是單數型，以此類推。</p>
+<p><code>msgid_plural</code> 就是遇到複數型態的時候，要找的對象的 msgid。通常單數型與複數型的翻譯會寫在一起，這樣好像功能重複了？所以 msgid_plural 的用處更像是 fallback。</p>
+<blockquote>
+<p>In  the  “C”  locale,  or  if  none of the used catalogs contain a translation for msgid, the ngettext functions return msgid if n == 1, or msgid_plural if n != 1.</p>
+</blockquote>
+<p>如果沒有找到合適的翻譯，那麼就拿 <code>msgid</code> 的字串當成單數型來用，<code>msgid_plural</code> 的字串當成複數型來用，要用哪一個由 <code>n</code> 來決定。</p>
+<p>看到這邊就知道上面的 patch 錯了，因為它把整個 id(key) 變成了另外一個值，這會使得其他所有的 po 檔都失效，永遠找不到對應的翻譯。由於有 fallback 的關係而不會爆炸，但這樣的行為就不對了。</p>
+<p>於是比較合理的作法，就是改 po 檔，從翻譯裡面指定 formatting 的時候參數的位置要擺到哪，這樣就不會出錯了。</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">diff --git a/po/zh_TW.po b/po/zh_TW.po</span><br><span class="line">index db57029..fd694bd 100644</span><br><span class="line"><span class="comment">--- a/po/zh_TW.po</span></span><br><span class="line"><span class="comment">+++ b/po/zh_TW.po</span></span><br><span class="line">@@ -12091,8 +12091,8 @@ msgstr "使用 &lt;b&gt;Shift+D&lt;/b&gt; 找尋訊框"</span><br><span class="line"> #, c-format</span><br><span class="line"> msgid "&lt;b&gt;%i&lt;/b&gt; objects selected of type %s"</span><br><span class="line"> msgid_plural "&lt;b&gt;%i&lt;/b&gt; objects selected of types %s"</span><br><span class="line"><span class="deletion">-msgstr[0] "已選擇類型 %s 的 &lt;b&gt;%i&lt;/b&gt; 個物件"</span></span><br><span class="line"><span class="deletion">-msgstr[1] "已選擇類型 %s 的 &lt;b&gt;%i&lt;/b&gt; 個物件"</span></span><br><span class="line"><span class="addition">+msgstr[0] "已選擇類型 %2$s 的 &lt;b&gt;%1$i&lt;/b&gt; 個物件"</span></span><br><span class="line"><span class="addition">+msgstr[1] "已選擇類型 %2$s 的 &lt;b&gt;%1$i&lt;/b&gt; 個物件"</span></span><br><span class="line"> </span><br><span class="line"> #: ../src/selection-describer.cpp:225</span><br><span class="line"> #, c-format</span><br><span class="line"><span class="deletion">-- </span></span><br><span class="line">2.8.1</span><br></pre></td></tr></table></figure>
+<p>額外一提的是，inkscape 跑起來的時候讀的 po 檔是 <em>/usr/share/locale/zh_TW/LC_MESSAGES/inkscape.mo</em>，我一開始不知道，想說怎麼改 po 檔的內容，make 完之後都沒變呢？後來才注意到即使是我自己編的 inkscape 還是跑去讀系統的 mo 檔。而且我找不到方法用 make 編出 mo 檔(除了整個 deb 重編以外 =.=)。不過我很偷懶地直接把 zh_TW.gmo 給硬塞進系統的位置，也算是另一個 workaround 吧 :P</p>
+<p>啊，還是不知道 debian 送 patch 的流程 orz</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2016/07/30-debian-inkscape.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2016-07-30">2016-07-30</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/linux/">
+                    <i class="fa fa-th"></i>
+                    <span class>linux</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+                <a href="/tags/debian/">
+                    <span class="tag">debian</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2016/08/19-sdk.html" title="Android Studio use sdk source code"><b>Android Studio use sdk source code</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2016/05/20-taiwan.html" title="第三次政黨輪替">Next &rarr; <b>第三次政黨輪替</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

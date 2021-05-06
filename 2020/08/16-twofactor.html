@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 實作 Google Authenticator 的兩階段驗證 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 實作 Google Authenticator 的兩階段驗證 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 實作 Google Authenticator 的兩階段驗證 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" 實作 Google Authenticator 的兩階段驗證 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" 實作 Google Authenticator 的兩階段驗證 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" 實作 Google Authenticator 的兩階段驗證 | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2020/08/16-twofactor.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2020/08/16-twofactor.html" itemprop="url" target="_blank">
+            <span class>實作 Google Authenticator 的兩階段驗證</span>
+        </a>
+    </h1>
+
+    <p>之前聽到 Tim 說 PTT 的現有的登入方式不改的話很沒救，我想到兩階段驗證的方法，所以好奇研究了一下該怎麼做。實際上看了才知道比想像中簡單，PTT 有意願的話，實作難度真的不高。</p>
+<p>Google Authenticator (後面簡稱 GA)是常見的兩階段驗證(2FA)會用到的程式，好比 GitHub 或是 Facebook 的兩階段驗證都能用這隻程式取得驗證碼。如果你的網站服務想要利用 2FA 增加安全性，利用 GA 可以算是非常便宜的方案 - 不需要自己寫 client App，只要自己的網站加上一些簡單的流程與演算法就能取得 2FA 的優點。</p>
+<p>本文簡介如何實作，並且附上驗證的程式。</p>
+<a id="more"></a>
+<p>要實作 GA 的 2FA，核心的部分只要弄好三個東西</p>
+<ul>
+<li>RFC4226：HOTP: An HMAC-Based One-Time Password Algorithm 的實作</li>
+<li>RFC6238：TOTP: Time-Based One-Time Password Algorithm 的實作</li>
+<li>Base32 的編碼演算法</li>
+</ul>
+<p>其中 RFC6238 其實是基於 RFC4226 的實作，只是拿時間當變數而已，所以搞定 RFC4226 就沒什麼大問題，以下拿 Kotlin 語言，依序介紹三者如何實作。<em>(其實我覺得看圖可能就懂了)</em></p>
+<h1 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h1><p>2FA 的概念是，使用者登入的時候除了輸入密碼，還要用私人擁有的裝置(手機)顯示一個隨機變動的數字，登入時提供給 Server 以宣稱「我除了知道密碼，還知道一個只有我手機才會產生的數字」，以此提昇帳號的安全性。要做到後者，Client 跟 Server 之間一定要共享某一個 Key，還有一個不斷變動的 Counter ，由這兩個參數生出隨機亂數。</p>
+<p>因此在起始 2FA 流程的時候，網站首先要給使用者產生隨機的文字當做 Key，以下都拿經典的台詞 <strong>GoAheadMakeMyDay</strong> 當做產生出來的 Key，後面的程式碼會用到的 <strong>key</strong> 都是這個字串。</p>
+<p>把這串 Key 的 ascii 直接轉成 byte 會拿到 <code>[47 6f 41 68 65 61 64 4d 61 6b 65 4d 79 44 61 79]</code></p>
+<h1 id="RFC4226"><a href="#RFC4226" class="headerlink" title="RFC4226"></a>RFC4226</h1><p>以下稍微解釋 RFC 裡面講的東西，沒耐心的可以跳到下一節</p>
+<p>RFC 的標題就是 HOTP: An HMAC-Based One-Time Password Algorithm。MAC, Message Authentication Code 是用來驗證訊息的另外一串比較短的訊息，HMAC 則是基於 hash function 的 MAC。舉例來說 HMAC-MD5 就是我們常用的 md5，對於一個大的檔案，產生一個比較小的 hash code (MAC)，可以用來驗證原來的大檔案有沒有出錯。</p>
+<p>RFC4226 的第五章講演算法，看完就知道怎麼實作了。但是要用在自家服務上的人，至少要把第六章也看完，才會知道 RFC4226 要基於哪些條件才會有安全性。不過我這篇短文，聚焦在演算法就好</p>
+<p>Section 5.1 有些簡單的名詞解釋</p>
+<ul>
+<li><p>C: 8 bytes 的 counter value，又稱 moving factor，HOTP generator (client，也就是使用者手上的手機) 跟 HOTP validator (server) 要同步這個值。譬如說兩邊可以用 1, 3, 5, 7 的奇數遞增，或是 100, 200, 300…，反正兩邊有共識就行了。(如果你很聰明地拿「時間」來當兩邊同步的基準，就是 RFC6238 的 TOTP 囉！)</p>
+</li>
+<li><p>K: shared secret，長度至少要 128 bits，也就是上面假設的 key (GoAheadMakeMyDay)</p>
+</li>
+<li>T: throttling parameter，嘗試 T 次失敗之後會拒絕連線 (總不能讓黑鬼無限制地猜下去吧！)</li>
+</ul>
+<p>K, C 都是 high order byte first，產生出來的都是 big endian，也就符合我們平常的習慣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HOTP(K,C) = Truncate(HMAC-SHA-1(K,C))</span><br></pre></td></tr></table></figure>
+<ol>
+<li>HS = HMAC-SHA-1(K,C) - HS 就是 HMAC-SHA-1，長度為 20 bytes</li>
+<li>產生一個 4 bytes 長度的值：Sbits = DT(HS) - DT 會回傳一個 31 bits String</li>
+<li>Snum = StToNum(Sbits) - 把 S 轉成一個數字，範圍是 0 ~ 2^31 -1</li>
+<li>回傳 D = Snum mod 10^Digit - D 也是一個數字，範圍是 0 ~ 10^D - 1</li>
+</ol>
+<p>DT 是為了要從 160 bits 之中取出 4 bytes dynamice binary code</p>
+<p>DT: 當 String = String[0] ~ String[19] 時，OffsetBits 就是 lower order 4 “bits”，也就是 String[19] 的最後 4 bits (if String[19] = 0x4A, offset 就是 0xA)<br>Offset = StToNum(OffsetBits) // <code>0 &lt;= Offset &lt;= 15</code><br>接著 P = String[Offset]…String[Offset + 3]<br>最後再回傳 P 的最後 31 bits</p>
+<p>取最後 31 bits 的原因是要避免 signed 與 unsigned 的問題</p>
+<p>實作最後至少要回傳 6 位數，依照情況也可以是 7 或 8 位數</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int offset   =  hmac_result[19] &amp; 0xf ;                // 取出 offset</span><br><span class="line">int bin_code = (hmac_result[offset]  &amp; 0x7f) &lt;&lt; 24     // 從 offset 開始取出 4 bytes</span><br><span class="line">   | (hmac_result[offset+1] &amp; 0xff) &lt;&lt; 16</span><br><span class="line">   | (hmac_result[offset+2] &amp; 0xff) &lt;&lt;  8</span><br><span class="line">   | (hmac_result[offset+3] &amp; 0xff) ;</span><br></pre></td></tr></table></figure>
+<h2 id="RFC4226-演算法"><a href="#RFC4226-演算法" class="headerlink" title="RFC4226 演算法"></a>RFC4226 演算法</h2><p>這節直接演練一次如何計算出 RFC4226 期待的結果</p>
+<ol>
+<li>準備一個 C (Counter value), 8 Byte 在 Kotlin 就是型別 Long 的變數，假設 Counter 為 <code>65535</code></li>
+<li><code>65535</code> 就是 <code>0xFFFF</code>，轉成長度為 16 的 hex String 就是 <code>000000000000FFFF</code></li>
+<li>把這個字串轉成 Byte Array，等下計算 SHA1 會用到。最後轉成 <code>[00 00 00 00 00 00 FF FF]</code> 的 8 Bytes array</li>
+<li>把 <code>GoAheadMakeMyDay</code> 轉成 Ascii 的 byte array，拿到 <code>[47 6f 41 68 65 61 64 4d 61 6b 65 4d 79 44 61 79]</code></li>
+<li>拿 Counter 以及 Key 的兩個 Array 計算出 SHA1 值，SHA1 值是 Digest，也就是 RFC 裡面的 <code>hs</code>。以我們的例子，最後計算出的 <code>hs[] = [16 66 4A 59 58 57 E2 55 22 DC A3 1B 97 A9 C4 B5 7E D7 77 25]</code></li>
+</ol>
+<p>Digest 一定是長度 20 bytes Array。別人弱水三千只取一瓢，這邊 20 bytes 也只需要 4 bytes</p>
+<ol>
+<li>取出 array 的最後一個 byte (hs[19])，進行 <code>AND 0x0F</code> 運算，得到一個絕對在 0 ~ 15 之間的數字，這個數字是 offset - 現在得到 <code>offset = 5</code></li>
+<li>在 hs 裡面以 offset 當位移取出 4 bytes <code>[57 E2 55 22]</code> (hs[5] ~ hs[8])，得到一個 4 bytes 的數字</li>
+<li>拿掉第一個 bit (<code>&amp; 0x7FFFFFFF</code>)，避免正負號的問題 - 最後拿到一個整數 <code>1474450722</code></li>
+<li>開始 truncate，如果只需要 6 位數，最後的結果就是 <code>450722</code></li>
+</ol>
+<div style="max-width: 100%; margin: auto;"><img src="/2020/08/16-twofactor/hotp_flow.svg"></div>
+
+<h1 id="RFC6238"><a href="#RFC6238" class="headerlink" title="RFC6238"></a>RFC6238</h1><p>聰明的你一定馬上就想到可以拿「當下的時間」當做理應要不斷變動的 Counter Value。是的，這就是 RFC 6238 在做的事情，只是它用的單位叫做 Steps</p>
+<ul>
+<li>以一個 T0 當做起始的秒數</li>
+<li>每 X 秒當做一個 Step (預設是 30 秒)</li>
+<li>現在的時間，減掉 T0 之後，共有多少 Steps？就是現在的 Steps</li>
+</ul>
+<p>我們要實作給 GA，所以</p>
+<ul>
+<li>T0 就是 January 1, 1970 00:00:00.0 UTC.</li>
+<li>X 是 30</li>
+<li>所以就是很簡單地，<code>currentTimeMillis()</code> 取得 Millis 後除以 1000，再除以 30，丟給 RFC4226 就搞定囉</li>
+</ul>
+<p>換句話說，如果 client 的時間不準，或說沒跟 Server 同步，兩邊就會對不起來了，這算是 GA 的限制吧。</p>
+<div style="max-width: 100%; margin: auto;"><img src="/2020/08/16-twofactor/totp_flow.svg"></div>
+
+<h1 id="Bas32-生出-GA-用的-URI"><a href="#Bas32-生出-GA-用的-URI" class="headerlink" title="Bas32 (生出 GA 用的 URI)"></a>Bas32 (生出 GA 用的 URI)</h1><p>這個反而比較麻煩一點。不能直接拿 Key <code>GoAheadMakeMyDay</code> 餵給 GA，要先轉成 Base32 的字串。因為不是常見的 Base64，所以最後我也是自己實作一份。Base32 的演算法如下</p>
+<ol>
+<li>把字串轉成 byte array</li>
+<li>每 5 個 bits 分成一組，最後不足 5 bits 的餘位，補上 0 成為 5 bits</li>
+<li>2 的 5 次方就是 32， 把每個數字拿去映射長度為 32 的列表 <code>&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, .... &#39;Y&#39;, &#39;Z&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;</code>. (沒有 1，可能是怕跟大寫 I 混淆)</li>
+<li>得到字串之後，最後補上等號 <code>=</code>，直到字串的長度為 8 的倍數，這就是能餵給 GA 的 Secret</li>
+<li><code>GoAheadMakeMyDay</code> 會得到 <code>I5XUC2DFMFSE2YLLMVGXSRDBPE======</code></li>
+</ol>
+<p>如果不想在 GA 裡面手動輸入這串字，就要生出一個 URI，格式為</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">otpauth://totp/foobar?digits=6&amp;issuer=TEST&amp;secret=I5XUC2DFMFSE2YLLMVGXSRDBPE======</span><br></pre></td></tr></table></figure>
+<p>拿這個 URI 去轉成 QR code，就能用 GA 掃描的方式輸入</p>
+<div style="max-width: 100%; margin: auto;"><img src="/2020/08/16-twofactor/ga_secret.svg"></div>
+
+<h1 id="Source-code"><a href="#Source-code" class="headerlink" title="Source code"></a>Source code</h1><p>如果對實作有興趣，可以看看我這很簡單的 Kotlin 版本: <a href="/2020/08/16-twofactor/twofactor.zip" title="twofactor.zip">twofactor.zip</a>，基本上就三個檔案分別是 HOTP, TOTP 與 Base32 的實作，還有 Unit Test 當做使用範例。</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2020/08/16-twofactor.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2020-08-16">2020-08-16</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/kotlin/">
+                    <span class="tag">kotlin</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2020/09/02-sqlscout.html" title="Android Studio 觀察 Sqlite Database"><b>Android Studio 觀察 Sqlite Database</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2020/03/22-coroutine.html" title="Kotlin coroutine 基礎筆記">Next &rarr; <b>Kotlin coroutine 基礎筆記</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Java 的 Nested Class | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Java 的 Nested Class | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Java 的 Nested Class | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Java 的 Nested Class | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Java 的 Nested Class | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Java 的 Nested Class | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2018/02/08-nested-class.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2018/02/08-nested-class.html" itemprop="url" target="_blank">
+            <span class>Java 的 Nested Class</span>
+        </a>
+    </h1>
+
+    <p>最近公司做的產品，收到來自外面鄉親貢獻的 <a href="https://github.com/mozilla-tw/Rocket/pull/1342" target="_blank" rel="noopener">PR</a>，想起了這個被自己遺忘很久的東西，趁著再次補起記憶的時候，順便做一點紀錄。</p>
+<p>簡單來說就是 Java 的 Nested class 盡量寫成 static 比較好。至於為什麼比較好，也許就要多花點功夫來了解。</p>
+<a id="more"></a>
+<h1 id="優先考慮靜態類別"><a href="#優先考慮靜態類別" class="headerlink" title="優先考慮靜態類別"></a>優先考慮靜態類別</h1><p>在 <a href="https://en.wikipedia.org/wiki/Joshua_Bloch" target="_blank" rel="noopener">Effective Java</a> 裡面有提到一個原則：「優先考慮靜態類別」(Favor static classes over nonstatic)。意思是說，在底下的範例裡面，若情況允許(Nested 類別不需要存取外層的 instance)，盡量採取 <code>StaticNested</code> 的寫法，而非 <code>NonStaticNested</code>，兩者的直觀差別是 <code>static</code> 關鍵字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">NonStaticNested</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticNested</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>書中提到的原因是，非 static 的 nested class，會有一個 Reference 指向外層的物件。於是來觀察一下 bytecode，利用 <code>javap -c Foo.class</code> 把 bytecode 匯出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">  OuterClass();</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0</span><br><span class="line">       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">       <span class="number">4</span>: <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span>$<span class="title">StaticNested</span> </span>&#123;</span><br><span class="line">  OuterClass$StaticNested();</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0</span><br><span class="line">       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">       <span class="number">4</span>: <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Compiled from <span class="string">"OuterClass.java"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span>$<span class="title">NonStaticNested</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> OuterClass <span class="keyword">this</span>$<span class="number">0</span>;                  <span class="comment">// 這裡！</span></span><br><span class="line"></span><br><span class="line">  OuterClass$NonStaticNested(OuterClass);</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0</span><br><span class="line">       <span class="number">1</span>: aload_1</span><br><span class="line">       2: putfield      #1                  // Field this$0:LOuterClass;</span><br><span class="line">       <span class="number">5</span>: aload_0</span><br><span class="line">       6: invokespecial #2                  // Method java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">       <span class="number">9</span>: <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>從 bytecode 可以看見，非 static nested class 的確多了指向外層實體的 reference。看到這裡大概懂了書上講的東西，理解 <strong>「Inner class 的 instance，總是連著一個 Enclosing instance」</strong> 是什麼意思了。</p>
+<p>附帶一提，要從其他類別中產生一個 Non-static nested class 實體的方法就是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OuterClass outer = <span class="keyword">new</span> OuterClass();</span><br><span class="line">OuterClass.InnerClass inner = outer.<span class="keyword">new</span> InnerClass(); <span class="comment">// inner 才知道它的 enclosing instance 是誰</span></span><br></pre></td></tr></table></figure>
+<h1 id="更進一步了解-Nested-Class"><a href="#更進一步了解-Nested-Class" class="headerlink" title="更進一步了解 Nested Class"></a>更進一步了解 Nested Class</h1><p>知道 non-static nested class 多一個 reference，於是有另一個問題發生了：為什麼會有這個 reference？此時也意識到自己對 nested class 的認識不夠，所以再多看一點文件。從 <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="noopener">Java Tutorial</a>來看，先上一點基本的名詞解釋</p>
+<ul>
+<li>enclosing class: 外層的 class，以上面的範例來說就是 <code>OuterClass</code></li>
+<li>nested class: 包在裡面的 class，就是 <code>StaticNested</code> 與 <code>NonStaticNested</code> 兩個，nested class 又能分為<strong>static nested class</strong> 與 <strong>inner class</strong> 兩種</li>
+<li>static nested class: 有加上 static 修識字</li>
+<li>inner class: 非 static nested class 的其他種類</li>
+</ul>
+<h2 id="Static-Nested-Class"><a href="#Static-Nested-Class" class="headerlink" title="Static Nested Class"></a>Static Nested Class</h2><p>先講 <strong>static nested class</strong>，它其實跟 enclosing class，或說跟一般的 class 沒什麼不同。只是恰好寫在另外一個 class 裡面而已。</p>
+<p>就像 Java 的 package 的用途，只是為了給 class 有個方便的分類而已。</p>
+<h2 id="Inner-Class"><a href="#Inner-Class" class="headerlink" title="Inner Class"></a>Inner Class</h2><p>inner class，則還能細分出 local class 與 anonymous class。前者是上面例子中的 <code>NonStaticNested</code>，後者就是實作時經常放在 callback 裡面或當成參數的 class</p>
+<p>Inner class 有底下幾樣特性</p>
+<ul>
+<li>Inner class 可以在任何一個 <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/localclasses.html" target="_blank" rel="noopener">block</a> 裡面宣告。如果這個 block 恰好是在 method 呼叫的參數裡面，那它就是 anonymous class，如同上面的範例</li>
+<li>根據倒出來的 bytecode，因為 inner class 有個 reference 指向 enclosing 的 instance，所以會有人說 <strong>「Inner class 的 instance，總是連著一個 Enclosing instance」</strong></li>
+<li>也因此，Inner class 可以使用 Enclosing instance 的 member，也就是我們常用的 <code>OuterClass.this.fooBarMemeber</code></li>
+<li>如果 Inner class 宣告在 method 裡面(往往是 anonymous class)，嘗試存取該 method 裡面的 local variable 必須宣告為 <code>final</code> (或是等價於 final 的變數，也就是賦值之後不曾變動過)</li>
+</ul>
+<p>最後一點比較難解釋，老闆來個飯粒</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.Rectangle;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Enclosing</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> member = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    Enclosing() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Enclosing"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> Rectangle r = <span class="keyword">new</span> Rectangle();</span><br><span class="line"></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                String o = r.toString();</span><br><span class="line">                System.out.println(o);</span><br><span class="line">                System.out.println(member); <span class="comment">// access member</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Inner i = <span class="keyword">new</span> Inner();</span><br><span class="line">        i.say();</span><br><span class="line">        r.translate(<span class="number">3</span>, <span class="number">3</span>); <span class="comment">// modify rectangle</span></span><br><span class="line">        i.say();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Enclosing e = <span class="keyword">new</span> Enclosing();</span><br><span class="line">        e.say();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述的範例中，宣告了一個外層的 class <strong>Enclosing</strong>，在它的 <code>say()</code> method 裡面，宣告了一個 Inner class <strong>Inner</strong>，並且產生一個 local variable <code>Rectangle r</code>，<code>Inner.say()</code> 不但用了 Enclosing 的 member，也用了 local variable。雖然 r 有加上 final 宣告字，我還是很故意地讓它 translate。</p>
+<p>把這個 <strong>Inner</strong> 的 bytecode 倒出來看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Compiled from <span class="string">"Enclosing.java"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Enclosing</span>$1<span class="title">Inner</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> java.awt.Rectangle val$r;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">final</span> Enclosing <span class="keyword">this</span>$<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ..... 略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這個 Inner class 不但有個 <code>this$0</code> 指向上層的 instance，還有個 <code>final java.awt.Rectangle val$r</code> 的 reference 指向 method 裡面宣告的 local variable。換句話說，在這個 class 裡面已經產生了一個 <strong>Closure 閉包</strong>，<code>r</code> 這個變數被 Inner 給 <strong>capture</strong> 了。在 Inner 裡面既然會是 <code>final</code>，那麼外面的 local variable 自然也該是 final。</p>
+<p>話說回來，Closure 裡面的變數，也不一定要是 final/immutable，好比 JavaScript 裡面就沒有這個限制。因此 <strong>Inner 裡面的 r 必須是 final</strong> 這件事情，我想應該是個語言設計的選擇，我還不知道會不會是其他的限制。(沒有辦法像 C 一樣用指標指向 int 等基本型別，而 Java 總是 pass by value？)</p>
+<h3 id="Anonymous-Class"><a href="#Anonymous-Class" class="headerlink" title="Anonymous Class"></a>Anonymous Class</h3><p>Anonymous class 其實就是一個擺的位置比較特別的 local class，所以剛好沒有名字而已，bytecode 看起來沒什麼變化，而且是 compiler 自動給個流水號當名字而已。</p>
+<p>舉例來說，底下就是一個 Runnable 的 anonymous class</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This class is an anonymous class"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)).run();</span><br></pre></td></tr></table></figure>
+<p>有趣的一點是，在 static 語境底下宣告的 anonymous 跟 instance 語境底下宣告的 anonymous class，產生的 bytecode 是不一樣的。</p>
+<p>Anonymous class，但是放在 static 裡面跟 放在 ThreadTest 裡面，產生出來的 bytecode 不一樣。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    ThreadTest() &#123;</span><br><span class="line">        (<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"This class is anonymous class in instance"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)).run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        (<span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"This class is anonymous class in static"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)).run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的範例，一個在 ThreadTest 的實體裡面宣告了匿名類別，也在 static main method 裡面宣告了同樣實作的匿名類別。把兩個匿名類別的 bytecode 倒出來之後，理所當然前者的 bytecode 會多了指向 ThreadTest instance 的 <code>this</code> reference，明白了 <code>static</code> 的差異，在這邊也沒什麼好奇怪的。</p>
+<h1 id="Inner-classes-cannot-have-static-declarations"><a href="#Inner-classes-cannot-have-static-declarations" class="headerlink" title="Inner classes cannot have static declarations"></a>Inner classes cannot have static declarations</h1><p><strong>Inner classes cannot have static declarations</strong> 這個警告，應該很多人都看過了。Static nested class 可以，但是 Non-static inner class 裡面不能使用 <code>static</code> 變數，究竟是為什麼呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">NonStaticNested</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> foo = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticNested</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> bar = <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>編譯的時候就會遇到以下的問題</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ javac OuterClass.java</span><br><span class="line">OuterClass.java:3: error: Illegal static declaration <span class="keyword">in</span> inner class OuterClass.NonStaticNested</span><br><span class="line">        static int foo = 3;</span><br><span class="line">                   ^</span><br><span class="line">  modifier <span class="string">'static'</span> is only allowed <span class="keyword">in</span> constant variable declarations</span><br><span class="line">1 error</span><br></pre></td></tr></table></figure>
+<p><strong>而且你把 foo 加上 final 就可以編譯了！</strong></p>
+<p>我並沒有查到官方說明，頂多只有說這個行為沒有說原因。我看到最好的解釋是 <a href="https://stackoverflow.com/questions/1953530/" target="_blank" rel="noopener">Why does Java prohibit static fields in inner classes?</a> 裡面 <a href="https://stackoverflow.com/users/1354334/saif" target="_blank" rel="noopener">saif</a> 的解釋</p>
+<blockquote>
+<p>class Initialization sequence is a critical reason.</p>
+</blockquote>
+<p>要產生一個 Instance 之前，要先讓 JVM 載入該 Class，才能用 Class 產生 Object instance。<a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-8.html#jls-8.3.1.1" target="_blank" rel="noopener">static field</a> 就是綁在 Class 上面，而不是 Instance 上面。</p>
+<p><a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.1" target="_blank" rel="noopener">12.4.1. When Initialization Occurs</a> 說了什麼時候會 initialize 一個 Class</p>
+<ul>
+<li>T 是一個 class，而且要產生一個 T 的 instance <code>new T()</code></li>
+<li>T 是一個 class，而且要呼叫 T 的 static method</li>
+<li>要賦值給 T 的一個 static field</li>
+<li>要使用 T 的一個 static field 而且那個 field 不是 <a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.12.4" target="_blank" rel="noopener">constant variable</a></li>
+<li>T 是 Top-class 而且接下來會用到 T 的 nested class</li>
+</ul>
+<p>回憶一下前面講的東西，<strong>Non-static nested class 的實體，總是會綁著 Enclosing class 的一個實體</strong>，也就是 bytecode 裡面的 <code>final OuterClass this$0</code>。嘗試在其他的程式碼裡面使用到 <code>NonStaticNested.foo</code> 的時候，觸發了前面的三個條件，於是嘗試讀進 T。</p>
+<p>如果 T 現在是 Inner class，它裡面有個 <code>this$0</code> 要連向 OuterClass 的實體，卻在 static 的語境下找不到能用的實體。因此若允許在 Non-static inner class 裡面使用 static variable 或 method，就會發生這個奇怪的結果。</p>
+<p>若我們給它加上 final 則可以因為第四點而繞過 T 的初始化，所以能夠通過編譯。</p>
+<p>以上是我讀了文件的見解，沒有參與過 JVM 的開發所以不敢非常確定。若你有確定的想法並且寫出來，我會很感激！</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2018/02/08-nested-class.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2018-02-08">2018-02-08</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2018/02/28-ffmpeg.html" title="使用 ffmpeg 編輯影片"><b>使用 ffmpeg 編輯影片</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2018/01/29-env.html" title="日常能做的環保小事">Next &rarr; <b>日常能做的環保小事</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

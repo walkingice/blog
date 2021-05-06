@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Kotlin 的 scope function: apply, let, run..等等 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Kotlin 的 scope function: apply, let, run..等等 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Kotlin 的 scope function: apply, let, run..等等 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Kotlin 的 scope function: apply, let, run..等等 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Kotlin 的 scope function: apply, let, run..等等 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Kotlin 的 scope function: apply, let, run..等等 | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2018/05/05-kotlin.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2018/05/05-kotlin.html" itemprop="url" target="_blank">
+            <span class>Kotlin 的 scope function: apply, let, run..等等</span>
+        </a>
+    </h1>
+
+    <p>先講結論：這些 functions 目的是希望，執行程式碼裡面的 function literal 的時候有更好的可讀性。</p>
+<table>
+<thead>
+<tr>
+<th><code>Function</code></th>
+<th style="text-align:center"><code>identifier</code></th>
+<th style="text-align:center"><code>return value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>let</td>
+<td style="text-align:center">it</td>
+<td style="text-align:center">last line of literal</td>
+</tr>
+<tr>
+<td>run</td>
+<td style="text-align:center">this</td>
+<td style="text-align:center">last line of literal</td>
+</tr>
+<tr>
+<td>also</td>
+<td style="text-align:center">it</td>
+<td style="text-align:center">this</td>
+</tr>
+<tr>
+<td>apply</td>
+<td style="text-align:center">this</td>
+<td style="text-align:center">this</td>
+</tr>
+</tbody>
+</table>
+<p><strong><i><span style="color:#FF0000">Let it</span> <span style="color:#FF8888">Run this</span> literal</i>, <span style="color:#0000FF">it Also</span> <span style="color:#8888FF">Apply this</span></strong></p>
+<p>這是我背誦記憶的口訣：<strong>Let 用 it，Run 用 this，都是回傳 function literal 最後一行的值。Also 用 it，Apply 用 this，都是回傳 this</strong></p>
+<a id="more"></a>
+<p>在學習 Kotlin 時，一定都會注意到它有許多 <code>let</code> <code>apply</code> <code>run</code> 這些 function，它們看起來大同小異，用起來似乎也經常可以相互替換，稍做修改就讓程式依照正確的邏輯執行。初期我以為有什麼深層的原因，使得 Kotlin 要加入這麼多相似的東西。後來把 Kotlin 的原始碼抓下來翻 Log，從 commit 訊息來看，似乎只是為了要增加 functional literal 的可讀性。</p>
+<p>也就是說，這些 function 的使用上，真的互相替換也沒麼大不了，只要你覺得這樣讓你的程式碼更好讀就可以了。</p>
+<p>了解這一點之後，我自己也比較放寬心去使用它們。底下就稍微介紹幾個 function，以及我個人偏好的使用場景(這是個人意見，誠如前述，你開心怎麼用就好)。他們都定義在 <a href="https://github.com/JetBrains/kotlin/blob/v1.2.41/libraries/stdlib/src/kotlin/util/Standard.kt" target="_blank" rel="noopener">Standard.kt</a> 裡面，以 function 的形式存在(並非 Kotlin 語言的一部份)，使用它們就像是在呼叫一般的函數一樣。</p>
+<h1 id="使用-Lambda-的慣例"><a href="#使用-Lambda-的慣例" class="headerlink" title="使用 Lambda 的慣例"></a>使用 Lambda 的慣例</h1><p>開始之前先提 lambda 的慣例。Kotlin 在把 lambda 當成函數的參數之時，有個<a href="https://kotlinlang.org/docs/reference/lambdas.html#passing-a-lambda-to-the-last-parameter" target="_blank" rel="noopener">慣例</a></p>
+<blockquote>
+<p>當 lambda literal 是函數調用的最後一個參數時，可以放到括號的外面。如果 lambda 是函數的唯一一個參數，甚至可以拿掉括號</p>
+</blockquote>
+<p>舉例來說，如果我有一個函數叫 <strong>foo</strong>，它接收一個參數，而且該參數是個 lambda</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> lambda = &#123; x: <span class="built_in">Int</span> -&gt; println(x)&#125;</span><br><span class="line">foo(lambda)</span><br><span class="line"><span class="comment">// 可以寫成</span></span><br><span class="line">foo &#123; x: <span class="built_in">Int</span> -&gt; println(x)&#125;</span><br></pre></td></tr></table></figure>
+<p>前面提到的那些 function，全部都是用這種方式去運作。所以才會 let, apply 看起來像是關鍵字，用起來像是 kotlin 語言的一部份，其實只是個函數呼叫。</p>
+<h2 id="run"><a href="#run" class="headerlink" title="run"></a>run</h2><ul>
+<li>產生一個短暫出現的中繼物件，利用它呼叫一些函數，我們在意的是最後執行完的結果，跟 <code>let</code> 不同之處為，<code>run</code> 不可以自訂變數名稱，並用該物件當成 context</li>
+<li>感覺類似對一個物件不斷呼叫 map</li>
+<li>最早的相關 commit: <a href="https://github.com/JetBrains/kotlin/commit/11ad28812d9fbb2785a8623e0f8baef18aa681cb" target="_blank" rel="noopener">11ad28812d9fbb2785a8623e0f8baef18aa681cb</a></li>
+<li>issue: <a href="https://youtrack.jetbrains.com/issue/KT-5235" target="_blank" rel="noopener">KT-5235</a></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;R&gt;</span> <span class="title">run</span><span class="params">(block: () -&gt; <span class="type">R</span>)</span></span>: R &#123;</span><br><span class="line">    <span class="keyword">return</span> block()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T, R&gt;</span> T.<span class="title">run</span><span class="params">(block: <span class="type">T</span>.() -&gt; <span class="type">R</span>)</span></span>: R &#123;</span><br><span class="line">    <span class="keyword">return</span> block()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="keyword">val</span> foo = Foo()</span><br><span class="line"><span class="keyword">val</span> value = run &#123; foo.bar() &#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="keyword">val</span> another = foo.run &#123; <span class="keyword">this</span>.bar() &#125;   <span class="comment">// this 可以省略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// value 跟 another 都是 bar() 的回傳值</span></span><br></pre></td></tr></table></figure>
+<p>第一個定義的 <code>run</code> 用了泛型，定義它的回傳值是 <strong><r></r></strong>。<code>run</code> 接受了一個叫做 <strong>block</strong> 的 lambda，lambda 的型別是執行之後會回傳 <strong>R</strong>，所以 <code>run</code> 的實作就是執行 <strong>block()</strong> 之後拿到 <strong>R</strong>，再把那個 <strong>R</strong> 當成自己的回傳值傳出去。</p>
+<p>第二個定義的 <code>run</code> 則是多了一個 <strong>T</strong> 綁上某個物件，執行 labmda 的時候就可以用 <code>this</code> 來當 context。感覺有點像 js 裡面的 bind 的差異</p>
+<p>什麼時候用 run 呢？看了一些說明，主要是可以用比較美的方式執行一段 lambda 並且拿到執行完的結果</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> foo = &#123; ... &#125;()   <span class="comment">// 括號容易被忽略</span></span><br><span class="line"><span class="keyword">val</span> bar = run &#123; ... &#125; <span class="comment">// looks better</span></span><br></pre></td></tr></table></figure>
+<h2 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h2><ul>
+<li>拿一個物件來執行一段程式碼，並且把原物件交給下一棒。跟 <code>also</code> 不同之處，<code>apply</code> 不可以自訂變數名稱，並用該物件當成 context</li>
+<li>commit: <a href="https://github.com/JetBrains/kotlin/commit/8a578a46f686b691320da2f7524f752fa573ee67" target="_blank" rel="noopener">8a578a46f686b691320da2f7524f752fa573ee67</a></li>
+<li>issue: <a href="https://youtrack.jetbrains.com/issue/KT-6903" target="_blank" rel="noopener">KT-6903</a></li>
+<li>issue: <a href="https://youtrack.jetbrains.com/issue/KT-6094" target="_blank" rel="noopener">KT-6094</a></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> T.<span class="title">apply</span><span class="params">(block: <span class="type">T</span>.() -&gt; <span class="type">Unit</span>)</span></span>: T &#123;</span><br><span class="line">    block()</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="keyword">val</span> foo = Foo()</span><br><span class="line"><span class="keyword">val</span> apple = apply &#123;</span><br><span class="line">    foo.bar()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="keyword">val</span> banana = foo.apply &#123;</span><br><span class="line">    <span class="keyword">this</span>.bar()    <span class="comment">// this 可以省略</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// banana 拿到的會是 foo，而非 this.bar() 的執行結果</span></span><br><span class="line"><span class="comment">// 那麼 apple 呢？端看那一行執行的時候 `this` 是誰囉</span></span><br></pre></td></tr></table></figure>
+<p>定義與實作來看會覺得與 <code>run</code> 很相似，主要差別是回傳值。apply 回傳的是 literal 執行的 context(也就是 this) 而非 literal 的最後一行。在 issue 6094 的標題來看，就是增加彈性可以用不同方法初始化一個物件，譬如說我們可以這麼做</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Rect&gt;().apply &#123;</span><br><span class="line">    add(Rect().apply &#123;left = <span class="number">20</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不過寫成這樣，可讀性完全沒有比較好，只是舉例能幹嘛而已。</p>
+<h2 id="also"><a href="#also" class="headerlink" title="also"></a>also</h2><ul>
+<li>拿一個物件來執行一段程式碼，並且把原物件交給下一棒。跟 <code>apply</code> 不同之處，<code>also</code> 可以自訂變數名稱(預設是 it)</li>
+<li><a href="https://kotlinlang.org/docs/reference/whatsnew11.html#also-takeif-and-takeunless" target="_blank" rel="noopener">官方 Release note 的介紹</a><br>  also is like apply: it takes the receiver, does some action on it, and returns that receiver. The difference is that in the block inside apply the receiver is available as this, while in the block inside also it’s available as it</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> T.<span class="title">also</span><span class="params">(block: (<span class="type">T</span>) -&gt; <span class="type">Unit</span>)</span></span>: T &#123;</span><br><span class="line">    block(<span class="keyword">this</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="keyword">var</span> foo = Foo()</span><br><span class="line">foo.also &#123; it -&gt; it.bar() &#125;</span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">foo.also &#123; myName -&gt; myName.bar() &#125;</span><br></pre></td></tr></table></figure>
+<p>定義與用法幾乎跟 <code>apply</code> 一樣，差別在於 <code>apply</code> 裡面用的 context/receiver 是 this，<code>also</code> 則是能夠自己指定名稱。</p>
+<h2 id="with"><a href="#with" class="headerlink" title="with"></a>with</h2><ul>
+<li>產生一個物件之後，對它做一系列的初始化動作</li>
+<li>commit: <a href="https://github.com/JetBrains/kotlin/commit/666cc6e6884643a404b40e33f283a6216551e6a5" target="_blank" rel="noopener">666cc6e6884643a404b40e33f283a6216551e6a5</a></li>
+<li>issue: <a href="https://youtrack.jetbrains.com/issue/KT-3557" target="_blank" rel="noopener">KT-3557</a></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T, R&gt;</span> <span class="title">with</span><span class="params">(receiver: <span class="type">T</span>, block: <span class="type">T</span>.() -&gt; <span class="type">R</span>)</span></span>: R &#123;</span><br><span class="line">    <span class="keyword">return</span> receiver.block()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example</span></span><br><span class="line"><span class="keyword">val</span> w = Window()</span><br><span class="line">with(w) &#123;</span><br><span class="line">    setWidth(<span class="number">100</span>)</span><br><span class="line">    setHeight(<span class="number">200</span>)</span><br><span class="line">    setBackground(RED)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>with 的用法差不多就是這樣。從宣告上來看，<code>with</code> 定義了兩個 arguments，第一個 <code>receiver</code> 是執行期的 context，第二個是要掛在那個 context 下執行的 function，<code>with</code> 也會有回傳值，回傳的型別取決於 function block 裡面最後一行。以上面的例子來說，端看 <code>setBackground</code> 會回傳 Int 或是 String 或什麼都沒有。</p>
+<p>它目的在於讓我們可以比較方便地呼叫某一個 instance 的 function，把一個 instance 當成 <strong>context</strong>，在 function block 裡面的 <code>this</code> 就是該 instance，通常 <code>this</code> 都能省略不寫，結果就是上面的範例。</p>
+<p>以我的看法，<code>with</code> 的用途除了少寫幾個 this 以外，更多是為了可讀性：<strong>把 w 包在 with 的小括號裡面，很明顯地知道作用的對象是 w。在這個 function block 的每一行敘述，都是針對 w 這個物件來執行的</strong>。當然可以故意執行別的 instance 的 function，但這樣就破壞可讀性了。</p>
+<h2 id="let"><a href="#let" class="headerlink" title="let"></a>let</h2><ul>
+<li>產生一個短暫出現的中繼物件，利用它呼叫一些函數，我們在意的是最後執行完的結果，跟 <code>run</code> 不同之處為，<code>let</code> 可以自訂變數名稱(預設是 it)</li>
+<li>感覺類似對一個物件不斷呼叫 map</li>
+<li>commit: <a href="https://github.com/JetBrains/kotlin/commit/a9638d9fa4fbda85e5f97275bdab5f4c3fcbdda3" target="_blank" rel="noopener">a9638d9fa4fbda85e5f97275bdab5f4c3fcbdda3</a></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T, R&gt;</span> T.<span class="title">let</span><span class="params">(block: (<span class="type">T</span>) -&gt; <span class="type">R</span>)</span></span>: R &#123;</span><br><span class="line">    <span class="keyword">return</span> block(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>commit log 就簡單地寫一行 <strong>“Opposite” for with called let.</strong>，看起來就是在文法/程式閱讀上，剛好是 <code>with</code> 的相反概念。從宣告上面來看，<code>run</code> 跟 <code>let</code> 很像，都把某個物件當成 context 執行，差別在 <code>let</code> 可以指定一個 id，而 <code>run</code> 省略了 id，只能用 <code>this</code>。從 context 命名的角度來看，我覺得 <code>run</code> 更像是 <code>with</code> 的反面。</p>
+<p>簡單來說，<code>let</code> 跟 <code>run</code> 用起來一樣，回傳值也同樣是 function literal 的最後一行，差別在於 <code>let</code> 可以自訂 context 的名稱。</p>
+<p>在語感上面我覺得 with 有點像是「既然手上現在拿到了這個 instance，我們來按下 instance 上面的這些按鈕吧」。let 有點像是「如果那邊有了這個 instance，希望那個 instance 照著我這份清單的工作去執行一遍」</p>
+<h2 id="takeIf"><a href="#takeIf" class="headerlink" title="takeIf"></a>takeIf</h2><ul>
+<li>透過一個函數做條件判斷，決定如何初始化一個值</li>
+<li><a href="https://kotlinlang.org/docs/reference/whatsnew11.html#also-takeif-and-takeunless" target="_blank" rel="noopener">官方 Release note 的介紹</a></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">inline</span> <span class="function"><span class="keyword">fun</span> <span class="type">&lt;T&gt;</span> T.<span class="title">takeIf</span><span class="params">(predicate: (<span class="type">T</span>) -&gt; <span class="type">Boolean</span>)</span></span>: T? &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">if</span> (predicate(<span class="keyword">this</span>)) <span class="keyword">this</span> <span class="keyword">else</span> <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// example</span></span><br><span class="line"><span class="keyword">var</span> foo = FallbackFoo()</span><br><span class="line"><span class="keyword">var</span> tmp = Foo()</span><br><span class="line"><span class="keyword">if</span> (tmp.value &gt; <span class="number">10</span>) &#123;</span><br><span class="line">    foo = tmp</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 配合 elvis-operator 可以改成</span></span><br><span class="line"><span class="keyword">val</span> foo = Foo().takeIf&#123; it -&gt; it.value &gt; <span class="number">10</span>&#125; ?: FallbackFoo()</span><br></pre></td></tr></table></figure>
+<p>透過一個判斷條件，來決定要不要採用那個物件。如果條件不滿足，<code>takeIf</code> 會回傳 null，此時配合 elvis-operator 可以簡潔地放進 fallback</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>寫了一大堆，感覺好像有點混亂。總之，記得最開頭的表格就好</p>
+<ul>
+<li><code>let</code>, <code>run</code>, <code>apply</code>, <code>also</code> 比較常用，可以減少使用一些暫時的變數，而每個 literal 裡面的局域變數，也不會跑出去污染其他區塊</li>
+<li>產生出新的物件，需要連續對它做一堆調整的時候，可以考慮用 <code>with</code></li>
+<li>透過特殊的條件來決定如何指派變數的時候，可以用 <code>takeIf</code></li>
+</ul>
+<h1 id="應用"><a href="#應用" class="headerlink" title="應用"></a>應用</h1><p>以下是從別的地方看見，或是我想到可以應用的地方</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以在 literal 裡面用很一般的 connection 命名，而且不用擔心污染到其他地方</span></span><br><span class="line">DbConnection.getConnection().let &#123; connection -&gt; ...&#125;</span><br><span class="line"><span class="comment">// 變數 connection 這邊就看不到了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不為 null 的時候才執行</span></span><br><span class="line">DbConnection.getConnection()?.let &#123; connection -&gt;</span><br><span class="line">    <span class="comment">// 這邊能確保一定有 connection 才執行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有時候寫測試會這樣</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> list = ArrayList&lt;Foo&gt;()</span><br><span class="line"><span class="keyword">var</span> foo1 = Foo()</span><br><span class="line">foo1.id = <span class="string">"foo1"</span></span><br><span class="line">foo1.value = <span class="number">10</span></span><br><span class="line">list.add(foo1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo2 = Foo()</span><br><span class="line">foo2.id = <span class="string">"foo2"</span></span><br><span class="line">foo2.value = <span class="number">20</span></span><br><span class="line">list.add(foo2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// use scope function to get rid of foo1, foo2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> list = ArrayList&lt;Foo&gt;()</span><br><span class="line">Foo().apply &#123; id = <span class="string">"foo1"</span> &#125;</span><br><span class="line">    .apply &#123; value = <span class="number">10</span> &#125;</span><br><span class="line">    .let &#123; list.add(it) &#125;</span><br><span class="line"></span><br><span class="line">Foo().apply &#123; id = <span class="string">"foo2"</span> &#125;</span><br><span class="line">    .apply &#123; value = <span class="number">20</span> &#125;</span><br><span class="line">    .let &#123; list.add(it) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// if we want to keep the reference</span></span><br><span class="line"><span class="keyword">val</span> ref = Foo().apply &#123; id = <span class="string">"foo3"</span> &#125;</span><br><span class="line">        .apply &#123; value = <span class="number">20</span> &#125;</span><br><span class="line">        .also &#123; list.add(it) &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h1><p><a href="https://discuss.kotlinlang.org/t/let-vs-with-vs-run/30" target="_blank" rel="noopener">https://discuss.kotlinlang.org/t/let-vs-with-vs-run/30</a><br><a href="http://beust.com/weblog/2015/10/30/exploring-the-kotlin-standard-library/" target="_blank" rel="noopener">http://beust.com/weblog/2015/10/30/exploring-the-kotlin-standard-library/</a></p>
+<p>Kotlin 的人自己這麼說的</p>
+<blockquote>
+<p>Regarding to the question about is there a good reason to keep all three functions we have the following consideration: when such so-called scope function is used with a functional literal it introduces an identifier into the scope of the literal — either this or it, thus it may hide an identifier with the same name from the containing scope.<br>Despite there are ways to disambiguate hidden identifier, we’d like to provide some flexibility, so that one can choose which form is more convenient in particular situation.</p>
+</blockquote>
+<p>是不是三個 functions 都有用，有一些考量。這些用在 functional literal 上面被稱為 scope function 的東西，可能會引入一些 identifier 好比 <code>it</code> 或是自訂的名稱。或許外部的 scope 也用了同樣的名稱，但是在 scope 裡面我們能夠明確地知道 <code>it</code>(或自訂的變數名稱) 目前指的是誰，而且離開 scope 之後就沒了。多幾個 function 是希望保留彈性讓 programmer 自己選擇使用。</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2018/05/05-kotlin.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2018-05-05">2018-05-05</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/kotlin/">
+                    <span class="tag">kotlin</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2018/08/16-test.html" title="測試中常見的名詞：Stub, Dummy, Mock..等等"><b>測試中常見的名詞：Stub, Dummy, Mock..等等</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2018/03/13-cd.html" title="Change directory helper function">Next &rarr; <b>Change directory helper function</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 測試中常見的名詞：Stub, Dummy, Mock..等等 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 測試中常見的名詞：Stub, Dummy, Mock..等等 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 測試中常見的名詞：Stub, Dummy, Mock..等等 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" 測試中常見的名詞：Stub, Dummy, Mock..等等 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" 測試中常見的名詞：Stub, Dummy, Mock..等等 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" 測試中常見的名詞：Stub, Dummy, Mock..等等 | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2018/08/16-test.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2018/08/16-test.html" itemprop="url" target="_blank">
+            <span class>測試中常見的名詞：Stub, Dummy, Mock..等等</span>
+        </a>
+    </h1>
+
+    <p>開發的過程要寫程式，寫程式我們都知道要寫測試，寫測試的時候經常看見 Stub, Dummy, Mock 等等這些名詞。使用 Testing Framework 的時候，更是經常使用到看起來功能類似，不同名稱的物件。稍微理解這些名詞的概念，使用測試框架的時候會有點幫助。</p>
+<a id="more"></a>
+<p>首先，這是看了 <a href="http://xunitpatterns.com/Test%20Double.html" target="_blank" rel="noopener">xUnit Patterns</a> 網站裡面的部分頁面，寫下的筆記。如果有看不懂的地方，請連回去直接看原文，或是用這當關鍵字之一去搜尋其他人的文章。</p>
+<p>接著來一些會反覆出現的名詞解釋</p>
+<h2 id="名詞"><a href="#名詞" class="headerlink" title="名詞"></a>名詞</h2><ul>
+<li><p><a href="http://xunitpatterns.com/SUT.html" target="_blank" rel="noopener">SUT</a><br>  System Under Test，就是待測物。舉例來說，當我們在寫 Unit Test，SUT 往往就是 Class，那個我們要測試的 Class</p>
+</li>
+<li><p><a href="http://xunitpatterns.com/DOC.html" target="_blank" rel="noopener">DOC</a><br>  Depended-On Component，SUT 所依賴的元件，也就是 Mock, Stub ..想要抽換掉的元件。把這些相依性抽換成我們可以控制的狀態，以專注去測試 SUT。</p>
+</li>
+<li><p><a href="http://xunitpatterns.com/test%20fixture%20-%20xUnit.html" target="_blank" rel="noopener">test fixture</a><br>  測試的時候特意準備的東西，讓測試可以順利跑完所需要，有些人會叫做 test context。舉例來說，一組測試用的資料。</p>
+</li>
+<li><p><a href="http://xunitpatterns.com/control%20point.html" target="_blank" rel="noopener">control point</a><br>  用 control point 來操作 SUT，有些 control point 只是為了測試而存在。舉例來說，某個 class 開了純為測試存在的 API，這種 control point 當然不能在產品裡面使用。</p>
+</li>
+<li><p><a href="http://xunitpatterns.com/indirect%20input.html" target="_blank" rel="noopener">indirect input</a><br>  改變 SUT 的數值，並非直接來自我們的操作，而是來自於 DOC。好比我們對一個物件呼叫 <code>updateName</code>，然後物件去問另外一個資料庫物件，取得了在資料庫裡面的數值來更新自己</p>
+</li>
+<li><p><a href="http://xunitpatterns.com/indirect%20output.html" target="_blank" rel="noopener">indirect output</a><br>  當 SUT 的一些狀態改變了，而我們沒有辦法透過直接的 API 去取得改變的狀態。可是，它同時也會影響到其他元件的狀態，後面這些能被觀察的狀態，就是 indirect output。這與後面的 Mock object 有關。</p>
+</li>
+<li><p><a href="http://xunitpatterns.com/Test%20Double.html" target="_blank" rel="noopener">Test double</a></p>
+<p>  本文的重點，我看的書有將其翻譯為「測試副本」。這個字不好翻譯，double 當作名詞有「替身」的意思，Test Double 就是我們要拿來替換掉真實運作的 DOC 的物件們，得到一個更簡單，可以測試的環境。</p>
+<p>  大致能夠把 Test double 分成以下幾種</p>
+</li>
+</ul>
+<div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_double.svg" title="Test Double"></div>
+
+<p>測試的過程，可以用這張圖大概解釋一下</p>
+<div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_flow.svg" title="Test Flow"></div>
+
+<ol>
+<li>Setup，生成 Test double 來取代 DOC，並準備好 Fixture 方便接下來的測試</li>
+<li>初始化 SUT，通常就是建構一個 object</li>
+<li>Exercise，執行測試。這時候 SUB 還可能會去跟 Test double 去要一些數值</li>
+<li>Verify，確認執行完的結果是否無誤</li>
+<li>Teardown，把之前測試過程產生的東西給清乾淨</li>
+</ol>
+<p>有了這個流程，接下來要解釋 Test double 就簡單多了</p>
+<h2 id="Test-Stub"><a href="#Test-Stub" class="headerlink" title="Test Stub"></a>Test Stub</h2><p><strong><a href="http://xunitpatterns.com/Test%20Stub.html" target="_blank" rel="noopener">Test stub</a> 就是，提供 indirect input 給 SUT 的 Test double</strong></p>
+<div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_stub.svg" title="Test Stub"></div>
+
+<p>舉例來說，我們要測試登入用的程式是不是有正常運作。SUT 就是登入用的主程式，塞了一個假的 Network 物件給他，只要對 Network 物件下 <code>GET</code> 總是回傳 200 OK。這個 Network 物件就是 Stub。</p>
+<h2 id="Test-Spy"><a href="#Test-Spy" class="headerlink" title="Test Spy"></a>Test Spy</h2><p><strong><a href="http://xunitpatterns.com/Test%20Spy.html" target="_blank" rel="noopener">Test spy</a> 就是能力更強，有記錄功能的 Test Stub，提供 indirect input 給 SUT 的 Test double</strong></p>
+<div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_spy.svg" title="Test Spy"></div>
+
+<p>以前面的例子來說，在驗證的階段，可能還想要知道這個 Network 物件的 API 被呼叫了幾次，有沒有使用到錯的 end-point？能夠告訴我們這些資訊的，就是 Test Spy。</p>
+<h2 id="Mock-Object"><a href="#Mock-Object" class="headerlink" title="Mock Object"></a>Mock Object</h2><p><strong><a href="http://xunitpatterns.com/Mock%20Object.html" target="_blank" rel="noopener">Mock Object</a> 就是帶有判斷功能的 Stub，判斷 SUT 是不是正確地使用這個 DOC</strong></p>
+<div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_mock.svg" title="Mock Object"></div>
+
+<p>前面的 Spy 是看最後有沒有正確的 indirect output。但也有可能，最後的結果是對的，中間的順序錯了。好比說呼叫 web api 的順序是不是正確的？這時候我們需要在 Test double 裡面偷看實作的運作。Mock Object 就會在被使用的過程中，擁有檢查的邏輯。</p>
+<h2 id="Fake-Object"><a href="#Fake-Object" class="headerlink" title="Fake Object"></a>Fake Object</h2><p><strong><a href="http://xunitpatterns.com/Fake%20Object.html" target="_blank" rel="noopener">Fake Object</a> 就是提供比較簡單、輕量實作的 DOC</strong></p>
+<div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_fake.svg" title="Fake Object"></div>
+
+<p>Fake Object 不在意 Indirect input 也不在意 indirect output，只專心地滿足自己的介面。</p>
+<p>前述的幾個物件，要嘛是專門提供假的固定值(Stub)，要嘛是有檢查的功能。Fake 物件就是一個簡化過 DOC，有著一樣的介面但是實作都很簡單，譬如說是個 In-memory 的資料庫物件，用起來像是真正的資料庫，但是操作沒有 disk IO，而且資料可能是我們寫好的 fixture。</p>
+<h2 id="Dummy-Object"><a href="#Dummy-Object" class="headerlink" title="Dummy Object"></a>Dummy Object</h2><p><strong>用來填充的無用物件，只是為了滿足 API 的介面</strong></p>
+<p>建構一個物件，或是呼叫一個方法的時候，有時候需要傳入一些物件當作參數，而我們知道這些物件完全不會被使用到，但是為了要滿足介面，成功編譯，塞進去的填充物就是 Dummy Object。</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2018/08/16-test.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2018-08-16">2018-08-16</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/test/">
+                    <span class="tag">test</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2018/09/15-dm-crypt.html" title="在 Debian 上 dm-crypt 的緊急救援"><b>在 Debian 上 dm-crypt 的緊急救援</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2018/05/05-kotlin.html" title="Kotlin 的 scope function: apply, let, run..等等">Next &rarr; <b>Kotlin 的 scope function: apply, let, run..等等</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

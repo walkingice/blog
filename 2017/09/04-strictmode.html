@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 開發 Android App 階段啟用 StrictMode | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 開發 Android App 階段啟用 StrictMode | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 開發 Android App 階段啟用 StrictMode | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" 開發 Android App 階段啟用 StrictMode | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" 開發 Android App 階段啟用 StrictMode | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" 開發 Android App 階段啟用 StrictMode | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2017/09/04-strictmode.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/04-strictmode.html" itemprop="url" target="_blank">
+            <span class>開發 Android App 階段啟用 StrictMode</span>
+        </a>
+    </h1>
+
+    <p>開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 <strong>Don’t keep Activity</strong> 打開以外，還有一個就是啟動 <a href="https://developer.android.com/reference/android/os/StrictMode.html" target="_blank" rel="noopener">StrictMode</a></p>
+<a id="more"></a>
+<p>啟用 StrictMode 的方式，在網路上隨意 Google 一下就能看到很多教學。通常都直接 <code>detectAll()</code> 把所有的情況都抓出來，那麼要如何測試會不會動的？最簡單的就是測試 Resource mismatch。</p>
+<p>新增一個 strings array 到 xml 檔，array 的內容放數字，然後把該 array 當成 integer-arry 來存取，就能觸發 penalty</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// add this to array.xml</span></span><br><span class="line"><span class="comment">//  &lt;string-array name="my_str_array"&gt;</span></span><br><span class="line"><span class="comment">//    &lt;item&gt;9257&lt;/item&gt;</span></span><br><span class="line"><span class="comment">//  &lt;/string-array&gt;</span></span><br><span class="line"><span class="keyword">final</span> TypedArray ta = getResources().obtainTypedArray(R.array.my_str_array);</span><br><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> foobar = ta.getInt(<span class="number">0</span>, -<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>我試著在 <code>Application.onCreate()</code> 裡面直接啟用，測試的結果卻發現 StrictMode 不會動，詳細的原因不明，但是透過 <code>StrictMode.getThreadPolicy()</code> 取得 instance 再看它的 mask 值，發現我在 Application 裡面順利設定的值，在 Activity 裡面重新檢查的時候已經不見，變回預設值了。</p>
+<p>沒有追進 framework 裡面詳細檢查原因(註)，現在先暫時在每個 Activity 啟動的時候再設定一次，就能看到 penalty 了</p>
+<div class="img-row"><img src="/2017/09/04-strictmode/penalty.png" title="Penalty for detectResourceMismatches"></div>
+
+<p>註：其實這個原因需要釐清，如果真的是被改成預設值而不知道條件為何，很可能開發階段以為 StrictMode 有啟動，實際上並沒有作用</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2017/09/04-strictmode.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2017-09-03">2017-09-03</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2017/09/04-drawable.html" title="TransitionDrawable 用兩張以上的圖"><b>TransitionDrawable 用兩張以上的圖</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2017/09/02-viewpager.html" title="ViewPager 與 FragmentStatePagerAdapter">Next &rarr; <b>ViewPager 與 FragmentStatePagerAdapter</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

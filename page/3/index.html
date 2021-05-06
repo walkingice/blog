@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+	<meta property="og:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+	<meta name="twitter:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            <div id="index">
+    <div class="panel-content">
+    <div class="row">
+        <div class="title">
+            <h1 id="blog-title">只放拖鞋的鞋櫃</h1>
+        </div>
+        <div class>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2018/02/08-nested-class.html" itemprop="url" target="_blank">
+            <span class>Java 的 Nested Class</span>
+        </a>
+    </h1>
+
+    <p>最近公司做的產品，收到來自外面鄉親貢獻的 <a href="https://github.com/mozilla-tw/Rocket/pull/1342" target="_blank" rel="noopener">PR</a>，想起了這個被自己遺忘很久的東西，趁著再次補起記憶的時候，順便做一點紀錄。</p>
+<p>簡單來說就是 Java 的 Nested class 盡量寫成 static 比較好。至於為什麼比較好，也許就要多花點功夫來了解。</p>
+
+    
+    <a href="/2018/02/08-nested-class.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2018-02-08</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2018/01/29-env.html" itemprop="url" target="_blank">
+            <span class>日常能做的環保小事</span>
+        </a>
+    </h1>
+
+    <p>比起各種政治立場或是國族認同，我覺得最能夠找出共識的議題應該就是環保了(好吧，雖然還是會有些科學的爭議)。姑且不論層次比較高的空汙、能源議題，若能夠隨手做一點小事來降低對生態的衝擊，也不是一件壞事。</p>
+<p>這篇文章記錄了我在日常生活中會做的一點小事，成本不高，希望能給你參考之後一同來試試看，簡單來說就是</p>
+<ul>
+<li>減少使用塑膠袋，盡量隨身攜帶重複使用</li>
+<li>出門自備筷子與手帕</li>
+<li>想買飲料來喝，就自備罐子與吸管</li>
+</ul>
+<p>上述除了第三點可能稍微有點麻煩之外，一二點都是很自然就能做到的小事了</p>
+
+    
+    <a href="/2018/01/29-env.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2018-01-29</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/ramble/">
+                    <i class="fa fa-th"></i>
+                    <span class>ramble</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/taiwan/">
+                    <span class="tag">taiwan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/16-constraintlayout.html" itemprop="url" target="_blank">
+            <span class>使用 ConstraintLayout 建構畫面</span>
+        </a>
+    </h1>
+
+    <p>ConstraintLayout 是 Support Library 裡面新增的一個 ViewGroup，從功能上來看非常強大，效能上不輸、甚至<a href="https://android-developers.googleblog.com/2017/08/understanding-performance-benefits-of.html" target="_blank" rel="noopener">贏過</a>傳統的 Layout。因為放在 Support Library 裡面，幾乎市面上所有的手機都相容，就放心使用吧。</p>
+<p>以往在建構複雜的畫面時，經常是 LinearLayout 與 RelativeLayout 等等相互組合，拼湊出相當深且複雜的樹狀 xml。略懂 View render 過程的都知道，效能就在層層的 measurement/layout 之中持續消耗。改用 ConstraintLayout 取代傳統 Layout 的複雜組合，把 xml 檔變得更加扁平，效率很容易就能提升。</p>
+<p>粗看 ConstraintLayout 會覺得跟 RelativeLayout 有點像，其實它還能做到很多 RelativeLayout 做不到的事情。以下就稍微簡介 ConstraintLayout 的安裝與使用。</p>
+
+    
+    <a href="/2017/09/16-constraintlayout.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-09-16</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/13-checkstyle.html" itemprop="url" target="_blank">
+            <span class>使用 Checkstyle/Ktlint 檢查 Java/Kotlin 語法</span>
+        </a>
+    </h1>
+
+    <p>多人開發的場合，大家寫程式的習慣用法往往不一樣。除了實作上的思維不同，在所難免，至少在程式碼風格上可以一致。</p>
+<p>不同的語言有不同的 coding style，在 Java 裡面我通常就是參考(以前是 Sun Microsystems 現在是 Oracle) <a href="http://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html" target="_blank" rel="noopener">Code Conventions for the Java TM Programming Language</a>。隨著開發時間的拉長，遞交程式的數量變多之後，總是會有幾次忘記加上空白之類的小瑕疵，這種檢查理當交給程式去做。</p>
+<p>雖然寫程式沒有 freestyle，但是我們有 <a href="http://checkstyle.sourceforge.net/" target="_blank" rel="noopener">checkstyle</a></p>
+
+    
+    <a href="/2017/09/13-checkstyle.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-09-13</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/git/">
+                    <span class="tag">git</span>
+                </a>
+            
+                <a href="/tags/kotlin/">
+                    <span class="tag">kotlin</span>
+                </a>
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/04-drawable.html" itemprop="url" target="_blank">
+            <span class>TransitionDrawable 用兩張以上的圖</span>
+        </a>
+    </h1>
+
+    <p>當我們需要一張圖片，慢慢交錯顯示出另外一張圖片的時候，經常使用 TransitionDrawable。繼承自 LayerDrawable 的 TransitionDrawble 的實作，則是在 <a href="https://android.googlesource.com/platform/frameworks/base/+/oreo-r6-release/graphics/java/android/graphics/drawable/TransitionDrawable.java#205" target="_blank" rel="noopener">onDraw</a> 的時候只拿前兩張來交換顯示。</p>
+<p>實務上使用時，需要交換顯示的圖片往往不只兩張，這時候就需要一點取巧的做法。</p>
+
+    
+    <a href="/2017/09/04-drawable.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-09-04</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/04-strictmode.html" itemprop="url" target="_blank">
+            <span class>開發 Android App 階段啟用 StrictMode</span>
+        </a>
+    </h1>
+
+    <p>開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 <strong>Don’t keep Activity</strong> 打開以外，還有一個就是啟動 <a href="https://developer.android.com/reference/android/os/StrictMode.html" target="_blank" rel="noopener">StrictMode</a></p>
+
+    
+    <a href="/2017/09/04-strictmode.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-09-03</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/02-viewpager.html" itemprop="url" target="_blank">
+            <span class>ViewPager 與 FragmentStatePagerAdapter</span>
+        </a>
+    </h1>
+
+    <p>在 Android 上面想要做兩三個 Tabs，並且希望透過左右滑動切換 Tab 的時候，通常就會用到 <a href="https://developer.android.com/reference/android/support/v4/view/ViewPager.html" target="_blank" rel="noopener">ViewPager</a>。若希望每個 Tab 都是一個獨立的 Fragment，我們能使用 <a href="https://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html" target="_blank" rel="noopener">FragmentStatePagerAdapter</a>。只是這個 Adapter 的使用方法跟 ListView 或 RecyclerView 的 Adapter 有點不一樣，一不小心就會踩到洞。</p>
+<p>測試的方法也不難，只要進到系統設定裡面的開發者選項，把 <strong>Don’t keep activties</strong> 打開便能測試。就我自己的經驗，在 MainActivity 用了 ViewPager 顯示幾個 Fragments，打開一個新的 Activity 觸發系統將 MainActivity 砍掉，接著回到 MainActivity 的時候就能發現，所有的 View 都是 null。</p>
+
+    
+    <a href="/2017/09/02-viewpager.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-09-02</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/08/21-storage.html" itemprop="url" target="_blank">
+            <span class>Android 的 ExternalStorage</span>
+        </a>
+    </h1>
+
+    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a href="https://developer.android.com/guide/topics/data/data-storage.html" target="_blank" rel="noopener">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
+<p>從結論來說，Android 並沒有 SD card 這樣的概念，External Storage 也不一定是外接式儲存裝置。先有這樣的認知，接著就可以問以下幾個問題</p>
+<ul>
+<li>有哪些 Storage 可以用？</li>
+<li>Context 與 Environment 有哪些 Storage 的 API 可以用？</li>
+<li>有怎樣的權限問題？</li>
+</ul>
+
+    
+    <a href="/2017/08/21-storage.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-08-21</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/08/01-news.html" itemprop="url" target="_blank">
+            <span class>新聞業的挑戰</span>
+        </a>
+    </h1>
+
+    <p>新聞業在這個世代遇到的挑戰相當大，不論是業內的人或是一般的讀者，對「新聞業」的表現普遍不滿，常有人嘲諷「小時不讀書，長大當記者」，媒體給人感覺是嗜血充滿腥羶色，記者文字水準差勁，固定的用語就那幾個還經常打錯字。</p>
+<p>業內的記者，也有許多人感到不滿而離開，常有批評現在的新聞充斥業配文，看一份報紙都不知道是廣告多還是報導比較多。</p>
+<p>這些批評我幾乎都認同，大多數新聞媒體的運作方式就是如此，同時很多人嘗試找出解方。我並沒那麼厲害，我也想不到有什麼方法。(真有方法我就賣器官籌錢來投資了！)。只是想整理一下自己對新聞業面臨的困境的想法。底下的內容已經有很多人在各個地方提過了，只是把我所知道的整理起來而已。</p>
+<p>我並不認為新聞業現在的問題跟道德有關，只是單純的錢的問題，或說原本的商業模式被網路摧毀了。而新聞的表現水準江河日下，只是結果而已。</p>
+
+    
+    <a href="/2017/08/01-news.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-08-01</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/ramble/">
+                    <i class="fa fa-th"></i>
+                    <span class>ramble</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/taiwan/">
+                    <span class="tag">taiwan</span>
+                </a>
+            
+                <a href="/tags/political/">
+                    <span class="tag">political</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/07/08-book.html" itemprop="url" target="_blank">
+            <span class>議會裡的部落頭人</span>
+        </a>
+    </h1>
+
+    <p>美拉尼西亞社會裡面，由當地人稱為「萬托克」(wantok，由 one talk 而來)的部落組成。每一個萬托克由數十到數千人不等，彼此有親屬關係。萬托克由一個「頭人」(Big Man) 當領袖，頭人不是世襲的位置，而需要靠爭取，成為最受部落居民信任者才是頭人。頭人會分配豬隻、貝殼等資源給部落成員，只要沒有資源可以分配，隨時可能失去領袖地位，被其他人取代。</p>
+<p>正在看「政治秩序的起源」這本書，僅從序開始看到第二章而已。序講到「頭人」這個詞讓我有很強的既視感，這不就是地方派系的大頭嗎？</p>
+
+    
+    <a href="/2017/07/08-book.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2017-07-08</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/ramble/">
+                    <i class="fa fa-th"></i>
+                    <span class>ramble</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/political/">
+                    <span class="tag">political</span>
+                </a>
+            
+                <a href="/tags/book/">
+                    <span class="tag">book</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+
+            <div class="box-article-nav">
+
+    <a class="btn" href="/page/2/">&larr; Prev</a>
+
+
+
+    <a class="btn" href="/page/4/">Next &rarr;</a>
+
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

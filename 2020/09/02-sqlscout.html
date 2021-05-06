@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Android Studio 觀察 Sqlite Database | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Android Studio 觀察 Sqlite Database | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Android Studio 觀察 Sqlite Database | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Android Studio 觀察 Sqlite Database | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Android Studio 觀察 Sqlite Database | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Android Studio 觀察 Sqlite Database | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2020/09/02-sqlscout.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2020/09/02-sqlscout.html" itemprop="url" target="_blank">
+            <span class>Android Studio 觀察 Sqlite Database</span>
+        </a>
+    </h1>
+
+    <p>最近在改一個 open source 記帳 App，其實也只是隨便亂改一通，讓它的 UI 看得順眼且堪用而已。修改的過程中需要查詢 App 裡面用到的 SQLite db，所以搜尋到一個 SQLScout 的 IDEA IDE Plugin，覺得滿好用，順手紀錄一下用法。</p>
+<a id="more"></a>
+<p>首先在 <a href="https://www.idescout.com/sqlscout/" target="_blank" rel="noopener">SQLScout 的網頁</a>就能看見它強調這個 plugin 沒有 open source，可能有些人比較在意，在此先提醒一下。</p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><div style="max-width: 100%; margin: auto;"><img src="/2020/09/02-sqlscout/sqlscout.jpg"></div>
+
+<p>安裝很簡單，打開 Android Studio 的設定，搜尋 Plugin 的關鍵字，安裝完之後重開就行了。</p>
+<h2 id="從手機下載-database-到-host"><a href="#從手機下載-database-到-host" class="headerlink" title="從手機下載 database 到 host"></a>從手機下載 database 到 host</h2><div style="max-width: 100%; margin: auto;"><img src="/2020/09/02-sqlscout/download_db.jpg"></div>
+
+<ul>
+<li>App 先編譯成 debuggable，這樣才能取出 database 的資料</li>
+<li>Android Studio 右邊會多出一個 SQLite Explorer 的 Tab，點一下就能打開上圖的畫面</li>
+<li>點「+」好，選「Android (Download Database Locally)」就能 dump 一個資料庫檔案，存到自訂的目錄</li>
+</ul>
+<h2 id="Table-Data"><a href="#Table-Data" class="headerlink" title="Table Data"></a>Table Data</h2><div style="max-width: 100%; margin: auto;"><img src="/2020/09/02-sqlscout/table.jpg"></div>
+
+<p>資料庫下載完之後，馬上就能看見所有的 Table。還能夠直接修改 Table 裡面的數值，再上傳回手機裡面</p>
+<h2 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h2><div style="max-width: 100%; margin: auto;"><img src="/2020/09/02-sqlscout/console.jpg"></div>
+
+<p>還有 Console 能夠使用，直接輸入 SQL 指令，附帶 auto complete，指令敲完以後點左邊的綠色執行鈕就好，很方便</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2020/09/02-sqlscout.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2020-09-02">2020-09-02</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2020/10/30-gradle.html" title="Gralde build error"><b>Gralde build error</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2020/08/16-twofactor.html" title="實作 Google Authenticator 的兩階段驗證">Next &rarr; <b>實作 Google Authenticator 的兩階段驗證</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

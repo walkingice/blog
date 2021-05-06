@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> ViewPager 與 FragmentStatePagerAdapter | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" ViewPager 與 FragmentStatePagerAdapter | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" ViewPager 與 FragmentStatePagerAdapter | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" ViewPager 與 FragmentStatePagerAdapter | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" ViewPager 與 FragmentStatePagerAdapter | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" ViewPager 與 FragmentStatePagerAdapter | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2017/09/02-viewpager.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/09/02-viewpager.html" itemprop="url" target="_blank">
+            <span class>ViewPager 與 FragmentStatePagerAdapter</span>
+        </a>
+    </h1>
+
+    <p>在 Android 上面想要做兩三個 Tabs，並且希望透過左右滑動切換 Tab 的時候，通常就會用到 <a href="https://developer.android.com/reference/android/support/v4/view/ViewPager.html" target="_blank" rel="noopener">ViewPager</a>。若希望每個 Tab 都是一個獨立的 Fragment，我們能使用 <a href="https://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html" target="_blank" rel="noopener">FragmentStatePagerAdapter</a>。只是這個 Adapter 的使用方法跟 ListView 或 RecyclerView 的 Adapter 有點不一樣，一不小心就會踩到洞。</p>
+<p>測試的方法也不難，只要進到系統設定裡面的開發者選項，把 <strong>Don’t keep activties</strong> 打開便能測試。就我自己的經驗，在 MainActivity 用了 ViewPager 顯示幾個 Fragments，打開一個新的 Activity 觸發系統將 MainActivity 砍掉，接著回到 MainActivity 的時候就能發現，所有的 View 都是 null。</p>
+<a id="more"></a>
+<p>原本我自己的寫法，在 MainActivity.onCreate 裡面會重新產生 Adapter 並 <code>findViewById</code> 把所有的 View 都連結一遍，心想所有的東西都重新產生一遍，也沒有 static reference，應該不用擔心 leak 的問題。實際上卻在 <strong>FragmentStatePagerAdapter</strong> 的使用上踩到了地雷。</p>
+<p>我繼承的 Adapter，保留了一份 List，指向系統正在使用的 Fragments，理論上應該要這樣。但實際上，<code>FragmentStatePagerAdapter</code> 內部也有維護一份 List，並且會對 <code>FragmentManager</code> 回復被砍掉的 Fragment。</p>
+<p>當程式從其他 Activity 返回到 MainActivity 時，雖然我自己的程式邏輯順利地重新產生幾個 Fragments，但是 <code>FragmentStatePagerAdapter</code> 在之前 MainActivity 被移除之時，會被 <code>ViewPager</code> 呼叫 <code>saveState</code> 把狀態儲存下來，在 Activity 回來的時候 <code>ViewPager</code> 又會將狀態回復。此時 <code>FragmentStatePagerAdapter</code> 便把先前的幾個 Fragments 給重新產生，放到畫面上。</p>
+<p>我在畫面上看到的 Fragment，並不是我自以為，在 MainActivity 裡面重新產生的</p>
+<p>所以麻煩之處就在於，<code>FragmentStatePagerAdapter</code> 會很好心地幫你跟 <code>FragmentManager</code> 打交道，回復被砍掉的 Fragments。但實務上，我們經常需要取用正在顯示的 Fragment，很不巧 <code>FragmentStatePagerAdapter</code> 並沒有提供介面讓我們存取它內部維護的 Fragments List。</p>
+<h2 id="不一樣的-Adapter-getItem"><a href="#不一樣的-Adapter-getItem" class="headerlink" title="不一樣的 Adapter.getItem"></a>不一樣的 Adapter.getItem</h2><p>若我們要自己維護一份 List，首先便要記得 <code>FragmentStatePagerAdapter.getItem</code> 的行為與平常的 ListView 的 <code>getItem()</code> 不一樣。</p>
+<p>以前寫 ListView/RecyclerView 的 Adapter，經常就是內部產生一個 List，<code>getItem()</code> 的時候就翻找 List，找到就把東西丟回去 - 被當成 query 的 method 來使用。</p>
+<p>但是 <code>FragmentStatePagerAdapter.getItem</code> 的行為更像是 <strong>createItem</strong>，用來產生一個新的 Fragment，口語化的講法就是 ViewPager 對 Adapter 說：「喂，第 N 頁現在沒有東西，產生一個 Fragment 讓我塞在那一頁吧」。<code>getItem</code> 這個方法定義在 <code>FragmentStatePagerAdapter</code> 而非 <code>PagerAdapter</code>，換句話說 <code>getItem</code> 的實作會被 <code>FragmentStatePagerAdapter</code> 拿去用，而 <code>PagerAdapter</code> 或 <code>ViewPager</code> 根本不會用到。</p>
+<p>那 <code>FragmentStatePagerAdapter</code> 什麼時候會用到呢？在 <code>instantiateItem</code> 裡面，也就是要產生一個新的 Fragment instance。所以 <code>getItem</code> 在這裡不是 query-like method。</p>
+<h2 id="實作"><a href="#實作" class="headerlink" title="實作"></a>實作</h2><p>理解差異之後，要實作就簡單多了。首先 <code>getItem</code> 就是用來產生新的 fragment instance。因為我們想要存取正在畫面上正在顯示的 Fragments，所以需要自己維護一份 fragments list。因為 <code>FragmentStatePagerAdapter</code> 會幫我們跟 <code>FragmentManager</code> 打交道，所以只要針對 <code>instantiateItem</code> 這個方法回傳的 Fragment 做更動即可。</p>
+<p>示範的程式碼如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyFragmentPagerAdapter</span> <span class="keyword">extends</span> <span class="title">FragmentStatePagerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;CharSequence&gt; mTitles = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> SparseArray&lt;Fragment&gt; mFragments = <span class="keyword">new</span> SparseArray&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> POSITION_FRAGMENT_A = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> POSITION_FRAGMENT_B = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> POSITION_FRAGMENT_C = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyFragmentPagerAdapter</span><span class="params">(FragmentManager fm)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(fm);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 定義我們想要放三個 fragments as tab，以及他們的位置</span></span><br><span class="line">        mTitles.add(POSITION_FRAGMENT_A, <span class="string">"Fragment A"</span>);</span><br><span class="line">        mTitles.add(POSITION_FRAGMENT_B, <span class="string">"Fragment B"</span>);</span><br><span class="line">        mTitles.add(POSITION_FRAGMENT_C, <span class="string">"Fragment C"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (position) &#123;</span><br><span class="line">            <span class="keyword">case</span> POSITION_FRAGMENT_A:</span><br><span class="line">                <span class="keyword">return</span> FragmentA.newInstance();</span><br><span class="line">            <span class="keyword">case</span> POSITION_FRAGMENT_B:</span><br><span class="line">                <span class="keyword">return</span> FragmentB.newInstance();</span><br><span class="line">            <span class="keyword">case</span> POSITION_FRAGMENT_C:</span><br><span class="line">                <span class="keyword">return</span> FragmentC.newInstance();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Unknown type"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 總共的 tabs 數就是 titles 的數目</span></span><br><span class="line">        <span class="comment">// 不能用 mFragments，因為它可能一堆 Fragments 都還沒產生</span></span><br><span class="line">        <span class="keyword">return</span> mTitles.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mTitles.get(position).toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Fragment fragment =</span><br><span class="line">                (Fragment) <span class="keyword">super</span>.instantiateItem(container, position);</span><br><span class="line">        <span class="comment">// 這是會被拿去顯示的 Fragment，放進我們維護的 List 裡面</span></span><br><span class="line">        mFragments.put(position, fragment);</span><br><span class="line">        <span class="keyword">return</span> fragment;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.destroyItem(container, position, obj);</span><br><span class="line">        <span class="comment">// 可能是 Activity 被砍掉了，總之這個 Fragment 現在沒被使用了</span></span><br><span class="line">        mFragments.remove(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 現在我們可以順利存取到畫面上有哪些 Fragments 了</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Fragment <span class="title">getFragment</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mFragments.get(position);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2017/09/02-viewpager.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2017-09-02">2017-09-02</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2017/09/04-strictmode.html" title="開發 Android App 階段啟用 StrictMode"><b>開發 Android App 階段啟用 StrictMode</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2017/08/21-storage.html" title="Android 的 ExternalStorage">Next &rarr; <b>Android 的 ExternalStorage</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

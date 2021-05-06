@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> streamsupport | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" streamsupport | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" streamsupport | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" streamsupport | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" streamsupport | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" streamsupport | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2015/09/18-streamsupport.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/09/18-streamsupport.html" itemprop="url" target="_blank">
+            <span class>streamsupport</span>
+        </a>
+    </h1>
+
+    <p>從字面上來看 Javascrpit 跟 Java 的差異只是在於一個是 script language，另外一個不是 (超級大誤)，所以在 Javascript 做的事情當然都可以用在 Java 裡面。(胡說八道)</p>
+<p>在 javascript 裡面經常用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank" rel="noopener">map</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank" rel="noopener">reduce</a> 來對資料做處理，好比說</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = [<span class="string">"a"</span>, <span class="string">"bb"</span>, <span class="string">"ccc"</span>, <span class="string">"dddd"</span>, <span class="string">"eeeee"</span>].filter(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (str.length &gt; <span class="number">2</span>);</span><br><span class="line">&#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.length;</span><br><span class="line">&#125;).reduce(<span class="function"><span class="keyword">function</span> (<span class="params">prev, current</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> prev + current;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>這支無用的程式就是依序把一個字串陣列做處理</p>
+<ol>
+<li>字元數小於 2 的字串拿掉</li>
+<li>把字串陣列轉成整數陣列，內容是該字串的長度</li>
+<li>加總每個數字</li>
+</ol>
+<p>整個處理的過程就像一個串流(Stream)，Java8 多了 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> 這個 utility class，提供了類似的功能，可以讓我們把一個 Array 或是 List 用類似的方法來處理。</p>
+<p>但是 Java8 這麼新潮(唔)的東西，不能用在 Android 上面？就像 retrolambda 一樣，也有鄉民弄了 <a href="http://sourceforge.net/projects/streamsupport/" target="_blank" rel="noopener">streamsupport</a> 這個 library，讓我們在 Java6 runtime 玩 stream util</p>
+<a id="more"></a>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><p>用 gralde 安裝 streamsupport 相當簡單，只要在 build.gradle 的 dependency 加上一行就可以了</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">dependencies &#123;</span><br><span class="line">    ...</span><br><span class="line">    compile <span class="string">'net.sourceforge.streamsupport:streamsupport:1.1.3'</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>撰文當下最新的 stable 版本就是 1.1.3。不是用 gradle build system 的人，可以到 <a href="http://sourceforge.net/projects/streamsupport/files/1.3.1-stable/" target="_blank" rel="noopener">sourceforge</a> 上面下載 jar 檔，別忘了順便抓 doc 檔下來參考，才知道會哪些 methods 可用。</p>
+<h1 id="Try-it"><a href="#Try-it" class="headerlink" title="Try it"></a>Try it</h1><p>安裝完了當然要試用一下。</p>
+<p>要用 Stream 的功能，要先拿到 Stream 這個物件，Java8 的 Arrays 提供了相關的 methods 來轉化，但是 Java6 runtime 裡面的 Arrays class 沒這東西可用，所以要用 streamsuuport.jar 替代的 J8Arrays class 相同的 API 介面。</p>
+<p>這邊寫一個簡單的 sample，假設有個 Foo class，有個 method getName 可以讓我們取得 instance name。對一串Foo 物件，想要轉成 String[] names 的時候可以這麼寫</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String[] getNames(Foo[] array) &#123;</span><br><span class="line">    <span class="keyword">return</span> J8Arrays.stream(array).map(<span class="keyword">new</span> Function&lt;Foo, String&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">apply</span><span class="params">(Foo bar)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> bar.getName();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).toArray(<span class="keyword">new</span> IntFunction&lt;String[]&gt;() &#123;</span><br><span class="line">        <span class="keyword">public</span> String[] apply(<span class="keyword">int</span> length) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> String[length];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一堆角括號看起來真是地獄啊！這時候就覺得 lambda expression 太重要了 XD</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2015/09/18-streamsupport.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2015-09-18">2015-09-18</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2015/09/24-simpleadapter-viewbinder.html" title="SimpleAdapter and ViewBinder"><b>SimpleAdapter and ViewBinder</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2015/08/24-android-retrolambda.html" title="Android Studio 使用 RetroLambda">Next &rarr; <b>Android Studio 使用 RetroLambda</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

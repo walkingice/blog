@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Upgrade Retrofit 1.X to 2 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Upgrade Retrofit 1.X to 2 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Upgrade Retrofit 1.X to 2 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Upgrade Retrofit 1.X to 2 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Upgrade Retrofit 1.X to 2 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Upgrade Retrofit 1.X to 2 | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2016/09/06-retrofit.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/09/06-retrofit.html" itemprop="url" target="_blank">
+            <span class>Upgrade Retrofit 1.X to 2</span>
+        </a>
+    </h1>
+
+    <p>I guess most of people alreay read the post <a href="https://futurestud.io/blog/retrofit-2-upgrade-guide-from-1-9" target="_blank" rel="noopener">Retrofit 2 — Upgrade Guide from 1.9</a>, me too. It listed some points for upgrading. If you used Retrofit 1.x in production, you might get more problem than the guide in upgrading, at least I did. Just make a memo here for myself and other poor guy.</p>
+<p>I had problems such as</p>
+<ul>
+<li>Primitive String was wrapped by double quotes</li>
+<li>Upload multipart-form by using RequestBody doesn’t work</li>
+</ul>
+<a id="more"></a>
+<p>Weeks ago Twitter SDK <a href="https://docs.fabric.io/android/changelog.html#id88" target="_blank" rel="noopener">upgraded to v2.0</a> and its Retrofit dependency also migrate to 2.0. Congratulations! Since we are geek, using latest version is kind of curse in our gene, of course we want to use it.</p>
+<h1 id="Double-quotes-for-primitive-string"><a href="#Double-quotes-for-primitive-string" class="headerlink" title="Double quotes for primitive string"></a>Double quotes for primitive string</h1><p>Reference: <a href="https://github.com/square/retrofit/issues/1210" target="_blank" rel="noopener">#1210 2.0-beta2 adding extra quotes to multipart string form values</a> - a stackoverflow-liked issue</p>
+<p>We usually define an API call interface like this</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// use Part annotation</span></span><br><span class="line"><span class="meta">@POST</span>(<span class="string">"/v1/new_feed"</span>)</span><br><span class="line"><span class="function">Observable&lt;MyResponse&gt; <span class="title">postSomething</span><span class="params">(@NonNull @Part(<span class="string">"title"</span>)</span> String title)</span>;</span><br></pre></td></tr></table></figure>
+<p>if we call <code>postSomething(“hello”)</code>, we expect the post body should be</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title=hello</span><br></pre></td></tr></table></figure>
+<p>Actually it will be</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title=&quot;hello&quot;</span><br></pre></td></tr></table></figure>
+<p>As the issue tracker mentioned, it due to the Gson converter regards the value as JSON object and convert it to String. Interesting thing is, sigod mentioned(<a href="https://github.com/square/retrofit/issues/763#issuecomment-151262201" target="_blank" rel="noopener">#763</a>) this int primitive is a valid JSON</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">244</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Early versions of JSON (such as specified by RFC 4627) required that a valid JSON “document” must consist of only an object or an array type—though they could contain other types within them. This restriction was removed starting with RFC 7158, so that a JSON document may consist entirely of any possible JSON typed value.</p>
+</blockquote>
+<p>No wonder Gson will regards the String primitive as a JSON. My way to deal with it is to create a ConverterFactory for String.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrimitiveStringConverterFactory</span> <span class="keyword">extends</span> <span class="title">Converter</span>.<span class="title">Factory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> MediaType MEDIA_TYPE = MediaType.parse(<span class="string">"text/plain"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Converter&lt;?, RequestBody&gt; requestBodyConverter(Type type,</span><br><span class="line">                                                          Annotation[] paramAnots,</span><br><span class="line">                                                          Annotation[] methodAnots,</span><br><span class="line">                                                          Retrofit retrofit) &#123;</span><br><span class="line">        <span class="keyword">if</span> (String<span class="class">.<span class="keyword">class</span>.<span class="title">equals</span>(<span class="title">type</span>)) </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (Annotation ant : paramAnots) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ant <span class="keyword">instanceof</span> Part) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Converter&lt;String, RequestBody&gt;() &#123;</span><br><span class="line">                        <span class="meta">@Override</span></span><br><span class="line">                        <span class="function"><span class="keyword">public</span> RequestBody <span class="title">convert</span><span class="params">(String value)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> RequestBody.create(MEDIA_TYPE, value);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.......</span><br><span class="line"></span><br><span class="line">builder.addConverterFactory(<span class="keyword">new</span> PrimitiveStringConverterFactory());</span><br></pre></td></tr></table></figure>
+<p>I would like to add a customized annotation for this Converter to distinguish should it convert the String or not, but Retrofit only accepts its <a href="https://square.github.io/retrofit/2.x/retrofit/" target="_blank" rel="noopener">annotations</a> so I quit.</p>
+<h1 id="Upload-images-by-multipart-form"><a href="#Upload-images-by-multipart-form" class="headerlink" title="Upload images by multipart form"></a>Upload images by multipart form</h1><p>Reference: <a href="https://github.com/square/retrofit/issues/1063" target="_blank" rel="noopener">#1063 How to Upload a File using Retrofit 2.0</a></p>
+<p>One of the most change from Retrofit 2 is no more <strong>TypedFile</strong> (OkHttp3 drop it), instead to use RequestBody. It is not too hard to replace TypedFile by RequestBody by ‘program’.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Observable&lt;MyResponse&gt; <span class="title">doPost</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    @NonNull @Part(<span class="string">"content"</span>)</span> String comment,</span></span><br><span class="line"><span class="function">    @Nullable @PartMap Map&lt;String, RequestBody&gt; images)</span>;</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">Map&lt;String, RequestBody&gt; images = <span class="keyword">new</span> HasnMap&lt;&gt;();</span><br><span class="line">images.put(<span class="string">"images[0]"</span>, methodToCreateRequestBody(image1));</span><br><span class="line">images.put(<span class="string">"images[1]"</span>, methodToCreateRequestBody(image2));</span><br><span class="line">doPost(<span class="string">"life is struggle"</span>, images);</span><br></pre></td></tr></table></figure>
+<p>But I met a problem in run-time. As each comments mentioned in that issue, it seems the RequestBody doesn’t work in Multipart-form uploading.</p>
+<p>After reading the thread and give some try, this code works for me. I use <a href="https://square.github.io/okhttp/3.x/okhttp/okhttp3/MultipartBody.Part.html" target="_blank" rel="noopener">MultipartBody.Part</a> instead.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Observable&lt;MyResponse&gt; <span class="title">doPost</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    @NonNull @Part(<span class="string">"content"</span>)</span> String comment,</span></span><br><span class="line"><span class="function">    @Nullable @Part List&lt;MultipartBody.Part&gt; images)</span>;</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">List&lt;MultiPartBody.Part&gt; images = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">images.add(MultipartBody.Part.create(</span><br><span class="line">        <span class="string">"images[0]"</span>, <span class="string">"img1.png"</span>, methodToCreateRequestBody(image1)));</span><br><span class="line">images.add(MultipartBody.Part.create(</span><br><span class="line">        <span class="string">"images[1]"</span>, <span class="string">"img2.png"</span>, methodToCreateRequestBody(image2)));</span><br><span class="line"></span><br><span class="line">doPost(<span class="string">"go ahead"</span>, images);</span><br></pre></td></tr></table></figure>
+<p>I am curious about the difference between two implementation. Use okhttp logger to inspect request body.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Use Map</span><br><span class="line"></span><br><span class="line">09-05 22:55:46.763 16172 20511 D OkHttp  : Content-Disposition: form-data; name=&quot;images[0]&quot;</span><br><span class="line">09-05 22:55:46.763 16172 20511 D OkHttp  : Content-Transfer-Encoding: binary</span><br><span class="line">09-05 22:55:46.763 16172 20511 D OkHttp  : Content-Type: image/jpeg</span><br><span class="line">09-05 22:55:46.763 16172 20511 D OkHttp  : Content-Length: 20738</span><br><span class="line">09-05 22:55:46.763 16172 20511 D OkHttp  : .......(binary file content)</span><br><span class="line">09-05 22:55:46.768 16172 20511 D OkHttp  : --8d0ff432-6d5a-4e16-bf62-ed613edcae96--</span><br><span class="line">09-05 22:55:46.768 16172 20511 D OkHttp  : --&gt; END POST (21356-byte body)</span><br><span class="line"></span><br><span class="line"># Use List</span><br><span class="line"></span><br><span class="line">09-05 23:05:08.618 22723 23479 D OkHttp  : --c9292ea2-2e9f-400e-81e0-ea148544a735</span><br><span class="line">09-05 23:05:08.618 22723 23479 D OkHttp  : Content-Disposition: form-data; name=&quot;images[0]&quot;; filename=&quot;bomberman.png&quot;</span><br><span class="line">09-05 23:05:08.618 22723 23479 D OkHttp  : Content-Type: multipart/form-data</span><br><span class="line">09-05 23:05:08.618 22723 23479 D OkHttp  : Content-Length: 20738</span><br><span class="line">09-05 22:55:46.763 16172 20511 D OkHttp  : .......(binary file content)</span><br><span class="line">09-05 23:05:08.622 22723 23479 D OkHttp  : --c9292ea2-2e9f-400e-81e0-ea148544a735--</span><br></pre></td></tr></table></figure>
+<p>the field <code>filename</code> is the only one obvious difference I found.(of course as well as content-type). Probably, probably our server side implementation is too strict that regards <code>filename</code> as necessary field.</p>
+<p>I tried read <a href="https://www.ietf.org/rfc/rfc2388.txt" target="_blank" rel="noopener">RFC 2388</a> and <a href="https://www.ietf.org/rfc/rfc1867.txt" target="_blank" rel="noopener">RFC 1867</a>, it said</p>
+<blockquote>
+<p>File inputs may also identify the file name. The file name may be<br>described using the ‘filename’ parameter of the “content-disposition”<br>header. This is not required, but is strongly recommended in any case<br>where the original filename is known. This is useful or necessary in<br>many applications.</p>
+</blockquote>
+<p>I think it is not necessary field. But maybe I am wrong in some place. Just keep studying.</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2016/09/06-retrofit.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2016-09-05">2016-09-05</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2016/09/26-tokyo-transport.html" title="東京大眾交通簡單上手"><b>東京大眾交通簡單上手</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2016/08/19-sdk.html" title="Android Studio use sdk source code">Next &rarr; <b>Android Studio use sdk source code</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

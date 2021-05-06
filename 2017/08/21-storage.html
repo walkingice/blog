@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Android 的 ExternalStorage | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Android 的 ExternalStorage | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Android 的 ExternalStorage | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Android 的 ExternalStorage | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Android 的 ExternalStorage | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Android 的 ExternalStorage | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2017/08/21-storage.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2017/08/21-storage.html" itemprop="url" target="_blank">
+            <span class>Android 的 ExternalStorage</span>
+        </a>
+    </h1>
+
+    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a href="https://developer.android.com/guide/topics/data/data-storage.html" target="_blank" rel="noopener">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
+<p>從結論來說，Android 並沒有 SD card 這樣的概念，External Storage 也不一定是外接式儲存裝置。先有這樣的認知，接著就可以問以下幾個問題</p>
+<ul>
+<li>有哪些 Storage 可以用？</li>
+<li>Context 與 Environment 有哪些 Storage 的 API 可以用？</li>
+<li>有怎樣的權限問題？</li>
+</ul>
+<a id="more"></a>
+<h2 id="有哪些-Storage-可以用"><a href="#有哪些-Storage-可以用" class="headerlink" title="有哪些 Storage 可以用"></a>有哪些 Storage 可以用</h2><p>打開 API 文件就可以看到幾個名詞</p>
+<ol>
+<li>Internal Storage</li>
+<li>Primary External Storage</li>
+<li>Secondary External Storage</li>
+</ol>
+<h3 id="Internal-Storage"><a href="#Internal-Storage" class="headerlink" title="Internal Storage"></a>Internal Storage</h3><p>User 不能直接存取，只有 app 可以。路徑通常就是 <strong>data/data/&lt;app_packageName&gt;</strong>。就是手機內部的儲存空間(internal flash)，app 的設定檔或是 SQLite 資料庫就是寫在這裡面。屬於各個應用程式的私密空間，寫在這裡面的東西，在系統安全無虞的前提下，只有該 App 可以存取。</p>
+<p>雖說不能直接存取，但如果是你自己正在開發的 app，所以會安裝 debuggable 的 app，就能透過 adb 的 run-as 去存取該目錄</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ adb shell</span><br><span class="line">$ run-as &lt;app_packageName&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Primary-External-Storage"><a href="#Primary-External-Storage" class="headerlink" title="Primary External Storage"></a>Primary External Storage</h3><p>不管系統有沒有 SD card，你一定有 Primary External Storage 可以用。所以將 Primary external storage 當成 SD card 一定會被搞得很混亂。正如前述，External Storage 不一定是外接式儲存裝置。把 External 換成 Shared 就會變得容易理解：<strong>Primary Shared Storage</strong></p>
+<p>相較於 Internal storage 專門儲存一些 app 私密的資料，有時我們會想存下一些可供分享的檔案，好比程式產出的圖片、照片，或是錄下的聲音，透過網路抓下來的檔案…等等。這些檔案想要被其他程式使用，系統提供了一個非 Internal 的 Stroage，這就是 External Storage。</p>
+<p>Primary External Storage 可能是 sd card，也可能是系統自己從 internal flash 分割一塊出來的空間。</p>
+<h3 id="Secondary-External-Storage"><a href="#Secondary-External-Storage" class="headerlink" title="Secondary External Storage"></a>Secondary External Storage</h3><p>Primary 以外，剩下的就是 Secondary External Storage，SD-card 或是外接式 USB 硬碟，往往都是這一類。早期的 API 並沒有提供存取 Secondary External Storage 的方法，後來漸漸提供了稍微受限的存取方式，後面再講。</p>
+<h3 id="Traditional-Storage-and-Adoptable-Storage"><a href="#Traditional-Storage-and-Adoptable-Storage" class="headerlink" title="Traditional Storage and Adoptable Storage"></a>Traditional Storage and Adoptable Storage</h3><p>API 上面看不見，但可以從<a href="https://source.android.com/devices/storage/adoptable" target="_blank" rel="noopener">文件</a>裡面看到這個名詞。Traditional Storage 就是前述那些可以拔插置換的傳統儲存裝置，相對的名詞則是 Adoptable Storage。</p>
+<p>買了手機卻擔心 internal flash 不夠大？在 Android 6.0(M, API 23) 之後提供了這個功能。有些手機的 SD 卡插槽設計得難以拔插，實務上可以視為半永久的儲存裝置。在這種插槽裝上 SD 卡，系統就會詢問是否要將其「收養」，變成 Adoptable Storage</p>
+<p>adopt 之後系統便將此 storage 重新格式化、加密，接著把 Primary shared storage 的東西搬移到上面，開始把這顆裝置當成 Priamry shared storage 來使用。也因為會被加密，所以沒辦法拔下來給其他裝置使用。</p>
+<h2 id="API-使用"><a href="#API-使用" class="headerlink" title="API 使用"></a>API 使用</h2><p>Context 跟 Environment 都有 storage 相關的 API，乍看會有點混亂，表列之後就清晰許多。Context 是跟 App 相關的東西，Environment 是跟系統相關的東西。在 Android Froyo 之前，app 只能拿到 internal 的目錄來放檔案，想要分享檔案，就要取得系統的 primary external storage 的最上層目錄，自己手動建立目錄把檔案放進去。</p>
+<p>後來才透過統一的 API 來給各個 App 放置自己的 cache 或是 files；所以 Context 傳回來的都是「專屬於此 App 的相關目錄」</p>
+<p>相較之下，Environment 傳回來的就是 external storage 的最上層目錄，或是共用的 Public directory</p>
+<ul>
+<li><code>Context.getCacheDir()</code> - 取得 <strong>/data/data/<application package>/cache</application></strong></li>
+<li><code>Context.getFilesDir()</code> - 取得 <strong>/data/data/<application package>/files</application></strong></li>
+<li><code>ContextCompat.getExternalFilesDirs(Context context, String type)</code><ul>
+<li>回傳 <strong>application-specific</strong> 的目錄，專屬於這個 app，app 移除的時候會一併砍掉這個目錄</li>
+<li>存取不需要 Permission</li>
+<li>回傳的 File[]，第一筆是位在 Primary external storage 上面的目錄</li>
+</ul>
+</li>
+<li><code>ContextCompat.getExternalCacheDirs(Context context)</code></li>
+<li><code>Environment.getExternalStorageDirectory()</code><ul>
+<li>回傳 primary external storage top path</li>
+<li>若有複數使用者 (UserManager)，每個 user 看到的 external storage 不一樣</li>
+<li>砍 App 的時候不會把這裡面的一起砍掉</li>
+</ul>
+</li>
+<li><code>Environment.getExternalStoragePublicDirectory(String type)</code><ul>
+<li>回傳 primary external storage 相對應 type 的 目錄</li>
+<li>目錄可能不存在，要自己呼叫 <code>File.mkdirs()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="歷史共業"><a href="#歷史共業" class="headerlink" title="歷史共業"></a>歷史共業</h2><p>SD card 的歷史從蠻荒時代的 1.5 就有了，看完一些文章的整理如下</p>
+<ul>
+<li>最早開始 external storage 是一個能夠 expose 給 PC 的 Volume<ul>
+<li>可能是 internal flash 上面的一塊空間，也可能是 sdcard。</li>
+<li>唯一的規則是，它若沒有被 PC 拿去用，就要被預設掛載起來</li>
+<li>單一的 permission 就可以對整顆 external storage 的任何位置讀寫</li>
+</ul>
+</li>
+<li>Froyo 2.2 (Api level 8) 之後<ul>
+<li>permission 跟之前一樣</li>
+<li>加入了 application specific directory 的概念 - <strong>/Android/data/[Package name]</strong></li>
+<li>但是移除 app 的時候，會順便連這個目錄一起移除</li>
+<li>若檔案被拿到這個目錄之外，則不會被移除</li>
+</ul>
+</li>
+<li><p>在早期的時候，系統廠可能自己弄一個 primary external storage 及數個 secondary external storage，但此時的 API 都沒有開放存取 secondary。Samsung galaxy 手機就是這樣，而 sdcard 都是 secondary，所以 API 都無法存取。只有系統的 app 能夠把資料存在上面</p>
+</li>
+<li><p>Kitkat 4.0(Api level 19) 之後</p>
+<ul>
+<li>開始能夠存取 secondary external storage。此時 primary external storage 的權限跟以前一樣，secondary 的權限規則就不一樣</li>
+<li>還是沒有 api 能夠存取到 secondary 上，application-specific 以外的目錄，好比 secondary 的根目錄</li>
+<li>所以 secondary 上面的 <strong>/DCIM</strong> <strong>/Picture</strong> 都拿不到囉</li>
+</ul>
+</li>
+<li><p>Android N 7.0(Api level 24) 之後</p>
+<ul>
+<li>Storage 的邏輯上沒什麼大改變。主要是增加 <a href="https://developer.android.com/about/versions/nougat/android-7.0.html#scoped_directory_access" target="_blank" rel="noopener">Scoped directory access(限定範圍目錄存取)</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="存取權限"><a href="#存取權限" class="headerlink" title="存取權限"></a>存取權限</h2><p>Android 上面的 storage 讀取權限，主要是靠 Linux 上面常見的檔案系統與 UID/GID 來控管，以 FUSE 提供檔案存取的介面。以前是在 AndroidManifest.xml 裡面宣告了權限，安裝 App 的時候就批准所有權限。後來在 6.0 之後則是執行到需要的時候，才會<a href="https://developer.android.com/training/permissions/requesting.html" target="_blank" rel="noopener">向使用者要權限</a></p>
+<p>取得了 <code>READ_EXTERNAL_STORAGE</code> 或 <code>WRITE_EXTERNAL_STORAGE</code> 權限之後，便把該 app 加入 <strong>sdcard_r</strong> 或 <strong>sdcard_w</strong> 的群組。所以系統只要設定好各個 storage 上面各個目錄的權限與群組，就可以控管該 app 能不能碰檔案了。</p>
+<ul>
+<li><p>Froyo 2.2 (Api level 8) 之後</p>
+<ul>
+<li><strong>/storage/sdcard</strong> 底下的檔案，所屬的 group 是 <strong>sdcard_rw</strong> owner 是 <em>root</em></li>
+<li><strong>Android/data/[Package Name]</strong> 也是一樣的權限</li>
+<li><code>WRITE_EXTERNAL_STORAGE</code> 會讓 app 加入 <strong>sdcard_rw</strong> 這個 group，所以就拿到完整的讀寫權限</li>
+<li><code>READ_EXTERNAL_STORAGE</code> 會拿到 <strong>sdcard_r</strong> 的權限，但是在 4.3 之前都沒用</li>
+</ul>
+</li>
+<li><p>Kitkat 4.0(Api level 19) 之後</p>
+<ul>
+<li><strong>/storage/sdcard</strong> 底下的檔案所屬的 group 是<strong>sdcard_r</strong></li>
+<li>取得 <code>READ_EXTERNAL_STORAGE</code> 就能加入 <strong>sdcard_r</strong> group，能讀取 volume 上所有的檔案</li>
+<li>取得 <code>WRITE_EXTERNAL_STORAGE</code> 則會加入 <strong>sdcard_r</strong> 與 <strong>sdcard_rw</strong></li>
+<li>非 owner 非 group member 者，在這 volume 上的 read 權限被拿掉了</li>
+<li>app-specific-dir 底下的 group 也屬於 <strong>sdcard_r</strong>，但是檔案的 owner 換成 <em>app-id</em>，所以 app 存取自己的目錄時不需要任何權限</li>
+</ul>
+</li>
+</ul>
+<p>Primary 與 Secondary 的目錄權限設定上也略有不同，所以就會有讀寫能力不完全相同的情況，表格整理之後就是這樣</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Primary</th>
+<th>Secondary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>讀最上層目錄</td>
+<td>R</td>
+<td>R</td>
+</tr>
+<tr>
+<td>寫最上層目錄</td>
+<td>W</td>
+<td>N</td>
+</tr>
+<tr>
+<td>讀自己的 Data Directory</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>寫自己的 Data Directory</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>讀他人的 Data Directory</td>
+<td>R</td>
+<td>R</td>
+</tr>
+<tr>
+<td>寫他人的 Data Directory</td>
+<td>W</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<p>R = 需要 Read Permission, W = 需要 Write Permission, Y = Always, N = Never</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://possiblemobile.com/2014/03/android-external-storage/" target="_blank" rel="noopener">On the Edge of the Sandbox: External Storage Permissions</a></li>
+<li><a href="http://pierrchen.blogspot.tw/2016/09/an-walk-through-of-android-uidgid-based.html" target="_blank" rel="noopener">Android Security: An Overview Of Application Sandbox</a></li>
+<li><a href="https://www.xda-developers.com/diving-into-sdcardfs-how-googles-fuse-replacement-will-reduce-io-overhead/" target="_blank" rel="noopener">Diving into SDCardFS: How Google’s FUSE Replacement Will Reduce I/O Overhead</a></li>
+</ul>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2017/08/21-storage.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2017-08-21">2017-08-21</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2017/09/02-viewpager.html" title="ViewPager 與 FragmentStatePagerAdapter"><b>ViewPager 與 FragmentStatePagerAdapter</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2017/08/01-news.html" title="新聞業的挑戰">Next &rarr; <b>新聞業的挑戰</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

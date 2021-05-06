@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Gulp and Webpack-dev-server options | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Gulp and Webpack-dev-server options | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Gulp and Webpack-dev-server options | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Gulp and Webpack-dev-server options | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Gulp and Webpack-dev-server options | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Gulp and Webpack-dev-server options | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2016/02/23-webpack.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/02/23-webpack.html" itemprop="url" target="_blank">
+            <span class>Gulp and Webpack-dev-server options</span>
+        </a>
+    </h1>
+
+    <p>通常以直接下指令的方式使用 <strong>webpack-dev-server</strong>，可能會配合一些參數。當我們更動其中一個檔案的時候，webpack 會在 console 顯示剛剛重編的那唯一一個檔案。</p>
+<p>如果你想用 <strong>gulp + webpack</strong>，照著官方的<a href="https://webpack.github.io/docs/usage-with-gulp.html" target="_blank" rel="noopener">文件</a>做下去，你會發現結果有些不同</p>
+<p>Usually we invoke command directly to launch <strong>webpack-dev-server</strong>, maybe adding some parameters. Once we modified one of files, webpack rebuild it and displays related message to that one only.</p>
+<p>If you follow official <a href="https://webpack.github.io/docs/usage-with-gulp.html" target="_blank" rel="noopener">tutorial</a> to use <strong>gulp + webpack</strong>, then you find something different.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># run webpack-dev-server directly</span></span><br><span class="line">$ webpack-dev-server --content-base _tmp --hot --inline</span><br></pre></td></tr></table></figure>
+<p>Update file by <code>touch</code>, webpack just rebuild it and print clean messages.</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/02/23-webpack/expected.png"></div>
+
+<a id="more"></a>
+<p>使用 <strong>gulp + webpack</strong>，僅僅只是更動一個檔案，重編之後畫面會顯示所有的檔案，包括沒有重編的。在開發期相當惱人，chunks 全部加起來會有上百個，整個畫面都被洗。</p>
+<p>To use <strong>gulp + webpack</strong>. Although just modified ONE file, after rebuild the console displays each of chunks includes immutable ones. There could be hundreds of chunks and it is pretty annoying. The build message flood your console.</p>
+<div style="max-width: 700px; margin: auto;"><img src="/2016/02/23-webpack/actually.png"></div>
+
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>解法其實很簡單，只要把 gulp 餵給 webpack-dev-server 的選項，多補上 <code>stats.cached: true</code> 即可。</p>
+<p>Actually it is easy to resolve. In gulp file, just to add <code>stats.cached: true</code> to the options which be provided to webpack-dev-server.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> WebpackDevServer(compiler, &#123;</span><br><span class="line">    progress: <span class="literal">true</span>,</span><br><span class="line">    hot: <span class="literal">true</span>,</span><br><span class="line">    stats: &#123;</span><br><span class="line">        cached: <span class="literal">false</span>,    <span class="comment">// HERE!</span></span><br><span class="line">        colors: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;).listen(PORT, <span class="string">"localhost"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> <span class="keyword">new</span> gutil.PluginError(<span class="string">"webpack-dev-server"</span>, err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h1><p>至少在 v2.0.0-beta 的版本，直接呼叫 <strong>webpack-dev-server</strong> 的時候它會<a href="https://github.com/webpack/webpack-dev-server/blob/v2.0.0-beta/bin/webpack-dev-server.js#L175" target="_blank" rel="noopener">預設</a>幫你補上 <code>options.stats.cached : false </code>，但是在 gulp 裡面以 module 的方式使用時，options 是<a href="https://github.com/webpack/webpack-dev-server/blob/v2.0.0-beta/lib/Server.js#L16" target="_blank" rel="noopener">從零開始</a>。</p>
+<p>At least in version v2.0.0-beta, invoke command <strong>webpack-dev-server</strong> will append <code>options.stats.cached: false</code> to options <a href="https://github.com/webpack/webpack-dev-server/blob/v2.0.0-beta/bin/webpack-dev-server.js#L175" target="_blank" rel="noopener">by default</a>. However, if we require webpack-dev-server as a module in gulp, the options is a <a href="https://github.com/webpack/webpack/blob/v2.1.0-beta.3/lib/Stats.js#L41" target="_blank" rel="noopener">empty object</a>. The behavior is inconsistent.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!options.stats) &#123;</span><br><span class="line">    options.stats = &#123;</span><br><span class="line">        cached: <span class="literal">false</span>,</span><br><span class="line">        cachedAssets: <span class="literal">false</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Stats"><a href="#Stats" class="headerlink" title="Stats"></a>Stats</h1><p>在 webpack 的 <a href="https://github.com/webpack/webpack/blob/v2.1.0-beta.3/lib/Stats.js#L41" target="_blank" rel="noopener">/lib/Stats.js</a> 裡面你可以看到更多選項，控制編譯時的訊息輸出。如何知道這些文件都沒寫到的東西呢？當然是苦命地翻原始碼啊 (淚)</p>
+<p>You could find more options in <a href="https://github.com/webpack/webpack/blob/v2.1.0-beta.3/lib/Stats.js#L41" target="_blank" rel="noopener">/lib/Stats.js</a> to control building message output. How do we know these undocumented stuffs? Of course source code. Use the source, Luke!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> showHash = d(options.hash, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showVersion = d(options.version, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showTimings = d(options.timings, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showAssets = d(options.assets, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showChunks = d(options.chunks, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showChunkModules = d(options.chunkModules, !!forToString);</span><br><span class="line"><span class="keyword">var</span> showChunkOrigins = d(options.chunkOrigins, !forToString);</span><br><span class="line"><span class="keyword">var</span> showModules = d(options.modules, !forToString);</span><br><span class="line"><span class="keyword">var</span> showCachedModules = d(options.cached, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showCachedAssets = d(options.cachedAssets, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showReasons = d(options.reasons, !forToString);</span><br><span class="line"><span class="keyword">var</span> showChildren = d(options.children, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showSource = d(options.source, !forToString);</span><br><span class="line"><span class="keyword">var</span> showErrors = d(options.errors, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showErrorDetails = d(options.errorDetails, !forToString);</span><br><span class="line"><span class="keyword">var</span> showWarnings = d(options.warnings, <span class="literal">true</span>);</span><br><span class="line"><span class="keyword">var</span> showPublicPath = d(options.publicPath, !forToString);</span><br></pre></td></tr></table></figure>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2016/02/23-webpack.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2016-02-23">2016-02-23</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/webdev/">
+                    <span class="tag">webdev</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2016/03/13-recyclerview.html" title="使用 RecyclerView"><b>使用 RecyclerView</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2016/01/28-2014jp5.html" title="2014 東京自由行 Day 5">Next &rarr; <b>2014 東京自由行 Day 5</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

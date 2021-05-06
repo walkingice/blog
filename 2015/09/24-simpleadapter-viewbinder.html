@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> SimpleAdapter and ViewBinder | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" SimpleAdapter and ViewBinder | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" SimpleAdapter and ViewBinder | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" SimpleAdapter and ViewBinder | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" SimpleAdapter and ViewBinder | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" SimpleAdapter and ViewBinder | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2015/09/24-simpleadapter-viewbinder.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/09/24-simpleadapter-viewbinder.html" itemprop="url" target="_blank">
+            <span class>SimpleAdapter and ViewBinder</span>
+        </a>
+    </h1>
+
+    <p>這是一篇以前寫過的<a href="http://walkingice.blogspot.tw/2013/06/simpleadapter-and-viewbinder.html" target="_blank" rel="noopener">老文章</a>了，以前的 syntax highlight 弄得不好，想說貼到這邊排版比較好看，順便備份一下。</p>
+<h1 id="SimpleAdapter-should-be-enough"><a href="#SimpleAdapter-should-be-enough" class="headerlink" title="SimpleAdapter should be enough"></a>SimpleAdapter should be enough</h1><p>ListView 是 Android 一個極為常用的元件，經常看見為了「用自己定義的 xml 來產生 ListView row」而自己實作了一個 BaseAdapter。這樣的作法也不能說不對，我一開始也是這樣。為了烤蛋糕自己做了一個烤箱的事情，幾次之後還是覺得有點怪其實絕大多數的時候我們都不需要額外實作一個 Adapter，直接拿 SimpleAdapter 來用即可。</p>
+<a id="more"></a>
+<p>SimpleAdapter 需要一堆資料，還要有資料對應到 View 的表格。首先看一筆資料，每一筆資料都是一個 Map，從 JSON 的格式來看就像是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> julian = &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"Julian Chu"</span>,</span><br><span class="line">    <span class="string">"avatar"</span>: R.drawable.julian,</span><br><span class="line">    <span class="string">"location"</span>: <span class="string">"Taiwan"</span>,</span><br><span class="line">    <span class="string">"prefer"</span>: <span class="string">"blue"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Java 裡面用 Map 產生等價的 Julian 的資料就會是以下的作法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; julian = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">julian.put(<span class="string">"name"</span>, <span class="string">"Julian Chu"</span>);</span><br><span class="line">julian.put(<span class="string">"avatar"</span>, R.drawable.julian);</span><br><span class="line">julian.put(<span class="string">"location"</span>, <span class="string">"Taiwan"</span>);</span><br><span class="line">julian.put(<span class="string">"prefer"</span>, <span class="keyword">new</span> Integer(Color.BLUE));</span><br></pre></td></tr></table></figure>
+<p>既然要放進 ListView，當然不會只有一個 User。於是可以寫一個 method，從 User 資料產生 Map 並放進 List 裡面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">appendData</span><span class="params">(List&lt;Map&lt;String, Object&gt;&gt; records, User user)</span> </span>&#123;</span><br><span class="line">    Map&lt;String, Object&gt; record = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">    record.put(<span class="string">"name"</span>, user.getName());</span><br><span class="line">    record.put(<span class="string">"avatar"</span>, user.getAvatar());</span><br><span class="line">    record.put(<span class="string">"location"</span>, user.getLocation());</span><br><span class="line">    record.put(<span class="string">"prefer"</span>, user.getPreferColor());</span><br><span class="line">    records.add(record);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著看 SimpleAdapter 的建構子用法，把我們剛剛存放資料的 records 放進 SimpleAdapter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SimpleAdapter(Context context,</span><br><span class="line">        List&lt;? extends Map&lt;String,?&gt;&gt; records,</span><br><span class="line">        <span class="keyword">int</span> resource,</span><br><span class="line">        String[] from,</span><br><span class="line">        <span class="keyword">int</span>[] to);</span><br></pre></td></tr></table></figure>
+<p>白話文解釋就是</p>
+<ol>
+<li>我要建立一個 SimpleAdapter，先給我 context</li>
+<li>給我一串資料，放在 List 裡面</li>
+<li>List 裡面的每一筆資料格式都是 <code>Map&lt;String, ?&gt;</code>，也就是 <strong>key=String, value=任意資料結構</strong></li>
+<li>給我一個 layout xml 檔(resource)，產生 view 的時候會拿它來當 template</li>
+<li>對於 Map 裡面的資料，我要拿哪些欄位來用(from)</li>
+<li>取出的欄位，要對應到 xml 檔裡面的哪些 view (to)</li>
+</ol>
+<p>假設我們的 layout row.xml 如下，它有一個 TextView 與 ImageView</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@id/row_container"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">"@id/row_name"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">"@id/row_avatar"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下來告訴 SimpleAdapter 對應的關係(from -&gt; to)，把名字對應到 TextView，大頭照對應到 ImageView</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String[] from = &#123;<span class="string">"name"</span>, <span class="string">"avatar"</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] to = &#123;R.id.row_name, R.id.row_avatar&#125;;</span><br><span class="line"></span><br><span class="line">SimpleAdapter adapter = <span class="keyword">new</span> SimpleAdapter(</span><br><span class="line">        context,</span><br><span class="line">        records,</span><br><span class="line">        R.layout.row,</span><br><span class="line">        from,</span><br><span class="line">        to);</span><br></pre></td></tr></table></figure>
+<p>如此一來，SimpleAdapter 就會透過 <code>Map.get(from[0])</code> 取出名字，然後再 <code>findViewById(to[0])</code> 找到 TextView，接著就 <code>TextView.setText();</code> 設定名字</p>
+<p>也因此只要設定好對應關係就可以產生我們要的 view 了，其他生成 view 的事情就交給 SimpleAdapter 去做，我們不用再插手，也不用自己再實作一份。</p>
+<p>通常至此會有疑問 <strong>我們僅僅只是對 string key 跟 view id 建立關聯，但是 SimpleAdapter 怎麼知道要 setText？</strong></p>
+<p>更進一步的問題就會是：<strong>我們想要對 View 做更多客製化，好比「根據每個 User 的 Prefer Color 設定該 row 的背景顏色」，該怎麼做？</strong>，也就是說 setText 無法滿足<del>只出一張嘴的</del>老闆的需求</p>
+<h1 id="ViewBinder"><a href="#ViewBinder" class="headerlink" title="ViewBinder"></a>ViewBinder</h1><p>第一個問題的解答是，SimpleAdapter 對 TextView, ImageView, Checkable 有作預設的處理。findViewById 之後會用 <code>if (v instanceof TextView)</code>來判斷是不是 TextView，找到 TextView 就把 data 拿來 <code>TextView.setText(data.toString())</code></p>
+<p>針對第二個問題，SimpleAdapter 有個 inner class 叫 View Binder(跟底層的 Binder 無關)，我們可以對它實作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewBinder</span> <span class="keyword">implements</span> <span class="title">SimpleAdapter</span>.<span class="title">ViewBinder</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">setViewValue</span><span class="params">(View view, Object data, String textRepresentation)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (data <span class="keyword">instanceof</span> Integer) &#123;</span><br><span class="line">            Integer color = (Integer)data;</span><br><span class="line">            view.setBackgroundColor(color.intValue());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接著把 from, to 多做一組 mapping 即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String[] from = &#123;<span class="string">"name"</span>, <span class="string">"avatar"</span>, <span class="string">"prefer"</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] to = &#123;R.id.row_name, R.id.row_avatar, R.id.container&#125;;</span><br><span class="line">adapter.setViewBinder(<span class="keyword">new</span> MyViewBinder());</span><br></pre></td></tr></table></figure>
+<p>這樣子我們就多教了 SimpleAdapter 一件事：<strong>看到 Integer 就把它當成背景顏色來設定</strong></p>
+<p>其實這個例子寫得滿蠢的，希望能夠這樣有保留到最重要的精神</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2015/09/24-simpleadapter-viewbinder.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2015-09-23">2015-09-23</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2015/09/26-implement-listview.html" title="實作 Android ListView"><b>實作 Android ListView</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2015/09/18-streamsupport.html" title="streamsupport">Next &rarr; <b>streamsupport</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

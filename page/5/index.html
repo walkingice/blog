@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+	<meta property="og:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+	<meta name="twitter:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            <div id="index">
+    <div class="panel-content">
+    <div class="row">
+        <div class="title">
+            <h1 id="blog-title">只放拖鞋的鞋櫃</h1>
+        </div>
+        <div class>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/04/19-docker.html" itemprop="url" target="_blank">
+            <span class>Docker volume 簡單用法</span>
+        </a>
+    </h1>
+
+    <p>最近在設定開發環境的時候有個使用 docker volume 的機會，在這邊筆記一下指令，以便自己下次查詢使用。</p>
+<p>比起在系統裡面裝一個 postgresql，我比較喜歡透過 <a href="https://hub.docker.com/_/postgres/" target="_blank" rel="noopener">docker</a> 來使用。藉此降低對 host packages 的相依性，雖然會有一些效能上的 overhead 我覺得還是值得。</p>
+<p>既然要用 docker，馬上就要考慮 persistent data 的問題：<strong>如何把資料獨立在 image 之外來保存？</strong>，第一個聽到的解答就是 volume，因為開發需要，我的需求又有點不一樣</p>
+<ul>
+<li>希望能用官方的 pg image</li>
+<li>db 資料是獨立的，這樣可以獨立升級 pg 版本</li>
+<li>db 的資料希望能有 snapshot，這樣方便寫 unit test 或是開發，不管怎麼惡搞資料都能簡單回復</li>
+</ul>
+<p>這邊紀錄下我最近的作法，未來遇到更好的作法再更新於此。</p>
+
+    
+    <a href="/2016/04/19-docker.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-04-19</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/docker/">
+                    <span class="tag">docker</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/03/13-recyclerview.html" itemprop="url" target="_blank">
+            <span class>使用 RecyclerView</span>
+        </a>
+    </h1>
+
+    <p><a href="http://android-developers.blogspot.tw/2015/10/android-support-library-231.html" target="_blank" rel="noopener">RecyclerView</a> 是個在 Google I/O 2014 出現的 ViewGroup，放在 <a href="http://developer.android.com/intl/zh-tw/tools/support-library/features.html#v7" target="_blank" rel="noopener">v7 support libraries</a>，Android 2.1(API Level 7) 以上的版本都可以用，以現在普及率來看，幾乎是每一支手機都能用。</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/03/13-recyclerview/3layout.png"></div>
+
+<p>RecyclerView 預設就提供了三種 <a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank" rel="noopener">LayoutManager</a>，如上圖，由左而右依序是 ListLayoutManager, GridLayoutManager 與 StaggeredGridLayoutManager。都放在 v7 support libraries 裡面。</p>
+<p>看起來 List 與 Grid 已經重複了，為何 Android 還要多提供這個 Widget？</p>
+
+    
+    <a href="/2016/03/13-recyclerview.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-03-13</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/02/23-webpack.html" itemprop="url" target="_blank">
+            <span class>Gulp and Webpack-dev-server options</span>
+        </a>
+    </h1>
+
+    <p>通常以直接下指令的方式使用 <strong>webpack-dev-server</strong>，可能會配合一些參數。當我們更動其中一個檔案的時候，webpack 會在 console 顯示剛剛重編的那唯一一個檔案。</p>
+<p>如果你想用 <strong>gulp + webpack</strong>，照著官方的<a href="https://webpack.github.io/docs/usage-with-gulp.html" target="_blank" rel="noopener">文件</a>做下去，你會發現結果有些不同</p>
+<p>Usually we invoke command directly to launch <strong>webpack-dev-server</strong>, maybe adding some parameters. Once we modified one of files, webpack rebuild it and displays related message to that one only.</p>
+<p>If you follow official <a href="https://webpack.github.io/docs/usage-with-gulp.html" target="_blank" rel="noopener">tutorial</a> to use <strong>gulp + webpack</strong>, then you find something different.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># run webpack-dev-server directly</span></span><br><span class="line">$ webpack-dev-server --content-base _tmp --hot --inline</span><br></pre></td></tr></table></figure>
+<p>Update file by <code>touch</code>, webpack just rebuild it and print clean messages.</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/02/23-webpack/expected.png"></div>
+
+    
+    <a href="/2016/02/23-webpack.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-02-23</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/webdev/">
+                    <span class="tag">webdev</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/01/28-2014jp5.html" itemprop="url" target="_blank">
+            <span class>2014 東京自由行 Day 5</span>
+        </a>
+    </h1>
+
+    <p>最後一天，由於是中午過後的飛機，平常又晚起的我在這一天就沒安排什麼行程。這天約了好友一同吃午餐，他還帶了這個伴手禮給我。</p>
+<div style="max-width: 300px; margin: auto;"><img src="/2016/01/28-2014jp5/DSC09377.JPG"></div>
+
+    
+    <a href="/2016/01/28-2014jp5.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-01-28</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class>life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/japan/">
+                    <span class="tag">japan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/01/26-2014jp4.html" itemprop="url" target="_blank">
+            <span class>2014 東京自由行 Day 4</span>
+        </a>
+    </h1>
+
+    <p>本日的目標是度假勝地輕井澤。講到這個地點，就會想到小叮噹裡面，每次暑假阿福都會向大雄炫耀，要到輕井澤的別墅避暑。</p>
+<p>我們從東京搭乘新幹線出發，印象中台灣高鐵採用的是新幹線的車體，在車上果然有種搭乘高鐵的感覺。時間不久，約莫一個小時就抵達輕井澤。原本以為這個名景點會有相當多人，出站後才覺得，竹南火車站的人都比這邊多。我對「東京人很多」的印象不斷下修，也許我見識還不夠吧。</p>
+<p>由於老婆大人想要穿著浴衣多拍幾張照片，我們在軽井沢駅外閒晃到附近的<a href="https://goo.gl/maps/YBfAnWghH7r" target="_blank" rel="noopener">矢ケ崎公園</a>開始偽外拍行程</p>
+<img src="/2016/01/26-2014jp4/PANO_20140726_115529.JPG">
+
+    
+    <a href="/2016/01/26-2014jp4.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-01-26</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class>life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/japan/">
+                    <span class="tag">japan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/01/26-2014jp3.html" itemprop="url" target="_blank">
+            <span class>2014 東京自由行 Day 3</span>
+        </a>
+    </h1>
+
+    <p>第三天的行程重點是<a href="http://www.ghibli-museum.jp/" target="_blank" rel="noopener">三鷹之森吉卜力美術館</a>，因此今天大多在東京市區內走動，一早搭 JR 到吉祥寺站再走到吉卜力美術館，下午逛了吉祥寺的商店街，晚上還到台場晃了一下。</p>
+<p>到國外旅遊的奇妙之處，一些在電視上與生活領域毫無相關的東西，突然都變得有意義起來。在 JR 上看到熟悉的站名，心中就會開始挖掘相關的體驗。經過新宿就會想到電影新宿事件，看到池袋就會想到池袋西口公園，電車在秋葉原靠站時，看見站外年輕人的服飾就會不自覺說出：「啊！果然是秋葉原」。第一次看到「目黑」這個地名，後來在 HERO 2 的日劇，主角到目黑區偵查時，心裡也會想：「喔喔喔！就是那個目黑耶！」</p>
+<p>上一次的體驗是從 <a href="http://walkingice.blogspot.tw/2012/01/2011.html" target="_blank" rel="noopener">Budapest</a> 回來之後，在 <a href="http://www.wallagroup.com/movies/502936e546949bf4298e55d9/" target="_blank" rel="noopener">Mission Impossible 4</a> 的片頭看見場景是 Budapest，當下就急著搜尋螢幕上那條街道我是不是有走過？</p>
+<p>就像小王子與他的玫瑰花，當你與它接觸過一次，這個陌生的名字就此對你有了意義。</p>
+
+    
+    <a href="/2016/01/26-2014jp3.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-01-26</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class>life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/japan/">
+                    <span class="tag">japan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/01/26-2014jp2.html" itemprop="url" target="_blank">
+            <span class>2014 東京自由行 Day 2</span>
+        </a>
+    </h1>
+
+    <p><a href="https://picasaweb.google.com/111787784022722324434/2014__Day2" target="_blank" rel="noopener">Day 2 的照片在此</a></p>
+<p>第二天的行程是<del>小說或日劇裡面上司要跟屬下偷情都要去的</del>箱根。</p>
+<img src="/2016/01/26-2014jp2/DSC09189.JPG">
+<p>這份木質拼圖，是買來要送給外甥女的禮物。今日的行程就是從新宿搭上浪漫特快號到箱根車站，然後沿著拼圖上面的行程逆時鐘玩一圈。不過上面許多景點無法在一日內全數遊覽，所以我們也跳過不少景點，也許以後還有機會再玩一遍。</p>
+<p><em>註：在新宿車站拿票的時候，也拿了一本箱根的乘車時刻表，從纜車、海盜船到巴士都有，相當詳盡也寫得很好，對於規劃時間非常有用。</em></p>
+
+    
+    <a href="/2016/01/26-2014jp2.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-01-26</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class>life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/japan/">
+                    <span class="tag">japan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/01/26-2014jp1.html" itemprop="url" target="_blank">
+            <span class>2014 東京自由行 Day 1</span>
+        </a>
+    </h1>
+
+    <p><em>ps. 把舊的旅行文搬過來這裡，因為我要繼續補完！(握拳)</em></p>
+<p>好久沒有寫部落格，終於要來寫日本遊記。希望在第三次去日本之前，先補繳一部分。</p>
+<p>連結：<a href="https://picasaweb.google.com/111787784022722324434/2014__Day1" target="_blank" rel="noopener">Day 1 的部份照片</a></p>
+<p>蜜月去了一次關西，自此喜歡去日本旅遊，在這次公司的員工旅遊便選擇了東京自由行，雖說想到這個世界知名的都市看一看，但我跟老婆都不喜歡人多的地方，行程多數安排在市區之外。</p>
+<p>這次住的飯店是離品川車站相當近的<a href="http://www.princehotels.co.jp/shinagawa/" target="_blank" rel="noopener">王子大飯店</a>， 居住的品質普通，空氣不甚流通，房間保有日本一貫的乾淨。值得一提的是，某日晚上看見華航的交通車，載了一整車的華航空姊過來，希望下次還有機會看見 XD</p>
+<p>因為我對泡麵與拉麵充滿了愛，老婆安排的行程第一站就是橫濱的<a href="http://www.cupnoodles-museum.jp/" target="_blank" rel="noopener">日清杯麵博物館</a>，從品川車站搭 JR 到橫濱之後，時間有點晚了，擔心趕不上博物館的閉門時間，隨手招了計程車，意外解除了第一次在日本搭計程車的成就</p>
+<img src="/2016/01/26-2014jp1/DSC08911.jpg" title="第一次搭日本計程車">
+
+    
+    <a href="/2016/01/26-2014jp1.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2016-01-26</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class>life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/japan/">
+                    <span class="tag">japan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/12/03-hsinchu.html" itemprop="url" target="_blank">
+            <span class>新竹市官網比賽後記</span>
+        </a>
+    </h1>
+
+    <p>11/28 的時候與 <a href="https://github.com/yhsiang" target="_blank" rel="noopener">Ly</a> 以及設計師佳寧一同參與了名為 <a href="http://2015hackhsinchucity.punnode.com/" target="_blank" rel="noopener">2015新竹官網黑客松</a> 的網頁設計比賽。雖然比賽沒有拿到名次，覺得還是該稍微紀錄一下，以後回顧的時候才不會都忘光光。</p>
+<div class="img-row"><img src="/2015/12/03-hsinchu/thumb.png" title="成果擷圖"></div>
+
+<p>這是成果網頁的部份截圖，我還另外抓了 <a target="_blank" href="/2015/12/03-hsinchu/index.png">首頁的圖</a>，有興趣的可以看看。</p>
+<p>打開多數市府的網頁，多是目不暇給的各式連結，或是市府想要宣導的訊息。就我自己多次打開各單位的網站，通常都已有特定目的，好比要申訴、回報問題，或是有文件申請的疑惑想尋求解答。因此我們嘗試從另外一個極端出發，設計一個盡力完成民眾需求的網站，想看看用起來的感覺會怎樣。</p>
+
+    
+    <a href="/2015/12/03-hsinchu.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2015-12-02</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class>life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/hsinchu/">
+                    <span class="tag">hsinchu</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/11/18-git.html" itemprop="url" target="_blank">
+            <span class>Git commands</span>
+        </a>
+    </h1>
+
+    <p>今天看到朋友講了一個 git 指令，想說順便分享一下我自己常用的指令，算是野人獻曝。</p>
+
+    
+    <a href="/2015/11/18-git.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2021-05-06">2015-11-18</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+
+            <div class="box-article-nav">
+
+    <a class="btn" href="/page/4/">&larr; Prev</a>
+
+
+
+    <a class="btn" href="/page/6/">Next &rarr;</a>
+
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

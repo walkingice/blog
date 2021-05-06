@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Docker volume 簡單用法 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Docker volume 簡單用法 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" Docker volume 簡單用法 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Docker volume 簡單用法 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Docker volume 簡單用法 | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" Docker volume 簡單用法 | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2016/04/19-docker.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2016/04/19-docker.html" itemprop="url" target="_blank">
+            <span class>Docker volume 簡單用法</span>
+        </a>
+    </h1>
+
+    <p>最近在設定開發環境的時候有個使用 docker volume 的機會，在這邊筆記一下指令，以便自己下次查詢使用。</p>
+<p>比起在系統裡面裝一個 postgresql，我比較喜歡透過 <a href="https://hub.docker.com/_/postgres/" target="_blank" rel="noopener">docker</a> 來使用。藉此降低對 host packages 的相依性，雖然會有一些效能上的 overhead 我覺得還是值得。</p>
+<p>既然要用 docker，馬上就要考慮 persistent data 的問題：<strong>如何把資料獨立在 image 之外來保存？</strong>，第一個聽到的解答就是 volume，因為開發需要，我的需求又有點不一樣</p>
+<ul>
+<li>希望能用官方的 pg image</li>
+<li>db 資料是獨立的，這樣可以獨立升級 pg 版本</li>
+<li>db 的資料希望能有 snapshot，這樣方便寫 unit test 或是開發，不管怎麼惡搞資料都能簡單回復</li>
+</ul>
+<p>這邊紀錄下我最近的作法，未來遇到更好的作法再更新於此。</p>
+<a id="more"></a>
+<h1 id="準備-postgres"><a href="#準備-postgres" class="headerlink" title="準備 postgres"></a>準備 postgres</h1><p>首先當然是先抓下 pg 的 image，假設指定安裝 9.5 版 pg，方法如下。如此一來系統只要安裝 pg client 使用 <strong>psql</strong> 就能連進去了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull postgres:9.5</span><br></pre></td></tr></table></figure>
+<h1 id="什麼是-docker-volume"><a href="#什麼是-docker-volume" class="headerlink" title="什麼是 docker volume"></a>什麼是 docker volume</h1><p><a href="http://dockone.io/article/128" target="_blank" rel="noopener">深入理解 Docker Volume（一）</a>已經寫得很好，可以先去看一看。這邊條列幾個重點：</p>
+<ul>
+<li>Docker image 由多個 read-only 的 file system 疊加而成一個 stack，這些組合稱為 Union File System。</li>
+<li>啟動 container 的時候，會在 stack 上方添加一個 read-write layer，更動都在這邊，砍掉 container 這邊也就沒了</li>
+<li>Volume 是為了要解決 container 之間資料共享與資料保存而提出的</li>
+<li>Volume 就是目錄或是檔案，可以繞過 UFS 以正常的檔案或目錄的方式存在 host 本機上</li>
+<li>啟動 Container 的時候產生 volume，如果 Volume 掛載的目標路徑已經有檔案存在於 Image 上面，則 Image 上面的檔案會 copy 到 volume 上，<a href="https://docs.docker.com/engine/userguide/containers/dockervolumes/#mount-a-host-directory-as-a-data-volume" target="_blank" rel="noopener">但不包括 host directory</a></li>
+</ul>
+<h2 id="基本-Volume-使用方法"><a href="#基本-Volume-使用方法" class="headerlink" title="基本 Volume 使用方法"></a>基本 Volume 使用方法</h2><p>先來基本的使用方法，就是透過 volume command 以及它的 sub-commands 來操作。前面說到 volume 是一個獨立於 container 之外的檔案，那麼就來練習</p>
+<ul>
+<li>產生一個空的 volume</li>
+<li>在 container foo 裡面塞個檔案進去 volume</li>
+<li>再新開一個 container bar 觀察一下是不是一樣有該檔案</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 產生一個 volume，假設它的 id 是 AABBCCDDEE</span></span><br><span class="line">$ docker volume create</span><br><span class="line">AABBCCDDEE</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 busybox image 生出一個 container，把 volume 掛到 /foo 底下，並且新增一個空白檔案 Blah</span></span><br><span class="line">$ docker run -v AABBCCDDEE:/foo --name foo -it busybox /bin/sh</span><br><span class="line">/ <span class="comment"># cd /foo</span></span><br><span class="line">/foo <span class="comment"># ls</span></span><br><span class="line">/foo <span class="comment"># touch Blah</span></span><br><span class="line">/foo <span class="comment"># exit</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把原來的 container 砍掉，重開一個，把 volume 掛進去還是可以看見該檔案 Blah 被放在 /foobar 底下</span></span><br><span class="line">$ docker run -v AABBCCDDEE:/foobar --name bar -it busybox /bin/sh</span><br></pre></td></tr></table></figure>
+<p>還有一些基本觀察 volume 的指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume ls</span><br><span class="line">$ docker volume inspect THE_VOLUME_ID</span><br><span class="line"></span><br><span class="line">$ docker inspect -f <span class="string">'&#123;&#123;.Mounts&#125;&#125;'</span> foo  <span class="comment">#查看某一個 container 的 volume 狀況</span></span><br></pre></td></tr></table></figure>
+<h3 id="啟動-container-自動產生-volume"><a href="#啟動-container-自動產生-volume" class="headerlink" title="啟動 container 自動產生 volume"></a>啟動 container 自動產生 volume</h3><p>除了前面的作法，要使用 volume 還有兩種方法，一個是在 Dockerfile 裡面使用 <code>VOLUME</code>，另一個是啟動 container 的時候加上選項 <code>-v</code> 並不指定 mountpoint(要拿哪一個 volume 來用)，這樣就會自動產生一個新的 volume</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 方法一</span><br><span class="line">FROM debian:wheezy</span><br><span class="line">VOLUME /data</span><br><span class="line"></span><br><span class="line"># 方法二</span><br><span class="line">$docker run -v /tmp --name foo busybox ls /tmp</span><br></pre></td></tr></table></figure>
+<h3 id="移除-volume"><a href="#移除-volume" class="headerlink" title="移除 volume"></a>移除 volume</h3><p>既然 volume 是獨立於 container 而存在的檔案，移除 container 的時候要記得一併把沒用到的 volume 拿掉。或是一段時間把孤苦無依的 volume 清空一遍</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker rm -v the_container_id</span><br><span class="line"></span><br><span class="line">$ docker volume rm `docker volume ls -f <span class="string">'dangling=true'</span> -q` <span class="comment"># clean up</span></span><br></pre></td></tr></table></figure>
+<h1 id="自製-pg-data-image"><a href="#自製-pg-data-image" class="headerlink" title="自製 pg data image"></a>自製 pg data image</h1><p>前面簡介了 docker volume 的用法，知道怎麼把玩之後，回到我原來的需求。</p>
+<p>因為 pg 會把資料庫的內容放在 <code>/var/lib/postgres</code>，我的想法是把該目錄的資料 commit 到一個很小的 container 裡面，產生一個幾乎只有純 data 的 image 來做到 snapshot 的功能。接著利用這個 image 生出 container，產生的同時也生成一個 volume，最後啟動 pg 的時候把 volume 掛上去就行了</p>
+<p>先透過官方的 pg 產生出合用的 <strong>/var/lib/postgresql</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /tmp/db   <span class="comment"># 匯出的檔案將放在 host 的 /tmp/db</span></span><br><span class="line">$ docker run -d -v /tmp/db/:/tmp/db --name upstream -e POSTGRES_PASSWORD=thepwd postgres</span><br><span class="line"></span><br><span class="line"><span class="comment"># 這時候已經跑起 pg 了，可以透過 psql 進去做一些操作，把我們的測試資料放進去，密碼就是 thepwd</span></span><br><span class="line">$ psql -U postgres -h 172.17.0.2</span><br><span class="line">.......(to add fixture data)........</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用 tar 打包資料，保留 file permission</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it upstream /bin/bash</span><br><span class="line">root@bfb8bc37341e:/<span class="comment"># cd /</span></span><br><span class="line">root@bfb8bc37341e:/<span class="comment"># tar cvvf /tmp/db/archive.tar /var/lib/postgresql</span></span><br><span class="line"></span><br><span class="line">$ docker rm -vf upstream</span><br></pre></td></tr></table></figure>
+<p>接著用已經夠小的 busybox image 來做 snapshot。其實也可以再用一次掛 volume 的方式讓 staging 找到 archive.tar，但是這樣 commit  image 之後會留一點渣渣，我選擇在 host 跑 http server，再從 container 裡面用 wget 抓，效果一樣</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull busybox</span><br><span class="line">$ docker run --name staging -it busybox</span><br><span class="line"></span><br><span class="line">/ <span class="comment"># wget 192.168.42.100:8000/archive.tar</span></span><br><span class="line">/ <span class="comment"># tar xvf archive.tar   # 解開 fixture data</span></span><br><span class="line">/ <span class="comment"># rm /tmp/archive.tar</span></span><br><span class="line">/ <span class="comment"># exit</span></span><br><span class="line"></span><br><span class="line">$ docker commit staging data_img</span><br></pre></td></tr></table></figure>
+<p>接下來就是真正使用 snapshot 了。跑起一個 data_provider container 只是為了產生 volume，它後來就這樣關掉也沒關係，只要 volume 還在就好。</p>
+<p>啟動 pg image 的時候，只要說「我要從 data_provider 而來的 volume」即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -v /var/lib/postgresql/data --name data_provider data_img</span><br><span class="line">$ docker volume ls</span><br><span class="line"></span><br><span class="line">$ docker run -d --name running_pg --volumes-from data_provider postgres</span><br><span class="line">$ docker <span class="built_in">exec</span> -it running_pg /bin/bash</span><br></pre></td></tr></table></figure>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2016/04/19-docker.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2016-04-19">2016-04-19</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/docker/">
+                    <span class="tag">docker</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2016/05/20-taiwan.html" title="第三次政黨輪替"><b>第三次政黨輪替</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2016/03/13-recyclerview.html" title="使用 RecyclerView">Next &rarr; <b>使用 RecyclerView</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>

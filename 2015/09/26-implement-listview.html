@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head><meta name="generator" content="Hexo 3.9.0">
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 實作 Android ListView | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 實作 Android ListView | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:title" content=" 實作 Android ListView | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" 實作 Android ListView | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" 實作 Android ListView | 只放拖鞋的鞋櫃 ">
+	<meta name="twitter:description" content=" 實作 Android ListView | 只放拖鞋的鞋櫃 ">
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2015/09/26-implement-listview.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    </head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article">
+    <h1 class="article-title">
+        <a href="/2015/09/26-implement-listview.html" itemprop="url" target="_blank">
+            <span class>實作 Android ListView</span>
+        </a>
+    </h1>
+
+    <p>最近在改別人留下的 Android code。</p>
+<p>好一段時間沒寫 Android 了，尤其我的記憶力又特差，經常要翻一下以前寫的程式才能回想起來某些 widget 怎麼用，ListView 就是其中一個。雖說一個功能可以有多種不同實作方式，各人又有各自常用的套招，即便 ListView 沒特別難，還是經常可以看見各種不同的寫法。</p>
+<p>原本只是要貼一些程式碼進自己的筆記 wiki 裡面，想說反正都寫一些了，不如多寫一點貼出來給有緣人當參考，雖然更多時候會是我自己一直回頭來看。</p>
+<p>用 ListView 的時機通常就是這幾種</p>
+<ol>
+<li>把一堆字串顯示在 ListView 當中</li>
+<li>把客製化的 View 顯示在 ListView 當中</li>
+<li>提供單選 single choice 的選單</li>
+<li>提供多選 multiple choices 的選單</li>
+<li>實作客製化的 multiple choices</li>
+</ol>
+<p>接下來針對以上常見的需求來介紹，同時也會處理 Click 事件</p>
+<a id="more"></a>
+<p>先從單純地顯示字串開始</p>
+<h1 id="Single-row-list-item"><a href="#Single-row-list-item" class="headerlink" title="Single row list item"></a>Single row list item</h1><p>這是最簡單的 ListView，在 Android API Demo 裡面就有各式各樣的作法。只要產生 ArrayAdapter 的時候塞一個 String array 再丟給 ListView 用就行了。指定使用 Android 預設的 layout resource <code>android.R.simple_list_item_1</code> ，沒特別原因不要自己再手動做一個 Layout，這樣外觀才會跟系統一致。</p>
+<div class="img-row"><img src="/2015/09/26-implement-listview/one-row.png" title="single row list item"></div>
+
+<p>(那個 Hello world 的 TextView 是我隨手亂塞懶得移除的，請忽略它的存在)</p>
+<p>程式實際寫起來很簡單，buildData 只是我一個產生測試資料的 method。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> String[] buildData(<span class="keyword">int</span> length, String name) &#123;</span><br><span class="line">    String[] array = <span class="keyword">new</span> String[length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        array[i] = name + <span class="string">":"</span> + i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ListView mList = (ListView) findViewById(R.id.listView);</span><br><span class="line">    String[] mNames = buildData(<span class="number">30</span>, <span class="string">"Name"</span>);</span><br><span class="line"></span><br><span class="line">    ListAdapter mAdapter = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>,</span><br><span class="line">            android.R.layout.simple_list_item_1,</span><br><span class="line">            mNames);</span><br><span class="line">    mList.setAdapter(mAdapter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有時候會想要另外一種有兩行，文字一大一小的 list item，也就是 <code>android.R.layout.simple_list_item_2</code> 的外觀。這個 Android 預設提供的 Layout 有兩個 TextView，分別都有固定的 Android 預設 id 可以用</p>
+<ul>
+<li>android.R.id.text1 - 字比較大，上方的 title</li>
+<li>android.R.id.text2 - 字比較小，下方的 description</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ListAdapter mAdapter =</span><br><span class="line">        <span class="keyword">new</span> ArrayAdapter&lt;Struct&gt;(<span class="keyword">this</span>,</span><br><span class="line">                android.R.layout.simple_list_item_2,</span><br><span class="line">                android.R.id.text1,</span><br><span class="line">                mNames);</span><br></pre></td></tr></table></figure>
+<p>這樣的意思就是說，拿 simple_list_item_2 來 layout，每一行 row 都是把 mNames 的物件做 toString() 的結果，放到 id 為 <strong>text1</strong> 的 view，也就是 title。</p>
+<p>如果把建構子的第三個參數換成 <code>android.R.id.text2</code>，就是把 toString() 的結果放在第二行比較小的 TextView 上面。</p>
+<h1 id="Two-rows-list-item"><a href="#Two-rows-list-item" class="headerlink" title="Two rows list item"></a>Two rows list item</h1><p>承上繼續使用 <code>android.R.layout.simple_list_item_2</code>。如果要同時顯示 Title 跟 Description 呢？最常見的方法就是實作一個 ListAdapter</p>
+<div class="img-row"><img src="/2015/09/26-implement-listview/two-rows.png" title="two rows list item"></div>
+
+<p>(唔，請繼續忽略 hello world textview)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Struct</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String iName;</span><br><span class="line">    <span class="keyword">public</span> String iDesc;</span><br><span class="line"></span><br><span class="line">    Struct(String name, String desc) &#123;</span><br><span class="line">        iName = name;</span><br><span class="line">        iDesc = desc;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Struct[] buildData(<span class="keyword">int</span> length, String name, String desc) &#123;</span><br><span class="line">    Struct[] array = <span class="keyword">new</span> Struct[length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        array[i] = <span class="keyword">new</span> Struct(name + <span class="string">":"</span> + i, desc + <span class="string">","</span> + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ListView mList = (ListView) findViewById(R.id.listView);</span><br><span class="line">    Struct[] mItems = buildData(<span class="number">30</span>, <span class="string">"Name"</span>, <span class="string">"Desc"</span>);</span><br><span class="line">    ListAdapter mAdapter =</span><br><span class="line">            <span class="keyword">new</span> ArrayAdapter&lt;Struct&gt;(<span class="keyword">this</span>,</span><br><span class="line">                    android.R.layout.simple_list_item_2,</span><br><span class="line">                    android.R.id.text1,</span><br><span class="line">                    mItems) &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> pos, View convert, ViewGroup group)</span> </span>&#123;</span><br><span class="line">                    View v = <span class="keyword">super</span>.getView(pos, convert, group);</span><br><span class="line">                    TextView t1 = (TextView) v.findViewById(android.R.id.text1);</span><br><span class="line">                    TextView t2 = (TextView) v.findViewById(android.R.id.text2);</span><br><span class="line">                    t1.setText(getItem(pos).iName);</span><br><span class="line">                    t2.setText(getItem(pos).iDesc);</span><br><span class="line">                    <span class="keyword">return</span> v;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">    mList.setAdapter(mAdapter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先定義出用來存放資料的結構 Struct，產生一組陣列之後交給自製的 ArrayAdapter。這個 ArrayAdapter 覆寫了 getView，手動把資料取出，找出 Title 與 Description 的 TextView 來設定字串。</p>
+<p>自己實作 Adapter 是常見的作法，但我個人不愛這一招。</p>
+<p>另外比較建議用 <code>getItem()</code> 與被綁定的資料陣列互動，而不建議直接拿 mItems 來用。對這個 Adapter 來說「它不應該知道 mItems 的存在」，應該遵循 API 介面所暗示的無知狀態，產生 ArrayAdapter 的時候就指定了它的 generic type(在此例中就是 Struct)，再利用 getItem 取得感興趣的物件。</p>
+<p>寫成這樣的好處之一，就是這個 Anonymous class 可以寫成外部的具名 Class。(唔，好像也沒特別好)</p>
+<h1 id="Handle-click-event"><a href="#Handle-click-event" class="headerlink" title="Handle click event"></a>Handle click event</h1><p>其實也不是什麼難事，直接在 ListView 上面掛個 OnItemClickListener 就行了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mList.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&lt;?&gt; adapterView,</span></span></span><br><span class="line"><span class="function"><span class="params">            View view,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">int</span> position,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">long</span> l)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Adapter adapter = adapterView.getAdapter();</span><br><span class="line">        Struct clicked = (Struct) adapter.getItem(position);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>有些人的習慣是拿 position 去外部的 adapter 找出該位置的 item 來做後續處理，如果該 Adapter 有用上泛型，getItem 的結果就不需要轉型。如同前面所述，我的習慣是盡量不假設外部的 adapter 是哪一個，從 AdapterView 裡面找出綁定的 adapter，再從該 adapter 取出 item。</p>
+<p>比較討厭的是 <code>getItem()</code> 之後要補一個強制轉型的 cast。目前的 API 設計就只能這樣，要嘛就是在 Listener 裡面用某一個<strong>寫死變數名稱，有指定內容類型的 Adapter</strong> 來取用資料，要嘛就是在 Listener 裡面<strong>取出綁定但是不知道內容類型的 Adapter </strong>，自己手動 cast。兩者取其一，各有優缺。</p>
+<p>總覺得這樣很可惜，強制轉型其實就是浪費了強型別語言的優勢。</p>
+<h1 id="Custom-list-item-in-ListView"><a href="#Custom-list-item-in-ListView" class="headerlink" title="Custom list item in ListView"></a>Custom list item in ListView</h1><p>前面提到了自己實作 Adapter 的方法。通常接到來自上級的「可不可以稍微自訂一下 List item 的外觀」這種需求的時候，都會手工再打造一個 Adapter。</p>
+<p>如果不想要自己實作一個新的 Adapter 呢？可以用 SimpleAdapter 與 ViewBinder 來做。</p>
+<p>用 SimpleAdapter 也可以同時實作出「在 ListView 裡面使用客製化的 ListItem」的功能。底下的程式碼僅僅是簡單地把 text1, text2 的 id 跟 name, desc 連結起來，演示了 SimpleAdapter 的 mapping 用法。更複雜一點的 ViewBinder 用法可以參考另外一篇 <a href="/2015/09/23-simpleadapter-viewbinder.html">SimpleAdapter and ViewBiner</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;Map&lt;String, Object&gt;&gt; buildData(<span class="keyword">int</span> length, String name, String desc) &#123;</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">"name"</span>, name + <span class="string">":"</span> + i);</span><br><span class="line">        map.put(<span class="string">"desc"</span>, desc + <span class="string">":"</span> + i);</span><br><span class="line">        list.add(map);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>  list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ListView mList = (ListView) findViewById(R.id.listView);</span><br><span class="line">    List&lt;Map&lt;String, Object&gt;&gt; mItems = buildData(<span class="number">30</span>, <span class="string">"Name"</span>, <span class="string">"Desc"</span>);</span><br><span class="line">    ListAdapter mAdapter =</span><br><span class="line">            <span class="keyword">new</span> SimpleAdapter(<span class="keyword">this</span>,</span><br><span class="line">                    mItems,</span><br><span class="line">                    android.R.layout.simple_list_item_2,</span><br><span class="line">                    <span class="keyword">new</span> String[] &#123;<span class="string">"name"</span>, <span class="string">"desc"</span>&#125;,</span><br><span class="line">                    <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;android.R.id.text1, android.R.id.text2&#125;);</span><br><span class="line">    mList.setAdapter(mAdapter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下來講<strong>可選的 ListView</strong></p>
+<h1 id="Single-choice-ListView"><a href="#Single-choice-ListView" class="headerlink" title="Single choice ListView"></a>Single choice ListView</h1><p>繼續從前面的 ListView sample code 改過來，簡單達到兩個重點就可以了</p>
+<ol>
+<li>對 ListView 設定 mode 為 <code>AbsListView.CHOICE_MODE_SINGLE</code></li>
+<li>resource 指定用 <code>simple_list_item_single_choice</code></li>
+</ol>
+<div class="img-row"><img src="/2015/09/26-implement-listview/single-choice.png" title="單選列表"></div>
+
+<p>如圖所示，Android 提供的 single choice list item 只有一個 TextView，所以指定的 resource id 一定是 <code>android.R.id.text1</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ListAdapter mAdapter =</span><br><span class="line">        <span class="keyword">new</span> ArrayAdapter&lt;Struct&gt;(<span class="keyword">this</span>,</span><br><span class="line">                android.R.layout.simple_list_item_single_choice,</span><br><span class="line">                android.R.id.text1,</span><br><span class="line">                mItems);</span><br><span class="line">mList.setAdapter(mAdapter);</span><br><span class="line"></span><br><span class="line">mList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);</span><br><span class="line">mList.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&lt;?&gt; adapterView, View view, <span class="keyword">int</span> pos, <span class="keyword">long</span> l)</span> </span>&#123;</span><br><span class="line">        AbsListView list = (AbsListView)adapterView;</span><br><span class="line">        <span class="keyword">int</span> idx = list.getCheckedItemPosition();</span><br><span class="line">        Struct checked = (Struct)adapterView.getAdapter().getItem(idx);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>顯示很簡單，上面的 code 處理了多數人比較在意的 Click 事件。Click Listener 裡頭先把 adapterView 轉型成 AbsListview 之後用 <code>getCheckedItemPosition()</code> 就能知道是哪一行被選取了。既然知道是哪一行被選了，去跟 Adapter 拿資料就可以做更進一步的處理。</p>
+<p>另外，我看過一種我不太贊成的作法：從 View 裡面拿資訊。</p>
+<p>好比說透過 id 從 View 裡面找出預期的 TextView，再用 <code>TextView.getText()</code> 來找出使用者到底按下哪一欄，更精確的來說，拿到了 User 到底按了什麼字串。如果你是在做電話簿，很可能有兩個同樣叫做小明的人，這時候就會出問題。</p>
+<p>畫面上看到的 View 是拿原始資料 render 完的結果，原始資料通常含有比較多的資訊，不會因為 render 的過程丟失。使用 Adapter 提供的原始資料，某種程度上也是跟 View 那一層鬆綁，減少程式對外觀的假設。</p>
+<h1 id="Multiple-choices-ListView"><a href="#Multiple-choices-ListView" class="headerlink" title="Multiple choices ListView"></a>Multiple choices ListView</h1><p>Multiple choices 跟 Single choice 很像。不過要找出被選擇的 item 比較麻煩一點，Listener 那邊要費比較多功夫跟 SparceBooleanArray 打交道</p>
+<ol>
+<li>對 ListView 設定 mode 為 <code>AbsListView.CHOICE_MODE_MULTIPLE</code></li>
+<li>resource 指定用 <code>simple_list_item_multiple_choice</code></li>
+</ol>
+<div class="img-row"><img src="/2015/09/26-implement-listview/multiple-choice.png" title="多選列表"></div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">ListAdapter mAdapter =</span><br><span class="line">        <span class="keyword">new</span> ArrayAdapter&lt;Struct&gt;(<span class="keyword">this</span>,</span><br><span class="line">                android.R.layout.simple_list_item_multiple_choice,</span><br><span class="line">                android.R.id.text1,</span><br><span class="line">                mItems);</span><br><span class="line">mList.setAdapter(mAdapter);</span><br><span class="line"></span><br><span class="line">mList.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);</span><br><span class="line">mList.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&lt;?&gt; adapterView, View view, <span class="keyword">int</span> pos, <span class="keyword">long</span> l)</span> </span>&#123;</span><br><span class="line">        AbsListView list = (AbsListView)adapterView;</span><br><span class="line">        Adapter adapter = list.getAdapter();</span><br><span class="line">        SparseBooleanArray array = list.getCheckedItemPositions();</span><br><span class="line">        List&lt;Struct&gt; checked = <span class="keyword">new</span> ArrayList&lt;&gt;(list.getCheckedItemCount());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> key = array.keyAt(i);</span><br><span class="line">            <span class="keyword">if</span> (array.get(key)) &#123;</span><br><span class="line">                checked.add((Struct)adapter.getItem(key));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>SparceBooleanArray 就是存放很多 Boolean 數值的資料結構，但它不是緊密的 Array，也就是資料結構課本裡面提過的 Sparce matrix (稀疏矩陣)的概念。一個 ListView 可能有 100 行以上的元件，使用者真正選擇的只有少數幾個，用完整的 Array 去存太浪費了，如果行數爆增到一萬行以上怎麼辦？(雖說不應該有 UI 愚蠢到提供一萬行以上 ListView 給 user 才對)</p>
+<p>SparceBooleanArray 比較像是一個 Map，給它一個 int 讓它回答 true or false。當使用者在 ListView 上面按了第 1, 3, 5, 9, 20 行之後，ListView 就會在 SparceBooleanArray 裡面放入 5 個元素，對應到剛剛按過那幾行，取出來的 boolean value 則對應著該行是否被 checked。</p>
+<p>如果使用者接下來又勾選了第 7 行，接著又把第 7 行取消呢？SparceBooleanArray 的元素會變成 6 個，而 key 為 7 的元素內容為 false。</p>
+<p>換句話說，使用者按過幾個 list item，SparceBooleanArray 就會有幾個元素，元素的值不一定都為 true。所以上面的 Clicke Handler 做的事情就是</p>
+<ol>
+<li>根據 SparceBooleanArray 的長度跑一遍，依序取出每個元素</li>
+<li>拿出每個元素的 key，依前面例子就會是 1, 3, 5, 9, 20, 7….不等</li>
+<li><code>app.get(key)</code> 再問 <strong>key 為 1/3/5..的狀態是 true or false？</strong></li>
+<li>true 就是被使用者點選的，加進去 List 裡面</li>
+</ol>
+<h1 id="Customize-Multiple-Choice-ListView"><a href="#Customize-Multiple-Choice-ListView" class="headerlink" title="Customize Multiple Choice ListView"></a>Customize Multiple Choice ListView</h1><p>世界就是這樣運轉，你總是會遇上客製化選單的需求，如果我們想要用自己手工打造的 View 該怎麼做？假設我們的手工品叫做 MyListItem，我們要做這幾件事情</p>
+<ol>
+<li>幫 MyListItem 定義出 layout xml</li>
+<li>實作 MyListItem.java，重點是要 <code>implements Checkable</code></li>
+<li>把 Resource 指到該 layout</li>
+</ol>
+<div class="img-row"><img src="/2015/09/26-implement-listview/custom-checkable.png" title="自製可選列表"></div>
+
+<p>這個醜到爆炸的東西，只是為了要展示客製化的 list item。它是一個 Multiple choices ListView，預設都是 <strong>no</strong>，按下去就會變成 <strong>ok</strong>，再按一下又會變回 <strong>no</strong>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">zeroxlab.org.testlistview.MyListItem</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@android:id/text1"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_margin</span>=<span class="string">"10dip"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dip"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginRight</span>=<span class="string">"10dip"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:textAppearance</span>=<span class="string">"?android:attr/textAppearanceListItem"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">zeroxlab.org.testlistview.MyListItem</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> zeroxlab.org.testlistview;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyListItem</span> <span class="keyword">extends</span> <span class="title">TextView</span> <span class="keyword">implements</span> <span class="title">Checkable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> mChecked = <span class="keyword">false</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyListItem</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyListItem</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyListItem</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs, defStyle);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChecked</span><span class="params">(<span class="keyword">boolean</span> c)</span> </span>&#123;</span><br><span class="line">        mChecked = c;</span><br><span class="line">        <span class="keyword">if</span> (mChecked) &#123;</span><br><span class="line">            setText(<span class="string">"ok"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            setText(<span class="string">"no"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">toggle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        setChecked(!mChecked);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isChecked</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mChecked;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ListAdapter mAdapter =</span><br><span class="line">        <span class="keyword">new</span> ArrayAdapter&lt;Struct&gt;(<span class="keyword">this</span>,</span><br><span class="line">                R.layout.sample_my_list_item,</span><br><span class="line">                android.R.id.text1,</span><br><span class="line">                mItems);</span><br></pre></td></tr></table></figure>
+<p>繼承了 TextView 之後，再實作 Checkable 的介面，依據情況用 setText 更動文字。如果你繼承的不是 TextView 而是更複雜的 ViewGroup Layout 呢？要小心 click event 被裡面的 child view 吃掉，使得自己的 view 完全不知道應該要更新狀態了。如果你有跑去看 CheckedTextView 的 source code，就會發現它並不是一個 ViewGroup，而且是自己手動把選勾畫出來的，就是要解決 event dispatch 這檔事(當然，也許也考慮了 ListView fling performance issue)</p>
+<p>如果只是想單純地替換選勾符號的外觀，CheckedTextView 的 layout xml 裡面就能夠透過 <code>android:checkMark=”@drawable/my_png”</code> 來更換，這樣其實就足夠應付多數情況了，沒事還是不要自己作手工藝品。</p>
+<h1 id="Empty-View"><a href="#Empty-View" class="headerlink" title="Empty View"></a>Empty View</h1><p>寫程式經常要處理一些邊界條件，好比 array 是空的怎麼辦？在 ListView 裡面也會有類似的情況，當 List 內容光溜溜的時候，ListView 也會光溜溜。偶爾會看見的寫法就是多放一個隱藏的 View 在旁邊，檢查 List 內容來決定顯示與否，當作是空無一物的 List 的 fallback。</p>
+<p>雖然 Android Framework 好像沒有很好用，但是這麼常見的需求還是有提供一個簡單的 API <code>AdapterView.setEmptyView()</code>，只要把這個 View 丟進去 Layout 裡面就好。Empty View 與 ListView 之間的顯示與否，就交由 Framework 去幫我們做</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/empty_view"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:text</span>=<span class="string">"Oooops, I am EMPTY!"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ListView</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/listview"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">....</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ListView mList = (ListView) findViewById(R.id.listView);</span><br><span class="line">View empty = findViewById(R.id.empty_view);</span><br><span class="line">mList.setEmptyView(empty);</span><br></pre></td></tr></table></figure>
+<h1 id="ListView-內部怎麼運作"><a href="#ListView-內部怎麼運作" class="headerlink" title="ListView 內部怎麼運作"></a>ListView 內部怎麼運作</h1><p>到前面為止大概展示了 ListView 常見的實作需求，好奇寶寶可能會想多知道一點。<del>(每次腦中都會自然飄出「請長官再多說一點勉勵的話」這句)</del></p>
+<p>前面提到了對 ListView 設定了 Single/Multiple 的模式之後，就能夠選用對應的 Layout resouce，並且詢問哪些 items 被選擇。我們不免想要知道裡面是怎麼運作的，這樣在自製 View 的時候比較有信心不會出錯。</p>
+<p>雖說是 ListView，但大多數的實作都放在 AbsListView.java 裡面</p>
+<p>設定 Mode 的時候會把數值儲存在內部的一個 <code>int mChoiceMode</code> 裡面，向 ListView 詢問哪些 item 被選擇的時候，就會檢查這個數值，看看當前的 ListView 處在何種模式之下，發出錯誤的問法就會被抱怨。對一個 Single mode 的 ListView 詢問單數的 <code>getCheckedItemPosition()</code> 會回傳正確的數值，詢問複數的 <code>getCheckedItemPositions()</code> 就會回傳 SparceBooleanArray(但裡面理論上只會有一個值)；Multiple mode ListView 的行為也是類似，只是無法取得單數的 position。</p>
+<p>內部裡面都是把 Checked-Item-Position 儲存在 <code>SparceBooleanArray mCheckStates</code> 裡面，也就是 <code>getCheckedItemPositions()</code> 回傳的那個處理起來稍稍有點麻煩的資料結構。</p>
+<p>既然現在知道 AbsListView 會幫我們維護 <code>getCheckedItemPosition</code> 的資料，我們不用管它。下一步就是想知道，鄉民自己手工打造的 View 要在什麼情況下更新自己的外觀？畢竟只有自己的程式碼才會知道該怎麼畫自己的外觀。</p>
+<p>更新外觀的事件，會發生在兩條路徑上，一個是比較物理層面的， User 在介面上點擊了 ListView 觸發事件或是執行 <code>performItemClick(…)</code>，另一個是比較精神層面的在程式裡面用 <code>setItemChecked()</code></p>
+<p>第一條路徑，當 User 按了一下 ListView 會觸發在 AbsListView.java 裡面的 <code>onKeyUp()</code>，裡面又呼叫 <code>performItemClick()</code>，在這個 method 裡面經過計算之後去更新 mCheckStates 的數值，接著呼叫 <code>updateOnScreenCheckedViews()</code>，這裡面就會呼叫到由我們自己實作的 <code>CheckedTextView.setChecked()</code></p>
+<p>第二條路徑在執行 <code>setItemChecked()</code> 之後就更新了 mCheckStates，之後執行 requestLayout 要求畫面重繪。重繪的過程會在 Android 複雜的 Framework 繞一大圈，在 main thread 上一路 call 到 ListView 的 <code>LayoutChildren</code>，ListView 接著呼叫到由我們自己實作的 <code>CheckedTextView.setChecked()</code></p>
+<p>在 debugger 裡面看到的 Callstack 簡略如下</p>
+<ol>
+<li>AbsListView.onLayout</li>
+<li>ListView.LayoutChildren</li>
+<li>ListView.fillSpecific</li>
+<li>ListView.makeAndAddView</li>
+<li>ListView.setupChild</li>
+<li>CheckedTextView.setChecked</li>
+</ol>
+<div class="img-row"><img src="/2015/09/26-implement-listview/callstack.png" title="setChecked call stack"></div>
+
+<p>不論這兩條路徑任何一條，都會執行到像這樣一段程式碼，只是一個在 AbsListView，一個在 ListView。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (child <span class="keyword">instanceof</span> Checkable) &#123;</span><br><span class="line">    ((Checkable) child).setChecked(mCheckStates.get(position));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是說，當 AbsListView 所維護的 mCheckStates 有更動之後，都會呼叫相對應的 List item 的 <code>setChecked()</code>，讓 List item 的實作(也就是我們寫的 code)能夠做出反應。就 ListView 的通常情況，就是叫 checkedTextView 決定要不要顯示選勾。而自己打造的手工品，一定要 <code>implements Checkable</code>，不然就會被忽略了</p>
+<p>講了一大圈，其實結論也是簡單到大家都很清楚了：<strong>客製化 ListView 的外觀，只要實作 List Item 就好，維護被點選項目這件事情交給 ListView 它自己(實際上是 AbsListView)。自己實作的 ListItem implements Checkable 則要記得在 <code>setChecked()</code> 裡面對最新的狀態做出反應</strong></p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2015/09/26-implement-listview.html">
+                <i class="fa fa-calendar"></i>
+                <span itemprop="datePublished" content="2015-09-26">2015-09-26</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class>geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+                <a class="btn" href="/2015/10/21-crack.html" title="被攻陷的 Android 平板"><b>被攻陷的 Android 平板</b> &larr; Prev</a>
+            
+            
+                <a class="btn" href="/2015/09/24-simpleadapter-viewbinder.html" title="SimpleAdapter and ViewBinder">Next &rarr; <b>SimpleAdapter and ViewBinder</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>
