@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jchu.cc/2021/05/24-license.html</loc>
+    
+    <lastmod>2021-05-24T14:09:07.012Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jchu.cc/2021/03/06-constitution.html</loc>
     
     <lastmod>2021-03-07T16:46:08.037Z</lastmod>
@@ -30,14 +37,14 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2020/10/30-gradle.html</loc>
+    <loc>https://jchu.cc/2020/11/01-game.html</loc>
     
     <lastmod>2020-12-16T17:38:04.277Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jchu.cc/2020/11/01-game.html</loc>
+    <loc>https://jchu.cc/2020/10/30-gradle.html</loc>
     
     <lastmod>2020-12-16T17:38:04.277Z</lastmod>
     
@@ -72,6 +79,13 @@
   </url>
   
   <url>
+    <loc>https://jchu.cc/tags/index.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.454Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jchu.cc/lamejokes/old.html</loc>
     
     <lastmod>2020-08-15T13:10:31.454Z</lastmod>
@@ -79,9 +93,9 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/tags/index.html</loc>
+    <loc>https://jchu.cc/lamejokes/2017.html</loc>
     
-    <lastmod>2020-08-15T13:10:31.454Z</lastmod>
+    <lastmod>2020-08-15T13:10:31.453Z</lastmod>
     
   </url>
   
@@ -94,13 +108,6 @@
   
   <url>
     <loc>https://jchu.cc/lamejokes/2016.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.453Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jchu.cc/lamejokes/2017.html</loc>
     
     <lastmod>2020-08-15T13:10:31.453Z</lastmod>
     
@@ -170,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2018/05/05-kotlin.html</loc>
+    <loc>https://jchu.cc/2018/08/16-test.html</loc>
     
     <lastmod>2020-08-15T13:10:31.361Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jchu.cc/2018/08/16-test.html</loc>
+    <loc>https://jchu.cc/2018/05/05-kotlin.html</loc>
     
     <lastmod>2020-08-15T13:10:31.361Z</lastmod>
     
@@ -212,13 +219,6 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2017/09/04-strictmode.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.349Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jchu.cc/2017/09/13-checkstyle.html</loc>
     
     <lastmod>2020-08-15T13:10:31.349Z</lastmod>
@@ -226,9 +226,9 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2017/08/01-news.html</loc>
+    <loc>https://jchu.cc/2017/09/04-strictmode.html</loc>
     
-    <lastmod>2020-08-15T13:10:31.348Z</lastmod>
+    <lastmod>2020-08-15T13:10:31.349Z</lastmod>
     
   </url>
   
@@ -247,14 +247,21 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2016/12/03-git.html</loc>
+    <loc>https://jchu.cc/2017/08/01-news.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.348Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jchu.cc/2017/04/24-mockito.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jchu.cc/2017/04/24-mockito.html</loc>
+    <loc>https://jchu.cc/2016/12/03-git.html</loc>
     
     <lastmod>2020-08-15T13:10:31.347Z</lastmod>
     
@@ -317,14 +324,14 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2016/04/19-docker.html</loc>
+    <loc>https://jchu.cc/2016/05/20-taiwan.html</loc>
     
     <lastmod>2020-08-15T13:10:31.328Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jchu.cc/2016/05/20-taiwan.html</loc>
+    <loc>https://jchu.cc/2016/04/19-docker.html</loc>
     
     <lastmod>2020-08-15T13:10:31.328Z</lastmod>
     
@@ -380,13 +387,6 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2015/10/28-lightdm.html</loc>
-    
-    <lastmod>2020-08-15T13:10:31.216Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jchu.cc/2015/10/31-github.html</loc>
     
     <lastmod>2020-08-15T13:10:31.216Z</lastmod>
@@ -394,7 +394,7 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2015/11/18-git.html</loc>
+    <loc>https://jchu.cc/2015/10/28-lightdm.html</loc>
     
     <lastmod>2020-08-15T13:10:31.216Z</lastmod>
     
@@ -402,6 +402,13 @@
   
   <url>
     <loc>https://jchu.cc/2015/12/03-hsinchu.html</loc>
+    
+    <lastmod>2020-08-15T13:10:31.216Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jchu.cc/2015/11/18-git.html</loc>
     
     <lastmod>2020-08-15T13:10:31.216Z</lastmod>
     
@@ -422,14 +429,14 @@
   </url>
   
   <url>
-    <loc>https://jchu.cc/2015/09/24-simpleadapter-viewbinder.html</loc>
+    <loc>https://jchu.cc/2015/09/18-streamsupport.html</loc>
     
     <lastmod>2020-08-15T13:10:31.210Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jchu.cc/2015/09/18-streamsupport.html</loc>
+    <loc>https://jchu.cc/2015/09/24-simpleadapter-viewbinder.html</loc>
     
     <lastmod>2020-08-15T13:10:31.210Z</lastmod>
     
