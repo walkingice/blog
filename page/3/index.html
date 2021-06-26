@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 
 <html lang="zh-Hant-TW">
-    <head><meta name="generator" content="Hexo 3.9.0">
+    <head>
         
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title> 只放拖鞋的鞋櫃 </title>
-	<meta property="og:title" content=" 只放拖鞋的鞋櫃 ">
+	<meta property="og:title" content=" 只放拖鞋的鞋櫃 " />
 	<meta name="twitter:title" content=" 只放拖鞋的鞋櫃 ">
 
 	<meta property="og:type" content="article">
 	<meta name="twitter:card" content="summary">
 
 	<meta name="description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
-	<meta property="og:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
-	<meta name="twitter:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 ">
+	<meta property="og:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 " />
+	<meta name="twitter:description" content=" Julian Chu(Walkingice) 的個人部落格，補救自己不牢靠的記憶力 " />
 
 	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
 
-	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg">
-	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg">
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg" >
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg" />
 
 	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
 
@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
 
-    </head>
+    <meta name="generator" content="Hexo 5.4.0"></head>
 
     <body>
         
@@ -114,7 +114,7 @@
 
                 
                 <div class="extra-comments">
-                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
                 </div>
                 
 
@@ -158,28 +158,22 @@
         <div class="title">
             <h1 id="blog-title">只放拖鞋的鞋櫃</h1>
         </div>
-        <div class>
+        <div class="">
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
-        <a href="/2018/02/28-ffmpeg.html" itemprop="url" target="_blank">
-            <span class>使用 ffmpeg 編輯影片</span>
+        <a href="/2018/03/13-cd.html" itemprop="url" target="_blank">
+            <span class="">Change directory helper function</span>
         </a>
     </h1>
 
-    <p>長話短說，可以用 ffmpeg 做到一些簡單的影片編輯功能，好比說</p>
-<p>把 input.mp4 裡面 00:24:32 到 00:29:34 這段時間的影像擷取出來</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i input.mp4 -ss 00:24:32 -to 00:29:34 -threads 2 -y clip001.mp4</span><br></pre></td></tr></table></figure>
-<p>從一張圖片產生一個長度 15 秒的影片，同時把尺寸轉為 1280x720</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -loop 1 -i image.png -t 15 -vf scale=1280:720 -pix_fmt yuv420p -y image.mp4</span><br></pre></td></tr></table></figure>
-<p>將一個完全沒有音軌的影片，塞入 15 秒的無聲音軌，指定頻率為 48000 Hz。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f lavfi -i anullsrc=r=48000 -i image.mp4 -t 15 -c:v copy -c:a aac  -y silent.mp4</span><br></pre></td></tr></table></figure>
-<p>接著把幾個 mp4 檔接成一個檔案，先把它們都轉成 ts 檔，最後再接回 mp4 檔</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i clip0.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip0.ts</span><br><span class="line">$ ffmpeg -i clip1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip1.ts</span><br><span class="line">$ ffmpeg -i clip2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip2.ts</span><br><span class="line"></span><br><span class="line">$ ffmpeg -i <span class="string">"concat:clip0.ts|clip1.ts|clip2.ts"</span> -c copy -bsf:a aac_adtstoasc -y output.mp4</span><br><span class="line"></span><br><span class="line">$ rm clip0.ts clip1.ts clip2.ts</span><br></pre></td></tr></table></figure>
+    <p>This function might be the most useful one in my own scripts, and I had introduced it for several times.</p>
+<p>Let’s say you are working in a big project such as Android Framework, or your are a command-line heavy user. The change-directory-command, <code>cd</code>, would be typed thounsands times per day. THAT IS SO ANNOYING!.</p>
+<p>Try adding this function to <em>~/.bashrc</em></p>
 
     
-    <a href="/2018/02/28-ffmpeg.html#more">
+    <a href="/2018/03/13-cd.html#more">
         <span class="read-more">
             <i class="fa fa-file-text-o"></i>
             閱讀全文 &gt;&gt;
@@ -194,7 +188,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2018-02-27</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2018-03-13</span>
             </a>
         </span>
 
@@ -203,7 +199,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -233,10 +229,84 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2018/02/28-ffmpeg.html" itemprop="url" target="_blank">
+            <span class="">使用 ffmpeg 編輯影片</span>
+        </a>
+    </h1>
+
+    <p>長話短說，可以用 ffmpeg 做到一些簡單的影片編輯功能，好比說</p>
+<p>把 input.mp4 裡面 00:24:32 到 00:29:34 這段時間的影像擷取出來</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i input.mp4 -ss 00:24:32 -to 00:29:34 -threads 2 -y clip001.mp4</span><br></pre></td></tr></table></figure>
+<p>從一張圖片產生一個長度 15 秒的影片，同時把尺寸轉為 1280x720</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -loop 1 -i image.png -t 15 -vf scale=1280:720 -pix_fmt yuv420p -y image.mp4</span><br></pre></td></tr></table></figure>
+<p>將一個完全沒有音軌的影片，塞入 15 秒的無聲音軌，指定頻率為 48000 Hz。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f lavfi -i anullsrc=r=48000 -i image.mp4 -t 15 -c:v copy -c:a aac  -y silent.mp4</span><br></pre></td></tr></table></figure>
+<p>接著把幾個 mp4 檔接成一個檔案，先把它們都轉成 ts 檔，最後再接回 mp4 檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i clip0.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip0.ts</span><br><span class="line">$ ffmpeg -i clip1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip1.ts</span><br><span class="line">$ ffmpeg -i clip2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip2.ts</span><br><span class="line"></span><br><span class="line">$ ffmpeg -i <span class="string">"concat:clip0.ts|clip1.ts|clip2.ts"</span> -c copy -bsf:a aac_adtstoasc -y output.mp4</span><br><span class="line"></span><br><span class="line">$ rm clip0.ts clip1.ts clip2.ts</span><br></pre></td></tr></table></figure>
+
+    
+    <a href="/2018/02/28-ffmpeg.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2018-02-27</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2018/02/08-nested-class.html" itemprop="url" target="_blank">
-            <span class>Java 的 Nested Class</span>
+            <span class="">Java 的 Nested Class</span>
         </a>
     </h1>
 
@@ -259,7 +329,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2018-02-08</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2018-02-08</span>
             </a>
         </span>
 
@@ -268,7 +340,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -294,10 +366,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2018/01/29-env.html" itemprop="url" target="_blank">
-            <span class>日常能做的環保小事</span>
+            <span class="">日常能做的環保小事</span>
         </a>
     </h1>
 
@@ -326,7 +398,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2018-01-29</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2018-01-29</span>
             </a>
         </span>
 
@@ -335,7 +409,7 @@
             
                 <a href="/categories/ramble/">
                     <i class="fa fa-th"></i>
-                    <span class>ramble</span>
+                    <span class="">ramble</span>
                 </a>
             
         </span>
@@ -357,10 +431,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2017/09/16-constraintlayout.html" itemprop="url" target="_blank">
-            <span class>使用 ConstraintLayout 建構畫面</span>
+            <span class="">使用 ConstraintLayout 建構畫面</span>
         </a>
     </h1>
 
@@ -384,7 +458,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-09-16</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2017-09-16</span>
             </a>
         </span>
 
@@ -393,7 +469,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -419,10 +495,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2017/09/13-checkstyle.html" itemprop="url" target="_blank">
-            <span class>使用 Checkstyle/Ktlint 檢查 Java/Kotlin 語法</span>
+            <span class="">使用 Checkstyle/Ktlint 檢查 Java/Kotlin 語法</span>
         </a>
     </h1>
 
@@ -446,7 +522,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-09-13</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2017-09-13</span>
             </a>
         </span>
 
@@ -455,7 +533,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -489,10 +567,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2017/09/04-drawable.html" itemprop="url" target="_blank">
-            <span class>TransitionDrawable 用兩張以上的圖</span>
+            <span class="">TransitionDrawable 用兩張以上的圖</span>
         </a>
     </h1>
 
@@ -515,7 +593,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-09-04</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2017-09-04</span>
             </a>
         </span>
 
@@ -524,7 +604,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -546,10 +626,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2017/09/04-strictmode.html" itemprop="url" target="_blank">
-            <span class>開發 Android App 階段啟用 StrictMode</span>
+            <span class="">開發 Android App 階段啟用 StrictMode</span>
         </a>
     </h1>
 
@@ -571,7 +651,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-09-03</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2017-09-03</span>
             </a>
         </span>
 
@@ -580,7 +662,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -606,10 +688,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2017/09/02-viewpager.html" itemprop="url" target="_blank">
-            <span class>ViewPager 與 FragmentStatePagerAdapter</span>
+            <span class="">ViewPager 與 FragmentStatePagerAdapter</span>
         </a>
     </h1>
 
@@ -632,7 +714,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-09-02</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2017-09-02</span>
             </a>
         </span>
 
@@ -641,7 +725,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -663,10 +747,10 @@
             </div>
             
             <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
         <a href="/2017/08/21-storage.html" itemprop="url" target="_blank">
-            <span class>Android 的 ExternalStorage</span>
+            <span class="">Android 的 ExternalStorage</span>
         </a>
     </h1>
 
@@ -694,7 +778,9 @@
         <span class="group">
             <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
                 <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-08-21</span>
+                <span
+                    itemprop="datePublished"
+                    content="2021-06-27">2017-08-21</span>
             </a>
         </span>
 
@@ -703,7 +789,7 @@
             
                 <a href="/categories/geek/">
                     <i class="fa fa-th"></i>
-                    <span class>geek</span>
+                    <span class="">geek</span>
                 </a>
             
         </span>
@@ -713,69 +799,6 @@
             
                 <a href="/tags/Android/">
                     <span class="tag">Android</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article">
-    <h1 class="article-title">
-        <a href="/2017/08/01-news.html" itemprop="url" target="_blank">
-            <span class>新聞業的挑戰</span>
-        </a>
-    </h1>
-
-    <p>新聞業在這個世代遇到的挑戰相當大，不論是業內的人或是一般的讀者，對「新聞業」的表現普遍不滿，常有人嘲諷「小時不讀書，長大當記者」，媒體給人感覺是嗜血充滿腥羶色，記者文字水準差勁，固定的用語就那幾個還經常打錯字。</p>
-<p>業內的記者，也有許多人感到不滿而離開，常有批評現在的新聞充斥業配文，看一份報紙都不知道是廣告多還是報導比較多。</p>
-<p>這些批評我幾乎都認同，大多數新聞媒體的運作方式就是如此，同時很多人嘗試找出解方。我並沒那麼厲害，我也想不到有什麼方法。(真有方法我就賣器官籌錢來投資了！)。只是想整理一下自己對新聞業面臨的困境的想法。底下的內容已經有很多人在各個地方提過了，只是把我所知道的整理起來而已。</p>
-<p>我並不認為新聞業現在的問題跟道德有關，只是單純的錢的問題，或說原本的商業模式被網路摧毀了。而新聞的表現水準江河日下，只是結果而已。</p>
-
-    
-    <a href="/2017/08/01-news.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
-                <i class="fa fa-calendar"></i>
-                <span itemprop="datePublished" content="2021-05-24">2017-08-01</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/ramble/">
-                    <i class="fa fa-th"></i>
-                    <span class>ramble</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/taiwan/">
-                    <span class="tag">taiwan</span>
-                </a>
-            
-                <a href="/tags/political/">
-                    <span class="tag">political</span>
                 </a>
             
         </span>
@@ -812,7 +835,7 @@
         <div class="box-footer">
             <footer class="footer">
                 
-                <a href="http://creativecommons.org/">
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
                     License: <i class="fa fa-cc"></i> by-nc-sa
                 </a>
                 
@@ -826,16 +849,6 @@
     </div>
 </div>
 
-
-<script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-2502077-5', 'auto');
-    ga('send', 'pageview');
-</script>
 
 
 
