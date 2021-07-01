@@ -1,7 +1,7 @@
 title: 《民粹時代》閱讀筆記
 s: populism
 date: 2019-03-11 22:26:23
-category: ramble
+categories: ramble
 tags:
     - political
     - taiwan

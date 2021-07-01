@@ -1,7 +1,7 @@
 title: 隱私與監控
 s: privacy
 date: 2019-03-04 22:28:53
-category: ramble
+categories: ramble
 tags:
     - political
 ---
