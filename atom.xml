@@ -46,7 +46,7 @@
     <link href="https://jchu.cc/2021/07/02-nihongo.html"/>
     <id>https://jchu.cc/2021/07/02-nihongo.html</id>
     <published>2021-07-01T17:13:33.000Z</published>
-    <updated>2021-07-01T16:33:48.057Z</updated>
+    <updated>2021-07-06T14:32:38.664Z</updated>
     
     <content type="html"><![CDATA[<p>It is funny that there were lots of Japanese languae learner were asking the meaning of “交通規則を逃げろ(にげろ)”, but every japanese native speaker answers “this sentence doesn’t make sense”.</p><span id="more"></span><p>But, why there were so many learners asking same question?</p><div style="max-width: 100%; margin: auto;"><img src="/2021/07/02-nihongo/pic_1.jpg" class=""></div><p>Because they all used みなの日本語II as text book. In page. 62 you will find this example</p><div style="max-width: 100%; margin: auto;"><img src="/2021/07/02-nihongo/pic_2.jpg" class=""></div><p>The answer is quite simple: We misinterpreted the format.</p><div style="max-width: 100%; margin: auto;"><img src="/2021/07/02-nihongo/pic_3.jpg" class=""></div><p>Wrong</p><ol><li>交通規則を逃げろ</li><li>交通規則をまもれ</li></ol><p>Correct</p><ol><li>逃げろ</li><li>交通規則をまもれ</li></ol><p>Oh, yes, I made the same mistake yesterday, haha!</p>]]></content>
     
@@ -58,7 +58,9 @@
     <category term="japan" scheme="https://jchu.cc/categories/japan/"/>
     
     
-    <category term="-japan -life" scheme="https://jchu.cc/tags/japan-life/"/>
+    <category term="japan" scheme="https://jchu.cc/tags/japan/"/>
+    
+    <category term="life" scheme="https://jchu.cc/tags/life/"/>
     
   </entry>
   
