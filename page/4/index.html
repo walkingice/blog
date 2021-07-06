@@ -163,6 +163,65 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2017/09/02-viewpager.html" itemprop="url" target="_blank">
+            <span class="">ViewPager 與 FragmentStatePagerAdapter</span>
+        </a>
+    </h1>
+
+    <p>在 Android 上面想要做兩三個 Tabs，並且希望透過左右滑動切換 Tab 的時候，通常就會用到 <a href="https://developer.android.com/reference/android/support/v4/view/ViewPager.html" target="_blank" rel="noopener">ViewPager</a>。若希望每個 Tab 都是一個獨立的 Fragment，我們能使用 <a href="https://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html" target="_blank" rel="noopener">FragmentStatePagerAdapter</a>。只是這個 Adapter 的使用方法跟 ListView 或 RecyclerView 的 Adapter 有點不一樣，一不小心就會踩到洞。</p>
+<p>測試的方法也不難，只要進到系統設定裡面的開發者選項，把 <strong>Don’t keep activties</strong> 打開便能測試。就我自己的經驗，在 MainActivity 用了 ViewPager 顯示幾個 Fragments，打開一個新的 Activity 觸發系統將 MainActivity 砍掉，接著回到 MainActivity 的時候就能發現，所有的 View 都是 null。</p>
+
+    
+    <a href="/2017/09/02-viewpager.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2021-07-06">2017-09-02</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/Android/">
+                    <span class="tag">Android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2017/08/21-storage.html" itemprop="url" target="_blank">
             <span class="">Android 的 ExternalStorage</span>
         </a>
@@ -194,7 +253,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2017-08-21</span>
+                    content="2021-07-06">2017-08-21</span>
             </a>
         </span>
 
@@ -255,7 +314,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2017-08-01</span>
+                    content="2021-07-06">2017-08-01</span>
             </a>
         </span>
 
@@ -318,7 +377,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2017-07-08</span>
+                    content="2021-07-06">2017-07-08</span>
             </a>
         </span>
 
@@ -381,7 +440,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2017-06-19</span>
+                    content="2021-07-06">2017-06-19</span>
             </a>
         </span>
 
@@ -449,7 +508,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2017-04-24</span>
+                    content="2021-07-06">2017-04-24</span>
             </a>
         </span>
 
@@ -513,7 +572,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2016-12-03</span>
+                    content="2021-07-06">2016-12-03</span>
             </a>
         </span>
 
@@ -590,7 +649,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2016-10-10</span>
+                    content="2021-07-06">2016-10-10</span>
             </a>
         </span>
 
@@ -657,7 +716,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2016-10-02</span>
+                    content="2021-07-06">2016-10-02</span>
             </a>
         </span>
 
@@ -716,7 +775,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-02">2016-09-26</span>
+                    content="2021-07-06">2016-09-26</span>
             </a>
         </span>
 
@@ -735,77 +794,6 @@
             
                 <a href="/tags/japan/">
                     <span class="tag">japan</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2016/09/06-retrofit.html" itemprop="url" target="_blank">
-            <span class="">Upgrade Retrofit 1.X to 2</span>
-        </a>
-    </h1>
-
-    <p>I guess most of people alreay read the post <a href="https://futurestud.io/blog/retrofit-2-upgrade-guide-from-1-9" target="_blank" rel="noopener">Retrofit 2 — Upgrade Guide from 1.9</a>, me too. It listed some points for upgrading. If you used Retrofit 1.x in production, you might get more problem than the guide in upgrading, at least I did. Just make a memo here for myself and other poor guy.</p>
-<p>I had problems such as</p>
-<ul>
-<li>Primitive String was wrapped by double quotes</li>
-<li>Upload multipart-form by using RequestBody doesn’t work</li>
-</ul>
-
-    
-    <a href="/2016/09/06-retrofit.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2021-07-02">2016-09-05</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/android/">
-                    <span class="tag">android</span>
-                </a>
-            
-                <a href="/tags/java/">
-                    <span class="tag">java</span>
                 </a>
             
         </span>

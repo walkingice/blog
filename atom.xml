@@ -6,7 +6,7 @@
   <link href="https://jchu.cc/atom.xml" rel="self"/>
   
   <link href="https://jchu.cc/"/>
-  <updated>2021-07-01T16:33:48.057Z</updated>
+  <updated>2021-07-06T14:31:35.318Z</updated>
   <id>https://jchu.cc/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Thinkpad TrackPoint Keyboard 2 works well on Macbook Pro 2019</title>
+    <link href="https://jchu.cc/2021/07/05-tp-keyboard.html"/>
+    <id>https://jchu.cc/2021/07/05-tp-keyboard.html</id>
+    <published>2021-07-05T13:47:12.000Z</published>
+    <updated>2021-07-06T14:31:35.318Z</updated>
+    
+    <content type="html"><![CDATA[<p>Conclusion: I had bought a Thinkpad TrackPoint Keyboard 2 yesterday (2021 July 4th), it works well on my Macbook Pro. I don’t find a way to adjust scroll direction (becase I enabled Natural scroll direction for built-in trackpad). Except this. I would like to say: it works perfect.</p><span id="more"></span><p>My configuration</p><ul><li>Mac OS X 11.4 Big Sur</li><li>Macbook Pro 15-inch 2019, Intel Core i9</li></ul><p>Test result</p><ul><li>✅ Bluetooth connection has no problem</li><li>✅ 2.4G connection has no problem</li><li>✅ Fn key has no problem</li><li>✅ TrackPoint has no problem</li></ul><p>When pairing TP keyboard to MBP, do not forget to input Pin code. If you don’t like the default key mapping, <a href="https://karabiner-elements.pqrs.org/">Karabiner Elements</a> will help you a lot. Inlcudes switching key layout, or disabling TrackPoint middle key.</p><p>Pressing <code>Fn</code> + <code>Esc</code> to enable FnLock, then you could use Function keys as usual.</p><p>Since I enabled Natural scroll direction in MBP for its built-in trackpad, using TrackPoint for scrolling will apply opposit direction, and I haven’t found a way to address this issue. But this is not big deal for me.</p><div style="max-width: 300px; margin: auto;"><img src="/2021/07/05-tp-keyboard/pic.jpg" class=""></div>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Conclusion: I had bought a Thinkpad TrackPoint Keyboard 2 yesterday (2021 July 4th), it works well on my Macbook Pro. I don’t find a way to adjust scroll direction (becase I enabled Natural scroll direction for built-in trackpad). Except this. I would like to say: it works perfect.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="life" scheme="https://jchu.cc/categories/life/"/>
+    
+    
+    <category term="geek" scheme="https://jchu.cc/tags/geek/"/>
+    
+    <category term="tools" scheme="https://jchu.cc/tags/tools/"/>
+    
+    <category term="life" scheme="https://jchu.cc/tags/life/"/>
+    
+  </entry>
   
   <entry>
     <title>What is 「交通規則をにげろ」</title>
@@ -495,29 +520,6 @@
     <category term="geek" scheme="https://jchu.cc/tags/geek/"/>
     
     <category term="linux" scheme="https://jchu.cc/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>測試中常見的名詞：Stub, Dummy, Mock..等等</title>
-    <link href="https://jchu.cc/2018/08/16-test.html"/>
-    <id>https://jchu.cc/2018/08/16-test.html</id>
-    <published>2018-08-16T09:05:54.000Z</published>
-    <updated>2020-08-15T13:10:31.361Z</updated>
-    
-    <content type="html"><![CDATA[<p>開發的過程要寫程式，寫程式我們都知道要寫測試，寫測試的時候經常看見 Stub, Dummy, Mock 等等這些名詞。使用 Testing Framework 的時候，更是經常使用到看起來功能類似，不同名稱的物件。稍微理解這些名詞的概念，使用測試框架的時候會有點幫助。</p><a id="more"></a><p>首先，這是看了 <a href="http://xunitpatterns.com/Test%20Double.html" target="_blank" rel="noopener">xUnit Patterns</a> 網站裡面的部分頁面，寫下的筆記。如果有看不懂的地方，請連回去直接看原文，或是用這當關鍵字之一去搜尋其他人的文章。</p><p>接著來一些會反覆出現的名詞解釋</p><h2 id="名詞"><a href="#名詞" class="headerlink" title="名詞"></a>名詞</h2><ul><li><p><a href="http://xunitpatterns.com/SUT.html" target="_blank" rel="noopener">SUT</a><br>  System Under Test，就是待測物。舉例來說，當我們在寫 Unit Test，SUT 往往就是 Class，那個我們要測試的 Class</p></li><li><p><a href="http://xunitpatterns.com/DOC.html" target="_blank" rel="noopener">DOC</a><br>  Depended-On Component，SUT 所依賴的元件，也就是 Mock, Stub ..想要抽換掉的元件。把這些相依性抽換成我們可以控制的狀態，以專注去測試 SUT。</p></li><li><p><a href="http://xunitpatterns.com/test%20fixture%20-%20xUnit.html" target="_blank" rel="noopener">test fixture</a><br>  測試的時候特意準備的東西，讓測試可以順利跑完所需要，有些人會叫做 test context。舉例來說，一組測試用的資料。</p></li><li><p><a href="http://xunitpatterns.com/control%20point.html" target="_blank" rel="noopener">control point</a><br>  用 control point 來操作 SUT，有些 control point 只是為了測試而存在。舉例來說，某個 class 開了純為測試存在的 API，這種 control point 當然不能在產品裡面使用。</p></li><li><p><a href="http://xunitpatterns.com/indirect%20input.html" target="_blank" rel="noopener">indirect input</a><br>  改變 SUT 的數值，並非直接來自我們的操作，而是來自於 DOC。好比我們對一個物件呼叫 <code>updateName</code>，然後物件去問另外一個資料庫物件，取得了在資料庫裡面的數值來更新自己</p></li><li><p><a href="http://xunitpatterns.com/indirect%20output.html" target="_blank" rel="noopener">indirect output</a><br>  當 SUT 的一些狀態改變了，而我們沒有辦法透過直接的 API 去取得改變的狀態。可是，它同時也會影響到其他元件的狀態，後面這些能被觀察的狀態，就是 indirect output。這與後面的 Mock object 有關。</p></li><li><p><a href="http://xunitpatterns.com/Test%20Double.html" target="_blank" rel="noopener">Test double</a></p><p>  本文的重點，我看的書有將其翻譯為「測試副本」。這個字不好翻譯，double 當作名詞有「替身」的意思，Test Double 就是我們要拿來替換掉真實運作的 DOC 的物件們，得到一個更簡單，可以測試的環境。</p><p>  大致能夠把 Test double 分成以下幾種</p></li></ul><div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_double.svg" title="Test Double"></div><p>測試的過程，可以用這張圖大概解釋一下</p><div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_flow.svg" title="Test Flow"></div><ol><li>Setup，生成 Test double 來取代 DOC，並準備好 Fixture 方便接下來的測試</li><li>初始化 SUT，通常就是建構一個 object</li><li>Exercise，執行測試。這時候 SUB 還可能會去跟 Test double 去要一些數值</li><li>Verify，確認執行完的結果是否無誤</li><li>Teardown，把之前測試過程產生的東西給清乾淨</li></ol><p>有了這個流程，接下來要解釋 Test double 就簡單多了</p><h2 id="Test-Stub"><a href="#Test-Stub" class="headerlink" title="Test Stub"></a>Test Stub</h2><p><strong><a href="http://xunitpatterns.com/Test%20Stub.html" target="_blank" rel="noopener">Test stub</a> 就是，提供 indirect input 給 SUT 的 Test double</strong></p><div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_stub.svg" title="Test Stub"></div><p>舉例來說，我們要測試登入用的程式是不是有正常運作。SUT 就是登入用的主程式，塞了一個假的 Network 物件給他，只要對 Network 物件下 <code>GET</code> 總是回傳 200 OK。這個 Network 物件就是 Stub。</p><h2 id="Test-Spy"><a href="#Test-Spy" class="headerlink" title="Test Spy"></a>Test Spy</h2><p><strong><a href="http://xunitpatterns.com/Test%20Spy.html" target="_blank" rel="noopener">Test spy</a> 就是能力更強，有記錄功能的 Test Stub，提供 indirect input 給 SUT 的 Test double</strong></p><div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_spy.svg" title="Test Spy"></div><p>以前面的例子來說，在驗證的階段，可能還想要知道這個 Network 物件的 API 被呼叫了幾次，有沒有使用到錯的 end-point？能夠告訴我們這些資訊的，就是 Test Spy。</p><h2 id="Mock-Object"><a href="#Mock-Object" class="headerlink" title="Mock Object"></a>Mock Object</h2><p><strong><a href="http://xunitpatterns.com/Mock%20Object.html" target="_blank" rel="noopener">Mock Object</a> 就是帶有判斷功能的 Stub，判斷 SUT 是不是正確地使用這個 DOC</strong></p><div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_mock.svg" title="Mock Object"></div><p>前面的 Spy 是看最後有沒有正確的 indirect output。但也有可能，最後的結果是對的，中間的順序錯了。好比說呼叫 web api 的順序是不是正確的？這時候我們需要在 Test double 裡面偷看實作的運作。Mock Object 就會在被使用的過程中，擁有檢查的邏輯。</p><h2 id="Fake-Object"><a href="#Fake-Object" class="headerlink" title="Fake Object"></a>Fake Object</h2><p><strong><a href="http://xunitpatterns.com/Fake%20Object.html" target="_blank" rel="noopener">Fake Object</a> 就是提供比較簡單、輕量實作的 DOC</strong></p><div style="max-width: 100%;" class="img-row"><img src="/2018/08/16-test/test_fake.svg" title="Fake Object"></div><p>Fake Object 不在意 Indirect input 也不在意 indirect output，只專心地滿足自己的介面。</p><p>前述的幾個物件，要嘛是專門提供假的固定值(Stub)，要嘛是有檢查的功能。Fake 物件就是一個簡化過 DOC，有著一樣的介面但是實作都很簡單，譬如說是個 In-memory 的資料庫物件，用起來像是真正的資料庫，但是操作沒有 disk IO，而且資料可能是我們寫好的 fixture。</p><h2 id="Dummy-Object"><a href="#Dummy-Object" class="headerlink" title="Dummy Object"></a>Dummy Object</h2><p><strong>用來填充的無用物件，只是為了滿足 API 的介面</strong></p><p>建構一個物件，或是呼叫一個方法的時候，有時候需要傳入一些物件當作參數，而我們知道這些物件完全不會被使用到，但是為了要滿足介面，成功編譯，塞進去的填充物就是 Dummy Object。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;開發的過程要寫程式，寫程式我們都知道要寫測試，寫測試的時候經常看見 Stub, Dummy, Mock 等等這些名詞。使用 Testing Framework 的時候，更是經常使用到看起來功能類似，不同名稱的物件。稍微理解這些名詞的概念，使用測試框架的時候會有點幫助。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="geek" scheme="https://jchu.cc/categories/geek/"/>
-    
-    
-    <category term="geek" scheme="https://jchu.cc/tags/geek/"/>
-    
-    <category term="test" scheme="https://jchu.cc/tags/test/"/>
     
   </entry>
   
