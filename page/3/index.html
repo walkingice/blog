@@ -163,6 +163,70 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2018/09/15-dm-crypt.html" itemprop="url" target="_blank">
+            <span class="">在 Debian 上 dm-crypt 的緊急救援</span>
+        </a>
+    </h1>
+
+    <p>這兩年來工作的主力機是 MacBook Pro，原本的 x220 比較少出動，系統的 debian testing 也因此許久沒更新。</p>
+<p>前幾天拿出來用 aptitude 升級套件的時候，因為衝突與相依數量太多，一度讓 aptitude 不會動。同時自己又不知道在哪個地方犯了傻，有些套件只更新到一半就重開機，結果掛載家目錄的時候失敗，一直無法開機，連 tty 都沒拿到。</p>
+<p>所幸只是小問題，以下紀錄過程，希望能給類似的苦主一點幫助。</p>
+
+    
+    <a href="/2018/09/15-dm-crypt.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2021-07-27">2018-09-15</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2018/08/16-test.html" itemprop="url" target="_blank">
             <span class="">測試中常見的名詞：Stub, Dummy, Mock..等等</span>
         </a>
@@ -188,7 +252,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2018-08-16</span>
+                    content="2021-07-27">2018-08-16</span>
             </a>
         </span>
 
@@ -283,7 +347,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2018-05-05</span>
+                    content="2021-07-27">2018-05-05</span>
             </a>
         </span>
 
@@ -347,7 +411,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2018-03-13</span>
+                    content="2021-07-27">2018-03-13</span>
             </a>
         </span>
 
@@ -421,7 +485,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2018-02-27</span>
+                    content="2021-07-27">2018-02-27</span>
             </a>
         </span>
 
@@ -488,7 +552,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2018-02-08</span>
+                    content="2021-07-27">2018-02-08</span>
             </a>
         </span>
 
@@ -557,7 +621,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2018-01-29</span>
+                    content="2021-07-27">2018-01-29</span>
             </a>
         </span>
 
@@ -617,7 +681,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2017-09-16</span>
+                    content="2021-07-27">2017-09-16</span>
             </a>
         </span>
 
@@ -681,7 +745,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2017-09-13</span>
+                    content="2021-07-27">2017-09-13</span>
             </a>
         </span>
 
@@ -752,7 +816,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2021-07-07">2017-09-04</span>
+                    content="2021-07-27">2017-09-04</span>
             </a>
         </span>
 
@@ -768,68 +832,6 @@
 
         <span class="group float-right">
             
-            
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2017/09/04-strictmode.html" itemprop="url" target="_blank">
-            <span class="">開發 Android App 階段啟用 StrictMode</span>
-        </a>
-    </h1>
-
-    <p>開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 <strong>Don’t keep Activity</strong> 打開以外，還有一個就是啟動 <a href="https://developer.android.com/reference/android/os/StrictMode.html" target="_blank" rel="noopener">StrictMode</a></p>
-
-    
-    <a href="/2017/09/04-strictmode.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/3/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2021-07-07">2017-09-03</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/tools/">
-                    <span class="tag">tools</span>
-                </a>
             
                 <a href="/tags/Android/">
                     <span class="tag">Android</span>
