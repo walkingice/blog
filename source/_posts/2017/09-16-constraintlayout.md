@@ -71,7 +71,7 @@ Android Studio 還提供了非常強大的 [Layout Editor](https://developer.and
 
 ### 使用 Guideline
 
-Guideline 是非常簡單的 View，它總是把自己設為 `View.GONE` 變成看不見，因此只是用來輔助定位的物件，可以有 vertical 與 horizontal 兩種
+Guideline 是非常簡單的 View，它總是把自己設為 `View.GONE` 變成看不見，因此只是用來輔助定位的物件，可以有 vertical 與 horizontal 兩種。有時候，我們並不總是希望把一堆元件都以 `parent` 為基準來排版，可能會想要畫上一條線，讓好幾個元件都針對這條線來排版，這就是 guideline 的用處
 
 ```xml
 <android.support.constraint.Guideline
@@ -102,6 +102,59 @@ Guideline 是非常簡單的 View，它總是把自己設為 `View.GONE` 變成�
 上面的範例中，我新增了一個 Guideline，位置在 parent 的左側的 100dp(RTL 的時候會剛好相反)。接著讓原本置中的 button，把左側對齊新增的 guideline。另外還新增了一個按鈕，左側一樣是對齊 guideline，右側則是對齊 btn_01 的左方。在兩邊拉扯之下，這個 button 就會擺在 guideline 與 btn 的中間。這件事情用 RelativeLayout 就很難做到。
 
 Guideline 也可以用百分比的方式來擺放，如果使用 `app:layout_constraintGuide_percent="0.3"` 就是從上方或是左方算起 30% 的地方放置 guideline。(不確定會不會有 RTL 的 issue)
+
+### 使用 Barrier
+
+柵欄(?)，用來定義一個浮動的邊界，邊界會根據某一側的 Views 去調整自己的位置，另外一側的 view 則參考這個邊界進行排版
+
+舉例來說，有 Button A, B 橫排在一起。有個 Button C 排在 A, B 的底下
+
+<div style="95%;" class="img-row">{% asset_img 16-barrier.jpg Using Barrier %}</div>
+
+如果 Button A, B 的高度會變化，那麼 Button C 的上緣究竟該對準哪個按鈕呢？這時候就是 Barrier 出場的時候。設定一個 Barrier 去參考 A, B 的底部，然後讓 Button C 去參考 Barrier
+
+```xml
+<Button
+    android:id="@+id/btn_a"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button A"
+    app:layout_constraintEnd_toStartOf="@id/btn_b"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<Button
+    android:id="@+id/btn_b"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button B"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btn_a"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<androidx.constraintlayout.widget.Barrier
+    android:id="@+id/barrier"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:barrierDirection="bottom"
+    app:constraint_referenced_ids="btn_a, btn_b" />
+
+<Button
+    android:id="@+id/btn_c"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="Button C"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/barrier" />
+```
+
+
+<div style="95%;" class="img-row">{% asset_img 17-barrier.jpg Using Barrier %}</div>
+
+<div style="95%;" class="img-row">{% asset_img 18-barrier.jpg Using Barrier %}</div>
+
+如此一來，不論 A 或 B 的高度怎麼變化，都能夠把 Barrier 往下推，連帶移動 Button C 的位置。當然 `barrierDirection` 除了 bottom 之外，要用 start, top, end, left, right 都可以。
 
 ## 透過 bias 用百分比做位置的調整
 
@@ -235,9 +288,42 @@ ConstraintLayout 裡面不該使用 **match_parent**，取而代之該使用 **m
 
 結果就是上圖。計算方法為：整個畫面的寬度減去 300dp 之後當成 view 的寬度，而 height 為動態調整，設定成跟寬度一樣。
 
+### Group
+
+比起其他元件，我覺得 Group 有點無聊。定義一個看不見的 View，當成數個 View 的集合，用來控制 Group 內 Views 的 visibility
+
+```xml
+<Button
+    android:id="@+id/btn_a"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button A"
+    app:layout_constraintEnd_toStartOf="@id/btn_b"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<Button
+    android:id="@+id/btn_b"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button B"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btn_a"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+<androidx.constraintlayout.widget.Group
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:visibility="invisible"
+    app:constraint_referenced_ids="btn_a, btn_b" />
+```
+
+以類別的繼承關係來說，`Group` 就是一個 `View` 的子類別，加了這東西就是會多佔用一點記憶體跟執行效率。以直覺來猜，如果控制的 views 只有一兩個，可能直接在程式碼裡面手動去操作還比較省事。此外，控制 visibility 我覺得比較偏向邏輯，把這個關係放進 layout xml 我自己是覺得滿怪的。所以我不太明白這了類別存在的意義
+
 ### Chain
 
-最後要介紹的概念就是 Chain。
+接著要介紹的概念就是 Chain。
 
 ```xml
 <Button
@@ -342,5 +428,6 @@ ConstraintLayout 裡面不該使用 **match_parent**，取而代之該使用 **m
 <hr>
 
 * 20190314 更新：修改關於 androidx 的部分，並加上一些範例
+* 20211206 更新：加上 Barrier 跟 Group
 
 若有寫錯的地方，還請到 [twitter](https://twitter.com/walkingice) 提醒我一下，謝謝
