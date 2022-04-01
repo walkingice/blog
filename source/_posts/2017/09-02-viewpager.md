@@ -2,7 +2,7 @@ title: ViewPager 與 FragmentStatePagerAdapter
 s: viewpager
 date: 2017-09-02 22:24:34
 tags:
-    - Android
+    - android
 categories: geek
 ---
 

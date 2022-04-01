@@ -2,7 +2,7 @@ title: 開發 Android App 階段啟用 StrictMode
 s: strictmode
 date: 2017-09-03 23:20:17
 tags:
-    - Android
+    - android
     - tools
 categories: geek
 ---

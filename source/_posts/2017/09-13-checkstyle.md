@@ -2,7 +2,7 @@ title: 使用 Checkstyle/Ktlint 檢查 Java/Kotlin 語法
 s: checkstyle
 date: 2017-09-13 00:14:12
 tags:
-    - Android
+    - android
     - tools
     - kotlin
     - git

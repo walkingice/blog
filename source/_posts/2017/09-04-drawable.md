@@ -2,7 +2,7 @@ title: TransitionDrawable 用兩張以上的圖
 s: drawable
 date: 2017-09-04 21:55:51
 tags:
-    - Android
+    - android
 categories: geek
 ---
 
