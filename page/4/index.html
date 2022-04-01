@@ -169,8 +169,8 @@
     </h1>
 
     <p>多人開發的場合，大家寫程式的習慣用法往往不一樣。除了實作上的思維不同，在所難免，至少在程式碼風格上可以一致。</p>
-<p>不同的語言有不同的 coding style，在 Java 裡面我通常就是參考(以前是 Sun Microsystems 現在是 Oracle) <a href="http://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html" target="_blank" rel="noopener">Code Conventions for the Java TM Programming Language</a>。隨著開發時間的拉長，遞交程式的數量變多之後，總是會有幾次忘記加上空白之類的小瑕疵，這種檢查理當交給程式去做。</p>
-<p>雖然寫程式沒有 freestyle，但是我們有 <a href="http://checkstyle.sourceforge.net/" target="_blank" rel="noopener">checkstyle</a></p>
+<p>不同的語言有不同的 coding style，在 Java 裡面我通常就是參考(以前是 Sun Microsystems 現在是 Oracle) <a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/documentation/codeconvtoc-136057.html">Code Conventions for the Java TM Programming Language</a>。隨著開發時間的拉長，遞交程式的數量變多之後，總是會有幾次忘記加上空白之類的小瑕疵，這種檢查理當交給程式去做。</p>
+<p>雖然寫程式沒有 freestyle，但是我們有 <a target="_blank" rel="noopener" href="http://checkstyle.sourceforge.net/">checkstyle</a></p>
 
     
     <a href="/2017/09/13-checkstyle.html#more">
@@ -211,12 +211,12 @@
                     <span class="tag">tools</span>
                 </a>
             
-                <a href="/tags/git/">
-                    <span class="tag">git</span>
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
                 </a>
             
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
+                <a href="/tags/git/">
+                    <span class="tag">git</span>
                 </a>
             
                 <a href="/tags/kotlin/">
@@ -240,7 +240,7 @@
         </a>
     </h1>
 
-    <p>當我們需要一張圖片，慢慢交錯顯示出另外一張圖片的時候，經常使用 TransitionDrawable。繼承自 LayerDrawable 的 TransitionDrawble 的實作，則是在 <a href="https://android.googlesource.com/platform/frameworks/base/+/oreo-r6-release/graphics/java/android/graphics/drawable/TransitionDrawable.java#205" target="_blank" rel="noopener">onDraw</a> 的時候只拿前兩張來交換顯示。</p>
+    <p>當我們需要一張圖片，慢慢交錯顯示出另外一張圖片的時候，經常使用 TransitionDrawable。繼承自 LayerDrawable 的 TransitionDrawble 的實作，則是在 <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/frameworks/base/+/oreo-r6-release/graphics/java/android/graphics/drawable/TransitionDrawable.java#205">onDraw</a> 的時候只拿前兩張來交換顯示。</p>
 <p>實務上使用時，需要交換顯示的圖片往往不只兩張，這時候就需要一點取巧的做法。</p>
 
     
@@ -278,8 +278,8 @@
         <span class="group float-right">
             
             
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
                 </a>
             
         </span>
@@ -299,7 +299,7 @@
         </a>
     </h1>
 
-    <p>開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 <strong>Don’t keep Activity</strong> 打開以外，還有一個就是啟動 <a href="https://developer.android.com/reference/android/os/StrictMode.html" target="_blank" rel="noopener">StrictMode</a></p>
+    <p>開發 App 的階段，通常是把條件弄得更嚴苛會比較好。除了常見的，把 <strong>Don’t keep Activity</strong> 打開以外，還有一個就是啟動 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/StrictMode.html">StrictMode</a></p>
 
     
     <a href="/2017/09/04-strictmode.html#more">
@@ -340,8 +340,8 @@
                     <span class="tag">tools</span>
                 </a>
             
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
                 </a>
             
         </span>
@@ -361,7 +361,7 @@
         </a>
     </h1>
 
-    <p>在 Android 上面想要做兩三個 Tabs，並且希望透過左右滑動切換 Tab 的時候，通常就會用到 <a href="https://developer.android.com/reference/android/support/v4/view/ViewPager.html" target="_blank" rel="noopener">ViewPager</a>。若希望每個 Tab 都是一個獨立的 Fragment，我們能使用 <a href="https://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html" target="_blank" rel="noopener">FragmentStatePagerAdapter</a>。只是這個 Adapter 的使用方法跟 ListView 或 RecyclerView 的 Adapter 有點不一樣，一不小心就會踩到洞。</p>
+    <p>在 Android 上面想要做兩三個 Tabs，並且希望透過左右滑動切換 Tab 的時候，通常就會用到 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/support/v4/view/ViewPager.html">ViewPager</a>。若希望每個 Tab 都是一個獨立的 Fragment，我們能使用 <a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html">FragmentStatePagerAdapter</a>。只是這個 Adapter 的使用方法跟 ListView 或 RecyclerView 的 Adapter 有點不一樣，一不小心就會踩到洞。</p>
 <p>測試的方法也不難，只要進到系統設定裡面的開發者選項，把 <strong>Don’t keep activties</strong> 打開便能測試。就我自己的經驗，在 MainActivity 用了 ViewPager 顯示幾個 Fragments，打開一個新的 Activity 觸發系統將 MainActivity 砍掉，接著回到 MainActivity 的時候就能發現，所有的 View 都是 null。</p>
 
     
@@ -399,8 +399,8 @@
         <span class="group float-right">
             
             
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
                 </a>
             
         </span>
@@ -420,7 +420,7 @@
         </a>
     </h1>
 
-    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a href="https://developer.android.com/guide/topics/data/data-storage.html" target="_blank" rel="noopener">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
+    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/data/data-storage.html">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
 <p>從結論來說，Android 並沒有 SD card 這樣的概念，External Storage 也不一定是外接式儲存裝置。先有這樣的認知，接著就可以問以下幾個問題</p>
 <ul>
 <li>有哪些 Storage 可以用？</li>
@@ -463,8 +463,8 @@
         <span class="group float-right">
             
             
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
                 </a>
             
         </span>

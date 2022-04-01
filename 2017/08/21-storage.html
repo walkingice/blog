@@ -164,36 +164,38 @@
         </a>
     </h1>
 
-    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a href="https://developer.android.com/guide/topics/data/data-storage.html" target="_blank" rel="noopener">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
+    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/data/data-storage.html">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
 <p>從結論來說，Android 並沒有 SD card 這樣的概念，External Storage 也不一定是外接式儲存裝置。先有這樣的認知，接著就可以問以下幾個問題</p>
 <ul>
 <li>有哪些 Storage 可以用？</li>
 <li>Context 與 Environment 有哪些 Storage 的 API 可以用？</li>
 <li>有怎樣的權限問題？</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
+
 <h2 id="有哪些-Storage-可以用"><a href="#有哪些-Storage-可以用" class="headerlink" title="有哪些 Storage 可以用"></a>有哪些 Storage 可以用</h2><p>打開 API 文件就可以看到幾個名詞</p>
 <ol>
 <li>Internal Storage</li>
 <li>Primary External Storage</li>
 <li>Secondary External Storage</li>
 </ol>
-<h3 id="Internal-Storage"><a href="#Internal-Storage" class="headerlink" title="Internal Storage"></a>Internal Storage</h3><p>User 不能直接存取，只有 app 可以。路徑通常就是 <strong>data/data/&lt;app_packageName&gt;</strong>。就是手機內部的儲存空間(internal flash)，app 的設定檔或是 SQLite 資料庫就是寫在這裡面。屬於各個應用程式的私密空間，寫在這裡面的東西，在系統安全無虞的前提下，只有該 App 可以存取。</p>
+<h3 id="Internal-Storage"><a href="#Internal-Storage" class="headerlink" title="Internal Storage"></a>Internal Storage</h3><p>User 不能直接存取，只有 app 可以。路徑通常就是 **data/data/<app_packageName>**。就是手機內部的儲存空間(internal flash)，app 的設定檔或是 SQLite 資料庫就是寫在這裡面。屬於各個應用程式的私密空間，寫在這裡面的東西，在系統安全無虞的前提下，只有該 App 可以存取。</p>
 <p>雖說不能直接存取，但如果是你自己正在開發的 app，所以會安裝 debuggable 的 app，就能透過 adb 的 run-as 去存取該目錄</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ adb shell</span><br><span class="line">$ run-as &lt;app_packageName&gt;</span><br></pre></td></tr></table></figure>
+
 <h3 id="Primary-External-Storage"><a href="#Primary-External-Storage" class="headerlink" title="Primary External Storage"></a>Primary External Storage</h3><p>不管系統有沒有 SD card，你一定有 Primary External Storage 可以用。所以將 Primary external storage 當成 SD card 一定會被搞得很混亂。正如前述，External Storage 不一定是外接式儲存裝置。把 External 換成 Shared 就會變得容易理解：<strong>Primary Shared Storage</strong></p>
 <p>相較於 Internal storage 專門儲存一些 app 私密的資料，有時我們會想存下一些可供分享的檔案，好比程式產出的圖片、照片，或是錄下的聲音，透過網路抓下來的檔案…等等。這些檔案想要被其他程式使用，系統提供了一個非 Internal 的 Stroage，這就是 External Storage。</p>
 <p>Primary External Storage 可能是 sd card，也可能是系統自己從 internal flash 分割一塊出來的空間。</p>
 <h3 id="Secondary-External-Storage"><a href="#Secondary-External-Storage" class="headerlink" title="Secondary External Storage"></a>Secondary External Storage</h3><p>Primary 以外，剩下的就是 Secondary External Storage，SD-card 或是外接式 USB 硬碟，往往都是這一類。早期的 API 並沒有提供存取 Secondary External Storage 的方法，後來漸漸提供了稍微受限的存取方式，後面再講。</p>
-<h3 id="Traditional-Storage-and-Adoptable-Storage"><a href="#Traditional-Storage-and-Adoptable-Storage" class="headerlink" title="Traditional Storage and Adoptable Storage"></a>Traditional Storage and Adoptable Storage</h3><p>API 上面看不見，但可以從<a href="https://source.android.com/devices/storage/adoptable" target="_blank" rel="noopener">文件</a>裡面看到這個名詞。Traditional Storage 就是前述那些可以拔插置換的傳統儲存裝置，相對的名詞則是 Adoptable Storage。</p>
+<h3 id="Traditional-Storage-and-Adoptable-Storage"><a href="#Traditional-Storage-and-Adoptable-Storage" class="headerlink" title="Traditional Storage and Adoptable Storage"></a>Traditional Storage and Adoptable Storage</h3><p>API 上面看不見，但可以從<a target="_blank" rel="noopener" href="https://source.android.com/devices/storage/adoptable">文件</a>裡面看到這個名詞。Traditional Storage 就是前述那些可以拔插置換的傳統儲存裝置，相對的名詞則是 Adoptable Storage。</p>
 <p>買了手機卻擔心 internal flash 不夠大？在 Android 6.0(M, API 23) 之後提供了這個功能。有些手機的 SD 卡插槽設計得難以拔插，實務上可以視為半永久的儲存裝置。在這種插槽裝上 SD 卡，系統就會詢問是否要將其「收養」，變成 Adoptable Storage</p>
 <p>adopt 之後系統便將此 storage 重新格式化、加密，接著把 Primary shared storage 的東西搬移到上面，開始把這顆裝置當成 Priamry shared storage 來使用。也因為會被加密，所以沒辦法拔下來給其他裝置使用。</p>
 <h2 id="API-使用"><a href="#API-使用" class="headerlink" title="API 使用"></a>API 使用</h2><p>Context 跟 Environment 都有 storage 相關的 API，乍看會有點混亂，表列之後就清晰許多。Context 是跟 App 相關的東西，Environment 是跟系統相關的東西。在 Android Froyo 之前，app 只能拿到 internal 的目錄來放檔案，想要分享檔案，就要取得系統的 primary external storage 的最上層目錄，自己手動建立目錄把檔案放進去。</p>
 <p>後來才透過統一的 API 來給各個 App 放置自己的 cache 或是 files；所以 Context 傳回來的都是「專屬於此 App 的相關目錄」</p>
 <p>相較之下，Environment 傳回來的就是 external storage 的最上層目錄，或是共用的 Public directory</p>
 <ul>
-<li><code>Context.getCacheDir()</code> - 取得 <strong>/data/data/<application package>/cache</application></strong></li>
-<li><code>Context.getFilesDir()</code> - 取得 <strong>/data/data/<application package>/files</application></strong></li>
+<li><code>Context.getCacheDir()</code> - 取得 <strong>/data/data/<application package>/cache</strong></li>
+<li><code>Context.getFilesDir()</code> - 取得 <strong>/data/data/<application package>/files</strong></li>
 <li><code>ContextCompat.getExternalFilesDirs(Context context, String type)</code><ul>
 <li>回傳 <strong>application-specific</strong> 的目錄，專屬於這個 app，app 移除的時候會一併砍掉這個目錄</li>
 <li>存取不需要 Permission</li>
@@ -215,13 +217,15 @@
 </ul>
 <h2 id="歷史共業"><a href="#歷史共業" class="headerlink" title="歷史共業"></a>歷史共業</h2><p>SD card 的歷史從蠻荒時代的 1.5 就有了，看完一些文章的整理如下</p>
 <ul>
-<li>最早開始 external storage 是一個能夠 expose 給 PC 的 Volume<ul>
+<li><p>最早開始 external storage 是一個能夠 expose 給 PC 的 Volume</p>
+<ul>
 <li>可能是 internal flash 上面的一塊空間，也可能是 sdcard。</li>
 <li>唯一的規則是，它若沒有被 PC 拿去用，就要被預設掛載起來</li>
 <li>單一的 permission 就可以對整顆 external storage 的任何位置讀寫</li>
 </ul>
 </li>
-<li>Froyo 2.2 (Api level 8) 之後<ul>
+<li><p>Froyo 2.2 (Api level 8) 之後</p>
+<ul>
 <li>permission 跟之前一樣</li>
 <li>加入了 application specific directory 的概念 - <strong>/Android/data/[Package name]</strong></li>
 <li>但是移除 app 的時候，會順便連這個目錄一起移除</li>
@@ -239,11 +243,11 @@
 </li>
 <li><p>Android N 7.0(Api level 24) 之後</p>
 <ul>
-<li>Storage 的邏輯上沒什麼大改變。主要是增加 <a href="https://developer.android.com/about/versions/nougat/android-7.0.html#scoped_directory_access" target="_blank" rel="noopener">Scoped directory access(限定範圍目錄存取)</a></li>
+<li>Storage 的邏輯上沒什麼大改變。主要是增加 <a target="_blank" rel="noopener" href="https://developer.android.com/about/versions/nougat/android-7.0.html#scoped_directory_access">Scoped directory access(限定範圍目錄存取)</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="存取權限"><a href="#存取權限" class="headerlink" title="存取權限"></a>存取權限</h2><p>Android 上面的 storage 讀取權限，主要是靠 Linux 上面常見的檔案系統與 UID/GID 來控管，以 FUSE 提供檔案存取的介面。以前是在 AndroidManifest.xml 裡面宣告了權限，安裝 App 的時候就批准所有權限。後來在 6.0 之後則是執行到需要的時候，才會<a href="https://developer.android.com/training/permissions/requesting.html" target="_blank" rel="noopener">向使用者要權限</a></p>
+<h2 id="存取權限"><a href="#存取權限" class="headerlink" title="存取權限"></a>存取權限</h2><p>Android 上面的 storage 讀取權限，主要是靠 Linux 上面常見的檔案系統與 UID/GID 來控管，以 FUSE 提供檔案存取的介面。以前是在 AndroidManifest.xml 裡面宣告了權限，安裝 App 的時候就批准所有權限。後來在 6.0 之後則是執行到需要的時候，才會<a target="_blank" rel="noopener" href="https://developer.android.com/training/permissions/requesting.html">向使用者要權限</a></p>
 <p>取得了 <code>READ_EXTERNAL_STORAGE</code> 或 <code>WRITE_EXTERNAL_STORAGE</code> 權限之後，便把該 app 加入 <strong>sdcard_r</strong> 或 <strong>sdcard_w</strong> 的群組。所以系統只要設定好各個 storage 上面各個目錄的權限與群組，就可以控管該 app 能不能碰檔案了。</p>
 <ul>
 <li><p>Froyo 2.2 (Api level 8) 之後</p>
@@ -273,8 +277,7 @@
 <th>Secondary</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>讀最上層目錄</td>
 <td>R</td>
 <td>R</td>
@@ -304,13 +307,12 @@
 <td>W</td>
 <td>N</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>R = 需要 Read Permission, W = 需要 Write Permission, Y = Always, N = Never</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li><a href="https://possiblemobile.com/2014/03/android-external-storage/" target="_blank" rel="noopener">On the Edge of the Sandbox: External Storage Permissions</a></li>
-<li><a href="http://pierrchen.blogspot.tw/2016/09/an-walk-through-of-android-uidgid-based.html" target="_blank" rel="noopener">Android Security: An Overview Of Application Sandbox</a></li>
-<li><a href="https://www.xda-developers.com/diving-into-sdcardfs-how-googles-fuse-replacement-will-reduce-io-overhead/" target="_blank" rel="noopener">Diving into SDCardFS: How Google’s FUSE Replacement Will Reduce I/O Overhead</a></li>
+<li><a target="_blank" rel="noopener" href="https://possiblemobile.com/2014/03/android-external-storage/">On the Edge of the Sandbox: External Storage Permissions</a></li>
+<li><a target="_blank" rel="noopener" href="http://pierrchen.blogspot.tw/2016/09/an-walk-through-of-android-uidgid-based.html">Android Security: An Overview Of Application Sandbox</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.xda-developers.com/diving-into-sdcardfs-how-googles-fuse-replacement-will-reduce-io-overhead/">Diving into SDCardFS: How Google’s FUSE Replacement Will Reduce I/O Overhead</a></li>
 </ul>
 
 
@@ -342,8 +344,8 @@
         <span class="group float-right">
             
             
-                <a href="/tags/Android/">
-                    <span class="tag">Android</span>
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
                 </a>
             
         </span>
