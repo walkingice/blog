@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> kotlinx-coroutines-test migrate to 1.6 紀錄 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" kotlinx-coroutines-test migrate to 1.6 紀錄 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:title" content=" kotlinx-coroutines-test migrate to 1.6 紀錄 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" kotlinx-coroutines-test migrate to 1.6 紀錄 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" kotlinx-coroutines-test migrate to 1.6 紀錄 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:description" content=" kotlinx-coroutines-test migrate to 1.6 紀錄 | 只放拖鞋的鞋櫃 " />
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg" >
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg" />
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2022/03/30-coroutine-migration.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    <meta name="generator" content="Hexo 5.4.0"></head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2022/03/30-coroutine-migration.html" itemprop="url" target="_blank">
+            <span class="">kotlinx-coroutines-test migrate to 1.6 紀錄</span>
+        </a>
+    </h1>
+
+    <p>之前因為工作的需要，把 kotlin 從 <code>1.5.2</code> 升級到 <code>1.6.0</code>，同時修了許多 unit test 相關的問題，在這邊紀錄一下過程，給需要幫助的朋友。</p>
+<span id="more"></span>
+
+<p>kotlin 升級到 1.6.0 的時候，有把許多元件標為 <code>Deprecated</code>。這在一般的小專案裡面不是什麼大問題，但我的公司有很多部門都會把程式送到同一個 repository 裡面，當然許多人都有寫 unit test 的習慣，而且我們也有打開 <strong>-Werror(Warning as Error)</strong> 的選項。於是必須在一個 PR 裡面，升級 coroutine 版本的同時，就把上百個 unit test 類別裡面的過時寫法一口氣更新。</p>
+<p>這種改測試的任務，配分到各個跨國團隊底下，很容易大家就因為各自的時程壓力而搞到永遠作不完。跟同事討論之後，決定我跳下去動手改。除了改程式碼的苦工之外，還要跟不同的團隊合作避免把測試改壞，同時要保持 commit 的清晰才容易解決 merge conflict，追上最新的開發版。來來回回搞了一個月，終於送出一個增減超過五千行的巨大 PR，算是最近工作比較難忘的一件事。</p>
+<p>這過程中也看到各種不同的使用 coroutine 的實作與單元測試寫法，我盡量把我記得的東西寫下來。</p>
+<h1 id="關於升級-kotlinx-coroutine-1-6"><a href="#關於升級-kotlinx-coroutine-1-6" class="headerlink" title="關於升級 kotlinx coroutine 1.6"></a>關於升級 kotlinx coroutine 1.6</h1><p>首先要看官方的 <a target="_blank" rel="noopener" href="https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-test/MIGRATION.md">Migration Guide</a>，列了不少步驟以及細節。說實在我也是來來回回看了好多遍，才搞懂大部分的意思。需要作 migration 的人可以認真看一下，一方面也是搞懂如何用比較簡潔的方式寫 coroutine unit test</p>
+<p>大致上有幾個重點，在寫 unit test 的時候</p>
+<ol>
+<li>不要用 <code>runBlocking</code> 或是 <code>runBlockingTest</code>，改用 <code>runTest</code></li>
+<li>不要用 <code>TestCoroutineScope</code>，改用 <code>TestScope</code></li>
+<li>不要用 <code>TestCoroutineDispatcher</code>，改用 <code>StandardTestDispatcher</code></li>
+<li>如果實作同時用到其他非同步的工具，好比 RxJava，可以試 <code>UnconfinedTestDispatcher</code> 看看有無奇效</li>
+<li>必要的時候用 <code>runCurrent</code> 確保 pending 的 coroutine 有跑完</li>
+<li>用到 <code>ViewModel.viewModelScope</code> 的話，用 <code>Dispatchers.setMain</code> 把 dispatcher 塞進去</li>
+<li>實作要是有用到 <code>delay</code>，可以用 <code>advanceTimeBy</code> 來控制時間進度</li>
+</ol>
+<p>掌握上面的幾個重點，應該就能處理絕大多數的測試。</p>
+<h1 id="好處：使用一致的風格撰寫-coroutine-的測試"><a href="#好處：使用一致的風格撰寫-coroutine-的測試" class="headerlink" title="好處：使用一致的風格撰寫 coroutine 的測試"></a>好處：使用一致的風格撰寫 coroutine 的測試</h1><p>升級到 <code>1.6.0</code> 之後，我覺得寫 unit test 有比較簡潔一點，而且我把絕大多數的測試包進 <code>runTest</code> 之後，也不需要依賴 Mockito 提供的一些為了測試 coroutine 而增加的工具。整體來說能夠用比較一致的風格來寫單元測試，對於大團隊算是好事。</p>
+<p>寫 coroutine unit test 的主要精神就是，產生一個 <code>TestDispatcher</code>，然後透過這個 <code>TestDispatcher</code> 生出 <code>TestScope</code>，然後注入這些測試專用的 Dispatcher 或是 Scope 到實作的程式裡面。因為這些測試用的物件提供了我們上下其手的空間，所以我們就能預期被測試的實作會如何被執行，以此來進行單元測試。</p>
+<p>Coroutine 的測試最後大概都能寫成這樣，以下是我覺得不錯的風格。(當然一個測試檔案只應該測試一個對象，我一次塞進 <code>foo</code>, <code>bar</code>, <code>foobar</code>, <code>foobarViewModel</code> 只是為了節省空間)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> kotlin.test.assertEquals</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.Dispatchers</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.ExperimentalCoroutinesApi</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.test.StandardTestDispatcher</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.test.TestDispatcher</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.test.TestScope</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.test.runCurrent</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.test.runTest</span><br><span class="line"><span class="keyword">import</span> kotlinx.coroutines.test.setMain</span><br><span class="line"><span class="keyword">import</span> org.junit.Before</span><br><span class="line"><span class="keyword">import</span> org.junit.Test</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith</span><br><span class="line"><span class="keyword">import</span> org.robolectric.RobolectricTestRunner</span><br><span class="line"></span><br><span class="line"><span class="meta">@ExperimentalCoroutinesApi</span></span><br><span class="line"><span class="meta">@RunWith(RobolectricTestRunner::class)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoobarTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> testScope: TestScope = TestScope(testDispatcher)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> foo: Foo = Foo(testScope) <span class="comment">// inject Scope to implementation Foo</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> bar: Bar = Bar(testDispatcher) <span class="comment">// inject Dispatcher to implementation Bar</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> foobarViewModel: FooBarViewModel = FooBarViewModel()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> foobar: Foobar = Foobar()</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setUp</span><span class="params">()</span></span> &#123;</span><br><span class="line">        Dispatchers.setMain(testDispatcher) <span class="comment">// for testing foobarViewModel</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">        <span class="keyword">val</span> returnedValue = foo.suspendableFunc()</span><br><span class="line">        assertEquals(<span class="number">9527</span>, returnedValue)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testBar</span><span class="params">()</span></span> = runTest(testDispatcher) &#123;</span><br><span class="line">        <span class="keyword">val</span> returnedValue = bar.suspendableFunc()</span><br><span class="line">        assertEquals(<span class="number">9527</span>, returnedValue)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testFooBar</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">        foobar.suspendableFunc()</span><br><span class="line"></span><br><span class="line">        runCurrent() <span class="comment">// ensure foobar completed its job</span></span><br><span class="line">        assertEquals(<span class="number">5987</span>, foobar.fetchedResult)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>從上方的範例可以看到</p>
+<ol>
+<li>我用 <code>StandardTestDispatcher</code> 產生一個 <code>TestDispatcher</code></li>
+<li>並且用 <code>TestDispatcher</code> 產生一個 <code>TestScope</code></li>
+<li>這些 Dispatcher 跟 Scope 被注入進 <code>Foo</code>, <code>Bar</code>…等</li>
+</ol>
+<p>接著列出一些常見的例子，解釋該怎麼寫測試比較好。<strong>注意：下方範例裡面的類別，即使同名，介面可能跟上面完全不同，請不要訝異上面下面對不起來。</strong></p>
+<h1 id="如何測試-suspend-function"><a href="#如何測試-suspend-function" class="headerlink" title="如何測試 suspend function"></a>如何測試 suspend function</h1><p>測試一個單純的 <code>suspend</code> function 最簡單了，因為我們可以直接掛在 testScope 底下執行該 function，過程輕鬆簡單</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> currentValue = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">suspendableFetch</span><span class="params">()</span></span> &#123;</span><br><span class="line">        currentValue = fetchRemoteWithDelay(currentValue)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">fetchRemoteWithDelay</span><span class="params">(input: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        delay(<span class="number">5000</span>)</span><br><span class="line">        <span class="keyword">return</span> input + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> bar: Bar = Bar()</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testBar</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">    assertEquals(<span class="number">0</span>, bar.currentValue)</span><br><span class="line">    bar.suspendableFetch()</span><br><span class="line">    assertEquals(<span class="number">1</span>, bar.currentValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>runTest</code> 會產生一個 <code>TestScope</code>，所以在它的 block 裡面，我們可以直接執行 <code>suspend</code> function 而不用擔心太多。</p>
+<h1 id="以注入的-Scope-來執行-suspend-function-的程式，該如何測試"><a href="#以注入的-Scope-來執行-suspend-function-的程式，該如何測試" class="headerlink" title="以注入的 Scope 來執行 suspend function 的程式，該如何測試"></a>以注入的 Scope 來執行 suspend function 的程式，該如何測試</h1><p>以下的範例有個看起來很普通的函式 <code>asyncRead</code>，其實裡面會透過注入的 coroutine scope 執行 suspend function。<code>asyncRead</code> 會直接返回，但我們又想要測試 <code>currentValue</code> 是否有按照預期地被更動</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> injectedScope: CoroutineScope) &#123;</span><br><span class="line">    <span class="keyword">var</span> currentValue = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">asyncRead</span><span class="params">()</span></span> &#123;</span><br><span class="line">        injectedScope.launch &#123;</span><br><span class="line">            currentValue = fetchRemote(currentValue)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">fetchRemote</span><span class="params">(input: <span class="type">Int</span>)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> input + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上面的例子來說，<code>asyncRead</code> 是一個在任何地方都可以呼叫的普通函式，射後不理的特徵讓我們不知道該怎麼測試。但是它是掛在注入的 <code>injectedScope</code> 下來執行，其實很好解決。既然已經注入了 scope，那麼只要在 assert 之前確保 scope 把該做的事情都做完就好。要確保這件事情，就是出動 <code>runCurrent</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testScope: TestScope = TestScope(testDispatcher)</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foo: Foo = Foo(testScope)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">    assertEquals(<span class="number">0</span>, foo.currentValue)</span><br><span class="line">    foo.asyncRead()</span><br><span class="line">    assertEquals(<span class="number">0</span>, foo.currentValue)</span><br><span class="line"></span><br><span class="line">    testScope.runCurrent()</span><br><span class="line">    assertEquals(<span class="number">1</span>, foo.currentValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外還有其他寫法，譬如說底下的作法也會通</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testScope: TestScope = TestScope(testDispatcher)</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foo: Foo = Foo(testScope)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest(testDispatcher) &#123;  <span class="comment">// 指定了 dispatcher</span></span><br><span class="line">    assertEquals(<span class="number">0</span>, foo.currentValue)</span><br><span class="line">    foo.asyncRead()</span><br><span class="line">    assertEquals(<span class="number">0</span>, foo.currentValue)</span><br><span class="line"></span><br><span class="line">    runCurrent()  <span class="comment">// 不需指定 scope</span></span><br><span class="line">    assertEquals(<span class="number">1</span>, foo.currentValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要看懂上面這個寫法，就要先弄懂 <code>runTest</code> 做了什麼事。<code>runTest</code> 可以接受一個 CoroutineContext，用它生出一個新的 TestScope。而 <code>runCurrent</code> 雖然是 <code>TestScope</code> 的 extension，實際上拿 <code>TestScope</code> 裡面的 scheduler 來用。因為我們把 <code>testDispatcher</code> 塞給了 <code>runTest</code>，同時又把跟 <code>testDispatcher</code> 綁在一起的 <code>testScope</code> 注入進去 <code>foo</code>。所以 <code>runCurrent()</code> 用的 scheduler 是同一個。</p>
+<p>結論就像下方的 pseudo code 演示的概念</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Just Psuedo Code **/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testScope: TestScope = TestScope(testDispatcher)</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foo: Foo = Foo(testScope)</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> theScheduler = testDispatcher.testScheduler</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest(theScheduler) &#123; theScheduler -&gt;</span><br><span class="line">    foo.asyncRead()</span><br><span class="line">    theScheduler.runCurrent()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以什麼時候會用 <code>runTest(testDispatcher)</code> 呢？<strong>想要確保 <code>runTest() &#123;....&#125;</code> 的 block 裡面是用哪個 scheduler 的時候</strong>。(另外也能寫成 <code>testScop.runTest &#123;...&#125;</code>，但我覺得寫 coroutine 的單元測試，控制流程進度應該從 Dispatcher 切入，而非 Scope，所以我都會避免這樣的寫法)</p>
+<h1 id="ViewModel-如何測試"><a href="#ViewModel-如何測試" class="headerlink" title="ViewModel 如何測試"></a>ViewModel 如何測試</h1><p><strong>androidx.lifecycle.lifecycle-viewmodel-ktx</strong> 提供了一個 extension <code>ViewModel.viewModelScope</code>，讓你在 ViewModel 裡面可以莫名其妙就拿到一個 Coroutine Scope 來用。其實實作很簡單，就是拿 <code>Dispatchers.Main</code> 來生出一個 scope 而已。所以在寫單元測試的時候，只要把 Main Dispatcher 換成我們自己的 TestDispatcher 就搞定了</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooBarViewModel</span> : <span class="type">ViewModel</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> currentValue: <span class="built_in">Int</span> = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testFunc</span><span class="params">()</span></span> &#123;</span><br><span class="line">        viewModelScope.launch &#123;</span><br><span class="line">            updateValue()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">updateValue</span><span class="params">()</span></span> = withContext(viewModelScope.coroutineContext) &#123;</span><br><span class="line">        currentValue = <span class="number">9527</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FoobarTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> testScope: TestScope = TestScope(testDispatcher)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> foobarViewModel: FooBarViewModel = FooBarViewModel()</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setUp</span><span class="params">()</span></span> &#123;</span><br><span class="line">        Dispatchers.setMain(testDispatcher) <span class="comment">// for testing foobarViewModel</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testFoobarViewModel</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">        assertEquals(-<span class="number">1</span>, foobarViewModel.currentValue)</span><br><span class="line">        foobarViewModel.testFunc()</span><br><span class="line"></span><br><span class="line">        assertEquals(-<span class="number">1</span>, foobarViewModel.currentValue)</span><br><span class="line">        runCurrent()</span><br><span class="line">        assertEquals(<span class="number">9527</span>, foobarViewModel.currentValue)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果跳進去看實作，就會看到 <code>StandardTestDispatcher</code> 跟 <code>UnconfinedTestDispatcher</code> 在建立的時候，如果沒有指定 Scheduler，就會拿同一個 Scheduler 來用，而且是同一個。而且執行 <code>Dispatcher.setMain</code> 的時候把這個 Dispatchers 指定給 Main，<code>TestSceop</code> 也說建購的時期如果沒有指定 Dispatcher，也會拿 Main Dispatcher 來用。所以到最後，這幾個背後都是同一個 Scheduler，也因此 <code>runCurrent</code> 幾乎是隨便亂用都會動(嘖嘖)。</p>
+<h1 id="StandardTestDispatcher-跟-UnconfinedTestDispatcher-差別在哪"><a href="#StandardTestDispatcher-跟-UnconfinedTestDispatcher-差別在哪" class="headerlink" title="StandardTestDispatcher 跟 UnconfinedTestDispatcher 差別在哪"></a>StandardTestDispatcher 跟 UnconfinedTestDispatcher 差別在哪</h1><p>官方 Guide 會看到這句話</p>
+<blockquote>
+<p>In these cases, UnconfinedTestDispatcher() should be used. We ensured that, when run with an UnconfinedTestDispatcher, runTest also eagerly enters launch and async blocks.</p>
+</blockquote>
+<p>當一個 coroutine 由 <code>UnconfinedTestDispatcher</code> 所啟動 (launch)，它會積極地在 caller 的 thread 執行。也就是說當你用這個 Dispatcher 跑起了一個 coroutine，它裡面又產生了一個 coroutine，那麼 <code>UnconfinedTestDispatcher</code> 會盡量去執行這個新的 coroutine。舉例來說</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foobar</span></span>(injectedDispatcher: CoroutineDispatcher) &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> scope = CoroutineScope(injectedDispatcher)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">printMsg</span><span class="params">()</span></span> &#123;</span><br><span class="line">        scope.launch &#123; <span class="comment">// coroutine A</span></span><br><span class="line">            funA()</span><br><span class="line">        &#125;</span><br><span class="line">        scope.launch &#123; <span class="comment">// coroutine B</span></span><br><span class="line">            funB()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">funA</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;&gt; before funcA&quot;</span>)</span><br><span class="line">        scope.launch &#123; <span class="comment">// coroutine C</span></span><br><span class="line">           funC()</span><br><span class="line">        &#125;</span><br><span class="line">        println(<span class="string">&quot;&lt; after funcA&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">funB</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;&gt; before funcB&quot;</span>)</span><br><span class="line">        scope.launch &#123; <span class="comment">// coroutine B</span></span><br><span class="line">            funcD()</span><br><span class="line">        &#125;</span><br><span class="line">        println(<span class="string">&quot;&lt; after funcB&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">funC</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;running funcC&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">funcD</span><span class="params">()</span></span>&#123;</span><br><span class="line">        println(<span class="string">&quot;running funcD&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>printMsg</code> 會產生兩個 coroutine，一個跑 <code>funA</code>，一個跑 <code>funB</code>。<code>funA</code> 執行的時候會 launch 一個 coroutine 來跑 <code>funC</code>，<code>funB</code> 也會 launch 一個 coroutine 來跑 <code>funD</code></p>
+<p>用 <code>StandardTestDispatcher</code> 的測試程式如下</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> theDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foobar: Foobar = Foobar(theDispatcher)</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFooBar</span><span class="params">()</span></span> = runTest(theDispatcher) &#123;</span><br><span class="line">    foobar.printMsg()</span><br><span class="line">    runCurrent()</span><br><span class="line">    println(<span class="string">&quot;Done&quot;</span>)</span><br><span class="line">    assert(<span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">results:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&gt; before funcA</span></span><br><span class="line"><span class="comment">&lt; after funcA</span></span><br><span class="line"><span class="comment">&gt; before funcB</span></span><br><span class="line"><span class="comment">&lt; after funcB</span></span><br><span class="line"><span class="comment">running funcC</span></span><br><span class="line"><span class="comment">running funcD</span></span><br><span class="line"><span class="comment">Done</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+<p>如果把依序把 <code>funA</code> 產生的 coroutine 稱為 <code>coroutine A</code>，那麼執行的順序就是</p>
+<ol>
+<li>coroutine A</li>
+<li>coroutine B</li>
+<li>coroutine C</li>
+<li>coroutine D</li>
+</ol>
+<p>接著改用 <code>UnconfinedTestDispatcher</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> theDispatcher: TestDispatcher = UnconfinedTestDispatcher()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foobar: Foobar = Foobar(theDispatcher)</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFooBar</span><span class="params">()</span></span> = runTest(theDispatcher) &#123;</span><br><span class="line">    foobar.printMsg()</span><br><span class="line">    runCurrent()</span><br><span class="line">    println(<span class="string">&quot;Done&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">results:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&gt; before funcA</span></span><br><span class="line"><span class="comment">&lt; after funcA</span></span><br><span class="line"><span class="comment">running funcC</span></span><br><span class="line"><span class="comment">&gt; before funcB</span></span><br><span class="line"><span class="comment">&lt; after funcB</span></span><br><span class="line"><span class="comment">running funcD</span></span><br><span class="line"><span class="comment">Done</span></span><br><span class="line"><span class="comment">**/</span></span><br></pre></td></tr></table></figure>
+
+<p>執行順序變成</p>
+<ol>
+<li>coroutine A</li>
+<li>coroutine C</li>
+<li>coroutine B</li>
+<li>coroutine D</li>
+</ol>
+<p>A 排在 B 前面，而 A 裡面產生的 C 被 Dispatcher 積極執行，所以插隊在 B 前面，這就是 Guide 裡面說的 Eagerly</p>
+<p>如果你的實作混用了其他 library 的非同步功能(ie: Rx)，有時候用 <code>UnconfinedTestDispatcher</code> 可以讓程式的執行順序跑得比較像一般函式呼叫的順序。但是長久來說，還是避免一堆工具混在一起作牛丸，盡量用單一工具來做非同步比較好。</p>
+<h1 id="何時使用-advanceTimeBy"><a href="#何時使用-advanceTimeBy" class="headerlink" title="何時使用 advanceTimeBy"></a>何時使用 advanceTimeBy</h1><p>有時候會用到 <code>delay</code> 或是其他函式對一個 coroutine 的執行時間作調整</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> injectedScope: CoroutineScope) &#123;</span><br><span class="line">    <span class="keyword">var</span> currentValue = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">asyncRead</span><span class="params">()</span></span> &#123;</span><br><span class="line">        injectedScope.launch &#123;</span><br><span class="line">            delay(<span class="number">2000</span>) <span class="comment">// 白金之星！...好吧，它是 delay 而非暫停時間</span></span><br><span class="line">            currentValue = <span class="number">9527</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>advanceTimeBy</code> 可以把 dispatcher 裡面的虛擬時鐘調快，就像老闆的替身能力克里姆王的那樣刪除一段時間</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">    foo.asyncRead()</span><br><span class="line">    assertEquals(-<span class="number">1</span>, foo.currentValue)</span><br><span class="line"></span><br><span class="line">    testScope.advanceTimeBy(<span class="number">3000</span>) <span class="comment">// 老闆能力發動！</span></span><br><span class="line">    assertEquals(<span class="number">9527</span>, foo.currentValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Troubleshooting-用到兩個-TestDispatcher-會出錯"><a href="#Troubleshooting-用到兩個-TestDispatcher-會出錯" class="headerlink" title="Troubleshooting: 用到兩個 TestDispatcher 會出錯"></a>Troubleshooting: 用到兩個 TestDispatcher 會出錯</h1><p>有時候會看到這個錯誤訊息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Detected use of different schedulers. If you need to use several test coroutine dispatchers, create one `TestCoroutineScheduler` and pass it to each of them.</span><br><span class="line">java.lang.IllegalStateException: Detected use of different schedulers. If you need to use several test coroutine dispatchers, create one `TestCoroutineScheduler` and pass it to each of them.</span><br></pre></td></tr></table></figure>
+
+<p>那是因為不小心產生了兩個 TestDispatcher，好比以下這段程式，使用 <code>withContext</code> 的時候經常發生這個錯誤。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span></span>(<span class="keyword">val</span> dispatcher: CoroutineDispatcher) &#123;</span><br><span class="line">    <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">suspendableFunc</span><span class="params">()</span></span>: <span class="built_in">Int</span> = withContext(dispatcher)&#123; <span class="comment">// 這裡用注入的 Dispatcher</span></span><br><span class="line">        <span class="comment">// ....</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BarTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> bar: Bar = Bar(testDispatcher)</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">testBar</span><span class="params">()</span></span> = runTest &#123; <span class="comment">// runTest 自己產生一個 Dispatcher，接著再以此生出 TestScope</span></span><br><span class="line">        bar.suspendableFunc()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Bar.suspendableFunc()</code> 會用注入的 Dispathcer，<code>runTest</code> 如果不指定一個 <code>TestDispatcher</code>，它內部實作也會產生一個新的。</p>
+<p>讓兩邊都用同一個 TestDispatcher 就可以解決問題。下面就是讓 runTest 使用同一個 Dispatcher</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testBar</span><span class="params">()</span></span> = runTest(testDispatcher) &#123;</span><br><span class="line">    bar.suspendableFunc()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="如果有個函式用到-withContext-Dispatcher-IO-，該如何測試"><a href="#如果有個函式用到-withContext-Dispatcher-IO-，該如何測試" class="headerlink" title="如果有個函式用到 withContext(Dispatcher.IO)，該如何測試"></a>如果有個函式用到 withContext(Dispatcher.IO)，該如何測試</h2><p>有時候我們會看到以下這樣的作法。<code>fetchRemote</code> 是個跑在 <code>Dispatcher.IO</code> 上面的耗時函數，外部呼叫 <code>asyncRead</code> 之後就可以射後不理，等到 <code>returnValue</code> 更新了，再去更新 UI</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> injectedScope: CoroutineScope) &#123;</span><br><span class="line">    <span class="keyword">var</span> returnedValue = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">asyncRead</span><span class="params">()</span></span> &#123;</span><br><span class="line">        injectedScope.launch &#123;</span><br><span class="line">            returnedValue = fetchRemote()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">fetchRemote</span><span class="params">()</span></span>: <span class="built_in">Int</span> = withContext(Dispatchers.IO) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e: Exception) &#123;</span><br><span class="line">            e.printStackTrace()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span><span class="symbol">@withContext</span> <span class="number">9527</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要測試 <code>asyncRead</code> 就會變得很麻煩，雖然已經注入了一個 <code>injectedScope</code>，但是在 <code>fetchRemote</code> 跑在我們測試程式碼裡面完全碰不到的 <code>Dispatchers.IO</code>。</p>
+<p>有個滿噁心的寫法：利用 <code>withContext</code> 來測試。</p>
+<p><code>withContext</code> 會拿當下的 coroutine context 跟透過參數指定進去的 context，兩個 merge 起來產生新的 context，接著用新的 context 裡面的 coroutine scope 執行 block 裡面的程式，直到該 scope 完成之後才離開 block。所以單元測試只要拿 <code>withContext</code> 產生的 scop 注入進去測試對象就可以了</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">    <span class="keyword">var</span> localFoo: Foo</span><br><span class="line">    withContext(testDispatcher) &#123;</span><br><span class="line">        localFoo = Foo(<span class="keyword">this</span>) <span class="comment">// `this` is a coroutineScope that created by withContext</span></span><br><span class="line">        localFoo.asyncRead()</span><br><span class="line">        assertEquals(<span class="number">0</span>, localFoo.returnedValue)</span><br><span class="line">    &#125;</span><br><span class="line">    assertEquals(<span class="number">9527</span>, localFoo.returnedValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但我覺得測試寫成這樣太過取巧，很可能遭天譴或是被人恥笑。有辦法修改的話，還是把類別改寫得比較容易測試才是正途。譬如說”inject Dispatcher” + “default value”</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span>(</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> coroutineScope: CoroutineScope,</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> ioDispatcher: CoroutineDispatcher = Dispatchers.IO</span><br><span class="line">) &#123;</span><br><span class="line">    ....</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">fetchRemote</span><span class="params">()</span></span>: <span class="built_in">Int</span> = withContext(ioDispatcher) &#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>scope, dispatcher, 球員，裁判都是我的，測試就會變得很好寫</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testDispatcher: TestDispatcher = StandardTestDispatcher()</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> testScope: TestScope = TestScope(testDispatcher)</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foo: Foo = Foo(testScope, testDispatcher)</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">testFoo</span><span class="params">()</span></span> = runTest &#123;</span><br><span class="line">    assertEquals(<span class="number">0</span>, foo.returnedValue)</span><br><span class="line">    foo.asyncRead()</span><br><span class="line"></span><br><span class="line">    runCurrent()</span><br><span class="line">    assertEquals(<span class="number">9527</span>, foo.returnedValue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="雜記"><a href="#雜記" class="headerlink" title="雜記"></a>雜記</h1><p>寫 coroutine 的單元測試，主要是要先搞懂當下在用的是哪個 Scope 或 Dispatcher，釐清它執行的順序，接著就是確保在 assert 之前把該做的事情做完。既然談到執行順序，又回到大家早就知道的概念，實作的時候要適當地注入 Dispatcher，這樣測試才會好寫。</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2022/03/30-coroutine-migration.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-03-30">2022-03-30</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/kotlin/">
+                    <span class="tag">kotlin</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+            
+                <a class="btn" href="/2021/12/10-ly.html" title="紀錄三讀通過交通處罰條例">Next &rarr; <b>紀錄三讀通過交通處罰條例</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>
