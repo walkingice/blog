@@ -163,6 +163,272 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2016/05/20-taiwan.html" itemprop="url" target="_blank">
+            <span class="">第三次政黨輪替</span>
+        </a>
+    </h1>
+
+    <p>賀！今天是 520 總統交接的日子。</p>
+<p>身為我大苗栗國民的好處是，走進全家就能看見滿櫃的就職紀念啤酒。</p>
+<p>2008 年還完全不懂政治的時候，我也投過馬一票。後來各種爭議事件愈來愈多，唸了一些書本、理論、歷史，價值觀大轉變。反倒是盼他趕緊下台，給台灣留點機會，不要全部輸光了。</p>
+<p>不知道來不來得及，總算是等到這一天。</p>
+<div style="max-width: 300px; margin: auto;"><img src="/2016/05/20-taiwan/taiwan_beer.jpg"></div>
+
+<p>雖然我不喝酒，但我喜歡 Pixel Art 的風格，買了兩瓶給老爸。</p>
+
+    
+    <a href="/2016/05/20-taiwan.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2016-05-20</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/taiwan/">
+                    <span class="tag">taiwan</span>
+                </a>
+            
+                <a href="/tags/political/">
+                    <span class="tag">political</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2016/04/19-docker.html" itemprop="url" target="_blank">
+            <span class="">Docker volume 簡單用法</span>
+        </a>
+    </h1>
+
+    <p>最近在設定開發環境的時候有個使用 docker volume 的機會，在這邊筆記一下指令，以便自己下次查詢使用。</p>
+<p>比起在系統裡面裝一個 postgresql，我比較喜歡透過 <a href="https://hub.docker.com/_/postgres/" target="_blank" rel="noopener">docker</a> 來使用。藉此降低對 host packages 的相依性，雖然會有一些效能上的 overhead 我覺得還是值得。</p>
+<p>既然要用 docker，馬上就要考慮 persistent data 的問題：<strong>如何把資料獨立在 image 之外來保存？</strong>，第一個聽到的解答就是 volume，因為開發需要，我的需求又有點不一樣</p>
+<ul>
+<li>希望能用官方的 pg image</li>
+<li>db 資料是獨立的，這樣可以獨立升級 pg 版本</li>
+<li>db 的資料希望能有 snapshot，這樣方便寫 unit test 或是開發，不管怎麼惡搞資料都能簡單回復</li>
+</ul>
+<p>這邊紀錄下我最近的作法，未來遇到更好的作法再更新於此。</p>
+
+    
+    <a href="/2016/04/19-docker.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2016-04-19</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/docker/">
+                    <span class="tag">docker</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2016/03/13-recyclerview.html" itemprop="url" target="_blank">
+            <span class="">使用 RecyclerView</span>
+        </a>
+    </h1>
+
+    <p><a href="http://android-developers.blogspot.tw/2015/10/android-support-library-231.html" target="_blank" rel="noopener">RecyclerView</a> 是個在 Google I/O 2014 出現的 ViewGroup，放在 <a href="http://developer.android.com/intl/zh-tw/tools/support-library/features.html#v7" target="_blank" rel="noopener">v7 support libraries</a>，Android 2.1(API Level 7) 以上的版本都可以用，以現在普及率來看，幾乎是每一支手機都能用。</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/03/13-recyclerview/3layout.png"></div>
+
+<p>RecyclerView 預設就提供了三種 <a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank" rel="noopener">LayoutManager</a>，如上圖，由左而右依序是 ListLayoutManager, GridLayoutManager 與 StaggeredGridLayoutManager。都放在 v7 support libraries 裡面。</p>
+<p>看起來 List 與 Grid 已經重複了，為何 Android 還要多提供這個 Widget？</p>
+
+    
+    <a href="/2016/03/13-recyclerview.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2016-03-13</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2016/02/23-webpack.html" itemprop="url" target="_blank">
+            <span class="">Gulp and Webpack-dev-server options</span>
+        </a>
+    </h1>
+
+    <p>通常以直接下指令的方式使用 <strong>webpack-dev-server</strong>，可能會配合一些參數。當我們更動其中一個檔案的時候，webpack 會在 console 顯示剛剛重編的那唯一一個檔案。</p>
+<p>如果你想用 <strong>gulp + webpack</strong>，照著官方的<a href="https://webpack.github.io/docs/usage-with-gulp.html" target="_blank" rel="noopener">文件</a>做下去，你會發現結果有些不同</p>
+<p>Usually we invoke command directly to launch <strong>webpack-dev-server</strong>, maybe adding some parameters. Once we modified one of files, webpack rebuild it and displays related message to that one only.</p>
+<p>If you follow official <a href="https://webpack.github.io/docs/usage-with-gulp.html" target="_blank" rel="noopener">tutorial</a> to use <strong>gulp + webpack</strong>, then you find something different.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># run webpack-dev-server directly</span></span><br><span class="line">$ webpack-dev-server --content-base _tmp --hot --inline</span><br></pre></td></tr></table></figure>
+<p>Update file by <code>touch</code>, webpack just rebuild it and print clean messages.</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/02/23-webpack/expected.png"></div>
+
+    
+    <a href="/2016/02/23-webpack.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2016-02-23</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/webdev/">
+                    <span class="tag">webdev</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2016/01/28-2014jp5.html" itemprop="url" target="_blank">
             <span class="">2014 東京自由行 Day 5</span>
         </a>
@@ -189,7 +455,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2016-01-28</span>
+                    content="2022-06-25">2016-01-28</span>
             </a>
         </span>
 
@@ -250,7 +516,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2016-01-26</span>
+                    content="2022-06-25">2016-01-26</span>
             </a>
         </span>
 
@@ -311,7 +577,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2016-01-26</span>
+                    content="2022-06-25">2016-01-26</span>
             </a>
         </span>
 
@@ -373,7 +639,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2016-01-26</span>
+                    content="2022-06-25">2016-01-26</span>
             </a>
         </span>
 
@@ -437,7 +703,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2016-01-26</span>
+                    content="2022-06-25">2016-01-26</span>
             </a>
         </span>
 
@@ -499,7 +765,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2015-12-02</span>
+                    content="2022-06-25">2015-12-02</span>
             </a>
         </span>
 
@@ -522,255 +788,6 @@
             
                 <a href="/tags/hsinchu/">
                     <span class="tag">hsinchu</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2015/11/18-git.html" itemprop="url" target="_blank">
-            <span class="">Git commands</span>
-        </a>
-    </h1>
-
-    <p>今天看到朋友講了一個 git 指令，想說順便分享一下我自己常用的指令，算是野人獻曝。</p>
-
-    
-    <a href="/2015/11/18-git.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2015-11-18</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/tools/">
-                    <span class="tag">tools</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2015/10/31-github.html" itemprop="url" target="_blank">
-            <span class="">Github 與 Halloween</span>
-        </a>
-    </h1>
-
-    <p>今天萬聖節，打開 github 看到這個 style 有嚇一跳</p>
-<div class="img-row"><img src="/2015/10/31-github/contributions.png" title="Github contributions"></div>
-
-    
-    <a href="/2015/10/31-github.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2015-10-31</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/fun/">
-                    <i class="fa fa-th"></i>
-                    <span class="">fun</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/github/">
-                    <span class="tag">github</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2015/10/28-lightdm.html" itemprop="url" target="_blank">
-            <span class="">從 GDM 換成 lightDM</span>
-        </a>
-    </h1>
-
-    <p>最近發生了奇怪的事情，就是我的 root file system (/) 會整個被吃光，同時還注意到 rsyslogd 會跑到 CPU 100%。接著就發現是 <code>/var/log</code> 底下的 syslog 或是 message 幾個檔案變成好幾 Gigabyte 的大小，裡面滿是 gdm3 的錯誤訊息</p>
-<p>幾乎都是發生在我跑 Android Studio 之後才會遇到這樣的情況，我還以為是 openjdk 配上我的 awesome window manager 有什麼問題。今天還忍痛換成 orcale java 8，也停掉了 rsyslogd。直到剛剛我才發現一件奇怪的事情</p>
-<blockquote>
-<p>竟然有個 gnome-shell 的 process 在跑！<br>竟然有個 gnome-shell 的 process 在跑！<br>竟然有個 gnome-shell 的 process 在跑！</p>
-</blockquote>
-
-    
-    <a href="/2015/10/28-lightdm.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2015-10-28</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/linux/">
-                    <span class="tag">linux</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2015/10/21-crack.html" itemprop="url" target="_blank">
-            <span class="">被攻陷的 Android 平板</span>
-        </a>
-    </h1>
-
-    <p>某天下午，我叔叔拿著他的 Android Nexus 7 平板來找我，說是不能操作了。拿來一看發現螢幕都被綁架得相當徹底。</p>
-
-    
-    <a href="/2015/10/21-crack.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2015-10-21</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/life/">
-                    <i class="fa fa-th"></i>
-                    <span class="">life</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/android/">
-                    <span class="tag">android</span>
                 </a>
             
         </span>

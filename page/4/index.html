@@ -163,6 +163,272 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2018/02/28-ffmpeg.html" itemprop="url" target="_blank">
+            <span class="">使用 ffmpeg 編輯影片</span>
+        </a>
+    </h1>
+
+    <p>長話短說，可以用 ffmpeg 做到一些簡單的影片編輯功能，好比說</p>
+<p>把 input.mp4 裡面 00:24:32 到 00:29:34 這段時間的影像擷取出來</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i input.mp4 -ss 00:24:32 -to 00:29:34 -threads 2 -y clip001.mp4</span><br></pre></td></tr></table></figure>
+<p>從一張圖片產生一個長度 15 秒的影片，同時把尺寸轉為 1280x720</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -loop 1 -i image.png -t 15 -vf scale=1280:720 -pix_fmt yuv420p -y image.mp4</span><br></pre></td></tr></table></figure>
+<p>將一個完全沒有音軌的影片，塞入 15 秒的無聲音軌，指定頻率為 48000 Hz。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f lavfi -i anullsrc=r=48000 -i image.mp4 -t 15 -c:v copy -c:a aac  -y silent.mp4</span><br></pre></td></tr></table></figure>
+<p>接著把幾個 mp4 檔接成一個檔案，先把它們都轉成 ts 檔，最後再接回 mp4 檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i clip0.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip0.ts</span><br><span class="line">$ ffmpeg -i clip1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip1.ts</span><br><span class="line">$ ffmpeg -i clip2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip2.ts</span><br><span class="line"></span><br><span class="line">$ ffmpeg -i <span class="string">"concat:clip0.ts|clip1.ts|clip2.ts"</span> -c copy -bsf:a aac_adtstoasc -y output.mp4</span><br><span class="line"></span><br><span class="line">$ rm clip0.ts clip1.ts clip2.ts</span><br></pre></td></tr></table></figure>
+
+    
+    <a href="/2018/02/28-ffmpeg.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2018-02-27</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2018/02/08-nested-class.html" itemprop="url" target="_blank">
+            <span class="">Java 的 Nested Class</span>
+        </a>
+    </h1>
+
+    <p>最近公司做的產品，收到來自外面鄉親貢獻的 <a href="https://github.com/mozilla-tw/Rocket/pull/1342" target="_blank" rel="noopener">PR</a>，想起了這個被自己遺忘很久的東西，趁著再次補起記憶的時候，順便做一點紀錄。</p>
+<p>簡單來說就是 Java 的 Nested class 盡量寫成 static 比較好。至於為什麼比較好，也許就要多花點功夫來了解。</p>
+
+    
+    <a href="/2018/02/08-nested-class.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2018-02-08</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2018/01/29-env.html" itemprop="url" target="_blank">
+            <span class="">日常能做的環保小事</span>
+        </a>
+    </h1>
+
+    <p>比起各種政治立場或是國族認同，我覺得最能夠找出共識的議題應該就是環保了(好吧，雖然還是會有些科學的爭議)。姑且不論層次比較高的空汙、能源議題，若能夠隨手做一點小事來降低對生態的衝擊，也不是一件壞事。</p>
+<p>這篇文章記錄了我在日常生活中會做的一點小事，成本不高，希望能給你參考之後一同來試試看，簡單來說就是</p>
+<ul>
+<li>減少使用塑膠袋，盡量隨身攜帶重複使用</li>
+<li>出門自備筷子與手帕</li>
+<li>想買飲料來喝，就自備罐子與吸管</li>
+</ul>
+<p>上述除了第三點可能稍微有點麻煩之外，一二點都是很自然就能做到的小事了</p>
+
+    
+    <a href="/2018/01/29-env.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2018-01-29</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/ramble/">
+                    <i class="fa fa-th"></i>
+                    <span class="">ramble</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/taiwan/">
+                    <span class="tag">taiwan</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2017/09/16-constraintlayout.html" itemprop="url" target="_blank">
+            <span class="">使用 ConstraintLayout 建構畫面</span>
+        </a>
+    </h1>
+
+    <p>ConstraintLayout 是 Support Library 裡面新增的一個 ViewGroup，從功能上來看非常強大，效能上不輸、甚至<a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2017/08/understanding-performance-benefits-of.html">贏過</a>傳統的 Layout。因為放在 Support Library 裡面，幾乎市面上所有的手機都相容，就放心使用吧。</p>
+<p>以往在建構複雜的畫面時，經常是 LinearLayout 與 RelativeLayout 等等相互組合，拼湊出相當深且複雜的樹狀 xml。略懂 View render 過程的都知道，效能就在層層的 measurement/layout 之中持續消耗。改用 ConstraintLayout 取代傳統 Layout 的複雜組合，把 xml 檔變得更加扁平，效率很容易就能提升。</p>
+<p>粗看 ConstraintLayout 會覺得跟 RelativeLayout 有點像，其實它還能做到很多 RelativeLayout 做不到的事情。以下就稍微簡介 ConstraintLayout 的安裝與使用。</p>
+
+    
+    <a href="/2017/09/16-constraintlayout.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-06-25">2017-09-16</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2017/09/13-checkstyle.html" itemprop="url" target="_blank">
             <span class="">使用 Checkstyle/Ktlint 檢查 Java/Kotlin 語法</span>
         </a>
@@ -190,7 +456,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2017-09-13</span>
+                    content="2022-06-25">2017-09-13</span>
             </a>
         </span>
 
@@ -261,7 +527,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2017-09-04</span>
+                    content="2022-06-25">2017-09-04</span>
             </a>
         </span>
 
@@ -319,7 +585,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2017-09-03</span>
+                    content="2022-06-25">2017-09-03</span>
             </a>
         </span>
 
@@ -382,7 +648,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2017-09-02</span>
+                    content="2022-06-25">2017-09-02</span>
             </a>
         </span>
 
@@ -446,7 +712,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2017-08-21</span>
+                    content="2022-06-25">2017-08-21</span>
             </a>
         </span>
 
@@ -507,7 +773,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-04-02">2017-08-01</span>
+                    content="2022-06-25">2017-08-01</span>
             </a>
         </span>
 
@@ -530,264 +796,6 @@
             
                 <a href="/tags/political/">
                     <span class="tag">political</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2017/07/08-book.html" itemprop="url" target="_blank">
-            <span class="">議會裡的部落頭人</span>
-        </a>
-    </h1>
-
-    <p>美拉尼西亞社會裡面，由當地人稱為「萬托克」(wantok，由 one talk 而來)的部落組成。每一個萬托克由數十到數千人不等，彼此有親屬關係。萬托克由一個「頭人」(Big Man) 當領袖，頭人不是世襲的位置，而需要靠爭取，成為最受部落居民信任者才是頭人。頭人會分配豬隻、貝殼等資源給部落成員，只要沒有資源可以分配，隨時可能失去領袖地位，被其他人取代。</p>
-<p>正在看「政治秩序的起源」這本書，僅從序開始看到第二章而已。序講到「頭人」這個詞讓我有很強的既視感，這不就是地方派系的大頭嗎？</p>
-
-    
-    <a href="/2017/07/08-book.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2017-07-08</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/ramble/">
-                    <i class="fa fa-th"></i>
-                    <span class="">ramble</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/political/">
-                    <span class="tag">political</span>
-                </a>
-            
-                <a href="/tags/book/">
-                    <span class="tag">book</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2017/06/19-political.html" itemprop="url" target="_blank">
-            <span class="">政治參與度</span>
-        </a>
-    </h1>
-
-    <p>在新竹、苗栗想要推在地的政治活動，一直都很不容易，參與的人數總是不多。</p>
-<p>常聽見人說這兩個縣市的人都不關心政治，關心的人少了，參與政治活動的人自然也少。而我的想法是這兩個縣市的人的生活方式，本來就不容易在工作跟家庭之外有自己的生活空間與興趣，因此更不容易撥出時間參與政治。</p>
-
-    
-    <a href="/2017/06/19-political.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2017-06-19</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/ramble/">
-                    <i class="fa fa-th"></i>
-                    <span class="">ramble</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/taiwan/">
-                    <span class="tag">taiwan</span>
-                </a>
-            
-                <a href="/tags/political/">
-                    <span class="tag">political</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2017/04/24-mockito.html" itemprop="url" target="_blank">
-            <span class="">Using Mockito</span>
-        </a>
-    </h1>
-
-    <p><a href="https://static.javadoc.io/org.mockito/mockito-core/2.6.1/allclasses-noframe.html" target="_blank" rel="noopener">Mockito</a> 是一個常見的 testing framework，這邊稍微紀錄一下我用到的測試寫法，包括</p>
-<ol>
-<li>change private variable</li>
-<li>specify return value</li>
-<li>to verify whether a method is invoked</li>
-<li>to verify parameters of a method call</li>
-</ol>
-
-    
-    <a href="/2017/04/24-mockito.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2017-04-24</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/test/">
-                    <span class="tag">test</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2016/12/03-git.html" itemprop="url" target="_blank">
-            <span class="">Some Git tips</span>
-        </a>
-    </h1>
-
-    <p>Git is so popular around the developer world, as well as Github. Nowadays almost every developer could use git a bit. It was hard to imagine this situation in several years ago.</p>
-<p>To master your development tool would help you focus on development itself. And provide more information when hacking code.</p>
-<p>Git has so many commands, and each commands have many parameters. It is common that people says “Oh! I don’t know we can use Git like that!”. This article is for sharing some commands I use often. Hope it helps, and I hope you can share your tips as well.</p>
-
-    
-    <a href="/2016/12/03-git.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/4/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-04-02">2016-12-03</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/tools/">
-                    <span class="tag">tools</span>
-                </a>
-            
-                <a href="/tags/git/">
-                    <span class="tag">git</span>
                 </a>
             
         </span>
