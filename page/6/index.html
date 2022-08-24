@@ -163,6 +163,79 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2016/07/30-debian-inkscape.html" itemprop="url" target="_blank">
+            <span class="">Inkscape crashed in Debian testing</span>
+        </a>
+    </h1>
+
+    <h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>這個問題持續發生好長一段時間了：只要同時選擇了兩個以上的物件，Inkscape 就會 crash。問題簡單來說就是中文翻譯的問題，所以用其他語言的人不會遇到。</p>
+<p><strong>For debian inkscape 0.91, It only happens in Traditional-Chinese conext</strong>.</p>
+<p>You could reproduce this problem by launching inkscape in Traditional-Chinese context. (It won’t happen in Simplified-Chinese context. explain later).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANGUAGE=zh_TW.utf8 /usr/bin/inkscape</span><br></pre></td></tr></table></figure>
+<p>Then create any two objects, select all of them. boom!</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/07/30-debian-inkscape/inkscape_crash_in_zh.png"></div>
+
+<p>If you only need workaroud for now.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ LANGUAGE=en_US /usr/bin/inkscape</span><br></pre></td></tr></table></figure>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/07/30-debian-inkscape/inkscape_works_in_eng.png"></div>
+
+<p>因為困擾我超久的，今天就用 gdb 稍微追一下問題</p>
+
+    
+    <a href="/2016/07/30-debian-inkscape.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-08-24">2016-07-30</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/linux/">
+                    <i class="fa fa-th"></i>
+                    <span class="">linux</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+                <a href="/tags/debian/">
+                    <span class="tag">debian</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2016/05/20-taiwan.html" itemprop="url" target="_blank">
             <span class="">第三次政黨輪替</span>
         </a>
@@ -194,7 +267,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-05-20</span>
+                    content="2022-08-24">2016-05-20</span>
             </a>
         </span>
 
@@ -259,7 +332,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-04-19</span>
+                    content="2022-08-24">2016-04-19</span>
             </a>
         </span>
 
@@ -320,7 +393,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-03-13</span>
+                    content="2022-08-24">2016-03-13</span>
             </a>
         </span>
 
@@ -392,7 +465,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-02-23</span>
+                    content="2022-08-24">2016-02-23</span>
             </a>
         </span>
 
@@ -455,7 +528,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-01-28</span>
+                    content="2022-08-24">2016-01-28</span>
             </a>
         </span>
 
@@ -516,7 +589,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-01-26</span>
+                    content="2022-08-24">2016-01-26</span>
             </a>
         </span>
 
@@ -577,7 +650,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-01-26</span>
+                    content="2022-08-24">2016-01-26</span>
             </a>
         </span>
 
@@ -639,7 +712,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-01-26</span>
+                    content="2022-08-24">2016-01-26</span>
             </a>
         </span>
 
@@ -703,7 +776,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2022-06-28">2016-01-26</span>
+                    content="2022-08-24">2016-01-26</span>
             </a>
         </span>
 
@@ -722,72 +795,6 @@
             
                 <a href="/tags/japan/">
                     <span class="tag">japan</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2015/12/03-hsinchu.html" itemprop="url" target="_blank">
-            <span class="">新竹市官網比賽後記</span>
-        </a>
-    </h1>
-
-    <p>11/28 的時候與 <a href="https://github.com/yhsiang" target="_blank" rel="noopener">Ly</a> 以及設計師佳寧一同參與了名為 <a href="http://2015hackhsinchucity.punnode.com/" target="_blank" rel="noopener">2015新竹官網黑客松</a> 的網頁設計比賽。雖然比賽沒有拿到名次，覺得還是該稍微紀錄一下，以後回顧的時候才不會都忘光光。</p>
-<div class="img-row"><img src="/2015/12/03-hsinchu/thumb.png" title="成果擷圖"></div>
-
-<p>這是成果網頁的部份截圖，我還另外抓了 <a target="_blank" href="/2015/12/03-hsinchu/index.png">首頁的圖</a>，有興趣的可以看看。</p>
-<p>打開多數市府的網頁，多是目不暇給的各式連結，或是市府想要宣導的訊息。就我自己多次打開各單位的網站，通常都已有特定目的，好比要申訴、回報問題，或是有文件申請的疑惑想尋求解答。因此我們嘗試從另外一個極端出發，設計一個盡力完成民眾需求的網站，想看看用起來的感覺會怎樣。</p>
-
-    
-    <a href="/2015/12/03-hsinchu.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/6/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2022-06-28">2015-12-02</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/life/">
-                    <i class="fa fa-th"></i>
-                    <span class="">life</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/hsinchu/">
-                    <span class="tag">hsinchu</span>
                 </a>
             
         </span>
