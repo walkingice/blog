@@ -42,3 +42,11 @@ tags:
 
 * scroll 的作用對象都是 Viewport，scroll up 就是把 view port 往上方移動
 * drag 是手指在螢幕上的拖動方向，drag down 就是手指按著螢幕，往下滑
+
+
+Update:
+
+官方的 [Animate a scroll gesture](https://developer.android.com/develop/ui/views/touch-and-input/gestures/scroll) 也有提到這部分
+
+> "Scrolling" is a word that can take on different meanings in Android, depending on the context.
+> Scrolling is the general process of moving the viewport (that is, the 'window' of content you're looking at)
