@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Anki 的基本介紹與自訂卡片 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Anki 的基本介紹與自訂卡片 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:title" content=" Anki 的基本介紹與自訂卡片 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Anki 的基本介紹與自訂卡片 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Anki 的基本介紹與自訂卡片 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:description" content=" Anki 的基本介紹與自訂卡片 | 只放拖鞋的鞋櫃 " />
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg" >
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg" />
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2022/09/01-anki.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    <meta name="generator" content="Hexo 5.4.0"></head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2022/09/01-anki.html" itemprop="url" target="_blank">
+            <span class="">Anki 的基本介紹與自訂卡片</span>
+        </a>
+    </h1>
+
+    <p>Anki 是相當知名的單字背誦軟體，但是製作卡片的方法不是很容易理解，本篇文章嘗試從軟體阿宅的角度做基本的介紹</p>
+<span id="more"></span>
+
+<p>光是看中文寫作能力，就已經比許多台灣人還要厲害的畢靜翰也說<a target="_blank" rel="noopener" href="https://www.facebook.com/john.barthelette/posts/pfbid0EyfaNKzdjf8pW5X7SVuxinrfsoeStQpfeJXZW78ReoCek5YMCyn375ZAeSmfNheXl">學語言需要有技巧地背單字</a>，強者都這麼說了，當然要試著把這件事情做好。</p>
+<p>正所謂工欲善其事，必先利其器，我們軟體阿宅，最喜歡花時間把工具弄好。就像很多人會花好幾天調整 Blog 的樣式，然後三年寫不到一篇。寫不寫 Blog 不是重點，重點是我們寫 Blog 的工具一定要夠順夠好用。同理，能用 Anki 背多少單字一點都不重要，重要的是能夠造出比別人更細膩的單字卡，這才是我們關心的部分。</p>
+<h1 id="要做出怎樣的卡片"><a href="#要做出怎樣的卡片" class="headerlink" title="要做出怎樣的卡片"></a>要做出怎樣的卡片</h1><p>小畢那篇文章對於 Anki 用法的建議，大致整理要點如下</p>
+<ul>
+<li>正面寫上英文單字，譬如<code>Cone</code></li>
+<li>背面寫上中文解釋，並且加上例句，例句裡面要把生字挖空，譬如<code>圓錐或圓錐體 The ____is gone: VLC Media Player silently banned in India</code></li>
+</ul>
+<p>就我的額外理解，對於這個單字要產生兩張卡片。一張卡片是扔出英文單字，考你中文意思；另一張卡片是扔出中文，要你在英文例句裏面填空。當你卡片數量累積夠多的時候，就可以偶爾考你英翻中，偶爾考你中翻英，兩邊夾攻之下聽起來效果會很不錯。</p>
+<p>然而，但是，不過，But，我現在想學的是日文，學日文多了一個「漢字」要背。</p>
+<p>漢字該怎麼安排？我想了很久都想不到一個合理的做法。我試過分別產生漢字跟假名的卡片來背誦，可是這樣效果很差。舉例來說「便利(べんり)」這個字，漢字跟中文解釋完全一樣，這樣產生的卡片就很尷尬。</p>
+<p>我最近才想通，就單純背單字來說，我不應該去背漢字。就像完全不會寫漢字的日文小學生，全部寫假名然後用講的也能溝通，我應該要把假名當成英文，然後背誦的假名跟中文解釋的關係，譬如「正面：べんり；反面：很方便；東京の生活は…ですね」，漢字則當成一個補充學習的東西，反正對台灣人來說漢字大多數都不難。</p>
+<p>所以我的目標就是做出這樣的卡片</p>
+<ul>
+<li>正面：假名</li>
+<li>背面：中文解釋、挖空生字的例句</li>
+<li>可選(optional) 的註釋，預設都是隱藏起來，直到按下去才會顯示出來</li>
+</ul>
+<p>這樣我就能用背英文單字的方式去背日文，真的想要知道額外訊息的時候再去偷看一下註釋的東西。</p>
+<h1 id="Anki-的基本介紹"><a href="#Anki-的基本介紹" class="headerlink" title="Anki 的基本介紹"></a>Anki 的基本介紹</h1><p>剛開始碰 Anki 的阿宅都會搞不太懂牌組或卡片之類的關係，會覺得有點混亂。如果從軟體宅的角度來解釋，我會用資料庫的方式去解說</p>
+<ul>
+<li>整個 Anki 筆記就是一個資料庫<ul>
+<li>不懂程式的人，可以想像是一個 Excel 檔案</li>
+</ul>
+</li>
+<li>筆記類型(Note Type) 就是一個 Table<ul>
+<li>可以想像是一個 Excel 檔案裡面有好幾個工作表(Sheet)，一個 Note Type 就是一個 Sheet</li>
+</ul>
+</li>
+<li>筆記(Note) 就是 Table 裡面的一個 Row<ul>
+<li>可以想像是某個 Sheet 裡面的某一筆資料</li>
+</ul>
+</li>
+<li>卡片就是某一個 Row (筆記) Render 出來的結果，就像 Select 語句<ul>
+<li><code>SELECT front_col, back_col, comment_col FROM MY_NOTE;</code> 產生第一堆卡片，正面顯示假名，背面顯示中文解釋與例句</li>
+<li><code>SELECT back_col, front_col, comment_col FROM MY_NOTE;</code> 產生第二堆卡片，正面顯示中文解釋與例句，背面顯示假名</li>
+<li>可以想像是把 Sheet 裡面的資料匯出成各種花俏的資料</li>
+</ul>
+</li>
+<li>牌堆(Deck)就是前述 SELECT 出來的卡片，分組放到不同的地方<ul>
+<li>可以想像是把匯出的花俏資料，放到不同的資料夾：「給上司看的」「呼嚨投資人的」</li>
+</ul>
+</li>
+</ul>
+<p>用資料庫的表格來看，大概會像這樣</p>
+<div style="max-width: 100%;" class="img-row"><img src="/2022/09/01-anki/tables.svg" class=""></div>
+
+<ul>
+<li>有兩個 Note type，一個叫 JP，一個叫 Eng</li>
+<li>JP 裡面有三筆 Notes</li>
+<li>Eng 裡面有兩筆 Notes</li>
+</ul>
+<p>實際上 Anki 裡面是怎麼儲存這些資料呢？我沒有去看源碼所以並不清楚。不過沒關係，真正搞懂原理才動手，這是舊時代骨灰程式設計師才會做的事情，身為後現代軟體宅，歷經各種 Scrum 的調教，我們明白 time to market 比什麼都重要。所有東西都可以視為黑盒子，只要 INPUT 對，OUTPUT 對，就可以上線出貨。為了可以趕快進到改介面那個階段，我們不用管 Anki 存資料的真正方式。</p>
+<p>突破心魔之後，一切就海闊天空，要做的事情就變得很明確</p>
+<ul>
+<li>新增一個符合我們目標的 Note Type<ul>
+<li>要有 Front</li>
+<li>要有 Back</li>
+<li>要有 Comment</li>
+</ul>
+</li>
+<li>該 Note Type 要能夠針對每筆 Note 生出兩張卡片<ul>
+<li>一張問你 假名 =&gt; 意思、例句</li>
+<li>一張問你 意思、例句 =&gt; 假名</li>
+</ul>
+</li>
+<li>針對卡片修改外觀<ul>
+<li>Comment 預設隱藏，點一下才會顯示</li>
+</ul>
+</li>
+<li>輸入 Note 新增需要背誦的資料<ul>
+<li>其實可以用 CSV 檔匯入，但我懶得紀錄了</li>
+</ul>
+</li>
+<li>Optional(可省略)：使用 Anki 背單字</li>
+</ul>
+<h1 id="開始自訂格式"><a href="#開始自訂格式" class="headerlink" title="開始自訂格式"></a>開始自訂格式</h1><h2 id="產生我們的-Note-Type"><a href="#產生我們的-Note-Type" class="headerlink" title="產生我們的 Note Type"></a>產生我們的 Note Type</h2><p>其實你也可以用現成的 Note Type，但是自己土砲一個是軟體宅基本美德，我們永遠都會嫌棄，看不上毫無個性的預設值。</p>
+<ul>
+<li>打開 Anki desktop 版</li>
+<li>點上方的 Browse</li>
+<li>從左邊的 side bar 找到 Note Type，按右鍵選 Manage Note Types</li>
+<li>打開 Note Types 對話框之後，點 Add</li>
+<li>在顯示的 Add Note Type 對話框裡面，先隨便選個基本的 Add: Basic，取名叫 <code>JP</code></li>
+</ul>
+<p>至此已經產生 Table，但是 Table 裡面的欄位不對，所以我們來修改一下</p>
+<ul>
+<li>在 Note Types 對話框點剛剛新增的 <code>JP</code>，然後選右邊的 Fields</li>
+<li>在打開的 Field 對話框點 Add，新增一個欄位叫做 HiddenComment，於是就會有三個欄位<ul>
+<li><code>Front</code> - 這是預設的</li>
+<li><code>Back</code> - 這是預設的</li>
+<li><code>HiddenComment</code> - 我們新增的</li>
+</ul>
+</li>
+</ul>
+<div style="max-width: 100%;" class="img-row"><img src="/2022/09/01-anki/anki_add_field.jpg" class=""></div>
+
+<p>Save 之後就完成了這個階段</p>
+<h2 id="針對-Note-生出兩張卡片"><a href="#針對-Note-生出兩張卡片" class="headerlink" title="針對 Note 生出兩張卡片"></a>針對 Note 生出兩張卡片</h2><ul>
+<li>回到 Notes Type 對話框，選了 <code>JP</code> 之後點右邊的 <code>Cards</code> 按鈕，打開 Cards Types for JP 對話框</li>
+<li>點右上方的 Options 選 Add Card Type，預設的名字是 Card2</li>
+</ul>
+<p>以後 <code>JP</code> 這個 Note Type 每新增一筆資料，就會根據 Card1 跟 Card2 定義的樣式生出兩張卡片了</p>
+<div style="max-width: 100%;" class="img-row"><img src="/2022/09/01-anki/anki_add_type.jpg" class=""></div>
+
+<p>截圖裡面兩張卡片的敘述看起來不是很好懂，它的格式是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[順序]: [卡片類型名稱]: [正面卡片欄位] -&gt; [背面卡片欄位]</span><br></pre></td></tr></table></figure>
+
+<p>改名字只能改到 <code>卡片類型名稱</code> 那一塊，剩下的都是自動產生的提示，正面跟背面卡片的欄位會由下一節的內容來決定</p>
+<h2 id="針對卡片修改外觀"><a href="#針對卡片修改外觀" class="headerlink" title="針對卡片修改外觀"></a>針對卡片修改外觀</h2><p>重頭戲來了，展示我們軟體宅與眾不同的地方就是在這裡，首先我們先改 Card1 的外觀</p>
+<ul>
+<li>在 Card Types for JP 的對話框，在 Card Type 選 Card1</li>
+<li>接著左邊 Template 是我們動工的地方，右邊 Preview 就是…Preview 啦！<ul>
+<li>Front template - 卡片正面的版型，通常也就是提問的那一面</li>
+<li>Back template - 卡片背面的版型，也就是回答的那一面</li>
+<li>Style - 給你放超陽春 CSS 的地方，Template 跟 Style 分開來是基本起手式了</li>
+</ul>
+</li>
+</ul>
+<p>有寫過網頁的一看就知道這很像 mustache 之類的模板語言，在 front template 裡面填入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;front&quot;</span>&gt;</span></span><br><span class="line">&#123;&#123;Front&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>很簡單地把<code>Front</code> 欄位的內容放到 div 裡面，接著在 back template 裡面填入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;FrontSide&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;back&quot;</span>&gt;</span></span><br><span class="line">&#123;&#123;Back&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hint-container&quot;</span>&gt;</span></span><br><span class="line">&#123;&#123;hint:HiddenComment&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&#123;&#123;hint:HiddenComment&#125;&#125;</code> 是 Anki 的特殊標記，告訴 Anki 要把 <code>HiddenComment</code> 這個欄位的內容視為 <code>Hint</code>，而 Hint 就會被 Anki 暫時隱藏起來，直到我們點下去才會顯示內容。接著輸入 Style</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.front</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.8rem</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.back</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.2rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.hint</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">1.2rem</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.5</span>);</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.hint-container</span> &#123;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">5rem</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0.5rem</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#AAA</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上，就完成了 Card1 的外觀修改，接著 Card Type 選 Card2，繼續改它的 Front template。這次我們調換順序，在正面顯示 <code>Back</code> 欄位的內容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;front&quot;</span>&gt;</span></span><br><span class="line">&#123;&#123;Back&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 Back Template 顯示 <code>Front</code> 欄位的內容，於是我們就能夠用同一個 Note，產生出不同方向的問法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;FrontSide&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span> <span class="attr">id</span>=<span class="string">answer</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;back&quot;</span>&gt;</span></span><br><span class="line">&#123;&#123;Front&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;hint-container&quot;</span>&gt;</span></span><br><span class="line">&#123;&#123;HiddenComment&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>至於 Styles 的話，Card1 跟 Card2 都是共用同一個，所以不用再修改了。儲存之後就搞定這一切了</p>
+<h2 id="編輯資料"><a href="#編輯資料" class="headerlink" title="編輯資料"></a>編輯資料</h2><p>前述的東西只要做一次就好，以後只要專心新增資料就好。有時候我們會被混淆，雖然介面上說的是「新增卡片」，但實際上你新增的是 Note。我猜應該是要對一般使用者講清楚 Note 跟 Card 的差別太麻煩，所以新增的時候只會跟你說「新增卡片」，實際上真正的操作是在「新增筆記(Note)」</p>
+<p>也因此，你在卡片瀏覽器裏面，對某一張卡片點右鍵，怎樣都找不到「刪除卡片」的選項。因為 Card 是根據 Note 畫出來的結果，你真正要刪除的東西其實是 Note</p>
+<div style="max-width: 100%;" class="img-row"><img src="/2022/09/01-anki/anki_toggle.jpg" class=""></div>
+
+<p>在卡片瀏覽器的上方，可以透過 toggle widget(那個 N，原本是 C) 快速切換到 Note，這時候按右鍵就可以看見刪除的按鈕。正如我們前面的製作，讓一個 Note 可以生出兩張 Card，這邊刪除了一個 Note，理所當然會刪除對應的兩張 Card。</p>
+<p>至於 Deck(牌組) 的部分，我覺得不用做太多。其實一個或兩個就很夠用了，畢竟學習的方法是要創一個單字池，持續地把生字丟進去，讓 Anki 根據時間撈出來給你複習，我們大家腦筋都不好，每天能背的就是那幾個。所以一個 Deck 就很夠用，除非要背單字以外的其他東西，才比較需要弄不同的 Deck。如果考試前要加強複習的話，目前的做法都是利用 Filter，創立一個暫時的 Deck，把單字卡都丟進去，考完試之後再把該 Filter 刪掉，這樣就不會影響原本 Deck 的進度。</p>
+<p>以上就是對 Anki 的簡單介紹。身為軟體宅的你，現在已經能夠假裝自己對於 Anki 軟體本身有一定程度的熟悉，還能夠透過 CSV 檔一次匯入上千個單字，顯示出客製化過的幾千張卡片。別人只會用預設卡片老實地背單字，我們就能夠好好地炫耀：「看看我的 Anki 卡片，多美啊！」</p>
+<p>工具調整得差不多之後，可以安心地把 Anki 關掉了。</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2022/09/01-anki.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-09-01">2022-09-01</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/life/">
+                    <i class="fa fa-th"></i>
+                    <span class="">life</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+            
+                <a class="btn" href="/2022/08/27-2022-08-26.html" title="我的死刑議題立場">Next &rarr; <b>我的死刑議題立場</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>
