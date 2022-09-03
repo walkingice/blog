@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Kotlin 雙冒號 ::someMethod 的觀察 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Kotlin 雙冒號 ::someMethod 的觀察 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:title" content=" Kotlin 雙冒號 ::someMethod 的觀察 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Kotlin 雙冒號 ::someMethod 的觀察 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Kotlin 雙冒號 ::someMethod 的觀察 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:description" content=" Kotlin 雙冒號 ::someMethod 的觀察 | 只放拖鞋的鞋櫃 " />
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<link rel="image_src" href="https://jchu.cc/assets/default_avatar.jpg" >
+	<meta property="og:image" content="https://jchu.cc/assets/default_avatar.jpg" />
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2022/09/04-kotlin.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    <meta name="generator" content="Hexo 5.4.0"></head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu">
+                <div class="menu-group">
+                    <nav>
+                        <ul class="menu-list">
+                            
+                            <li class="menu-item">
+                                <a href="/">
+                                    <i class="fa fa-home gutter-right menu-icon"></i>
+                                    <span class="menu-item">首頁</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/archives">
+                                    <i class="fa fa-archive gutter-right"></i>
+                                    <span class="menu-item">文章彙整</span>
+                                </a>
+                            </li>
+                            
+                            
+                            <li class="menu-item">
+                                <a href="/atom.xml">
+                                    <i class="fa fa-rss-square gutter-right"></i>
+                                    <span class="menu-item">RSS</span>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+
+                
+                <div class="menu-group">
+                    <div class="menu-list">
+                    
+                        <div class="menu-item">
+                            <a href="/lamejokes" target="_blank">
+                                
+                                    <i class="fa fa-comment gutter-right"></i>
+                                
+                            冷言冷語
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item">
+                            <a href="https://github.com/g0v" target="_blank">
+                                
+                                    <i class="fa fa-compass gutter-right"></i>
+                                
+                            g0v
+                            </a>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+
+                
+                <div class="extra-comments">
+                    <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+                </div>
+                
+
+                
+                <div class="menu-group deflinks">
+                    <div class="menu-list text-center">
+                        
+                        <a href="https://github.com/walkingice" target="_blank">
+                            <i class="fa fa-github-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+                        <a href="https://twitter.com/walkingice" target="_blank">
+                            <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+                        </a>
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2022/09/04-kotlin.html" itemprop="url" target="_blank">
+            <span class="">Kotlin 雙冒號 ::someMethod 的觀察</span>
+        </a>
+    </h1>
+
+    <p>寫 kotlin 的時候經常會看到 <code>::myMethod</code> 的出現，本文觀察編譯器的結果去猜測可能的過程。並非真正地去閱讀規格或源碼。若有寫不正確的地方，還請鄉親指正</p>
+<span id="more"></span>
+
+<h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>有時候在實作中，我們會自製一些可被觀察的物件 Observable，以及觀察者 Observer。然後在 Fragment 結束的時候拔掉 Observer。Observer 的實作就用 lambda 解決</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> &#123;</span><br><span class="line">    myDataOwner.addObserver &#123;</span><br><span class="line">        doSomething()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">    myDataOwner.removeObserver &#123;</span><br><span class="line">        doSomething()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的片段一看就知道很有問題，因為新增跟刪除傳遞進去的東西很明顯不是同一個物件實體。通常會生出一個 private field 來指向同一個物件實體。但如果寫成這樣呢？能夠順利地移除掉 Observer 嗎？</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">onStart</span><span class="params">()</span></span> &#123;</span><br><span class="line">    myDataOwner.addObserver(::doSomething)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">onStop</span><span class="params">()</span></span> &#123;</span><br><span class="line">    myDataOwner.removeObserver(::doSomething)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">doSomething</span><span class="params">()</span></span> &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先說結論：<strong>運氣好的話，可以。</strong></p>
+<p>這邊引出幾個問題</p>
+<ul>
+<li>為什麼可以？在哪些情況下可以？</li>
+<li>究竟 <code>::doSomething</code> 這段做了什麼事？</li>
+<li>或著問，<code>::doSomething</code> 總是回傳同樣的東西嗎？(Singleton?)</li>
+</ul>
+<p>在那之前，我先岔題談一下 Lambda</p>
+<h1 id="Lambda-是如何傳遞的"><a href="#Lambda-是如何傳遞的" class="headerlink" title="Lambda 是如何傳遞的"></a>Lambda 是如何傳遞的</h1><p><a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/lambdas.html">Lambda</a> 鄉親都用得很爽，常聽到函式在 Kotlin 裡面是 First-class，就文件跟編譯的結果來看，Kotlin 是透過 <code>kotlin.jvm.functions.Function0</code> 或是類似的內部類別來實作，這東西就跟 Java 的 <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html">Method</a>差不多。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">observable.addObserver &#123;</span><br><span class="line">    println(<span class="string">&quot;===Inside lambda&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> myFunc = <span class="keyword">object</span> : Function0&lt;<span class="built_in">Unit</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">invoke</span><span class="params">()</span></span> &#123;</span><br><span class="line">        println(<span class="string">&quot;====Inside function&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">observable.addObserver(myFun)</span><br></pre></td></tr></table></figure>
+
+<p>這兩個寫法都可以只是上方的 Lambda 會產生一個匿名類別(anonymous class)，通常用數字取名 <code>$1</code>，底下會產生一個 <code>$myFunc</code>的類別。放編譯檔案的目錄 <code>app/build/...</code> 裡面就能找到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./tmp/kotlin-classes/debugUnitTest/foooo/baaar/MyObservableTest$testInstance$myFun$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/foooo/baaar/MyObservableTest$testInstance$1.class</span><br></pre></td></tr></table></figure>
+
+<p>用 javap 去看，會發現兩個東西很像</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lambda</span></span><br><span class="line">$ javap <span class="string">&#x27;./tmp/kotlin-classes/debugUnitTest/foooo/baaar/MyObservableTest$testInstance$1.class&#x27;</span></span><br><span class="line">Compiled from <span class="string">&quot;MyObservableTest.kt&quot;</span></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">foooo</span>.<span class="title">baaar</span>.<span class="title">MyObservableTest</span>$<span class="title">testInstance</span>$1 <span class="keyword">extends</span> <span class="title">kotlin</span>.<span class="title">jvm</span>.<span class="title">internal</span>.<span class="title">Lambda</span> <span class="keyword">implements</span> <span class="title">kotlin</span>.<span class="title">jvm</span>.<span class="title">functions</span>.<span class="title">Function0</span>&lt;<span class="title">kotlin</span>.<span class="title">Unit</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> foooo.baaar.MyObservableTest$testInstance$<span class="number">1</span> INSTANCE;</span><br><span class="line">  foooo.baaar.MyObservableTest$testInstance$<span class="number">1</span>();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">invoke</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="keyword">public</span> java.lang.<span class="function">Object <span class="title">invoke</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="keyword">static</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// myFun</span></span><br><span class="line">$ javap <span class="string">&#x27;./tmp/kotlin-classes/debugUnitTest/foooo/baaar/MyObservableTest$testInstance$myFun$1.class&#x27;</span></span><br><span class="line">Compiled from <span class="string">&quot;MyObservableTest.kt&quot;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">foooo</span>.<span class="title">baaar</span>.<span class="title">MyObservableTest</span>$<span class="title">testInstance</span>$<span class="title">myFun</span>$1 <span class="keyword">implements</span> <span class="title">kotlin</span>.<span class="title">jvm</span>.<span class="title">functions</span>.<span class="title">Function0</span>&lt;<span class="title">kotlin</span>.<span class="title">Unit</span>&gt; </span>&#123;</span><br><span class="line">  foooo.baaar.MyObservableTest$testInstance$myFun$<span class="number">1</span>();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">invoke</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="keyword">public</span> java.lang.<span class="function">Object <span class="title">invoke</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>兩個都實作了 <code>Function0</code>，這就有點像是 Runnable 的介面，<a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin/blob/master/spec-docs/function-types.md">Kotlin Function Type</a> 是這麼寫的</p>
+<ul>
+<li>On JVM, introduce Function0..Function22, which are optimized in a certain way, and FunctionN for functions with 23+ parameters. When passing a lambda to Kotlin from Java, one will need to implement one of these interfaces.</li>
+<li>Also on JVM (under the hood) add abstract FunctionImpl which implements all of Function0..Function22 and FunctionN (throwing exceptions), and which knows its arity. Kotlin lambdas are translated to subclasses of this abstract class, passing the correct arity to the super constructor.</li>
+</ul>
+<p>也可以看一下 JVM 的實作<a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/jvm/runtime/kotlin/jvm/internal/FunctionImpl.java">FunctionImpl.java</a></p>
+<p>小結：使用 Lambda 的時候，Kotlin 會自動幫你實作一個匿名類別，你傳遞過去的東西其實是這個匿名類別的實體化物件</p>
+<h1 id="雙冒號-class-java-在幹嘛？"><a href="#雙冒號-class-java-在幹嘛？" class="headerlink" title="雙冒號 ::class.java 在幹嘛？"></a>雙冒號 ::class.java 在幹嘛？</h1><p>這是 Kotlin 使用 <a target="_blank" rel="noopener" href="https://kotlinlang.org/docs/reflection.html">Reflection API</a> 的方法。Java 也有一套 Reflection API，讓你能做一些見不得光的事情，尤其測試的工具經常大量使用到 Reflection。在 Java 裡面通常會先拿到一個叫做 Class 的類別，然後用那個類別動態挖出一些 Method 來用。在 Kotlin 裡面，除了能用 Java 的 Class，做了很多對應的類別，好比 <code>KClass</code>，加個 K 就是 Kotlin 界的東西。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> j: Class&lt;Foobar&gt; = Foobar::<span class="keyword">class</span>.java</span><br><span class="line"><span class="keyword">val</span> k: KClass&lt;Foobar&gt; = Foobar::<span class="class"><span class="keyword">class</span></span></span><br></pre></td></tr></table></figure>
+
+<p>這個範例加上了型別，所以就很清楚知道 <code>MyClass::class.java</code> 是使用 Reflection API 去拿到 Java 界的 <code>Class</code> 類別，而 <code>MyClass::class</code> 是拿到 Kotlin 界的 <code>KClass</code> 類別。</p>
+<p><code>::class.java</code> 就相當於以前的 <code>object.getClass</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> j: Class&lt;Foobar&gt; = Foobar::<span class="keyword">class</span>.java</span><br><span class="line"><span class="keyword">val</span> obj = Foobar(<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> oldSchool: Class&lt;Foobar&gt; = obj.javaClass</span><br><span class="line">println(<span class="string">&quot;<span class="subst">$&#123;oldSchool === j&#125;</span>&quot;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>小結：<code>::class</code> 是使用 Reflection API 的方法，用來拿到 <code>KClass</code> 這個類別</p>
+<h1 id="雙冒號-someFunc-在幹嘛？"><a href="#雙冒號-someFunc-在幹嘛？" class="headerlink" title="雙冒號 ::someFunc 在幹嘛？"></a>雙冒號 ::someFunc 在幹嘛？</h1><p>前面是用 <code>::class</code>，但如果到我們的主角，雙冒號後面接個 method 呢？雖然同樣用 <code>::</code> 都是 Reflection，但是此時的行為不一樣。</p>
+<p>Kotlin 是個語言，跑在 JVM 上面只是這個語言的其中一種實作。只論 JVM 這部分的話，Kotlin 遇到 <code>::someFunc</code> 的處理方式，跟前面的 lambda 很像，都是產生一個匿名類別，然後傳遞出去。</p>
+<p>而且 <code>類別::someFunc</code> 跟 <code>物件::someFunc</code> 雖然都是產生出 <code>Callable</code> 的物件，但是兩者有所不同。懂 JS 的人，想像一下 <code>Function.prototype.apply()</code>就知道了</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> foobar = Foobar(<span class="string">&quot;Foobar&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> funSpeakA: KFunction&lt;<span class="built_in">Unit</span>&gt; = foobar::speak</span><br><span class="line"><span class="comment">// 成功</span></span><br><span class="line">funSpeakA.call()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> funSpeakB: KFunction&lt;<span class="built_in">Unit</span>&gt; = Foobar::speak</span><br><span class="line"><span class="comment">// runTime 會爆出 IllegalArgumentException Callable expects 1 arguments, but 0 were provided.</span></span><br><span class="line">funSpeakB.call()</span><br><span class="line"><span class="comment">// 塞一個 Instance 給它就可以了</span></span><br><span class="line">funSpeakB.call(foobar)</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子，生出 funSpeakB 的時候根本不知道<code>this</code> 是誰，所以會生出一個需要傳入 Foobar 實例的函式物件。</p>
+<p>既然知道這麼多「生出匿名類別與 Callable 物件」的技巧，可以看看這段程式碼會生出幾個匿名類別？</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> foobar = Foobar(<span class="string">&quot;Foobar&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> instanceFromMyObservable = MyObservable()</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> funSpeakA: KFunction&lt;<span class="built_in">Unit</span>&gt; = Foobar::speak <span class="comment">// 從 class 產生</span></span><br><span class="line"><span class="keyword">val</span> funSpeakB: KFunction&lt;<span class="built_in">Unit</span>&gt; = Foobar::speak</span><br><span class="line"><span class="keyword">val</span> funSpeakC: KFunction&lt;<span class="built_in">Unit</span>&gt; = foobar::speak <span class="comment">// 從 instance 產生</span></span><br><span class="line"><span class="keyword">val</span> funSpeakD: () -&gt; <span class="built_in">Unit</span> = foobar::speak</span><br><span class="line"><span class="keyword">val</span> funSpeakE: () -&gt; <span class="built_in">Unit</span> = foobar::speak</span><br><span class="line"></span><br><span class="line">instanceFromMyObservable.addObserver(funSpeakD)</span><br><span class="line">instanceFromMyObservable.addObserver(foobar::speak)</span><br><span class="line">instanceFromMyObservable.addObserver(foobar::speak)</span><br><span class="line">instanceFromMyObservable.addObserver(foobar::speak)</span><br></pre></td></tr></table></figure>
+
+<p><strong>答案是「8個」</strong>，abcde 各五個，以及 addObserver 那三行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$funSpeakA$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$funSpeakB$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$funSpeakC$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$funSpeakD$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$funSpeakE$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$1.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$2.class</span><br><span class="line">./tmp/kotlin-classes/debugUnitTest/investigate/reflection/mypkg/Tester$testReflection$3.class</span><br></pre></td></tr></table></figure>
+
+<p>而且看 Java 的 byte code，還真的都是拿不同的類別來做事</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">18</span>: getstatic     #<span class="number">49</span>  <span class="comment">// Field investigate/reflection/mypkg/Tester$testReflection$funSpeakA$1.INSTANCE:Linvestigate/reflection/mypkg/Tester$testReflection$funSpeakA$1;</span></span><br><span class="line"> <span class="number">21</span>: checkcast     #<span class="number">19</span>  <span class="comment">// class kotlin/reflect/KFunction</span></span><br><span class="line"> <span class="number">24</span>: astore_3</span><br><span class="line"> <span class="number">25</span>: getstatic     #<span class="number">54</span>  <span class="comment">// Field investigate/reflection/mypkg/Tester$testReflection$funSpeakB$1.INSTANCE:Linvestigate/reflection/mypkg/Tester$testReflection$funSpeakB$1;</span></span><br><span class="line"> <span class="number">28</span>: checkcast     #<span class="number">19</span>  <span class="comment">// class kotlin/reflect/KFunction</span></span><br><span class="line"> <span class="number">31</span>: astore        <span class="number">4</span></span><br><span class="line"> <span class="number">33</span>: <span class="keyword">new</span>           #<span class="number">56</span>  <span class="comment">// class investigate/reflection/mypkg/Tester$testReflection$funSpeakC$1</span></span><br><span class="line"> <span class="number">36</span>: dup</span><br><span class="line"> <span class="number">37</span>: aload_1</span><br><span class="line"> <span class="number">38</span>: invokespecial #<span class="number">57</span>  <span class="comment">// Method investigate/reflection/mypkg/Tester$testReflection$funSpeakC$1.&quot;&lt;init&gt;&quot;:(Ljava/lang/Object;)V</span></span><br><span class="line"> <span class="number">41</span>: checkcast     #<span class="number">19</span>  <span class="comment">// class kotlin/reflect/KFunction</span></span><br><span class="line"> <span class="number">44</span>: astore        <span class="number">5</span></span><br><span class="line"> <span class="number">46</span>: <span class="keyword">new</span>           #<span class="number">59</span>  <span class="comment">// class investigate/reflection/mypkg/Tester$testReflection$funSpeakD$1</span></span><br><span class="line"> <span class="number">49</span>: dup</span><br><span class="line"> <span class="number">50</span>: aload_1</span><br><span class="line"> <span class="number">51</span>: invokespecial #<span class="number">60</span>  <span class="comment">// Method investigate/reflection/mypkg/Tester$testReflection$funSpeakD$1.&quot;&lt;init&gt;&quot;:(Ljava/lang/Object;)V</span></span><br><span class="line"> <span class="number">54</span>: checkcast     #<span class="number">62</span>  <span class="comment">// class kotlin/jvm/functions/Function0</span></span><br><span class="line"> <span class="number">57</span>: astore        <span class="number">6</span></span><br><span class="line"> <span class="number">59</span>: <span class="keyword">new</span>           #<span class="number">64</span>  <span class="comment">// class investigate/reflection/mypkg/Tester$testReflection$funSpeakE$1</span></span><br><span class="line"> <span class="number">62</span>: dup</span><br><span class="line"> <span class="number">63</span>: aload_1</span><br><span class="line"> <span class="number">64</span>: invokespecial #<span class="number">65</span>  <span class="comment">// Method investigate/reflection/mypkg/Tester$testReflection$funSpeakE$1.&quot;&lt;init&gt;&quot;:(Ljava/lang/Object;)V</span></span><br><span class="line"> <span class="number">67</span>: checkcast     #<span class="number">62</span>  <span class="comment">// class kotlin/jvm/functions/Function0</span></span><br><span class="line"> <span class="number">70</span>: astore        <span class="number">7</span></span><br><span class="line"> <span class="number">72</span>: aload_2</span><br><span class="line"> <span class="number">73</span>: aload         <span class="number">6</span></span><br><span class="line"> <span class="number">75</span>: invokevirtual #<span class="number">69</span>  <span class="comment">// Method investigate/reflection/mypkg/MyObservable.addObserver:(Lkotlin/jvm/functions/Function0;)V</span></span><br><span class="line"> <span class="number">78</span>: aload_2</span><br><span class="line"> <span class="number">79</span>: <span class="keyword">new</span>           #<span class="number">71</span>  <span class="comment">// class investigate/reflection/mypkg/Tester$testReflection$1</span></span><br><span class="line"> <span class="number">82</span>: dup</span><br><span class="line"> <span class="number">83</span>: aload_1</span><br><span class="line"> <span class="number">84</span>: invokespecial #<span class="number">72</span>  <span class="comment">// Method investigate/reflection/mypkg/Tester$testReflection$1.&quot;&lt;init&gt;&quot;:(Ljava/lang/Object;)V</span></span><br><span class="line"> <span class="number">87</span>: checkcast     #<span class="number">62</span>  <span class="comment">// class kotlin/jvm/functions/Function0</span></span><br><span class="line"> <span class="number">90</span>: invokevirtual #<span class="number">69</span>  <span class="comment">// Method investigate/reflection/mypkg/MyObservable.addObserver:(Lkotlin/jvm/functions/Function0;)V</span></span><br><span class="line"> <span class="number">93</span>: aload_2</span><br><span class="line"> <span class="number">94</span>: <span class="keyword">new</span>           #<span class="number">74</span>  <span class="comment">// class investigate/reflection/mypkg/Tester$testReflection$2</span></span><br><span class="line"> <span class="number">97</span>: dup</span><br><span class="line"> <span class="number">98</span>: aload_1</span><br><span class="line"> <span class="number">99</span>: invokespecial #<span class="number">75</span>  <span class="comment">// Method investigate/reflection/mypkg/Tester$testReflection$2.&quot;&lt;init&gt;&quot;:(Ljava/lang/Object;)V</span></span><br><span class="line"><span class="number">102</span>: checkcast     #<span class="number">62</span>  <span class="comment">// class kotlin/jvm/functions/Function0</span></span><br><span class="line"><span class="number">105</span>: invokevirtual #<span class="number">69</span>  <span class="comment">// Method investigate/reflection/mypkg/MyObservable.addObserver:(Lkotlin/jvm/functions/Function0;)V</span></span><br><span class="line"><span class="number">108</span>: aload_2</span><br><span class="line"><span class="number">109</span>: <span class="keyword">new</span>           #<span class="number">77</span>  <span class="comment">// class investigate/reflection/mypkg/Tester$testReflection$3</span></span><br><span class="line"><span class="number">112</span>: dup</span><br><span class="line"><span class="number">113</span>: aload_1</span><br><span class="line"><span class="number">114</span>: invokespecial #<span class="number">78</span>  <span class="comment">// Method investigate/reflection/mypkg/Tester$testReflection$3.&quot;&lt;init&gt;&quot;:(Ljava/lang/Object;)V</span></span><br><span class="line"><span class="number">117</span>: checkcast     #<span class="number">62</span>  <span class="comment">// class kotlin/jvm/functions/Function0</span></span><br><span class="line"><span class="number">120</span>: invokevirtual #<span class="number">69</span>  <span class="comment">// Method investigate/reflection/mypkg/MyObservable.addObserver:(Lkotlin/jvm/functions/Function0;)V</span></span><br></pre></td></tr></table></figure>
+
+<p>現在知道了 <code>::someFunc</code> 就像 lambda 一樣，會生出匿名類別，並產生 Instance 來用。而且，<strong>如果 ::someFunc 有兩行，就會產生兩個</strong>，知道這個問題的答案之後，也很容易回答另外一個問題。</p>
+<p>既然都是用不同的類別來產生實體，當然不是回傳同樣的東西，絕對不是 Singleton</p>
+<h1 id="什麼時候可以讓-removeObserver-如預期般運作"><a href="#什麼時候可以讓-removeObserver-如預期般運作" class="headerlink" title="什麼時候可以讓 removeObserver 如預期般運作"></a>什麼時候可以讓 removeObserver 如預期般運作</h1><p>那麼第一個問題，在什麼情況下可以這麼用呢？這跟 Observer 的實作有關。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObservable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> list: MutableList&lt;MyObserver&gt; = mutableListOf()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">triggerObserver</span><span class="params">()</span></span> &#123;</span><br><span class="line">        list.forEach &#123;</span><br><span class="line">            it.invoke()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">addObserver</span><span class="params">(observer: <span class="type">MyObserver</span>)</span></span> &#123;</span><br><span class="line">        list.add(observer)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">removeObserver</span><span class="params">(observer: <span class="type">MyObserver</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> index = list.indexOfFirst &#123; it == observer &#125;</span><br><span class="line">        <span class="keyword">if</span> (index &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            list.removeAt(index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>實作的關鍵點就在 <code>removeObserver</code> 那邊，如果找到同樣的 observer 就拿掉，所以用 lambda 的時候很自然地就會拿不掉</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> instanceFromMyObservable = MyObservable()</span><br><span class="line">println(<span class="string">&quot;Size A: <span class="subst">$&#123;instanceFromMyObservable.list.size&#125;</span>&quot;</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">instanceFromMyObservable.addObserver &#123; someFunc() &#125;</span><br><span class="line">println(<span class="string">&quot;Size B: <span class="subst">$&#123;instanceFromMyObservable.list.size&#125;</span>&quot;</span>) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">instanceFromMyObservable.removeObserver &#123; someFunc() &#125;</span><br><span class="line">println(<span class="string">&quot;Size C: <span class="subst">$&#123;instanceFromMyObservable.list.size&#125;</span>&quot;</span>) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>但是如果改用 <code>::someFunc</code> 竟然會動！</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> instanceFromMyObservable = MyObservable()</span><br><span class="line">println(<span class="string">&quot;Size A: <span class="subst">$&#123;instanceFromMyObservable.list.size&#125;</span>&quot;</span>) <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">instanceFromMyObservable.addObserver(::someFunc)</span><br><span class="line">println(<span class="string">&quot;Size B: <span class="subst">$&#123;instanceFromMyObservable.list.size&#125;</span>&quot;</span>) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">instanceFromMyObservable.removeObserver(::someFunc)</span><br><span class="line">println(<span class="string">&quot;Size C: <span class="subst">$&#123;instanceFromMyObservable.list.size&#125;</span>&quot;</span>) <span class="comment">// 0 !!</span></span><br></pre></td></tr></table></figure>
+
+<p>明明是不同類別產生的物件，為什麼可以順利被對應到？鄉民們一定馬上就想到<strong>因為 <code>==</code> 被改寫了！</strong></p>
+<p>既然 Kotlin Relection 是產生 <code>KFunction</code> 介面的時候，那我們來看一下 JVM 平台的實作 <a target="_blank" rel="noopener" href="https://github.com/JetBrains/kotlin/blob/b8b0b279ee2195ccbdce61e2365f123ee928532b/core/reflection.jvm/src/kotlin/reflect/jvm/internal/KFunctionImpl.kt#L176">KFunctionImpl</a></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">equals</span><span class="params">(other: <span class="type">Any</span>?)</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">    <span class="keyword">val</span> that = other.asKFunctionImpl() ?: <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> container == that.container &amp;&amp; name == that.name &amp;&amp; signature == that.signature &amp;&amp; rawBoundReceiver == that.rawBoundReceiver</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我沒有繼續深追下去確認細節，看起來是用相同 Reflection API 方法產生的類別都會在這邊被視為同一個東西。所以在上方的 Observer 實作就能用 <code>==</code> 找到「同一種東西」</p>
+<p>我們可以用 <code>System.identityHashCode()</code> 找出物件的 hash code 來確認，其實它們真的不是同一個物件。也因此，如果在 <code>Observerable.removeObserver</code> 裡面用 <code>===</code> 當作比對的方法，就會發現原本可以 remove 的作法行不通了。這也就是我在一開始就說「運氣好的話，遇到用 <code>==</code> 來比對的實作，就可以這樣傳 <code>::someMethod</code> 進去」</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2022/09/04-kotlin.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2022-09-03">2022-09-03</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+                <a href="/tags/kotlin/">
+                    <span class="tag">kotlin</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+            
+                <a class="btn" href="/2022/09/01-anki.html" title="Anki 的基本介紹與自訂卡片">Next &rarr; <b>Anki 的基本介紹與自訂卡片</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2502077-5', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+
+    </body>
+</html>
