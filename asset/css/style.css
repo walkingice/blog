@@ -29,8 +29,8 @@ figure {
 body {
   background-color: #eee;
   color: #606060;
-  font-family: sans-serif serif;
-  font-size: 1rem;
+  font-family: sans-serif, serif;
+  font-size: 1.1rem;
 }
 ul {
   margin: 0;
@@ -76,10 +76,10 @@ a:hover {
 }
 .content pre,
 .content .highlight {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   text-shadow: none;
   background: #1d1f21;
-  margin: 1.9rem -30px;
+  margin: 1.7 -30px;
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 0px;
@@ -89,7 +89,7 @@ a:hover {
   border-width: 1px 0;
   overflow: auto;
   color: #c5c8c6;
-  line-height: 1.2rem;
+  line-height: 1.5rem;
 }
 .content .highlight .gutter pre,
 .content .gist .gist-file .gist-data .line-numbers {
@@ -300,15 +300,18 @@ pre .javascript .function {
 }
 @media screen and (max-width: 700px) {
   .layout-header {
-    position: static;
-    margin: 0 auto;
-    width: 100%;
+    display: none;
   }
 }
 .menu-list {
   margin: 0 auto;
   width: 80%;
   line-height: 2rem;
+}
+.layout-menu-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #424546;
 }
 .layout-menu {
   color: #fff;
@@ -317,18 +320,31 @@ pre .javascript .function {
 @media screen and (max-width: 700px) {
   .layout-menu {
     margin: 0 auto;
-    width: 200px;
   }
 }
 .layout-menu ul {
   padding: 0;
   list-style: none;
 }
+@media screen and (max-width: 700px) {
+  .layout-menu ul li {
+    margin: 20px;
+    display: inline;
+  }
+}
+.layout-menu-footer {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  .layout-menu-footer {
+    display: inherit;
+  }
+}
 .menu-group {
   margin-bottom: 30px;
 }
 .menu-item {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   margin-top: 5px;
 }
 .menu-item i {
@@ -367,6 +383,29 @@ pre .javascript .function {
   font-weight: bold;
   color: #808080;
 }
+.layout-footer {
+  margin-left: 300px;
+}
+@media screen and (max-width: 700px) {
+  .layout-footer {
+    margin: 0 auto;
+  }
+}
+.panel-footer {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  border-top: 1px dashed #dcdcdc;
+  padding-top: 20px;
+}
+.box-footer {
+  width: 400px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 700px) {
+  .box-footer {
+    width: 200px;
+  }
+}
 #blog-title {
   letter-spacing: 2px;
   text-shadow: 4px 3px 0px #ccc, 9px 8px 0px rgba(0,0,0,0.15);
@@ -390,6 +429,7 @@ img {
   margin-bottom: 30px;
 }
 .read-more {
+  display: inline-block;
   margin-top: 30px;
   font-weight: bold;
   padding: 3px;
@@ -439,7 +479,7 @@ article {
   font-size: 1.2rem;
   font-weight: 400;
   font-family: serif;
-  line-height: 1.9rem;
+  line-height: 1.7;
   color: #404040;
   text-shadow: 0px 1px 0px #fff;
 }
@@ -454,8 +494,8 @@ article hr {
   margin-bottom: 15px;
 }
 article p {
-  margin-top: 1.9rem;
-  margin-bottom: 2.28rem;
+  margin-top: 3.4rem;
+  margin-bottom: 2.04rem;
 }
 article p a {
   border-bottom: 1px dotted #bdbdbd;
@@ -685,27 +725,4 @@ article .img-row {
   background-color: #ccc;
   padding: 3px 7px;
   margin-left: 15px;
-}
-.layout-footer {
-  margin-left: 300px;
-}
-@media screen and (max-width: 700px) {
-  .layout-footer {
-    margin: 0 auto;
-  }
-}
-.panel-footer {
-  margin-top: 10px;
-  margin-bottom: 40px;
-  border-top: 1px dashed #dcdcdc;
-  padding-top: 20px;
-}
-.box-footer {
-  width: 400px;
-  margin: 0 auto;
-}
-@media screen and (max-width: 700px) {
-  .box-footer {
-    width: 200px;
-  }
 }
