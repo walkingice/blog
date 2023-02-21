@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jchu.cc/2023/02/22-post.html</loc>
+    
+    <lastmod>2023-02-21</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jchu.cc/2023/02/18-analytics.html</loc>
     
     <lastmod>2023-02-21</lastmod>
@@ -747,6 +754,13 @@
   
   <url>
     <loc>https://jchu.cc/tags/government/</loc>
+    <lastmod>2023-02-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://jchu.cc/tags/spring/</loc>
     <lastmod>2023-02-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

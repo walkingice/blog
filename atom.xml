@@ -6,7 +6,7 @@
   <link href="https://jchu.cc/atom.xml" rel="self"/>
   
   <link href="https://jchu.cc/"/>
-  <updated>2023-02-21T14:49:04.689Z</updated>
+  <updated>2023-02-21T15:13:33.625Z</updated>
   <id>https://jchu.cc/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring Boot 2.5.6 to 3.0.2 migration 筆記</title>
+    <link href="https://jchu.cc/2023/02/22-post.html"/>
+    <id>https://jchu.cc/2023/02/22-post.html</id>
+    <published>2023-02-21T15:56:50.000Z</published>
+    <updated>2023-02-21T15:13:33.625Z</updated>
+    
+    <content type="html"><![CDATA[<p>正在練習把玩的 Spring Boot 用的是 2.5.6，剛剛升級到 3.0.2，這邊隨手記錄必須的改動</p><span id="more"></span><h1 id="升級-Java"><a href="#升級-Java" class="headerlink" title="升級 Java"></a>升級 Java</h1><p>換上 3.0.2 之後，Java 必須要升級到 17 以上，我原本是用 Java 11，所以 IDE 跟 Console 的 JDK 都換成了 19</p><h1 id="升級-Gradle"><a href="#升級-Gradle" class="headerlink" title="升級 Gradle"></a>升級 Gradle</h1><p>JDK 換成 19 之後跑 gradle 會遇到莫名的 <code>PermittedSubclasses requires ASM9</code></p><p>我把原本的 <code>gradle-7.2</code> 換成 <code>gradle-7.6</code> 就沒事了</p><h1 id="更換-jakarta-的-package-name"><a href="#更換-jakarta-的-package-name" class="headerlink" title="更換 jakarta 的 package name"></a>更換 jakarta 的 package name</h1><p><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Release-Notes">Spring Boot 3.0 Release Note</a> 有說 Jakarta Persistence 為 3.1</p><p><a href="https://en.wikipedia.org/wiki/Jakarta_Persistence">Wiki</a> 說明 Jakarta Persistence 3.0 之後把 package name 從 <code>javax.persistence</code> 換成 <code>jakarta.persistence</code>，因此要做類似的修改</p><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="addition">+import jakarta.persistence.Column</span></span><br><span class="line"><span class="addition">+import jakarta.persistence.Entity</span></span><br><span class="line"><span class="addition">+import jakarta.persistence.Id</span></span><br><span class="line"><span class="addition">+import jakarta.persistence.Table</span></span><br><span class="line"><span class="deletion">-import javax.persistence.Column</span></span><br><span class="line"><span class="deletion">-import javax.persistence.Entity</span></span><br><span class="line"><span class="deletion">-import javax.persistence.Id</span></span><br><span class="line"><span class="deletion">-import javax.persistence.Table</span></span><br></pre></td></tr></table></figure><h1 id="更新-Spring-Security-的語法"><a href="#更新-Spring-Security-的語法" class="headerlink" title="更新 Spring Security 的語法"></a>更新 Spring Security 的語法</h1><ul><li>authorizeRequest 已經 deprecated</li><li>antMatchers 要換成 requestMatchers</li></ul><p>另外有個比較雷的地方，原本我只要用 <code>@EnableWebSecurity</code> 就能注入 Security 相關的 Bean，更新之後要再加上 <code>@Configuration</code> 否則不會有效果</p><p>前後差異如下</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+<span class="meta">@Configuration</span></span><br><span class="line"> <span class="meta">@EnableWebSecurity</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">AppSecurityConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="meta">@Bean</span></span><br><span class="line">     <span class="function"><span class="keyword">fun</span> <span class="title">createFilterChain</span><span class="params">(http: <span class="type">HttpSecurity</span>)</span></span>: SecurityFilterChain &#123;</span><br><span class="line">         <span class="comment">// public</span></span><br><span class="line">         http</span><br><span class="line">-            .authorizeRequests()</span><br><span class="line">-            .antMatchers(<span class="string">&quot;/&quot;</span>).permitAll()</span><br><span class="line">+            .authorizeHttpRequests()</span><br><span class="line">+            .requestMatchers(<span class="string">&quot;/&quot;</span>).permitAll()</span><br><span class="line">         ....</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;正在練習把玩的 Spring Boot 用的是 2.5.6，剛剛升級到 3.0.2，這邊隨手記錄必須的改動&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="geek" scheme="https://jchu.cc/categories/geek/"/>
+    
+    
+    <category term="java" scheme="https://jchu.cc/tags/java/"/>
+    
+    <category term="spring" scheme="https://jchu.cc/tags/spring/"/>
+    
+  </entry>
   
   <entry>
     <title>本站已拿掉 Google Analytics 換成 Matomo</title>
@@ -505,27 +528,6 @@
     <category term="taiwan" scheme="https://jchu.cc/tags/taiwan/"/>
     
     <category term="political" scheme="https://jchu.cc/tags/political/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用 Mayflash 把舊搖桿接上 Nintendo Switch</title>
-    <link href="https://jchu.cc/2021/03/04-mayflash.html"/>
-    <id>https://jchu.cc/2021/03/04-mayflash.html</id>
-    <published>2021-03-03T17:18:59.000Z</published>
-    <updated>2021-03-03T16:36:46.775Z</updated>
-    
-    <content type="html"><![CDATA[<p>結論：利用 Mayflash Magic S-Pro，可以用 Logitech F310 玩 Nintendo Switch</p><a id="more"></a><div style="margin: auto;"><img src="/2021/03/04-mayflash/f310.jpg"></div><p>Joy Con 的飄移問題讓人詬病已久，在家玩 Switch 的時候早就已經遇到這個問題。雖然還在保固內可以送修，但是未來用久了還是會再次遇到這個問題。突然想到我有專門用來玩 PC game 的 Logitech F710 跟 F310，不是很昂貴的搖桿，用起來還算順手，如果能夠拿來玩 Switch 就太好了。</p><p>稍微搜尋一下，只要買某幾支 USB Dongle 接上去就可以玩，於是選了<a href="https://www.mayflash.com/Products/NINTENDOWiiU/MAGIC-S%20PRO.html" target="_blank" rel="noopener">Mayflasy Magic S-Pro</a>，只比 Magic-NS 多上一點價格，如果哪天有 PS4 也可以用。</p><p>剛拿到 Dongle 接上 Switch 卻怎麼也連不上搖桿，試了一下就知道要認真看看官網上面的說明：要進入 Switch 的設定畫面 / Controller and Sensors / 打開 Pro Controller Wired Communication，接著 Switch 就會把外接的搖桿當成 Nintendo Switch Pro Controller 連接了</p><p>玩一些 FC/SFC 的老遊戲，尤其是動作類的遊戲，還是傳統有線搖桿比較順手</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;結論：利用 Mayflash Magic S-Pro，可以用 Logitech F310 玩 Nintendo Switch&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="acg" scheme="https://jchu.cc/categories/acg/"/>
-    
-    
-    <category term="game" scheme="https://jchu.cc/tags/game/"/>
     
   </entry>
   

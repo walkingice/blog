@@ -170,6 +170,76 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2016/03/13-recyclerview.html" itemprop="url" target="_blank">
+            <span class="">使用 RecyclerView</span>
+        </a>
+    </h1>
+
+    <p><a href="http://android-developers.blogspot.tw/2015/10/android-support-library-231.html" target="_blank" rel="noopener">RecyclerView</a> 是個在 Google I/O 2014 出現的 ViewGroup，放在 <a href="http://developer.android.com/intl/zh-tw/tools/support-library/features.html#v7" target="_blank" rel="noopener">v7 support libraries</a>，Android 2.1(API Level 7) 以上的版本都可以用，以現在普及率來看，幾乎是每一支手機都能用。</p>
+<div style="max-width: 800px; margin: auto;"><img src="/2016/03/13-recyclerview/3layout.png"></div>
+
+<p>RecyclerView 預設就提供了三種 <a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank" rel="noopener">LayoutManager</a>，如上圖，由左而右依序是 ListLayoutManager, GridLayoutManager 與 StaggeredGridLayoutManager。都放在 v7 support libraries 裡面。</p>
+<p>看起來 List 與 Grid 已經重複了，為何 Android 還要多提供這個 Widget？</p>
+
+    
+    <a href="/2016/03/13-recyclerview.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/7/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2023-02-21">2016-03-13</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2016/02/23-webpack.html" itemprop="url" target="_blank">
             <span class="">Gulp and Webpack-dev-server options</span>
         </a>
@@ -722,72 +792,6 @@
             
                 <a href="/tags/github/">
                     <span class="tag">github</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2015/10/28-lightdm.html" itemprop="url" target="_blank">
-            <span class="">從 GDM 換成 lightDM</span>
-        </a>
-    </h1>
-
-    <p>最近發生了奇怪的事情，就是我的 root file system (/) 會整個被吃光，同時還注意到 rsyslogd 會跑到 CPU 100%。接著就發現是 <code>/var/log</code> 底下的 syslog 或是 message 幾個檔案變成好幾 Gigabyte 的大小，裡面滿是 gdm3 的錯誤訊息</p>
-<p>幾乎都是發生在我跑 Android Studio 之後才會遇到這樣的情況，我還以為是 openjdk 配上我的 awesome window manager 有什麼問題。今天還忍痛換成 orcale java 8，也停掉了 rsyslogd。直到剛剛我才發現一件奇怪的事情</p>
-<blockquote>
-<p>竟然有個 gnome-shell 的 process 在跑！<br>竟然有個 gnome-shell 的 process 在跑！<br>竟然有個 gnome-shell 的 process 在跑！</p>
-</blockquote>
-
-    
-    <a href="/2015/10/28-lightdm.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/7/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2023-02-21">2015-10-28</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/geek/">
-                    <span class="tag">geek</span>
-                </a>
-            
-                <a href="/tags/linux/">
-                    <span class="tag">linux</span>
                 </a>
             
         </span>
