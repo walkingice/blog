@@ -74,9 +74,17 @@ a:hover {
 .float-right {
   float: right;
 }
+figure.img {
+  max-width: 90%;
+  margin: auto;
+}
+figcaption {
+  font-size: 1em;
+  margin-bottom: 3rem;
+}
 .content pre,
 .content .highlight {
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   text-shadow: none;
   background: #1d1f21;
   margin: 1.7 -30px;
@@ -89,7 +97,7 @@ a:hover {
   border-width: 1px 0;
   overflow: auto;
   color: #c5c8c6;
-  line-height: 1.5rem;
+  line-height: 1.1rem;
 }
 .content .highlight .gutter pre,
 .content .gist .gist-file .gist-data .line-numbers {
