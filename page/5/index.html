@@ -170,6 +170,80 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2018/02/28-ffmpeg.html" itemprop="url" target="_blank">
+            <span class="">使用 ffmpeg 編輯影片</span>
+        </a>
+    </h1>
+
+    <p>長話短說，可以用 ffmpeg 做到一些簡單的影片編輯功能，好比說</p>
+<p>把 input.mp4 裡面 00:24:32 到 00:29:34 這段時間的影像擷取出來</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i input.mp4 -ss 00:24:32 -to 00:29:34 -threads 2 -y clip001.mp4</span><br></pre></td></tr></table></figure>
+<p>從一張圖片產生一個長度 15 秒的影片，同時把尺寸轉為 1280x720</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -loop 1 -i image.png -t 15 -vf scale=1280:720 -pix_fmt yuv420p -y image.mp4</span><br></pre></td></tr></table></figure>
+<p>將一個完全沒有音軌的影片，塞入 15 秒的無聲音軌，指定頻率為 48000 Hz。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -f lavfi -i anullsrc=r=48000 -i image.mp4 -t 15 -c:v copy -c:a aac  -y silent.mp4</span><br></pre></td></tr></table></figure>
+<p>接著把幾個 mp4 檔接成一個檔案，先把它們都轉成 ts 檔，最後再接回 mp4 檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ffmpeg -i clip0.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip0.ts</span><br><span class="line">$ ffmpeg -i clip1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip1.ts</span><br><span class="line">$ ffmpeg -i clip2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts -y clip2.ts</span><br><span class="line"></span><br><span class="line">$ ffmpeg -i <span class="string">"concat:clip0.ts|clip1.ts|clip2.ts"</span> -c copy -bsf:a aac_adtstoasc -y output.mp4</span><br><span class="line"></span><br><span class="line">$ rm clip0.ts clip1.ts clip2.ts</span><br></pre></td></tr></table></figure>
+
+    
+    <a href="/2018/02/28-ffmpeg.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2023-07-24">2018-02-27</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2018/02/08-nested-class.html" itemprop="url" target="_blank">
             <span class="">Java 的 Nested Class</span>
         </a>
@@ -196,7 +270,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2018-02-08</span>
+                    content="2023-07-24">2018-02-08</span>
             </a>
         </span>
 
@@ -265,7 +339,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2018-01-29</span>
+                    content="2023-07-24">2018-01-29</span>
             </a>
         </span>
 
@@ -325,7 +399,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-09-16</span>
+                    content="2023-07-24">2017-09-16</span>
             </a>
         </span>
 
@@ -389,7 +463,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-09-13</span>
+                    content="2023-07-24">2017-09-13</span>
             </a>
         </span>
 
@@ -460,7 +534,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-09-04</span>
+                    content="2023-07-24">2017-09-04</span>
             </a>
         </span>
 
@@ -518,7 +592,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-09-03</span>
+                    content="2023-07-24">2017-09-03</span>
             </a>
         </span>
 
@@ -581,7 +655,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-09-02</span>
+                    content="2023-07-24">2017-09-02</span>
             </a>
         </span>
 
@@ -645,7 +719,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-08-21</span>
+                    content="2023-07-24">2017-08-21</span>
             </a>
         </span>
 
@@ -706,7 +780,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-03">2017-08-01</span>
+                    content="2023-07-24">2017-08-01</span>
             </a>
         </span>
 
@@ -729,69 +803,6 @@
             
                 <a href="/tags/political/">
                     <span class="tag">political</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2017/07/08-book.html" itemprop="url" target="_blank">
-            <span class="">議會裡的部落頭人</span>
-        </a>
-    </h1>
-
-    <p>美拉尼西亞社會裡面，由當地人稱為「萬托克」(wantok，由 one talk 而來)的部落組成。每一個萬托克由數十到數千人不等，彼此有親屬關係。萬托克由一個「頭人」(Big Man) 當領袖，頭人不是世襲的位置，而需要靠爭取，成為最受部落居民信任者才是頭人。頭人會分配豬隻、貝殼等資源給部落成員，只要沒有資源可以分配，隨時可能失去領袖地位，被其他人取代。</p>
-<p>正在看「政治秩序的起源」這本書，僅從序開始看到第二章而已。序講到「頭人」這個詞讓我有很強的既視感，這不就是地方派系的大頭嗎？</p>
-
-    
-    <a href="/2017/07/08-book.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2023-07-03">2017-07-08</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/ramble/">
-                    <i class="fa fa-th"></i>
-                    <span class="">ramble</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/political/">
-                    <span class="tag">political</span>
-                </a>
-            
-                <a href="/tags/book/">
-                    <span class="tag">book</span>
                 </a>
             
         </span>
