@@ -170,6 +170,101 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2018/05/05-kotlin.html" itemprop="url" target="_blank">
+            <span class="">Kotlin 的 scope function: apply, let, run..等等</span>
+        </a>
+    </h1>
+
+    <p>先講結論：這些 functions 目的是希望，執行程式碼裡面的 function literal 的時候有更好的可讀性。</p>
+<table>
+<thead>
+<tr>
+<th><code>Function</code></th>
+<th style="text-align:center"><code>identifier</code></th>
+<th style="text-align:center"><code>return value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>let</td>
+<td style="text-align:center">it</td>
+<td style="text-align:center">last line of literal</td>
+</tr>
+<tr>
+<td>run</td>
+<td style="text-align:center">this</td>
+<td style="text-align:center">last line of literal</td>
+</tr>
+<tr>
+<td>also</td>
+<td style="text-align:center">it</td>
+<td style="text-align:center">this</td>
+</tr>
+<tr>
+<td>apply</td>
+<td style="text-align:center">this</td>
+<td style="text-align:center">this</td>
+</tr>
+</tbody>
+</table>
+<p><strong><i><span style="color:#FF0000">Let it</span> <span style="color:#FF8888">Run this</span> literal</i>, <span style="color:#0000FF">it Also</span> <span style="color:#8888FF">Apply this</span></strong></p>
+<p>這是我背誦記憶的口訣：<strong>Let 用 it，Run 用 this，都是回傳 function literal 最後一行的值。Also 用 it，Apply 用 this，都是回傳 this</strong></p>
+
+    
+    <a href="/2018/05/05-kotlin.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2023-08-15">2018-05-05</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/kotlin/">
+                    <span class="tag">kotlin</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2018/03/13-cd.html" itemprop="url" target="_blank">
             <span class="">Change directory helper function</span>
         </a>
@@ -197,7 +292,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2018-03-13</span>
+                    content="2023-08-15">2018-03-13</span>
             </a>
         </span>
 
@@ -271,7 +366,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2018-02-27</span>
+                    content="2023-08-15">2018-02-27</span>
             </a>
         </span>
 
@@ -338,7 +433,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2018-02-08</span>
+                    content="2023-08-15">2018-02-08</span>
             </a>
         </span>
 
@@ -407,7 +502,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2018-01-29</span>
+                    content="2023-08-15">2018-01-29</span>
             </a>
         </span>
 
@@ -467,7 +562,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2017-09-16</span>
+                    content="2023-08-15">2017-09-16</span>
             </a>
         </span>
 
@@ -531,7 +626,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2017-09-13</span>
+                    content="2023-08-15">2017-09-13</span>
             </a>
         </span>
 
@@ -602,7 +697,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2017-09-04</span>
+                    content="2023-08-15">2017-09-04</span>
             </a>
         </span>
 
@@ -660,7 +755,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2017-09-03</span>
+                    content="2023-08-15">2017-09-03</span>
             </a>
         </span>
 
@@ -723,71 +818,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-07-31">2017-09-02</span>
-            </a>
-        </span>
-
-        <span class="group">
-            
-            
-                <a href="/categories/geek/">
-                    <i class="fa fa-th"></i>
-                    <span class="">geek</span>
-                </a>
-            
-        </span>
-
-        <span class="group float-right">
-            
-            
-                <a href="/tags/android/">
-                    <span class="tag">android</span>
-                </a>
-            
-        </span>
-    </div>
-
-</div>
-
-
-
-            </div>
-            
-            <div class="article-wrap">
-                <article class="content" itemscope itemtype="http://schema.org/Article" >
-    <h1 class="article-title">
-        <a href="/2017/08/21-storage.html" itemprop="url" target="_blank">
-            <span class="">Android 的 ExternalStorage</span>
-        </a>
-    </h1>
-
-    <p>在 Android 上要儲存檔案經常會用到 Internal 或 External <a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/data/data-storage.html">Storage</a>，對部分的應用程式來說，常見的需求是「把檔案存到 SD card」。</p>
-<p>從結論來說，Android 並沒有 SD card 這樣的概念，External Storage 也不一定是外接式儲存裝置。先有這樣的認知，接著就可以問以下幾個問題</p>
-<ul>
-<li>有哪些 Storage 可以用？</li>
-<li>Context 與 Environment 有哪些 Storage 的 API 可以用？</li>
-<li>有怎樣的權限問題？</li>
-</ul>
-
-    
-    <a href="/2017/08/21-storage.html#more">
-        <span class="read-more">
-            <i class="fa fa-file-text-o"></i>
-            閱讀全文 &gt;&gt;
-        </span>
-    </a>
-    
-</article>
-
-
-                <div class="article-meta content">
-    <div class="groups">
-        <span class="group">
-            <a class="archive-item-date" href="https://jchu.cc/page/5/index.html">
-                <i class="fa fa-calendar"></i>
-                <span
-                    itemprop="datePublished"
-                    content="2023-07-31">2017-08-21</span>
+                    content="2023-08-15">2017-09-02</span>
             </a>
         </span>
 
