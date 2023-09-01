@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="606px" preserveAspectRatio="none" style="width:801px;height:606px;background:#FFFFFF;" version="1.1" viewBox="0 0 801 606" width="801px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="80" x="353.5" y="23.5352">Git Subtree</text><!--cluster mainRepo--><g id="cluster_mainRepo"><path d="M8.5,43.4883 L127.5,43.4883 A3.75,3.75 0 0 1 130,45.9883 L137,65.9766 L494.5,65.9766 A2.5,2.5 0 0 1 497,68.4766 L497,596.7583 A2.5,2.5 0 0 1 494.5,599.2583 L8.5,599.2583 A2.5,2.5 0 0 1 6,596.7583 L6,45.9883 A2.5,2.5 0 0 1 8.5,43.4883 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="137" y1="65.9766" y2="65.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="118" x="10" y="59.0234">Main Repository</text></g><!--cluster subRepoClone--><g id="cluster_subRepoClone"><path d="M268.5,211.3883 L317.5,211.3883 A3.75,3.75 0 0 1 320,213.8883 L327,233.8766 L470.5,233.8766 A2.5,2.5 0 0 1 473,236.3766 L473,314.3783 A2.5,2.5 0 0 1 470.5,316.8783 L268.5,316.8783 A2.5,2.5 0 0 1 266,314.3783 L266,213.8883 A2.5,2.5 0 0 1 268.5,211.3883 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="266" x2="327" y1="233.8766" y2="233.8766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="48" x="270" y="226.9234">DirSub</text></g><!--cluster subRepo--><g id="cluster_subRepo"><path d="M523.5,129.6883 L633.5,129.6883 A3.75,3.75 0 0 1 636,132.1883 L643,152.1766 L791.5,152.1766 A2.5,2.5 0 0 1 794,154.6766 L794,596.7583 A2.5,2.5 0 0 1 791.5,599.2583 L523.5,599.2583 A2.5,2.5 0 0 1 521,596.7583 L521,132.1883 A2.5,2.5 0 0 1 523.5,129.6883 " fill="#CCFFFF" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="521" x2="643" y1="152.1766" y2="152.1766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="109" x="525" y="145.2234">Sub Repository</text></g><!--entity mainGit--><g id="elem_mainGit"><path d="M22,88.4883 C22,78.4883 90,78.4883 90,78.4883 C90,78.4883 158,78.4883 158,88.4883 L158,458.7656 C158,468.7656 90,468.7656 90,468.7656 C90,468.7656 22,468.7656 22,458.7656 L22,88.4883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><path d="M22,88.4883 C22,98.4883 90,98.4883 90,98.4883 C90,98.4883 158,98.4883 158,88.4883 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83" x="32" y="116.0234">.git for Main</text><path d="M22,113.9766 C22,123.9766 90,123.9766 90,123.9766 C90,123.9766 158,123.9766 158,113.9766 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M22,115.9766 C22,125.9766 90,125.9766 90,125.9766 C90,125.9766 158,125.9766 158,115.9766 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="32" y="136.5117">commit: AofSub</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="32" y="153">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="48" y="169.4883">change dir foo</text><path d="M22,171.4414 C22,181.4414 90,181.4414 90,181.4414 C90,181.4414 158,181.4414 158,171.4414 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="32" y="193.9766">commit: BofSub</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="32" y="210.4648">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="48" y="226.9531">add dir foo</text><path d="M22,228.9063 C22,238.9063 90,238.9063 90,238.9063 C90,238.9063 158,238.9063 158,228.9063 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="32" y="251.4414">commit: CofSub</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="32" y="267.9297">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="48" y="284.418">add dir bar</text><path d="M22,286.3711 C22,296.3711 90,296.3711 90,296.3711 C90,296.3711 158,296.3711 158,286.3711 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="32" y="308.9063">commit: 2ofMain</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="32" y="325.3945">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="48" y="341.8828">change FileA</text><path d="M22,343.8359 C22,353.8359 90,353.8359 90,353.8359 C90,353.8359 158,353.8359 158,343.8359 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="32" y="366.3711">commit: 3ofMain</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="32" y="382.8594">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="48" y="399.3477">add file A</text><path d="M22,401.3008 C22,411.3008 90,411.3008 90,411.3008 C90,411.3008 158,411.3008 158,401.3008 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="32" y="423.8359">commit: 4ofMain</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="32" y="440.3242">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="61" x="48" y="456.8125">add dir B</text></g><!--entity FileA--><g id="elem_FileA"><path d="M193,257.8883 L193,289.3766 A2.5,2.5 0 0 0 195.5,291.8766 L244.5,291.8766 A2.5,2.5 0 0 0 247,289.3766 L247,265.3883 L237,255.3883 L195.5,255.3883 A2.5,2.5 0 0 0 193,257.8883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><path d="M237,255.3883 L237,262.8883 A2.5,2.5 0 0 0 239.5,265.3883 L247,265.3883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="203" y="278.9234">FileA</text></g><!--entity DirB--><g id="elem_DirB"><path d="M57.5,528.7683 L98.5,528.7683 A3.75,3.75 0 0 1 101,531.2683 L108,549.7683 L122.5,549.7683 A2.5,2.5 0 0 1 125,552.2683 L125,580.7566 A2.5,2.5 0 0 1 122.5,583.2566 L57.5,583.2566 A2.5,2.5 0 0 1 55,580.7566 L55,531.2683 A2.5,2.5 0 0 1 57.5,528.7683 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="55" x2="108" y1="549.7683" y2="549.7683"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="65" y="570.3034">DirB</text></g><!--entity _a--><g id="elem__a"><path d="M389.5,246.3883 L430.5,246.3883 A3.75,3.75 0 0 1 433,248.8883 L440,267.3883 L454.5,267.3883 A2.5,2.5 0 0 1 457,269.8883 L457,298.3766 A2.5,2.5 0 0 1 454.5,300.8766 L389.5,300.8766 A2.5,2.5 0 0 1 387,298.3766 L387,248.8883 A2.5,2.5 0 0 1 389.5,246.3883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="387" x2="440" y1="267.3883" y2="267.3883"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="397" y="287.9234">Foo</text></g><!--entity _b--><g id="elem__b"><path d="M284.5,246.3883 L325.5,246.3883 A3.75,3.75 0 0 1 328,248.8883 L335,267.3883 L349.5,267.3883 A2.5,2.5 0 0 1 352,269.8883 L352,298.3766 A2.5,2.5 0 0 1 349.5,300.8766 L284.5,300.8766 A2.5,2.5 0 0 1 282,298.3766 L282,248.8883 A2.5,2.5 0 0 1 284.5,246.3883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="282" x2="335" y1="267.3883" y2="267.3883"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="22" x="292" y="287.9234">Bar</text></g><!--entity subGit--><g id="elem_subGit"><path d="M537,174.6883 C537,164.6883 605,164.6883 605,164.6883 C605,164.6883 673,164.6883 673,174.6883 L673,372.5711 C673,382.5711 605,382.5711 605,382.5711 C605,382.5711 537,382.5711 537,372.5711 L537,174.6883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><path d="M537,174.6883 C537,184.6883 605,184.6883 605,184.6883 C605,184.6883 673,184.6883 673,174.6883 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="547" y="202.2234">.git for Sub</text><path d="M537,200.1766 C537,210.1766 605,210.1766 605,210.1766 C605,210.1766 673,210.1766 673,200.1766 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M537,202.1766 C537,212.1766 605,212.1766 605,212.1766 C605,212.1766 673,212.1766 673,202.1766 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="547" y="222.7117">commit: AofSub</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="547" y="239.2">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="100" x="563" y="255.6883">change dir foo</text><path d="M537,257.6414 C537,267.6414 605,267.6414 605,267.6414 C605,267.6414 673,267.6414 673,257.6414 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107" x="547" y="280.1766">commit: BofSub</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="547" y="296.6648">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="563" y="313.1531">add dir foo</text><path d="M537,315.1063 C537,325.1063 605,325.1063 605,325.1063 C605,325.1063 673,325.1063 673,315.1063 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="547" y="337.6414">commit: CofSub</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="547" y="354.1297">&#160;</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76" x="563" y="370.618">add dir bar</text></g><!--entity Foo--><g id="elem_Foo"><path d="M710.5,246.3883 L751.5,246.3883 A3.75,3.75 0 0 1 754,248.8883 L761,267.3883 L775.5,267.3883 A2.5,2.5 0 0 1 778,269.8883 L778,298.3766 A2.5,2.5 0 0 1 775.5,300.8766 L710.5,300.8766 A2.5,2.5 0 0 1 708,298.3766 L708,248.8883 A2.5,2.5 0 0 1 710.5,246.3883 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="708" x2="761" y1="267.3883" y2="267.3883"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="718" y="287.9234">Foo</text></g><!--entity Bar--><g id="elem_Bar"><path d="M572.5,528.7683 L613.5,528.7683 A3.75,3.75 0 0 1 616,531.2683 L623,549.7683 L637.5,549.7683 A2.5,2.5 0 0 1 640,552.2683 L640,580.7566 A2.5,2.5 0 0 1 637.5,583.2566 L572.5,583.2566 A2.5,2.5 0 0 1 570,580.7566 L570,531.2683 A2.5,2.5 0 0 1 572.5,528.7683 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><line style="stroke:#181818;stroke-width:0.5;" x1="570" x2="623" y1="549.7683" y2="549.7683"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="22" x="580" y="570.3034">Bar</text></g><!--SRC=[rLAnJiGm3Dtp5LQPZm6Oa6wu5fM91KPqGWv9ZaXjZTBSW53_7SVSfONhLQnaY68_FzknN_IniN3l8ppjTGpMAkMeCJP0YxvxjEy4s4Fnm0Oag_UHmaS1dmhu68oeiRSId98yYpkTonsRZW8aQlQkr_dvIcthuorio75fbVs2lM6tis1yu1IKeTNgX5tEiD6Olr2h1Qh6i4Iz8YVVcckwzetTB96lvyYfi6CcB59lpb5JpwLujt9Bgh6JmqhlV2YdTh_NQQTLGvsLDNC0Z-IutKda2mfU4nKda1QenF0D3Mh86ZeKa01E_4D15rLT_vOHnvzHKThKAA9_fgBjTEZZ48yE6TsWlW00]
+@startuml
+title Git Subtree
+
+folder mainRepo as "Main Repository" {
+    database mainGit [
+        .git for Main
+        ==
+        commit: AofSub
+
+            change dir foo
+        - -
+        commit: BofSub
+
+            add dir foo
+        - -
+        commit: CofSub
+
+            add dir bar
+        - -
+        commit: 2ofMain
+
+            change FileA
+        - -
+        commit: 3ofMain
+
+            add file A
+        - -
+        commit: 4ofMain
+
+            add dir B
+    ]
+    file FileA
+    folder DirB
+    folder subRepoClone as "DirSub" {
+        folder _a as "Foo"
+        folder _b as "Bar"
+    }
+}
+
+folder subRepo as "Sub Repository" #CFF {
+    database subGit [
+        .git for Sub
+        ===
+        commit: AofSub
+
+            change dir foo
+        - -
+        commit: BofSub
+
+            add dir foo
+        - -
+        commit: CofSub
+
+            add dir bar
+    ]
+    folder "Foo"
+    folder "Bar"
+}
+
+@enduml
+
+PlantUML version 1.2023.5(Sat Mar 25 02:54:30 JST 2023)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: JP
+--></g></svg>

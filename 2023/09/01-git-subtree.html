@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Git Subtree 簡單介紹 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Git Subtree 簡單介紹 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:title" content=" Git Subtree 簡單介紹 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Git Subtree 簡單介紹 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Git Subtree 簡單介紹 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:description" content=" Git Subtree 簡單介紹 | 只放拖鞋的鞋櫃 " />
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<!--
+	<link rel="image_src" href="" >
+	<meta property="og:image" content="" />
+	-->
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2023/09/01-git-subtree.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    <meta name="generator" content="Hexo 5.4.0"></head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu-container">
+
+<div class="layout-menu">
+    <div class="menu-group">
+        <nav>
+            <ul class="menu-list">
+                
+                <li class="menu-item">
+                    <a href="/">
+                        <i class="fa fa-home gutter-right menu-icon"></i>
+                        <span class="menu-item">首頁</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/archives">
+                        <i class="fa fa-archive gutter-right"></i>
+                        <span class="menu-item">文章彙整</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/atom.xml">
+                        <i class="fa fa-rss-square gutter-right"></i>
+                        <span class="menu-item">RSS</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div class="menu-group">
+        <div class="menu-list">
+        
+            <div class="menu-item">
+                <a href="/lamejokes" target="_blank">
+                    
+                        <i class="fa fa-comment gutter-right"></i>
+                    
+                冷言冷語
+                </a>
+            </div>
+        
+            <div class="menu-item">
+                <a href="https://github.com/g0v" target="_blank">
+                    
+                        <i class="fa fa-compass gutter-right"></i>
+                    
+                g0v
+                </a>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    
+    <div class="extra-comments">
+        <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+    </div>
+    
+
+    
+    <div class="menu-group deflinks">
+        <div class="menu-list text-center">
+            
+            <a href="https://github.com/walkingice" target="_blank">
+                <i class="fa fa-github-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+            <a href="https://twitter.com/walkingice" target="_blank">
+                <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+ 
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2023/09/01-git-subtree.html" itemprop="url" target="_blank">
+            <span class="">Git Subtree 簡單介紹</span>
+        </a>
+    </h1>
+
+    <p>簡單快速地理解 git subtree 是怎樣的東西</p>
+<span id="more"></span>
+
+<p>如果有一個 git repository 同時會被幾個不同的專案用到，通常有兩個選擇：1) 使用 git submodule 2) 使用 git subtree</p>
+<h2 id="git-submodule-的概念"><a href="#git-submodule-的概念" class="headerlink" title="git submodule 的概念"></a>git submodule 的概念</h2><figure class="img" style="max-width: 100%;"><img src="/2023/09/01-git-subtree/git_submodule.svg" class="" title="git submodule"></figure>
+
+<ul>
+<li>有兩個 repo: Main Repo 跟 Sub Repo，希望在 MainRepo 底下的 DirSub 放 Sub Repo 的東西</li>
+<li>Main 裡面會有兩個 <code>.git</code> 目錄，一個是 Main 本身的，另外一個是 Sub Repo</li>
+<li>Main 跟 Sub 的 commit history 是分開的<ul>
+<li>在 Main 裡面看不到 Sub 的 commit history</li>
+</ul>
+</li>
+<li>對 Main 而言，它看不見 Sub 底下的 <code>Foo</code> 或是 <code>Bar</code> 目錄</li>
+<li>對 Main 而言，<code>DirSub</code> 是個特殊的檔案，Main 只在乎 <code>DirSub</code> 會用到 sub repo 的哪個 commit</li>
+</ul>
+<h2 id="git-subtree-的概念"><a href="#git-subtree-的概念" class="headerlink" title="git subtree 的概念"></a>git subtree 的概念</h2><figure class="img" style="max-width: 100%;"><img src="/2023/09/01-git-subtree/git_subtree.svg" class="" title="git subtree"></figure>
+
+<ul>
+<li>同上，有兩個 repo: Main Repo 跟 Sub Repo，希望在 MainRepo 底下的 DirSub 放 Sub Repo 的東西</li>
+<li>Main 裡面只會有一個 <code>.git</code> 目錄<ul>
+<li>Main 可以說是根本不知道 Sub Repo 的存在</li>
+<li>Main 也看得到 <code>DirSub</code> 的 commit history</li>
+</ul>
+</li>
+<li><code>DirSub</code> 對 Main 而言只是個普通的目錄<ul>
+<li>只是這裡面的東西會用某種方式，從其他 repo 拿過來</li>
+</ul>
+</li>
+</ul>
+<h2 id="簡單比較-git-submodule-跟-git-subtree"><a href="#簡單比較-git-submodule-跟-git-subtree" class="headerlink" title="簡單比較 git submodule 跟 git subtree"></a>簡單比較 git submodule 跟 git subtree</h2><p>我是這麼解釋這兩者的差別</p>
+<ul>
+<li>git submodule 是把兩個 git repo 擺進同一個 work directory 裡面，用這個 work directory 來編譯專案</li>
+<li>git subtree 是用一個 git repo 產生一個 work direcotry，用起來就像平常的專案<ul>
+<li>只是其中一個目錄裡面的東西，是從別的 repo 拿過來</li>
+</ul>
+</li>
+</ul>
+<p>拿 cherry-pick 來比喻，cherry-pick 就是從別的 branch 拿幾個 commit 進到正在工作的 branch</p>
+<p>而 subtree，相當於是從別的 repository，拿幾個 commit 進到正在工作的 repo/branch。</p>
+<h2 id="用-git-format-patch-am-理解"><a href="#用-git-format-patch-am-理解" class="headerlink" title="用 git format-patch / am 理解"></a>用 git format-patch / am 理解</h2><p>如果你常用 <code>format-patch</code> 與 <code>am</code> 就能很快理解 <code>subtree</code>。</p>
+<figure class="img" style="max-width: 100%;"><img src="/2023/09/01-git-subtree/git_format.svg" class="" title="git format-patch and am"></figure>
+
+<p>對於兩個完全沒關聯的 repository，我們可以</p>
+<ol>
+<li>從 sub repo 利用 <code>git format-patch</code> 對幾個 commit 生出 patch 檔案</li>
+<li>把這幾個 patch 檔案拿到 main repo 用 <code>git am</code> 把修改放進去</li>
+</ol>
+<p>從上面的例子可以看到，最後 Main Repository 會多出兩個目錄 <code>Foo</code> 與 <code>Bar</code>，內容跟 Sub Repository 一樣。</p>
+<p>不過常用這招的人，就會知道 Main 跟 Sub 的路徑要吻合，否則 patch 無法順利打上。</p>
+<p>雖然這樣不是很精確，但是可以快速地理解 subtree 是什麼樣的東西</p>
+<p><strong>subtree 就是針對某個子目錄，做類似 format-patch/am，同時也處理好路徑問題的工具</strong></p>
+<p>「我在 Main Repo 開了一個 SubDir，請把 SubRepo 的 commits 都幫我用 <code>git am</code> 的方式放進 SubDir 裡面」，大概是這種感覺吧</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2023/09/01-git-subtree.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2023-09-01">2023-09-01</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/git/">
+                    <span class="tag">git</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+            
+                <a class="btn" href="/2023/08/15-dieting.html" title="隨意減重過程">Next &rarr; <b>隨意減重過程</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<div class="layout-menu-footer">
+    <div class="layout-menu-container">
+
+<div class="layout-menu">
+    <div class="menu-group">
+        <nav>
+            <ul class="menu-list">
+                
+                <li class="menu-item">
+                    <a href="/">
+                        <i class="fa fa-home gutter-right menu-icon"></i>
+                        <span class="menu-item">首頁</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/archives">
+                        <i class="fa fa-archive gutter-right"></i>
+                        <span class="menu-item">文章彙整</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/atom.xml">
+                        <i class="fa fa-rss-square gutter-right"></i>
+                        <span class="menu-item">RSS</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div class="menu-group">
+        <div class="menu-list">
+        
+            <div class="menu-item">
+                <a href="/lamejokes" target="_blank">
+                    
+                        <i class="fa fa-comment gutter-right"></i>
+                    
+                冷言冷語
+                </a>
+            </div>
+        
+            <div class="menu-item">
+                <a href="https://github.com/g0v" target="_blank">
+                    
+                        <i class="fa fa-compass gutter-right"></i>
+                    
+                g0v
+                </a>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    
+    <div class="extra-comments">
+        <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+    </div>
+    
+
+    
+    <div class="menu-group deflinks">
+        <div class="menu-list text-center">
+            
+            <a href="https://github.com/walkingice" target="_blank">
+                <i class="fa fa-github-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+            <a href="https://twitter.com/walkingice" target="_blank">
+                <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://stats.timdream.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '13']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+    </body>
+</html>
