@@ -224,6 +224,7 @@
 <p>雖然這樣不是很精確，但是可以快速地理解 subtree 是什麼樣的東西</p>
 <p><strong>subtree 就是針對某個子目錄，做類似 format-patch/am，同時也處理好路徑問題的工具</strong></p>
 <p>「我在 Main Repo 開了一個 SubDir，請把 SubRepo 的 commits 都幫我用 <code>git am</code> 的方式放進 SubDir 裡面」，大概是這種感覺吧</p>
+<h2 id="差異"><a href="#差異" class="headerlink" title="差異"></a>差異</h2><p>雖然用 format-patch / am 可以很容易理解，但是要注意，實際上還是有所差異。最明顯的就是 commit history，用 <code>git log --graph</code> 就能看到 commit history 與 am 截然不同。甚至用 <code>git whatchanged</code> 也能看出檔案路徑的差異</p>
 
 
     
