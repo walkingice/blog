@@ -170,6 +170,86 @@
             <div class="article-wrap">
                 <article class="content" itemscope itemtype="http://schema.org/Article" >
     <h1 class="article-title">
+        <a href="/2015/09/18-streamsupport.html" itemprop="url" target="_blank">
+            <span class="">streamsupport</span>
+        </a>
+    </h1>
+
+    <p>從字面上來看 Javascrpit 跟 Java 的差異只是在於一個是 script language，另外一個不是 (超級大誤)，所以在 Javascript 做的事情當然都可以用在 Java 裡面。(胡說八道)</p>
+<p>在 javascript 裡面經常用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank" rel="noopener">map</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce" target="_blank" rel="noopener">reduce</a> 來對資料做處理，好比說</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = [<span class="string">"a"</span>, <span class="string">"bb"</span>, <span class="string">"ccc"</span>, <span class="string">"dddd"</span>, <span class="string">"eeeee"</span>].filter(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (str.length &gt; <span class="number">2</span>);</span><br><span class="line">&#125;).map(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.length;</span><br><span class="line">&#125;).reduce(<span class="function"><span class="keyword">function</span> (<span class="params">prev, current</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> prev + current;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>這支無用的程式就是依序把一個字串陣列做處理</p>
+<ol>
+<li>字元數小於 2 的字串拿掉</li>
+<li>把字串陣列轉成整數陣列，內容是該字串的長度</li>
+<li>加總每個數字</li>
+</ol>
+<p>整個處理的過程就像一個串流(Stream)，Java8 多了 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html" target="_blank" rel="noopener">Stream</a> 這個 utility class，提供了類似的功能，可以讓我們把一個 Array 或是 List 用類似的方法來處理。</p>
+<p>但是 Java8 這麼新潮(唔)的東西，不能用在 Android 上面？就像 retrolambda 一樣，也有鄉民弄了 <a href="http://sourceforge.net/projects/streamsupport/" target="_blank" rel="noopener">streamsupport</a> 這個 library，讓我們在 Java6 runtime 玩 stream util</p>
+
+    
+    <a href="/2015/09/18-streamsupport.html#more">
+        <span class="read-more">
+            <i class="fa fa-file-text-o"></i>
+            閱讀全文 &gt;&gt;
+        </span>
+    </a>
+    
+</article>
+
+
+                <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/page/9/index.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2023-11-07">2015-09-18</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+                <a href="/tags/android/">
+                    <span class="tag">android</span>
+                </a>
+            
+                <a href="/tags/java/">
+                    <span class="tag">java</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+            </div>
+            
+            <div class="article-wrap">
+                <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
         <a href="/2015/08/24-android-retrolambda.html" itemprop="url" target="_blank">
             <span class="">Android Studio 使用 RetroLambda</span>
         </a>
@@ -199,7 +279,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-09-11">2015-08-24</span>
+                    content="2023-11-07">2015-08-24</span>
             </a>
         </span>
 
@@ -271,7 +351,7 @@
                 <i class="fa fa-calendar"></i>
                 <span
                     itemprop="datePublished"
-                    content="2023-09-11">2015-08-22</span>
+                    content="2023-11-07">2015-08-22</span>
             </a>
         </span>
 

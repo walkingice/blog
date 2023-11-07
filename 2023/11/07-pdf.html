@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Markdown 轉成 PDF 檔 | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" Markdown 轉成 PDF 檔 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:title" content=" Markdown 轉成 PDF 檔 | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" Markdown 轉成 PDF 檔 | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" Markdown 轉成 PDF 檔 | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:description" content=" Markdown 轉成 PDF 檔 | 只放拖鞋的鞋櫃 " />
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<!--
+	<link rel="image_src" href="" >
+	<meta property="og:image" content="" />
+	-->
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2023/11/07-pdf.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    <meta name="generator" content="Hexo 5.4.0"></head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu-container">
+
+<div class="layout-menu">
+    <div class="menu-group">
+        <nav>
+            <ul class="menu-list">
+                
+                <li class="menu-item">
+                    <a href="/">
+                        <i class="fa fa-home gutter-right menu-icon"></i>
+                        <span class="menu-item">首頁</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/archives">
+                        <i class="fa fa-archive gutter-right"></i>
+                        <span class="menu-item">文章彙整</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/atom.xml">
+                        <i class="fa fa-rss-square gutter-right"></i>
+                        <span class="menu-item">RSS</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div class="menu-group">
+        <div class="menu-list">
+        
+            <div class="menu-item">
+                <a href="/lamejokes" target="_blank">
+                    
+                        <i class="fa fa-comment gutter-right"></i>
+                    
+                冷言冷語
+                </a>
+            </div>
+        
+            <div class="menu-item">
+                <a href="https://github.com/g0v" target="_blank">
+                    
+                        <i class="fa fa-compass gutter-right"></i>
+                    
+                g0v
+                </a>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    
+    <div class="extra-comments">
+        <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+    </div>
+    
+
+    
+    <div class="menu-group deflinks">
+        <div class="menu-list text-center">
+            
+            <a href="https://github.com/walkingice" target="_blank">
+                <i class="fa fa-github-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+            <a href="https://twitter.com/walkingice" target="_blank">
+                <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+ 
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2023/11/07-pdf.html" itemprop="url" target="_blank">
+            <span class="">Markdown 轉成 PDF 檔</span>
+        </a>
+    </h1>
+
+    <p>平常用 Markdown 格式寫文件，偶爾會需要輸出 PDF。在此紀錄我的簡易做法。</p>
+<span id="more"></span>
+
+<p>大多數時候寫筆記都是用 Markdown 的格式。不需要精美投影片的場合，就會想要直接 Markdown 輸出 PDF 檔。在網路上搜尋到的方法幾乎都是用 pandoc 配合 latex 相關的東西直接輸出 PDF 檔。</p>
+<p>不過我的需求沒有那麼高級；用 pandoc 輸出 html 檔之後，利用瀏覽器印出 PDF 就足夠用了。</p>
+<p>簡單思路如下</p>
+<ul>
+<li>寫 markdown 文件</li>
+<li>用 pandoc 把 markdown 文件轉成 html<ul>
+<li>轉換的同時塞進客製化的 css 檔</li>
+<li>css 檔針對 <code>@media print</code> 修改幾個常見的 tag，使其看起來比較像簡報用 PDF 檔</li>
+</ul>
+</li>
+<li>用瀏覽器打開 html 檔，選擇列印成 PDF 檔</li>
+</ul>
+<p>而且我希望</p>
+<ol>
+<li><code>h1</code> tag 當成置中的標題</li>
+<li><code>h2</code> tag 當成章節小標，而且都會從新頁面開始</li>
+<li>能利用 <code>&lt;span class=&quot;pagebreak&quot; /&gt;</code> 強制換新頁面</li>
+</ol>
+<p>於是我們先準備好 css 檔，編輯 <code>~/my_pandoc.css</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="keyword">@media</span> screen &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        ..... whatever you need</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> print &#123;</span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">        <span class="attribute">background-color</span>: white;</span><br><span class="line">        <span class="attribute">line-height</span>: <span class="number">120%</span>;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">24pt</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pre<span class="selector-class">.sourceCode</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">60%</span>;</span><br><span class="line">        <span class="attribute">line-height</span>: <span class="number">100%</span>;</span><br><span class="line">        <span class="attribute">background-color</span>: <span class="number">#333</span>;</span><br><span class="line">        <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">        <span class="attribute">border</span>: <span class="number">1px</span> solid ;</span><br><span class="line">        <span class="attribute">border-color</span>: <span class="number">#222</span>;</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">        <span class="attribute">font-family</span>: monospace;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">a</span><span class="selector-pseudo">:link</span>, <span class="selector-tag">a</span><span class="selector-pseudo">:visited</span>, <span class="selector-tag">a</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: grey;</span><br><span class="line">        <span class="attribute">font-weight</span>: bold;</span><br><span class="line">        <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">        <span class="attribute">word-wrap</span>: break-word;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">thead</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>: table-header-group;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">h1</span> &#123;</span><br><span class="line">        <span class="attribute">text-align</span>: center;</span><br><span class="line">        <span class="attribute">line-height</span>: <span class="number">50vh</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">h2</span> &#123;</span><br><span class="line">        <span class="attribute">line-height</span>: <span class="number">2em</span>;</span><br><span class="line">        <span class="attribute">margin-top</span>: <span class="number">3em</span>;</span><br><span class="line">        <span class="attribute">page-break-before</span>: always;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">span</span><span class="selector-class">.pagebreak</span>, <span class="selector-tag">div</span><span class="selector-class">.pagebreak</span> &#123;</span><br><span class="line">        <span class="attribute">page-break-after</span>: always;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">img</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">400px</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">img</span><span class="selector-class">.full</span> &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.right</span> &#123;</span><br><span class="line">        <span class="attribute">float</span>: right;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &#123;</span><br><span class="line">        <span class="attribute">font-weight</span>: bold;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &gt; <span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &#123;</span><br><span class="line">        <span class="attribute">font-weight</span>: normal;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">1.8rem</span>;</span><br><span class="line">        <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>隨便寫的 CSS。請依照你的需求自行修改</p>
+<p>假設我有個 Markdown 檔案 <code>~/my_present.md</code>，內容如下</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># This is title</span></span><br><span class="line"></span><br><span class="line"><span class="section">## Page 1</span></span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span> <span class="attr">src</span>=<span class="string">&quot;markdown.svg&quot;</span> /&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> Foo</span><br><span class="line"><span class="bullet">*</span> Bar</span><br><span class="line"><span class="bullet">    *</span> FooBar</span><br><span class="line"></span><br><span class="line"><span class="section">## Page 2</span></span><br><span class="line"></span><br><span class="line">Some text</span><br><span class="line"></span><br><span class="line">![<span class="string">Markdown logo</span>](<span class="link">./markdown.svg</span>)</span><br><span class="line"></span><br><span class="line"><span class="section">## Page 3</span></span><br><span class="line"></span><br><span class="line">Line 1, in one page</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;pagebreak&quot;</span> /&gt;</span></span></span><br><span class="line"></span><br><span class="line">Line 2, in another page</span><br></pre></td></tr></table></figure>
+
+<p>有了原始文件，接著用 pandoc 生出 html 檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pandoc -f markdown -t html -H ~/my_pandoc.css my_present.md &gt; output.html</span><br></pre></td></tr></table></figure>
+
+<p>接著用瀏覽器打開這個 html 檔案，列印成 PDF 即可。看起來如下</p>
+<img src="/2023/11/07-pdf/output.jpg" class="">
+
+<p>甚至可以寫成一個 alias 放在 <code>.bashrc</code> 裡面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> markdown-2-html=<span class="string">&#x27;f()&#123; pandoc -f markdown -t html $1 -H ~/my_pandoc.css ; unset -f f; &#125;; f&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 alias</span></span><br><span class="line">$ markdown-2-html input.md &gt; output.html</span><br></pre></td></tr></table></figure>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2023/11/07-pdf.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2023-11-07">2023-11-07</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+                <a href="/categories/geek/">
+                    <i class="fa fa-th"></i>
+                    <span class="">geek</span>
+                </a>
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/geek/">
+                    <span class="tag">geek</span>
+                </a>
+            
+                <a href="/tags/tools/">
+                    <span class="tag">tools</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+            
+                <a class="btn" href="/2023/09/01-git-subtree.html" title="Git Subtree 簡單介紹">Next &rarr; <b>Git Subtree 簡單介紹</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<div class="layout-menu-footer">
+    <div class="layout-menu-container">
+
+<div class="layout-menu">
+    <div class="menu-group">
+        <nav>
+            <ul class="menu-list">
+                
+                <li class="menu-item">
+                    <a href="/">
+                        <i class="fa fa-home gutter-right menu-icon"></i>
+                        <span class="menu-item">首頁</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/archives">
+                        <i class="fa fa-archive gutter-right"></i>
+                        <span class="menu-item">文章彙整</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/atom.xml">
+                        <i class="fa fa-rss-square gutter-right"></i>
+                        <span class="menu-item">RSS</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div class="menu-group">
+        <div class="menu-list">
+        
+            <div class="menu-item">
+                <a href="/lamejokes" target="_blank">
+                    
+                        <i class="fa fa-comment gutter-right"></i>
+                    
+                冷言冷語
+                </a>
+            </div>
+        
+            <div class="menu-item">
+                <a href="https://github.com/g0v" target="_blank">
+                    
+                        <i class="fa fa-compass gutter-right"></i>
+                    
+                g0v
+                </a>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    
+    <div class="extra-comments">
+        <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+    </div>
+    
+
+    
+    <div class="menu-group deflinks">
+        <div class="menu-list text-center">
+            
+            <a href="https://github.com/walkingice" target="_blank">
+                <i class="fa fa-github-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+            <a href="https://twitter.com/walkingice" target="_blank">
+                <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://stats.timdream.org/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '13']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+
+
+
+
+
+
+    </body>
+</html>
