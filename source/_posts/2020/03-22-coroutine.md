@@ -25,7 +25,7 @@ Coroutine 用起來很簡單，但是鑽進去實作之後發現裡面錯綜複�
 
 我們知道 Process 跟 Thread 的切換由作業系統負責，執行一段時間的程式碼被作業系統中斷，切換到另外一個 Process 或是 Thread。而 Coroutine 的精神則是程式碼執行到一個程度時，向 Scheduler 說：「我 OK，<del>你先領</del>下一位」。這部份的調度發生在 user space 裡面，從作業系統的角度來看，看不見「切換 coroutine」這件事情。
 
-用比較不精確的想像，就是 Kotlin 利用了 syntax sugar 讓你寫出看似循序執行的程式碼，但是實際上程式碼被切碎，放進一堆 coroutines 裡面。這些 coroutines 依照能夠被預測的順序放進 thread 裡面執行。
+用比較不精確的想像，就是 Kotlin 利用了 syntax sugar 讓你寫出看似循序執行的程式碼，但是實際上程式碼被切碎許多叫做 coroutine 的單位，放進叫做 Scope 的資料結構裡面。這些 coroutines 依照能夠被預測的順序放進 thread 裡面執行。
 
 用一開頭的例子，按下 fetch 鈕之後，透過 `launch` 產生一個 coroutine，繁重的工作放在裡面，所以最後那行 log 能在 coroutine 的工作完成以前就被執行到。
 ```kotlin
@@ -107,13 +107,16 @@ launch {
 }
 println("3")
 ```
-`launch` 會產生一個新的 coroutine，整個執行會依序印出數字 1 ~ 5。
 
+每個 `launch` 會產生一個新的 coroutine 排在後面執行，由於沒有 suspend function 被呼叫，缺少讓出控制流的機會，因此執行程式後會依序印出數字 `1 2 3 4 5`。
 
-底下是(拔掉 `runBlock`) 簡化之後的範例。因為 foo 是 suspend function，執行到 `delay` 會讓出控制權，所以印出來的數字會是 `1 2 3 4 foo 5 6`
+Kotlin Coroutine 官方提供了 `runTest` 這個工具，讓開發者可以輕鬆地在每個單元測試裡面呼叫 suspend function，彷彿被 runBlocking 包起來，確保 unit test 結束的時候，每個 scope 裡面的 coroutine 也有執行完畢。
+
+底下是利用 `runtTest` 的簡單範例。因為 foo 是 suspend function，執行到 `delay` 會讓出控制權，所以印出來的數字會是 <del>`1 2 3 4 foo 5 6`</del> `1 2 3 4 5 foo 6`
 
 ```kotlin
-fun suspendTest() {
+@Test
+fun suspendTest() = runTest {
     println("1")
     launch {
         println("4")
@@ -136,7 +139,8 @@ private suspend fun foo(param: String) {
 如果把情況弄得再複雜一點
 
 ```kotlin
-fun traceSequence() {
+@Test
+fun traceSequence() = runTest {
     println("1")
     launch {
         println("5")
@@ -203,3 +207,5 @@ fun traceRemoteCall() {
 最後印出的結果是 `1 2 3 4 done(a) 5 6 done(b) 7` 耗時 10 秒。雖然 3 很快地被印出來，但是 a 的動作很慢，一定要跑完 coroutine a 才有機會跑到 6
 
 如果把 getRemoteServer 換成 suspend function 並且跑在別的 dispatcher 底下，情況就變得更複雜了。以後有空再寫吧
+
+20240730 Update: 感謝[Jackal](https://twitter.com/KJackal)同學的提醒，修正 Example 2 的錯誤輸出
