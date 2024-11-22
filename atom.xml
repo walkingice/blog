@@ -6,7 +6,7 @@
   <link href="https://jchu.cc/atom.xml" rel="self"/>
   
   <link href="https://jchu.cc/"/>
-  <updated>2024-08-16T14:05:35.081Z</updated>
+  <updated>2024-11-22T09:00:25.130Z</updated>
   <id>https://jchu.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>連接 Serial Port 的程式 neocon</title>
+    <link href="https://jchu.cc/2024/11/22-neocon.html"/>
+    <id>https://jchu.cc/2024/11/22-neocon.html</id>
+    <published>2024-11-22T09:44:53.000Z</published>
+    <updated>2024-11-22T09:00:25.130Z</updated>
+    
+    <content type="html"><![CDATA[<p>連接 <code>/dev/tty*</code> console 的軟體，許多人用的是 minicom</p><p>而我個人最愛則是輕薄短小的 neocon</p><span id="more"></span><p>neocon 是 Kernel Hacker <a href="https://en.wikipedia.org/wiki/Werner_Almesberger">Werner Almesberger</a> 在 Openmoko 時期寫的小程式，具有連進 tty console 的基本功能，而且全部都在一個檔案裡面，只要自己備份那一個 <code>.c</code> 檔案，配合 gcc 隨時都能生出連線的工具，不用再花時間安裝其他東西</p><p>下載 <a href="https://github.com/openmoko/neocon/blob/master/neocon.c">neocon.c</a> (我這邊的備份：<a href="/2024/11/22-neocon/neocon.c" title="neocon.c">neocon.c</a>, hash: commit 504449a8c707fe9e93b670e024db3a315ce47a26)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># compile</span></span><br><span class="line">$ gcc -o neocon neocon.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># show usage</span></span><br><span class="line">$ ./neocon -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># connect</span></span><br><span class="line">$ ./neocon /dev/ttyYourPath</span><br></pre></td></tr></table></figure><p>要離開的時候輸入 <code>~.</code> 即可</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;連接 &lt;code&gt;/dev/tty*&lt;/code&gt; console 的軟體，許多人用的是 minicom&lt;/p&gt;
+&lt;p&gt;而我個人最愛則是輕薄短小的 neocon&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="linux" scheme="https://jchu.cc/tags/linux/"/>
+    
+    <category term="hardware" scheme="https://jchu.cc/tags/hardware/"/>
+    
+  </entry>
   
   <entry>
     <title>金庸小說年代表</title>
@@ -500,30 +522,6 @@
     
     <category term="ramble" scheme="https://jchu.cc/categories/ramble/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>在本機上存取 Android 的 sqlite 檔案</title>
-    <link href="https://jchu.cc/2022/04/17-sqlite.html"/>
-    <id>https://jchu.cc/2022/04/17-sqlite.html</id>
-    <published>2022-04-17T13:14:04.000Z</published>
-    <updated>2022-06-24T18:24:36.850Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前紀錄過一篇怎麼在 Android Studio 裡面用 SQLScout 的 Plugin 存取 sqlite database</p><p>其實用指令把 sqlite db 抓到本機端測試也一樣</p><span id="more"></span><p>先確保你安裝的是 debuggable app，假設 package 是 <code>foo.bar</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ adb shell</span><br><span class="line">$ run-as foo.bar</span><br><span class="line">$ <span class="built_in">cd</span> /data/data/foo.bar/database</span><br></pre></td></tr></table></figure><p>找 <code>db</code> 結尾的檔案就是 sqlte 的資料庫檔案了。如果你的資料庫名稱是 <code>my-db</code>，多半檔名就是 <code>MyDb.db</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp MyDb.db /sdcard</span><br></pre></td></tr></table></figure><p>接下來用 adb pull 就能抓下來了。知道路徑的話，可以用一行指令做完</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ adb exec-out run-as foo.bar cat /data/data/foo.bar/databases/MyDb.db &gt; backup.db</span><br></pre></td></tr></table></figure><p>以後用 sqlte3 的指令操作這個檔案就可以測試了，習慣指令操作的人，會覺得比起用 plugin 更有彈性</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;之前紀錄過一篇怎麼在 Android Studio 裡面用 SQLScout 的 Plugin 存取 sqlite database&lt;/p&gt;
-&lt;p&gt;其實用指令把 sqlite db 抓到本機端測試也一樣&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="geek" scheme="https://jchu.cc/categories/geek/"/>
-    
-    
-    <category term="geek" scheme="https://jchu.cc/tags/geek/"/>
-    
-    <category term="android" scheme="https://jchu.cc/tags/android/"/>
     
   </entry>
   

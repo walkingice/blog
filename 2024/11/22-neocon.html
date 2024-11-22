@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+    <head>
+        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> 連接 Serial Port 的程式 neocon | 只放拖鞋的鞋櫃 </title>
+	<meta property="og:title" content=" 連接 Serial Port 的程式 neocon | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:title" content=" 連接 Serial Port 的程式 neocon | 只放拖鞋的鞋櫃 ">
+
+	<meta property="og:type" content="article">
+	<meta name="twitter:card" content="summary">
+
+	<meta name="description" content=" 連接 Serial Port 的程式 neocon | 只放拖鞋的鞋櫃 ">
+	<meta property="og:description" content=" 連接 Serial Port 的程式 neocon | 只放拖鞋的鞋櫃 " />
+	<meta name="twitter:description" content=" 連接 Serial Port 的程式 neocon | 只放拖鞋的鞋櫃 " />
+
+	<link rel="icon" type="image/x-icon" href="https://jchu.cc/assets/favicon.ico">
+
+	<!--
+	<link rel="image_src" href="" >
+	<meta property="og:image" content="" />
+	-->
+
+	<link href="https://jchu.cc/atom.xml" title="只放拖鞋的鞋櫃" type="application/atom+xml" rel="alternative">
+
+	<link rel="canonical" href="/2024/11/22-neocon.html">
+
+	<link rel="stylesheet" href="/asset/css/style.css">
+
+    <link rel="stylesheet" href="/vendors/components-font-awesome/css/font-awesome.css">
+
+    <meta name="generator" content="Hexo 5.4.2"></head>
+
+    <body>
+        
+    <div class="layout-header">
+        <header class="header">
+            <div class="layout-logo">
+                <div class="panel-logo">
+
+                    <div class="box-logo">
+                        <a href="/" title="只放拖鞋的鞋櫃"><img src="/assets/default_avatar.jpg" class="img-logo"></a>
+                    </div>
+                    <div class="box-main-title">
+                        <h2><a href="/">Walkingice</a></h2>
+                    </div>
+                    <div class="box-sub-title">
+                        
+                            <p>Julian Chu, love Pixel-art and FF3. FOSS Developer. Co-founder of 0xLab. Join g0v.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="layout-menu-container">
+
+<div class="layout-menu">
+    <div class="menu-group">
+        <nav>
+            <ul class="menu-list">
+                
+                <li class="menu-item">
+                    <a href="/">
+                        <i class="fa fa-home gutter-right menu-icon"></i>
+                        <span class="menu-item">首頁</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/archives">
+                        <i class="fa fa-archive gutter-right"></i>
+                        <span class="menu-item">文章彙整</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/atom.xml">
+                        <i class="fa fa-rss-square gutter-right"></i>
+                        <span class="menu-item">RSS</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div class="menu-group">
+        <div class="menu-list">
+        
+            <div class="menu-item">
+                <a href="/lamejokes" target="_blank">
+                    
+                        <i class="fa fa-comment gutter-right"></i>
+                    
+                冷言冷語
+                </a>
+            </div>
+        
+            <div class="menu-item">
+                <a href="https://github.com/g0v" target="_blank">
+                    
+                        <i class="fa fa-compass gutter-right"></i>
+                    
+                g0v
+                </a>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    
+    <div class="extra-comments">
+        <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+    </div>
+    
+
+    
+    <div class="menu-group deflinks">
+        <div class="menu-list text-center">
+            
+            <a href="https://github.com/walkingice" target="_blank">
+                <i class="fa fa-github-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+            <a href="https://twitter.com/walkingice" target="_blank">
+                <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+ 
+        </header>
+    </div>
+
+        <div class="layout-content">
+            
+<div class="row panel-content">
+    
+
+    <div class="article-wrap">
+        <article class="content" itemscope itemtype="http://schema.org/Article" >
+    <h1 class="article-title">
+        <a href="/2024/11/22-neocon.html" itemprop="url" target="_blank">
+            <span class="">連接 Serial Port 的程式 neocon</span>
+        </a>
+    </h1>
+
+    <p>連接 <code>/dev/tty*</code> console 的軟體，許多人用的是 minicom</p>
+<p>而我個人最愛則是輕薄短小的 neocon</p>
+<span id="more"></span>
+
+<p>neocon 是 Kernel Hacker <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Werner_Almesberger">Werner Almesberger</a> 在 Openmoko 時期寫的小程式，具有連進 tty console 的基本功能，而且全部都在一個檔案裡面，只要自己備份那一個 <code>.c</code> 檔案，配合 gcc 隨時都能生出連線的工具，不用再花時間安裝其他東西</p>
+<p>下載 <a target="_blank" rel="noopener" href="https://github.com/openmoko/neocon/blob/master/neocon.c">neocon.c</a> (我這邊的備份：<a href="/2024/11/22-neocon/neocon.c" title="neocon.c">neocon.c</a>, hash: commit 504449a8c707fe9e93b670e024db3a315ce47a26)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># compile</span></span><br><span class="line">$ gcc -o neocon neocon.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># show usage</span></span><br><span class="line">$ ./neocon -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># connect</span></span><br><span class="line">$ ./neocon /dev/ttyYourPath</span><br></pre></td></tr></table></figure>
+
+<p>要離開的時候輸入 <code>~.</code> 即可</p>
+
+
+    
+</article>
+
+
+        <div class="article-meta content">
+    <div class="groups">
+        <span class="group">
+            <a class="archive-item-date" href="https://jchu.cc/2024/11/22-neocon.html">
+                <i class="fa fa-calendar"></i>
+                <span
+                    itemprop="datePublished"
+                    content="2024-11-22">2024-11-22</span>
+            </a>
+        </span>
+
+        <span class="group">
+            
+            
+        </span>
+
+        <span class="group float-right">
+            
+            
+                <a href="/tags/linux/">
+                    <span class="tag">linux</span>
+                </a>
+            
+                <a href="/tags/hardware/">
+                    <span class="tag">hardware</span>
+                </a>
+            
+        </span>
+    </div>
+
+</div>
+
+
+
+    </div>
+
+    <div class="panel-post-nav">
+        <div class="box-post-nav">
+            
+            
+                <a class="btn" href="/2024/08/16-timeline.html" title="金庸小說年代表">Next &rarr; <b>金庸小說年代表</b></a>
+            
+        </div>
+    </div>
+</div>
+
+
+        </div>
+        
+<div class="layout-footer" style="clear: both">
+    <div class="panel-footer">
+        <div class="box-footer">
+            <footer class="footer">
+                
+                <a target="_blank" rel="noopener" href="http://creativecommons.org/">
+                    License: <i class="fa fa-cc"></i> by-nc-sa
+                </a>
+                
+                <p class="theme">Powered by
+                    <a href="http://hexo.io/" target="_blank">Hexo</a>,
+                    Theme
+                    <a href="https://github.com/walkingice/hexo-theme-kaku" target="_blank">Kaku</a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<div class="layout-menu-footer">
+    <div class="layout-menu-container">
+
+<div class="layout-menu">
+    <div class="menu-group">
+        <nav>
+            <ul class="menu-list">
+                
+                <li class="menu-item">
+                    <a href="/">
+                        <i class="fa fa-home gutter-right menu-icon"></i>
+                        <span class="menu-item">首頁</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/archives">
+                        <i class="fa fa-archive gutter-right"></i>
+                        <span class="menu-item">文章彙整</span>
+                    </a>
+                </li>
+                
+                
+                <li class="menu-item">
+                    <a href="/atom.xml">
+                        <i class="fa fa-rss-square gutter-right"></i>
+                        <span class="menu-item">RSS</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div class="menu-group">
+        <div class="menu-list">
+        
+            <div class="menu-item">
+                <a href="/lamejokes" target="_blank">
+                    
+                        <i class="fa fa-comment gutter-right"></i>
+                    
+                冷言冷語
+                </a>
+            </div>
+        
+            <div class="menu-item">
+                <a href="https://github.com/g0v" target="_blank">
+                    
+                        <i class="fa fa-compass gutter-right"></i>
+                    
+                g0v
+                </a>
+            </div>
+        
+        </div>
+    </div>
+    
+
+    
+    <div class="extra-comments">
+        <div>本站無留言功能，有問題或發現錯誤，歡迎到<a target="_blank" rel="noopener" href="https://twitter.com/walkingice">twitter</a>戳我，謝謝</div>
+    </div>
+    
+
+    
+    <div class="menu-group deflinks">
+        <div class="menu-list text-center">
+            
+            <a href="https://github.com/walkingice" target="_blank">
+                <i class="fa fa-github-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+            <a href="https://twitter.com/walkingice" target="_blank">
+                <i class="fa fa-twitter-square gutter-right menu-icononly"></i>
+            </a>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+        </div>
+    </div>
+    
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+    </body>
+</html>
