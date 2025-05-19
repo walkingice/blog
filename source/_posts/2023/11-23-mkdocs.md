@@ -139,8 +139,16 @@ $ mkdocs server -f mkdocs.yml --dirty
 
 反正裝 mkdocs 的時候也會一併把 watchdog 裝好，我現在就倒過來用，直接用 watchdoc 去監看目錄，發現有更動就呼叫 mkdocs
 
+2025 更新：最近換到 [Rancher](https://github.com/rancher/rancher/tree/master) 之後發現，在 host 編輯檔案並沒有辦法在 container 裡面觸發 event，進而沒法讓 mkdocs 再次編譯文件。查詢後看到 [mkdocs issue #184](https://github.com/mkdocs/mkdocs/pull/184) 用 polling 解決這個問題，所以稍微更新了底下的指令。
+
 ```bash
 $ watchmedo shell-command -W --patterns='*' --recursive --command='mkdocs build -f mkdocs.yml' docs/
+
+# 為了在 container 裡面能偵測到 host 端修改了 docs 底下的檔案，這邊使用 polling
+# 並且用 --dirty 要求 mkdocs 只為有更動的檔案重新產生文件，以降低 rebuild doc 的時間
+# 這樣做有可能會發生 nav link 出問題。真的出問題的話，把產生的文件全部清掉，重新觸發一次 rebuild 即可
+# 我覺得這樣算是兼顧效能與可用性的解法
+$ watchmedo shell-command -W --patterns='*' --interval 10 --debug-force-polling --recursive --command='mkdocs build --dirty -f mkdocs.yml' docs/
 ```
 
 對我而言，下一步就是找個盡量輕巧的 http server 就行了。於是找到 docker hub 上面的 [joseluisq/static-web-server](https://hub.docker.com/r/joseluisq/static-web-server/)。rust 寫的，夭壽小又夭壽快，以靜態網頁伺服器這種明確穩定的需求，看到 rust 就莫名覺得安心 XD。
@@ -222,4 +230,4 @@ markdown_extensions:
 
 選擇用 markdown 這種純文字格式做筆記，在這次的轉換也享受到好處。我一個 rename 指令把 gitit 用的 `page` 副檔名換成 `md` 就搞定。以後有什麼更酷更方便的工具，要轉換應該也很簡單。(但我還是喜歡用瀏覽器閱讀，開 app 總是讓我覺得麻煩)
 
-mkdocs 的一個主要服務目標是技術文件的攥寫，譬如我上面所提及 rust 的 [static web server 的文件網站](https://static-web-server.net/)就是用 mkdocs。也因此 mkdocs 在連結不同頁面的功能面應該會做得不錯，不過我自己的筆記量小，自己也知道東西大概放在哪，所以目前也還沒深入理解這部分的功能，未來有空再說吧。
+mkdocs 的一個主要服務目標是技術文件的撰寫，譬如我上面所提及 rust 的 [static web server 的文件網站](https://static-web-server.net/)就是用 mkdocs。也因此 mkdocs 在連結不同頁面的功能面應該會做得不錯，不過我自己的筆記量小，自己也知道東西大概放在哪，所以目前也還沒深入理解這部分的功能，未來有空再說吧。
