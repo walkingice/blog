@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jchu.cc/2023/11/23-mkdocs.html</loc>
+    
+    <lastmod>2025-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jchu.cc/2025/03/20-editor.html</loc>
     
     <lastmod>2025-03-20</lastmod>
@@ -32,15 +41,6 @@
     <loc>https://jchu.cc/2020/03/22-coroutine.html</loc>
     
     <lastmod>2024-07-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://jchu.cc/2023/11/23-mkdocs.html</loc>
-    
-    <lastmod>2023-11-23</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -841,7 +841,7 @@
 
   <url>
     <loc>https://jchu.cc/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -849,189 +849,189 @@
   
   <url>
     <loc>https://jchu.cc/tags/geek/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/tools/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/android/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/java/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/github/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/linux/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/hsinchu/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/japan/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/webdev/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/taiwan/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/political/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/docker/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/debian/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/test/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/git/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/book/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/kotlin/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/game/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/gradle/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/python/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/acg/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/comic/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/life/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/government/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/spring/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/hardware/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/tags/ramble/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -1040,49 +1040,49 @@
   
   <url>
     <loc>https://jchu.cc/categories/geek/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/categories/life/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/categories/fun/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/categories/linux/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/categories/ramble/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/categories/acg/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://jchu.cc/categories/japan/</loc>
-    <lastmod>2025-03-20</lastmod>
+    <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

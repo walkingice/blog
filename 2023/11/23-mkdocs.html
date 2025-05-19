@@ -235,7 +235,7 @@
 <li>用 python 寫的</li>
 </ul>
 <p>最後一點對我來說也是滿大的優點。python 的開發生態系相當完整成熟，配合 virtualenv 之類的東西，要開發 plugin 或是除錯都很容易。安裝 mkdocs 也差不多是幾行指令就能搞定</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># you better use virtualenv</span></span><br><span class="line">$ pip install mkdocs</span><br><span class="line">$ mkdir /tmp/<span class="built_in">test</span> &amp;&amp; <span class="built_in">cd</span> /tmp/<span class="built_in">test</span></span><br><span class="line">$ mkdocs new .</span><br><span class="line">$ mkdocs serve -f mkdocs.yml <span class="comment"># DONE</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># you better use virtualenv</span></span><br><span class="line">$ pip install mkdocs</span><br><span class="line">$ <span class="built_in">mkdir</span> /tmp/test &amp;&amp; <span class="built_in">cd</span> /tmp/test</span><br><span class="line">$ mkdocs new .</span><br><span class="line">$ mkdocs serve -f mkdocs.yml <span class="comment"># DONE</span></span><br></pre></td></tr></table></figure>
 
 <p>我現在配合 plantuml server，跑起來大概像這樣</p>
 <div style="max-width: 100%; margin: auto;"><img src="/2023/11/23-mkdocs/mkdocs.jpg" class=""></div>
@@ -266,7 +266,8 @@
 <p>未啟動 mkdocs-material 之前，我用瀏覽器其實能夠順利搜尋。而 mkdocs-material 有用到一些現代的 bundle file 的技巧吧，總之會在 <code>file://</code> scheme 底下找不到某個 js。我原本以為是 mkdocs-material 的問題，後來才想到用 chrome 去測試，發現在 chrome 上面根本連搜尋框都看不到。</p>
 <p>想想也能接受，本來就是希望使用者把生出了的檔案擺到某台主機上面來用，如果在本機端就該關掉 js。</p>
 <h2 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h2><p>反正裝 mkdocs 的時候也會一併把 watchdog 裝好，我現在就倒過來用，直接用 watchdoc 去監看目錄，發現有更動就呼叫 mkdocs</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ watchmedo shell-command -W --patterns=<span class="string">&#x27;*&#x27;</span> --recursive --<span class="built_in">command</span>=<span class="string">&#x27;mkdocs build -f mkdocs.yml&#x27;</span> docs/</span><br></pre></td></tr></table></figure>
+<p>2025 更新：最近換到 <a target="_blank" rel="noopener" href="https://github.com/rancher/rancher/tree/master">Rancher</a> 之後發現，在 host 編輯檔案並沒有辦法在 container 裡面觸發 event，進而沒法讓 mkdocs 再次編譯文件。查詢後看到 <a target="_blank" rel="noopener" href="https://github.com/mkdocs/mkdocs/pull/184">mkdocs issue #184</a> 用 polling 解決這個問題，所以稍微更新了底下的指令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ watchmedo shell-command -W --patterns=<span class="string">&#x27;*&#x27;</span> --recursive --<span class="built_in">command</span>=<span class="string">&#x27;mkdocs build -f mkdocs.yml&#x27;</span> docs/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 為了在 container 裡面能偵測到 host 端修改了 docs 底下的檔案，這邊使用 polling</span></span><br><span class="line"><span class="comment"># 並且用 --dirty 要求 mkdocs 只為有更動的檔案重新產生文件，以降低 rebuild doc 的時間</span></span><br><span class="line"><span class="comment"># 這樣做有可能會發生 nav link 出問題。真的出問題的話，把產生的文件全部清掉，重新觸發一次 rebuild 即可</span></span><br><span class="line"><span class="comment"># 我覺得這樣算是兼顧效能與可用性的解法</span></span><br><span class="line">$ watchmedo shell-command -W --patterns=<span class="string">&#x27;*&#x27;</span> --interval 10 --debug-force-polling --recursive --<span class="built_in">command</span>=<span class="string">&#x27;mkdocs build --dirty -f mkdocs.yml&#x27;</span> docs/</span><br></pre></td></tr></table></figure>
 
 <p>對我而言，下一步就是找個盡量輕巧的 http server 就行了。於是找到 docker hub 上面的 <a target="_blank" rel="noopener" href="https://hub.docker.com/r/joseluisq/static-web-server/">joseluisq/static-web-server</a>。rust 寫的，夭壽小又夭壽快，以靜態網頁伺服器這種明確穩定的需求，看到 rust 就莫名覺得安心 XD。</p>
 <p>為了管理方便，我把 mkdocs 放進 docker 裡面來跑，現在沒編輯檔案的情況，兩個 container 消耗的資源能夠讓我接受了</p>
@@ -305,7 +306,7 @@
 
 <h2 id="感言"><a href="#感言" class="headerlink" title="感言"></a>感言</h2><p>這幾天玩 mkdocs + docker 玩得頗開心。在盡量不更動程式或是不違背 mkdocs 產品方向上，增添一些輕量的修改讓它適合我的需求。摸索的過程比較花時間，但是有了結論之後，以後要重建就很簡單。更何況東西都包成 docker 跟 jar 檔，理論上十年內應該都沒有執行環境的問題了。或許執行效能可能會有問題，但這要跑很久才知道，目前還看不出來。而且我覺得十年內電腦的效能進步應該會遠大於我的筆記尺寸增長。</p>
 <p>選擇用 markdown 這種純文字格式做筆記，在這次的轉換也享受到好處。我一個 rename 指令把 gitit 用的 <code>page</code> 副檔名換成 <code>md</code> 就搞定。以後有什麼更酷更方便的工具，要轉換應該也很簡單。(但我還是喜歡用瀏覽器閱讀，開 app 總是讓我覺得麻煩)</p>
-<p>mkdocs 的一個主要服務目標是技術文件的攥寫，譬如我上面所提及 rust 的 <a target="_blank" rel="noopener" href="https://static-web-server.net/">static web server 的文件網站</a>就是用 mkdocs。也因此 mkdocs 在連結不同頁面的功能面應該會做得不錯，不過我自己的筆記量小，自己也知道東西大概放在哪，所以目前也還沒深入理解這部分的功能，未來有空再說吧。</p>
+<p>mkdocs 的一個主要服務目標是技術文件的撰寫，譬如我上面所提及 rust 的 <a target="_blank" rel="noopener" href="https://static-web-server.net/">static web server 的文件網站</a>就是用 mkdocs。也因此 mkdocs 在連結不同頁面的功能面應該會做得不錯，不過我自己的筆記量小，自己也知道東西大概放在哪，所以目前也還沒深入理解這部分的功能，未來有空再說吧。</p>
 
 
     
