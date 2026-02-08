@@ -82,3 +82,14 @@ All Applications 則是對所有的 App 都套用這個設定。當然也能只�
 
 把想要的 Pane 拖拉到 Dock 上面，以後點一下就能直接打開了。若有經常需要修改的系統設定，用這招就會方便很多
 
+## 避免 `Option + ]` 輸出特殊字元
+
+Mac OS X 預設的英文輸入法，`按下 Option + ]` 會輸出特殊的字元。實測一下就能發現 `Option` 加上其他鍵，可以[輸出各種不同的特殊字元](https://apple.stackexchange.com/questions/388552)
+
+很不幸地，IDE 經常利用 `Option` 組合的快速鍵，因此對程式宅來說，這個行為非常困擾。畢竟我們幾乎都用不到那些特殊字元，但是我們很需要快速鍵。
+
+關閉的方法就如同前面的連結所述
+
+* System setting / Keyboard / Input Source 點下 "Edit"
+* 把 `ABC` 拿掉，新增一個 source，在最底下的 `Others` 裡面有個 `Unicode Hex Input`，用它代替 `ABC`
+
