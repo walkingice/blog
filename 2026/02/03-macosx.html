@@ -228,6 +228,13 @@
 <p>不過我比較懶，用的是最後一個方法</p>
 <p>打開 Finder，按 <code>Shift + Cmd + G</code> 打開 Go to 的輸入框，輸入 <code>/System/Library/PreferencePanes</code> 之後直接跳到該目錄底下</p>
 <p>把想要的 Pane 拖拉到 Dock 上面，以後點一下就能直接打開了。若有經常需要修改的系統設定，用這招就會方便很多</p>
+<h2 id="避免-Option-輸出特殊字元"><a href="#避免-Option-輸出特殊字元" class="headerlink" title="避免 Option + ] 輸出特殊字元"></a>避免 <code>Option + ]</code> 輸出特殊字元</h2><p>Mac OS X 預設的英文輸入法，<code>按下 Option + ]</code> 會輸出特殊的字元。實測一下就能發現 <code>Option</code> 加上其他鍵，可以<a target="_blank" rel="noopener" href="https://apple.stackexchange.com/questions/388552">輸出各種不同的特殊字元</a></p>
+<p>很不幸地，IDE 經常利用 <code>Option</code> 組合的快速鍵，因此對程式宅來說，這個行為非常困擾。畢竟我們幾乎都用不到那些特殊字元，但是我們很需要快速鍵。</p>
+<p>關閉的方法就如同前面的連結所述</p>
+<ul>
+<li>System setting / Keyboard / Input Source 點下 “Edit”</li>
+<li>把 <code>ABC</code> 拿掉，新增一個 source，在最底下的 <code>Others</code> 裡面有個 <code>Unicode Hex Input</code>，用它代替 <code>ABC</code></li>
+</ul>
 
 
     
