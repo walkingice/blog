@@ -35,6 +35,8 @@ tags:
 * 先打開 Mission Control，右上角有個 `＋` 符號，點下去就能增加一個虛擬桌面。
 * 打開 System Settings / Keyboard / Keyboard Shortcuts
 * 左邊的 Tabs 選 `Mission Control`，在右側展開 `Mission Control` 的欄位，依序為 `Switch to Desktop N` 設定你想要的快速鍵
+* 還要關掉可能會多事的 Mission Control (感謝小安提醒)
+    * System settings / Desktop and Dock / Mission Control / 關閉 `Automatically rearrange Spaces based on most recent use`
 
 ### 其他快速鍵
 
